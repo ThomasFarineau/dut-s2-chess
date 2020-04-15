@@ -1,14 +1,12 @@
 package fr.iut.plateau;
 
+import java.io.IOException;
 import java.util.Arrays;
 
+import fr.iut.gestionpartie.GestionnairePartie;
 import fr.iut.pieces.Cavalier;
-import fr.iut.pieces.Fou;
 import fr.iut.pieces.Piece;
 import fr.iut.pieces.Pion;
-import fr.iut.pieces.Reine;
-import fr.iut.pieces.Roi;
-import fr.iut.pieces.Tour;
 
 public class Plateau {
 	private boolean tourJoueur;
@@ -172,20 +170,16 @@ public class Plateau {
 	}
 
 	public static void main(String[] args) {
-		Piece[][] echiquier1 = {
-				{new Reine(false), null, null, new Tour(false), null, null, null, new Fou(false)},
-				{null, null, null, null, null, new Cavalier(false), null, new Roi(true)},
-				{null, null, null, null, null, null, new Pion(true), new Pion(false)},
-				{null, null, null, null, null, null, new Pion(false), null},
-				{null, null, null, null, null, null, null, null},
-				{null, new Pion(true), null, null, null, null, null, null},
-				{null, new Pion(true), null, null, null, null, null, null},
-				{null, new Roi(false), null, null, null, null, null, null}
-		};
-
 		Plateau plat = new Plateau();
-		plat.setEchiquier(echiquier1);
-
+		GestionnairePartie gp = new GestionnairePartie(plat);
+		try {
+			gp.chargerPartie();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(plat);
+		/*
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (echiquier1[i][j] != null) {
@@ -206,5 +200,6 @@ public class Plateau {
 				}
 			}
 		}
+		*/
 	}
 }
