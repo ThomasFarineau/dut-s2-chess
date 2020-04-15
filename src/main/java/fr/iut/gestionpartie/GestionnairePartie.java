@@ -3,6 +3,7 @@ package fr.iut.gestionpartie;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,17 +27,28 @@ public class GestionnairePartie {
 
 	public void chargerPartie() throws IOException {
 		Piece[][] echiquier = new Piece[8][8];
-		
-		BufferedReader br = 
-				new BufferedReader(
-						new FileReader(
-								new File(nomFichier)
-								)
-						);
-		
+		BufferedReader br;
+
+		try {
+			br = new BufferedReader(
+					new FileReader(
+							new File(nomFichier)
+							)
+					);
+		} catch (FileNotFoundException e) {
+			throw new FileNotFoundException("Fichier non trouvé : " + nomFichier);
+		}
+
 		for (int i = 0; i < echiquier.length; i++) {
 			String line = br.readLine();
 			String[] values = line.split(",");
+
+			if (values.length != 8) {
+				br.close();
+				throw new IOException("Ligne " + (i+1) + " invalide dans le fichier " +
+						nomFichier);
+			}
+
 			for (int j = 0; j < values.length; j++) {
 				switch (values[j]) {
 				case "Tn" :
@@ -75,35 +87,47 @@ public class GestionnairePartie {
 				case "Pb" : 
 					echiquier[i][j] = new Pion(false);
 					break;
-				default: 
+				case "V": 
 					break;
+				default:
+					throw new IOException("Nom de pièce invalide " + values[j] + 
+							" à la ligne " + (i+1) + " du fichier " + nomFichier);
 				}
 			}
 		}
+
 		br.close();
-		
+
 		plat.setEchiquier(echiquier);
 	}
-	
+
 	public void chargerPartie(String nomFichier) throws IOException {
 		this.nomFichier = nomFichier;
 		chargerPartie();
 	}
-	
+
 	public void sauvegarderPartie() throws IOException {
-		BufferedWriter bw = new BufferedWriter(new FileWriter(new File(nomFichier)));
-        for (Piece[] pieces : plat.getEchiquier()) {
-            for (int j = 0; j < pieces.length; j++) {
-                bw.write(
-                		((pieces[j] == null) ? "V" : pieces[j].toString()) + 
-                		((j == pieces.length - 1 )? "" : ",")
-                		);
-            }
-            bw.write("\n");
-        }
-        bw.close();
+		BufferedWriter bw;
+		
+		try {
+			bw = new BufferedWriter(new FileWriter(new File(nomFichier)));
+			
+			for (Piece[] pieces : plat.getEchiquier()) {
+				for (int j = 0; j < pieces.length; j++) {
+					bw.write(
+							((pieces[j] == null) ? "V" : pieces[j].toString()) + 
+							((j == pieces.length - 1 )? "" : ",")
+							);
+				}
+				bw.write("\n");
+			}
+			
+			bw.close();
+		} catch (FileNotFoundException e) {
+			throw new FileNotFoundException("Fichier non trouvé : " + nomFichier);
+		}
 	}
-	
+
 	public void sauvegarderPartie(String nomFichier) throws IOException {
 		this.nomFichier = nomFichier;
 		sauvegarderPartie();
