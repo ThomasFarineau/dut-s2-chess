@@ -162,23 +162,13 @@ public class Plateau {
 	public Piece[][] getEchiquier() {
 		return echiquier;
 	}
-
-	@Deprecated
-	public String toString2() {
-		String toReturn = "";
-		for (int i = 0; i < echiquier.length; i++) {
-			toReturn += 8 - i + "\t";
-			for (int j = 0; j < echiquier[i].length; j++) {
-				if (echiquier[i][j] != null) {
-					toReturn += echiquier[i][j].toString() + "\t";
-				} else {
-					toReturn += "-\t";
-				}
-			}
-			toReturn += "\n\n";
-		}
-		toReturn += "\n\tA\tB\tC\tD\tE\tF\tG\tH";
-		return toReturn;
+	
+	public boolean getTourJoueur() {
+		return tourJoueur;
+	}
+	
+	public void setTourJoueur(boolean tourJoueur) {
+		this.tourJoueur = tourJoueur;
 	}
 
 	public static void main(String[] args) {
