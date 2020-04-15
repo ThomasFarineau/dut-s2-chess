@@ -158,6 +158,10 @@ public class Plateau {
 	public void setEchiquier(Piece[][] echiquier) {
 		this.echiquier = echiquier;
 	}
+	
+	public Piece[][] getEchiquier() {
+		return echiquier;
+	}
 
 	@Deprecated
 	public String toString2() {
