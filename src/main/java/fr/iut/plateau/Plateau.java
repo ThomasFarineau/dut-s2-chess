@@ -7,6 +7,7 @@ import fr.iut.gestionpartie.GestionnairePartie;
 import fr.iut.pieces.Cavalier;
 import fr.iut.pieces.Piece;
 import fr.iut.pieces.Pion;
+import fr.iut.pieces.Roi;
 
 public class Plateau {
 	private boolean tourJoueur;
@@ -31,7 +32,7 @@ public class Plateau {
 				deplacementsPiece[9][7] = true;
 				deplacementsPiece[8][7] = false;
 			}
-				
+
 			else if (!echiquier[xP][yP].getCouleur() && xP == 6) {
 				deplacementsPiece[5][7] = true;
 				deplacementsPiece[6][7] = false;
@@ -120,9 +121,36 @@ public class Plateau {
 	} //Fin méthode
 
 	public boolean verifEchec() {
-		//CODE A IMPLEMENTER
+		for (int i = 0; i < 8; i++)
+			for (int j = 0; j < 8; j++)
+				if (echiquier[i][j] != null)
+					if (echiquier[i][j] instanceof Roi && echiquier[i][j].getCouleur() == tourJoueur) {
 
-		return true;
+						for (int k = 0; k < 8; k++) {
+							for (int l = 0; l < 8; l++) {
+
+								if (echiquier[k][l] != null)
+									if (echiquier[k][l].getCouleur() != tourJoueur) {
+
+										if (calculerDeplacementsPiece(k,l)[i][j]) {
+											System.out.println(echiquier[k][l] + 
+													" " + i + 
+													" " + j +
+													" " + k +
+													" " + l);
+											return true;
+										}
+
+									}
+								
+							}
+						}
+
+						j = 8;
+						i = 8;
+					}
+
+		return false;
 	}
 
 	public boolean verifMat() {
@@ -156,15 +184,15 @@ public class Plateau {
 	public void setEchiquier(Piece[][] echiquier) {
 		this.echiquier = echiquier;
 	}
-	
+
 	public Piece[][] getEchiquier() {
 		return echiquier;
 	}
-	
+
 	public boolean getTourJoueur() {
 		return tourJoueur;
 	}
-	
+
 	public void setTourJoueur(boolean tourJoueur) {
 		this.tourJoueur = tourJoueur;
 	}
@@ -177,8 +205,10 @@ public class Plateau {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		System.out.println(plat);
+
+		System.out.println(plat.verifEchec());
 		/*
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
@@ -200,6 +230,6 @@ public class Plateau {
 				}
 			}
 		}
-		*/
+		 */
 	}
 }
