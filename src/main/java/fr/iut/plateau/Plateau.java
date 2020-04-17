@@ -120,7 +120,7 @@ public class Plateau {
 		return deplacementsPlateau;
 	} //Fin méthode
 
-	public boolean verifEchec(Piece[][] echiquier) {
+	public boolean verifEchec() {
 		for (int i = 0; i < 8; i++)
 			for (int j = 0; j < 8; j++)
 				if (echiquier[i][j] != null)
@@ -149,31 +149,30 @@ public class Plateau {
 	}
 
 	public boolean verifMat() {
-		Piece[][] copieEchiquier;
 		for (int i = 0; i < 8; i++)
 			for (int j = 0; j < 8; j++) {
 				if (echiquier[i][j] != null)
 					if (echiquier[i][j].getCouleur() == tourJoueur) {
-						boolean[][] deplacementsPossPiece = echiquier[i][j].getDeplacementsPoss();
+						boolean[][] deplacementsPossPiece = calculerDeplacementsPiece(i,j);
 						
 						for (int k = 0; k < 8; k++)
 							for (int l = 0; l < 8; l++) {
 								if (deplacementsPossPiece[k][l]) {
-									copieEchiquier = getCopieEchiquier();
+									Piece copiePiece = echiquier[k][l];
+									echiquier[k][l] = echiquier[i][j];
+									echiquier[i][j] = null;
 									
-									copieEchiquier[k][l] = copieEchiquier[i][j];
-									copieEchiquier[i][j] = null;
-									
-									if (!verifEchec(copieEchiquier))
+									if (!verifEchec()) {
 										return false;
+									}
+									
+									echiquier[i][j] = echiquier[k][l];
+									echiquier[k][l] = copiePiece;
 								}
 							}
 						
-						
-						
 					}
 			}
-			
 
 		return true;
 	}
@@ -207,16 +206,6 @@ public class Plateau {
 	public Piece[][] getEchiquier() {
 		return echiquier;
 	}
-	
-	public Piece[][] getCopieEchiquier() {
-		Piece[][] copieEchiquier = new Piece[8][8];
-		
-		for (int i = 0; i < 8; i++)
-			for (int j = 0; j < 8; j++) {
-				copieEchiquier[i][j] = echiquier[i][j];
-			}
-		return echiquier;
-	}
 
 	public boolean getTourJoueur() {
 		return tourJoueur;
@@ -230,35 +219,16 @@ public class Plateau {
 		Plateau plat = new Plateau();
 		GestionnairePartie gp = new GestionnairePartie(plat);
 		try {
-			gp.nouvellePartie();
+			gp.chargerAnciennePartie("partieTest.csv");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		System.out.println(plat);
+		
+		plat.setTourJoueur(true);
 
-		System.out.println(plat.verifEchec(plat.getEchiquier()));
-		/*
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				if (echiquier1[i][j] != null) {
-					System.out.println(plat);
-					System.out.println("\nPiece : " + echiquier1[i][j] + "(" + i + ";" + j + ")");
-					boolean[][] dep = plat.calculerDeplacementsPiece(i, j);
-					for (int k = 0; k < 8; k++) {
-						for (int l = 0; l < 8; l++) {
-							if (k == i && l == j)
-								System.out.print("p ");
-							else if (dep[k][l])
-								System.out.print("O ");
-							else
-								System.out.print("- ");
-						}
-						System.out.println();
-					}
-				}
-			}
-		}
-		 */
+		System.out.println(plat.verifEchec());
+		System.out.println(plat.verifMat());
 	}
 }
