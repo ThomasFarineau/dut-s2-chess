@@ -173,7 +173,7 @@ public class Plateau {
 		Plateau plat = new Plateau();
 		GestionnairePartie gp = new GestionnairePartie(plat);
 		try {
-			gp.chargerPartie();
+			gp.nouvellePartie();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

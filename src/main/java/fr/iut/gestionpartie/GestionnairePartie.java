@@ -19,13 +19,13 @@ import fr.iut.plateau.Plateau;
 
 public class GestionnairePartie {
 	private Plateau plat;
-	private String nomFichier = "partie.csv";
+	private String nomFichier = "partieActuelle.csv";
 
 	public GestionnairePartie(Plateau plat) {
 		this.plat = plat;
 	}
 
-	public void chargerPartie() throws IOException {
+	public void chargerPartie(String nomFichier) throws IOException {
 		Piece[][] echiquier = new Piece[8][8];
 		BufferedReader br;
 
@@ -101,11 +101,15 @@ public class GestionnairePartie {
 		plat.setEchiquier(echiquier);
 	}
 
-	public void chargerPartie(String nomFichier) throws IOException {
+	public void chargerAnciennePartie(String nomFichier) throws IOException {
 		this.nomFichier = nomFichier;
-		chargerPartie();
+		chargerPartie(nomFichier);
 	}
 
+	public void nouvellePartie() throws IOException {
+		chargerPartie("partieActuelle.csv");
+	}
+	
 	public void sauvegarderPartie() throws IOException {
 		BufferedWriter bw;
 		
