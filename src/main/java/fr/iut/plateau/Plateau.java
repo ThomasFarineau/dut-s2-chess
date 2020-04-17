@@ -120,7 +120,7 @@ public class Plateau {
 		return deplacementsPlateau;
 	} //Fin méthode
 
-	public boolean verifEchec() {
+	public boolean verifEchec(Piece[][] echiquier) {
 		for (int i = 0; i < 8; i++)
 			for (int j = 0; j < 8; j++)
 				if (echiquier[i][j] != null)
@@ -133,11 +133,6 @@ public class Plateau {
 									if (echiquier[k][l].getCouleur() != tourJoueur) {
 
 										if (calculerDeplacementsPiece(k,l)[i][j]) {
-											System.out.println(echiquier[k][l] + 
-													" " + i + 
-													" " + j +
-													" " + k +
-													" " + l);
 											return true;
 										}
 
@@ -154,7 +149,31 @@ public class Plateau {
 	}
 
 	public boolean verifMat() {
-		//CODE A IMPLEMENTER
+		Piece[][] copieEchiquier;
+		for (int i = 0; i < 8; i++)
+			for (int j = 0; j < 8; j++) {
+				if (echiquier[i][j] != null)
+					if (echiquier[i][j].getCouleur() == tourJoueur) {
+						boolean[][] deplacementsPossPiece = echiquier[i][j].getDeplacementsPoss();
+						
+						for (int k = 0; k < 8; k++)
+							for (int l = 0; l < 8; l++) {
+								if (deplacementsPossPiece[k][l]) {
+									copieEchiquier = getCopieEchiquier();
+									
+									copieEchiquier[k][l] = copieEchiquier[i][j];
+									copieEchiquier[i][j] = null;
+									
+									if (!verifEchec(copieEchiquier))
+										return false;
+								}
+							}
+						
+						
+						
+					}
+			}
+			
 
 		return true;
 	}
@@ -188,6 +207,16 @@ public class Plateau {
 	public Piece[][] getEchiquier() {
 		return echiquier;
 	}
+	
+	public Piece[][] getCopieEchiquier() {
+		Piece[][] copieEchiquier = new Piece[8][8];
+		
+		for (int i = 0; i < 8; i++)
+			for (int j = 0; j < 8; j++) {
+				copieEchiquier[i][j] = echiquier[i][j];
+			}
+		return echiquier;
+	}
 
 	public boolean getTourJoueur() {
 		return tourJoueur;
@@ -208,7 +237,7 @@ public class Plateau {
 
 		System.out.println(plat);
 
-		System.out.println(plat.verifEchec());
+		System.out.println(plat.verifEchec(plat.getEchiquier()));
 		/*
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
