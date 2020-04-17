@@ -107,7 +107,7 @@ public class GestionnairePartie {
 	}
 
 	public void nouvellePartie() throws IOException {
-		chargerPartie("partieActuelle.csv");
+		chargerPartie("nouvellePartie.csv");
 	}
 	
 	public void sauvegarderPartie() throws IOException {
