@@ -36,7 +36,7 @@ public class GestionnairePartie {
 							)
 					);
 		} catch (FileNotFoundException e) {
-			throw new FileNotFoundException("Fichier non trouvé : " + nomFichier);
+			throw new FileNotFoundException("Fichier introuvable : " + nomFichier);
 		}
 
 		for (int i = 0; i < echiquier.length; i++) {
@@ -116,7 +116,15 @@ public class GestionnairePartie {
 		BufferedWriter bw;
 		
 		try {
+			File f = new File(nomFichier);
+			if (!f.exists()) {
+				f.createNewFile();
+				System.out.println("Le fichier " + nomFichier + " vient d'être créé.");
+			}
+			
+			
 			bw = new BufferedWriter(new FileWriter(new File(nomFichier)));
+		
 			
 			for (Piece[] pieces : plat.getEchiquier()) {
 				for (int j = 0; j < pieces.length; j++) {
@@ -129,8 +137,8 @@ public class GestionnairePartie {
 			}
 			
 			bw.close();
-		} catch (FileNotFoundException e) {
-			throw new FileNotFoundException("Fichier non trouvé : " + nomFichier);
+		} catch (IOException e) {
+			throw new IOException("Erreur lors de la sauvegarde du fichier");
 		}
 	}
 
