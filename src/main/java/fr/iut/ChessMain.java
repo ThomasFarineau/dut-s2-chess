@@ -3,7 +3,7 @@ package fr.iut;
 public class ChessMain {
 
     public String getHelloMessage() {
-        return "Welcome to the chess game.";
+        return "Welcome to the chest game.";
     }
 
     public static void main(String[] args) {
