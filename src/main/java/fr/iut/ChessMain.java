@@ -75,7 +75,7 @@ public class ChessMain {
         		System.out.println("noirs");
         	}
         	System.out.println(p);
-        	System.out.println("\nVeuillez saisir votre déplacement :");
+        	System.out.println("\nVeuillez saisir votre déplacement ");
             String deplacement=sc.nextLine();
         }
         
