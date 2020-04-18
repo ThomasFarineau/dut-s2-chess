@@ -66,8 +66,15 @@ public class ChessMain {
         System.out.println("\n\n\n\n\n"+p);
         System.out.println("\nLa partie commence !"); // On affiche le plateau pour commencer la partie.
         
-         {
-        	System.out.println("\n\n\n\n\n"+p);
+        {
+        	System.out.print("\n\n\n\n\nC'est au tour des ");
+        	if(p.getTourJoueur()) {
+        		System.out.println("blancs");
+        	}
+        	else {
+        		System.out.println("noirs");
+        	}
+        	System.out.println(p);
         	System.out.println("\nVeuillez saisir votre déplacement :");
             String deplacement=sc.nextLine();
         }
