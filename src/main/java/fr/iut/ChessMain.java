@@ -6,10 +6,27 @@ import fr.iut.gestionpartie.GestionnairePartie;
 import fr.iut.plateau.Plateau;
 
 public class ChessMain {
-    
-    public static void main(String[] args) {
-    	Plateau p = new Plateau(); // On charge le plateau
-    	GestionnairePartie gp = new GestionnairePartie(p); // On initialise un fichier avec le plateau
+	private static Plateau p = new Plateau(); // On charge le plateau
+	private static GestionnairePartie gp = new GestionnairePartie(p); // On initialise un fichier avec le plateau
+	
+	public static boolean verifSyntaxe(String entree) {
+		if(entree.length()!=5) {
+			return false;
+		}
+		char[] tab = entree.toUpperCase().toCharArray();
+		if(tab[2]!=' ' || tab[0]<'A' || tab[0]>'H' || tab[1]<'1' || tab[1]>'8' || tab[3]<'A' || tab[3]>'H' || tab[4]<'1' || tab[4]>'8') {
+			return false;
+		}
+		return true;
+	}
+	
+	public static int[] convertChaine(String entree) {
+		char[] tab = entree.toLowerCase().toCharArray();
+		return new int[] {tab[0]-'a', 8-(tab[1]-'0'), tab[3]-'a', 8-(tab[4]-'0')};
+	}
+	
+	public static void initialisation() {
+		
         System.out.println("Bienvenue dans le jeu d'échec");
         
         Scanner sc = new Scanner(System.in); // On implémente un scanner pour demander ce que veut l'utilisateur
@@ -62,11 +79,19 @@ public class ChessMain {
     			break;
     		}
         }
+        sc.close();
+	}
+	
+    public static void main(String[] args) {
+    	
+        initialisation();
+    	
+        Scanner sc = new Scanner(System.in); // On implémente un scanner pour demander ce que veut l'utilisateur
         
         System.out.println("\n\n\n\n\n"+p);
         System.out.println("\nLa partie commence !"); // On affiche le plateau pour commencer la partie.
         
-        {
+        while(!p.verifMat()){
         	System.out.print("\n\n\n\n\nC'est au tour des ");
         	if(p.getTourJoueur()) {
         		System.out.println("blancs");
@@ -74,12 +99,24 @@ public class ChessMain {
         	else {
         		System.out.println("noirs");
         	}
-        	System.out.println(p);
-        	System.out.println("\nVeuillez saisir votre déplacement :");
-            String deplacement=sc.nextLine();
+        	String deplacement="";
+        	boolean entreeValide=false;
+        	while(!entreeValide) {
+        		System.out.println("Veuillez entrer votre déplacement :");
+        		deplacement=sc.nextLine();
+        		if(verifSyntaxe(deplacement)) {
+        			try {
+            			p.deplacer(convertChaine(deplacement));
+            			entreeValide=true;
+            		}catch(Exception e) {
+            			System.out.println("Erreur "+e.getMessage());
+            		}
+        		}
+        		else {
+        			System.out.println("Erreur : Syntaxe invalide");
+        		}
+        	}
         }
-        
-        
         sc.close();
     }
 }
