@@ -1,6 +1,5 @@
 package fr.iut.plateau;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 import fr.iut.gestionpartie.GestionnairePartie;
@@ -225,7 +224,7 @@ public class Plateau {
 		GestionnairePartie gp = new GestionnairePartie(plat);
 		try {
 			gp.chargerAnciennePartie("partieTest.csv");
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 

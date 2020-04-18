@@ -101,7 +101,9 @@ public class GestionnairePartie {
 		plat.setEchiquier(echiquier);
 	}
 
-	public void chargerAnciennePartie(String nomFichier) throws IOException {
+	public void chargerAnciennePartie(String nomFichier) throws IOException, Exception {
+		if (nomFichier.equals("nouvellePartie.csv"))
+			throw new Exception("Vous n'avez pas le droit de charger le fichier \"nouvellePartie.csv\".");
 		this.nomFichier = nomFichier;
 		chargerPartie(nomFichier);
 	}
