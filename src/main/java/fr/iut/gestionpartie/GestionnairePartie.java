@@ -25,7 +25,7 @@ public class GestionnairePartie {
 		this.plat = plat;
 	}
 
-	public void chargerPartie(String nomFichier) throws IOException {
+	private void chargerPartie(String nomFichier) throws IOException {
 		Piece[][] echiquier = new Piece[8][8];
 		BufferedReader br;
 
