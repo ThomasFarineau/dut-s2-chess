@@ -12,9 +12,8 @@ public class Plateau {
 	private boolean tourJoueur = false;
 	private Piece[][] echiquier;
 
-	public boolean deplacer(int x1, int y1, int x2, int y2) {
+	public boolean deplacer(int[] entreeTraduite) {
 		//CODE A IMPLEMENTER
-
 		return true;
 	}
 
@@ -230,7 +229,7 @@ public class Plateau {
 
 		System.out.println(plat);
 		
-		plat.setTourJoueur(true);
+		plat.setTourJoueur(false);
 
 		System.out.println("Echec : " + plat.verifEchec());
 		System.out.println("Echec et mat : " + plat.verifMat());
