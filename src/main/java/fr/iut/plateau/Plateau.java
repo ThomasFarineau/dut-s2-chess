@@ -12,9 +12,8 @@ public class Plateau {
 	private boolean tourJoueur = false;
 	private Piece[][] echiquier;
 
-	public boolean deplacer(int[] entreeTraduite) {
+	public void deplacer(int[] entreeTraduite) throws Exception {
 		//CODE A IMPLEMENTER
-		return true;
 	}
 
 	public boolean[][] calculerDeplacementsPiece(int xP, int yP) {
