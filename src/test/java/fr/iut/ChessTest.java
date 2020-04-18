@@ -7,6 +7,6 @@ import org.junit.jupiter.api.Test;
 public class ChessTest {
     @Test
     public void premierTest() {
-    	fail();
+    	fail("Pas encore fini");
     }
 }
