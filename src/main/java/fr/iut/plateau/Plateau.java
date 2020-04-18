@@ -10,7 +10,7 @@ import fr.iut.pieces.Pion;
 import fr.iut.pieces.Roi;
 
 public class Plateau {
-	private boolean tourJoueur;
+	private boolean tourJoueur = false;
 	private Piece[][] echiquier;
 
 	public boolean deplacer(int x1, int y1, int x2, int y2) {
@@ -163,6 +163,11 @@ public class Plateau {
 									echiquier[i][j] = null;
 									
 									if (!verifEchec()) {
+										System.out.println(echiquier[k][l] + " : " +
+									i + " " +
+									j + " -> " +
+									k + " " +
+									l + " ");
 										return false;
 									}
 									
@@ -228,7 +233,7 @@ public class Plateau {
 		
 		plat.setTourJoueur(true);
 
-		System.out.println(plat.verifEchec());
-		System.out.println(plat.verifMat());
+		System.out.println("Echec : " + plat.verifEchec());
+		System.out.println("Echec et mat : " + plat.verifMat());
 	}
 }
