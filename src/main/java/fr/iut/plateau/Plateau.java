@@ -12,8 +12,28 @@ public class Plateau {
 	private boolean tourJoueur = false;
 	private Piece[][] echiquier;
 
-	public void deplacer(int[] entreeTraduite) throws Exception {
-		//CODE A IMPLEMENTER
+	public void deplacer(int[] coordonnees) throws Exception {
+		if(echiquier[coordonnees[0]][coordonnees[1]] == null) {
+			throw new Exception("Il n'y a pas de piece sur la première case entrée.");
+		}
+		
+		if(echiquier[coordonnees[0]][coordonnees[1]].getCouleur() != tourJoueur) {
+			throw new Exception("La pièce selectionnée ne vous appartient pas.");
+		}
+		
+		boolean[][] deplacementsPiece = calculerDeplacementsPiece(coordonnees[0], coordonnees[1]);
+		
+		if(!deplacementsPiece[coordonnees[2]][coordonnees[3]]) {
+			throw new Exception("La pièce sélectionnée ne peut pas aller ici.");
+		}
+
+		echiquier[coordonnees[2]][coordonnees[3]] = echiquier[coordonnees[0]][coordonnees[1]];
+		echiquier[coordonnees[0]][coordonnees[1]] = null;
+		
+		// Vérifier s'il y a échec pour le joueur qui déplace la pièce. S'il y a échec, c'est que le mouvement
+		// est incorrect : Il faut annuler le déplacement et lancer une exception. Sinon, passer au tour suivant.
+		
+		setTourJoueur(!tourJoueur);
 	}
 
 	public boolean[][] calculerDeplacementsPiece(int xP, int yP) {
@@ -44,10 +64,13 @@ public class Plateau {
 						int yDeplacementPiece = yP + j - 7;
 
 						if (xDeplacementPiece >= 0 && xDeplacementPiece <= 7 && yDeplacementPiece >= 0 && yDeplacementPiece <= 7) {
-							if (echiquier[xDeplacementPiece][yDeplacementPiece] == null)
+							if (echiquier[xDeplacementPiece][yDeplacementPiece] == null) {
 								deplacementsPlateau[xDeplacementPiece][yDeplacementPiece] = true;
-							else if (echiquier[xDeplacementPiece][yDeplacementPiece].getCouleur() != echiquier[xP][yP].getCouleur())
+							}
+
+							else if (echiquier[xDeplacementPiece][yDeplacementPiece].getCouleur() != echiquier[xP][yP].getCouleur()) {
 								deplacementsPlateau[xDeplacementPiece][yDeplacementPiece] = true;
+							}
 						}
 					}
 				}
@@ -99,8 +122,9 @@ public class Plateau {
 									y += yShift;
 								} else { // Sinon
 									// S'il y a une pièce de la couleur adverse, alors on peut tout de même y aller
-									if (echiquier[x][y].getCouleur() != echiquier[xP][yP].getCouleur())
+									if (echiquier[x][y].getCouleur() != echiquier[xP][yP].getCouleur()) {
 										deplacementsPlateau[x][y] = true;
+									}
 
 									// On a fini de calculer les déplacements pour le déplacement maximal courant
 									x = 8;
@@ -118,15 +142,15 @@ public class Plateau {
 	} //Fin méthode
 
 	public boolean verifEchec() {
-		for (int i = 0; i < 8; i++)
-			for (int j = 0; j < 8; j++)
-				if (echiquier[i][j] != null)
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (echiquier[i][j] != null) {
 					if (echiquier[i][j] instanceof Roi && echiquier[i][j].getCouleur() == tourJoueur) {
 
 						for (int k = 0; k < 8; k++) {
 							for (int l = 0; l < 8; l++) {
 
-								if (echiquier[k][l] != null)
+								if (echiquier[k][l] != null) {
 									if (echiquier[k][l].getCouleur() != tourJoueur) {
 
 										if (calculerDeplacementsPiece(k,l)[i][j]) {
@@ -134,13 +158,18 @@ public class Plateau {
 										}
 
 									}
-								
+								}
 							}
 						}
 
 						j = 8;
 						i = 8;
 					}
+				}
+
+			}
+		}
+
 
 		return false;
 	}
@@ -148,32 +177,37 @@ public class Plateau {
 	public boolean verifMat() {
 		for (int i = 0; i < 8; i++)
 			for (int j = 0; j < 8; j++) {
-				if (echiquier[i][j] != null)
+				if (echiquier[i][j] != null) {
 					if (echiquier[i][j].getCouleur() == tourJoueur) {
 						boolean[][] deplacementsPossPiece = calculerDeplacementsPiece(i,j);
-						
-						for (int k = 0; k < 8; k++)
+
+						for (int k = 0; k < 8; k++) {
 							for (int l = 0; l < 8; l++) {
 								if (deplacementsPossPiece[k][l]) {
 									Piece copiePiece = echiquier[k][l];
 									echiquier[k][l] = echiquier[i][j];
 									echiquier[i][j] = null;
-									
+
 									if (!verifEchec()) {
 										System.out.println(echiquier[k][l] + " : " +
-									i + " " +
-									j + " -> " +
-									k + " " +
-									l + " ");
+												i + " " +
+												j + " -> " +
+												k + " " +
+												l + " ");
+
+										echiquier[i][j] = echiquier[k][l];
+										echiquier[k][l] = copiePiece;
 										return false;
 									}
-									
+
 									echiquier[i][j] = echiquier[k][l];
 									echiquier[k][l] = copiePiece;
 								}
 							}
-						
+						}
+
 					}
+				}
 			}
 
 		return true;
@@ -181,24 +215,24 @@ public class Plateau {
 
 	@Override
 	public String toString() {
-		String retour="";
-		for(int i=0; i<echiquier.length; i++) {
-			retour += 8-i+" ";
-			for(int j=0; j<echiquier.length; j++) {
+		StringBuilder retour = new StringBuilder();
+		for(int i = 0; i < echiquier.length; i++) {
+			retour.append(8 - i).append(" ");
+			for(int j = 0; j < echiquier.length; j++) {
 				if(echiquier[i][j] != null) {
-					if (echiquier[i][j].toString().length()==2) {
-						retour+=echiquier[i][j].toString() + "  ";
+					if (echiquier[i][j].toString().length() == 2) {
+						retour.append(echiquier[i][j].toString()).append("  ");
 					} else {
-						retour+=echiquier[i][j].toString() + " ";
+						retour.append(echiquier[i][j].toString()).append(" ");
 					}
 				} else {
-					retour += " -  ";  
+					retour.append(" -  ");
 				}
 			}
-			retour += "\n";
+			retour.append("\n");
 		}
-		retour += "   A   B   C   D   E   F   G   H";
-		return retour;
+		retour.append("   A   B   C   D   E   F   G   H");
+		return retour.toString();
 	}
 
 	public void setEchiquier(Piece[][] echiquier) {
@@ -216,6 +250,7 @@ public class Plateau {
 	public void setTourJoueur(boolean tourJoueur) {
 		this.tourJoueur = tourJoueur;
 	}
+	
 
 	public static void main(String[] args) {
 		Plateau plat = new Plateau();
@@ -227,7 +262,7 @@ public class Plateau {
 		}
 
 		System.out.println(plat);
-		
+
 		plat.setTourJoueur(false);
 
 		System.out.println("Echec : " + plat.verifEchec());
