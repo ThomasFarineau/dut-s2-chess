@@ -1,5 +1,6 @@
 package fr.iut;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import fr.iut.gestionpartie.GestionnairePartie;
@@ -25,18 +26,32 @@ public class ChessMain {
 
 	public static int[] convertChaine(String entree) {
 		char[] tabEntree = entree.toLowerCase().toCharArray();
-		return new int[] {tabEntree[0]-'a', 8-(tabEntree[1]-'0'), tabEntree[3]-'a', 8-(tabEntree[4]-'0')};
+		return new int[] {8-(tabEntree[1]-'0'), tabEntree[0]-'a', 8-(tabEntree[4]-'0'), tabEntree[3]-'a'};
 	}
 	
 	public static void afficherMessageDebutTour() {
 		System.out.println("\n\n\n\n\n");
-		System.out.print("C'est au tour du joueur " + (p.getTourJoueur() ? "noir." : "blanc.\n"));
+		System.out.print("C'est au tour du joueur " + (p.getTourJoueur() ? "noir." : "blanc."));
 		
 		//Afficher si le roi du joueur est en echec
 		
-		System.out.println(p);
+		System.out.println("\n\n"+p.toString());
 	}
-	
+
+	public static void sauvegarder(String ligne) {
+
+		try {
+			if(ligne.length() <= 11 ) { //si le mot est juste sauvegarder
+				gp.sauvegarderPartie();
+			} else {
+				gp.sauvegarderPartie(ligne.substring(12)); // créer un fichier a partir des caractères du 12ieme caractère
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public static void jouerTour() {
 		boolean entreeValide = false;
 		
@@ -46,15 +61,20 @@ public class ChessMain {
 			System.out.print("\nVeuillez entrer votre déplacement : ");
 			
 			String deplacement = sc.nextLine();
-			if(verifSyntaxe(deplacement)) {
-				try {
-					p.deplacer(convertChaine(deplacement));
-					entreeValide = true;
-				} catch(Exception e) {
-					System.out.println("Erreur : "+e.getMessage());
-				}
+
+			if(deplacement.contains("sauvegarder")) {
+				sauvegarder(deplacement);
 			} else {
-				System.out.println("Erreur : Syntaxe invalide.");
+				if(verifSyntaxe(deplacement)) {
+					try {
+						p.deplacer(convertChaine(deplacement));
+						entreeValide = true;
+					} catch(Exception e) {
+						System.out.println("Erreur : "+e.getMessage());
+					}
+				} else {
+					System.out.println("Erreur : Syntaxe invalide.");
+				}
 			}
 		}
 	}

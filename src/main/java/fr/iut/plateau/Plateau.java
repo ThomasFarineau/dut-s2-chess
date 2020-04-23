@@ -13,26 +13,35 @@ public class Plateau {
 	private Piece[][] echiquier;
 
 	public void deplacer(int[] coordonnees) throws Exception {
-		if(echiquier[coordonnees[0]][coordonnees[1]] == null) {
+		int i = coordonnees[0];
+		int j = coordonnees[1];
+		int k = coordonnees[2];
+		int l = coordonnees[3];
+
+		if(echiquier[i][j] == null) {
 			throw new Exception("Il n'y a pas de piece sur la première case entrée.");
 		}
 		
-		if(echiquier[coordonnees[0]][coordonnees[1]].getCouleur() != tourJoueur) {
+		if(echiquier[i][j].getCouleur() != tourJoueur) {
 			throw new Exception("La pièce selectionnée ne vous appartient pas.");
 		}
 		
-		boolean[][] deplacementsPiece = calculerDeplacementsPiece(coordonnees[0], coordonnees[1]);
+		boolean[][] deplacementsPiece = calculerDeplacementsPiece(i, j);
 		
-		if(!deplacementsPiece[coordonnees[2]][coordonnees[3]]) {
+		if(!deplacementsPiece[k][l]) {
 			throw new Exception("La pièce sélectionnée ne peut pas aller ici.");
 		}
 
-		echiquier[coordonnees[2]][coordonnees[3]] = echiquier[coordonnees[0]][coordonnees[1]];
-		echiquier[coordonnees[0]][coordonnees[1]] = null;
-		
-		// Vérifier s'il y a échec pour le joueur qui déplace la pièce. S'il y a échec, c'est que le mouvement
-		// est incorrect : Il faut annuler le déplacement et lancer une exception. Sinon, passer au tour suivant.
-		
+		echiquier[k][l] = echiquier[i][j];
+		echiquier[i][j] = null;
+
+		if(verifEchec()) {
+			echiquier[i][j] = echiquier[k][l];
+			echiquier[k][l] = null;
+			throw new Exception("Mouvement impossible, vous êtes en échec.");
+		}
+		System.out.println("Le mouvement a été effectué");
+
 		setTourJoueur(!tourJoueur);
 	}
 
