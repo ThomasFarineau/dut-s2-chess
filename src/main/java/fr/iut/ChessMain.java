@@ -16,14 +16,11 @@ public class ChessMain {
 
 		char[] tabEntree = entree.toUpperCase().toCharArray();
 
-		if( (tabEntree[2] != ' ') || 
-				(tabEntree[0] < 'A' || tabEntree[0] > 'H') || 
-				(tabEntree[1]<'1' || tabEntree[1]>'8') || 
-				(tabEntree[3]<'A' || tabEntree[3]>'H') || 
-				(tabEntree[4]<'1' || tabEntree[4]>'8') )
-			return false;
-
-		return true;
+		return (tabEntree[2] == ' ') &&
+				(tabEntree[0] >= 'A' && tabEntree[0] <= 'H') &&
+				(tabEntree[1] >= '1' && tabEntree[1] <= '8') &&
+				(tabEntree[3] >= 'A' && tabEntree[3] <= 'H') &&
+				(tabEntree[4] >= '1' && tabEntree[4] <= '8');
 	}
 
 	public static int[] convertChaine(String entree) {
@@ -33,7 +30,7 @@ public class ChessMain {
 	
 	public static void afficherMessageDebutTour() {
 		System.out.println("\n\n\n\n\n");
-		System.out.print("\n" +p+ "\n\nC'est au tour du joueur " + (p.getTourJoueur() ? "noir." : "blanc."));
+		System.out.print("C'est au tour du joueur " + (p.getTourJoueur() ? "noir." : "blanc.\n"));
 		
 		//Afficher si le roi du joueur est en echec
 		
