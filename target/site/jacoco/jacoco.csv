@@ -3,7 +3,7 @@ chess-minimal-project,fr.iut.gestionpartie,GestionnairePartie,376,0,32,0,72,0,28
 chess-minimal-project,fr.iut.pieces,Fou,0,31,0,2,0,9,0,3,0,2
 chess-minimal-project,fr.iut.pieces,Roi,0,51,0,2,0,13,0,3,0,2
 chess-minimal-project,fr.iut.pieces,Piece,7,42,0,2,3,9,2,4,2,3
-chess-minimal-project,fr.iut.pieces,Cavalier,51,0,2,0,13,0,3,0,2,0
+chess-minimal-project,fr.iut.pieces,Cavalier,0,51,0,2,0,13,0,3,0,2
 chess-minimal-project,fr.iut.pieces,Pion,0,44,0,4,0,12,0,4,0,2
 chess-minimal-project,fr.iut.pieces,Reine,0,51,0,2,0,13,0,3,0,2
 chess-minimal-project,fr.iut.pieces,Tour,0,31,0,2,0,9,0,3,0,2

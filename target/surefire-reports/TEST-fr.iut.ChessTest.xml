@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="fr.iut.ChessTest" time="0.126" tests="1" errors="0" skipped="0" failures="1">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="fr.iut.ChessTest" time="0.085" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -17,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="FR"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-12.0.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\Alex\AppData\Local\Temp\surefire17568130532876789158\surefirebooter7016155902480204629.jar C:\Users\Alex\AppData\Local\Temp\surefire17568130532876789158 2020-04-23T16-46-44_775-jvmRun1 surefire2622863166474520162tmp surefire_05178452637858655695tmp"/>
+    <property name="sun.java.command" value="C:\Users\Alex\AppData\Local\Temp\surefire2552365773209680546\surefirebooter4792758681599322508.jar C:\Users\Alex\AppData\Local\Temp\surefire2552365773209680546 2020-04-23T16-58-30_242-jvmRun1 surefire9184239040534692265tmp surefire_05451597281806167555tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Alex\Documents\Alex\IUT\S2T\M213\New Workspace\chess-minimal-project-develop\target\test-classes;C:\Users\Alex\Documents\Alex\IUT\S2T\M213\New Workspace\chess-minimal-project-develop\target\classes;C:\Users\Alex\.m2\repository\org\junit\jupiter\junit-jupiter\5.6.2\junit-jupiter-5.6.2.jar;C:\Users\Alex\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.2\junit-jupiter-api-5.6.2.jar;C:\Users\Alex\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Alex\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Alex\.m2\repository\org\junit\platform\junit-platform-commons\1.6.2\junit-platform-commons-1.6.2.jar;C:\Users\Alex\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.2\junit-jupiter-params-5.6.2.jar;C:\Users\Alex\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.2\junit-jupiter-engine-5.6.2.jar;C:\Users\Alex\.m2\repository\org\junit\platform\junit-platform-engine\1.6.2\junit-platform-engine-1.6.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -33,7 +33,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\Alex\AppData\Local\Temp\surefire17568130532876789158\surefirebooter7016155902480204629.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Alex\AppData\Local\Temp\surefire2552365773209680546\surefirebooter4792758681599322508.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="12.0.1+12"/>
@@ -58,9 +58,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="56.0"/>
   </properties>
-  <testcase name="premierTest" classname="fr.iut.ChessTest" time="0.003">
-    <failure message="Pas encore fini" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: Pas encore fini
-	at fr.iut.ChessTest.premierTest(ChessTest.java:10)
-</failure>
-  </testcase>
+  <testcase name="premierTest" classname="fr.iut.ChessTest" time="0.043"/>
 </testsuite>
