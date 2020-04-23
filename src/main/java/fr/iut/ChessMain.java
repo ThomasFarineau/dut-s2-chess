@@ -44,7 +44,7 @@ public class ChessMain {
 				gp.sauvegarderPartie();
 				System.exit(0);
 			} else {
-				gp.sauvegarderPartie(entree.substring(8)); // créer un fichier a partir des caractères du 12ieme caractère
+				gp.sauvegarderPartie(entree.substring(8)); // créer un fichier a partir des caractères du 8ieme caractère
 				System.exit(0);
 			}
 		} catch (IOException e) {
