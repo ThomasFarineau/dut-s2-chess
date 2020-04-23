@@ -14,14 +14,6 @@ import fr.iut.pieces.Tour;
 
 public class PieceTest {
 	@Test
-	public void testToStringCav() {
-		Piece p1 = new Cavalier(false);
-		Piece p2 = new Cavalier(true);
-		assertEquals("Cb", p1.toString());
-		assertEquals("Cn", p2.toString());
-	}
-
-	@Test
 	public void testToStringTour() {
 		Piece p1 = new Tour(false);
 		Piece p2 = new Tour(true);
