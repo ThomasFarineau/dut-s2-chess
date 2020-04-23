@@ -1,3 +1,6 @@
-/target/*
 /partieTest.csv
+target/
+target
+/target
 /target/
+*.class
