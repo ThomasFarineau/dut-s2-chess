@@ -160,4 +160,3 @@ public class ChessMain {
 		sc.close();
 	}
 }
-//bonjour
