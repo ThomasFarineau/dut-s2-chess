@@ -38,13 +38,13 @@ public class ChessMain {
 		System.out.println("\n\n"+p.toString());
 	}
 
-	public static void sauvegarder(String ligne) {
+	public static void sauvegarder(String entree) {
 
 		try {
-			if(ligne.length() <= 11 ) { //si le mot est juste sauvegarder
+			if(entree.length() <= 11 ) { //si le mot est juste sauvegarder
 				gp.sauvegarderPartie();
 			} else {
-				gp.sauvegarderPartie(ligne.substring(12)); // créer un fichier a partir des caractères du 12ieme caractère
+				gp.sauvegarderPartie(entree.substring(12)); // créer un fichier a partir des caractères du 12ieme caractère
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
