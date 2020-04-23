@@ -1,11 +1,13 @@
 package fr.iut.pieces;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class CavalierTest {
+import fr.iut.pieces.Cavalier;
+
+public class CavalierTest {
 	private Cavalier cavalierNoir;
 	private Cavalier cavalierBlanc;
 	

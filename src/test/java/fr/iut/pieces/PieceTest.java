@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import fr.iut.pieces.Cavalier;
 import fr.iut.pieces.Fou;
 import fr.iut.pieces.Piece;
 import fr.iut.pieces.Pion;
