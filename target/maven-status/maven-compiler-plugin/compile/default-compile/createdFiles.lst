@@ -1,0 +1,10 @@
+fr\iut\gestionpartie\GestionnairePartie.class
+fr\iut\pieces\Piece.class
+fr\iut\pieces\Roi.class
+fr\iut\pieces\Reine.class
+fr\iut\plateau\Plateau.class
+fr\iut\pieces\Fou.class
+fr\iut\pieces\Tour.class
+fr\iut\pieces\Cavalier.class
+fr\iut\pieces\Pion.class
+fr\iut\ChessMain.class

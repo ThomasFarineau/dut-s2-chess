@@ -1,6 +1,6 @@
 package fr.iut.pieces;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
 import fr.iut.pieces.Cavalier;
 
 public class CavalierTest {
-	private Cavalier cavalierNoir;
 	private Cavalier cavalierBlanc;
+	private Cavalier cavalierNoir;
 	
 	@BeforeEach
 	public void initialisation() {
-		cavalierNoir = new Cavalier(true);
 		cavalierBlanc = new Cavalier(false);
+		cavalierNoir = new Cavalier(true);
 	}
 
 	@Test

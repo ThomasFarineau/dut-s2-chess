@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: fr.iut.ChessTest
 -------------------------------------------------------------------------------
-Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.126 s <<< FAILURE! - in fr.iut.ChessTest
+premierTest  Time elapsed: 0.003 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Pas encore fini
+	at fr.iut.ChessTest.premierTest(ChessTest.java:10)
+

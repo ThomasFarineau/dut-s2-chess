@@ -12,7 +12,6 @@ import fr.iut.pieces.Roi;
 import fr.iut.pieces.Tour;
 
 public class PieceTest {
-	
 	@Test
 	public void testToStringTour() {
 		Piece p1 = new Tour(false);

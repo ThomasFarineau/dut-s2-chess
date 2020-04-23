@@ -1,14 +1,163 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ChessMain.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chess-minimal-project</a> &gt; <a href="index.source.html" class="el_package">fr.iut</a> &gt; <span class="el_source">ChessMain.java</span></div><h1>ChessMain.java</h1><pre class="source lang-java linenums">package fr.iut;
 
-<span class="fc" id="L3">public class ChessMain {</span>
+import java.io.IOException;
+import java.util.Scanner;
 
-    public String getHelloMessage() {
-<span class="fc" id="L6">        return &quot;Welcome to the chess game.&quot;;</span>
-    }
+import fr.iut.gestionpartie.GestionnairePartie;
+import fr.iut.plateau.Plateau;
 
-    public static void main(String[] args) {
-<span class="nc" id="L10">        final ChessMain chessMain = new ChessMain();</span>
-<span class="nc" id="L11">        System.out.println(chessMain.getHelloMessage());</span>
-<span class="nc" id="L12">    }</span>
+<span class="nc" id="L9">public class ChessMain {</span>
+<span class="nc" id="L10">	private static Scanner sc = new Scanner(System.in); // On cr�e un scanner pour r�cup�rer les entr�es de l'utilisateur</span>
+<span class="nc" id="L11">	private static Plateau p = new Plateau(); // On charge le plateau</span>
+<span class="nc" id="L12">	private static GestionnairePartie gp = new GestionnairePartie(p); // On initialise un fichier avec le plateau</span>
+
+	public static boolean verifSyntaxe(String entree) {
+<span class="nc bnc" id="L15" title="All 2 branches missed.">		if(entree.length() != 5)</span>
+<span class="nc" id="L16">			return false;</span>
+
+<span class="nc" id="L18">		char[] tabEntree = entree.toUpperCase().toCharArray();</span>
+
+<span class="nc bnc" id="L20" title="All 18 branches missed.">		return (tabEntree[2] == ' ') &amp;&amp;</span>
+				(tabEntree[0] &gt;= 'A' &amp;&amp; tabEntree[0] &lt;= 'H') &amp;&amp;
+				(tabEntree[1] &gt;= '1' &amp;&amp; tabEntree[1] &lt;= '8') &amp;&amp;
+				(tabEntree[3] &gt;= 'A' &amp;&amp; tabEntree[3] &lt;= 'H') &amp;&amp;
+				(tabEntree[4] &gt;= '1' &amp;&amp; tabEntree[4] &lt;= '8');
+	}
+
+	public static int[] convertChaine(String entree) {
+<span class="nc" id="L28">		char[] tabEntree = entree.toLowerCase().toCharArray();</span>
+<span class="nc" id="L29">		return new int[] {8-(tabEntree[1]-'0'), tabEntree[0]-'a', 8-(tabEntree[4]-'0'), tabEntree[3]-'a'};</span>
+	}
+	
+	public static void afficherMessageDebutTour() {
+<span class="nc" id="L33">		System.out.println(&quot;\n\n\n\n\n&quot;);</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">		System.out.print(&quot;C'est au tour du joueur &quot; + (p.getTourJoueur() ? &quot;noir.&quot; : &quot;blanc.&quot;));</span>
+		
+		//Afficher si le roi du joueur est en echec
+		
+<span class="nc" id="L38">		System.out.println(&quot;\n\n&quot;+p.toString());</span>
+<span class="nc" id="L39">	}</span>
+
+	public static void quitter(String entree) {
+		try {
+<span class="nc bnc" id="L43" title="All 2 branches missed.">			if(entree.length() &lt;= 7 ) { //si le mot est juste quitter</span>
+<span class="nc" id="L44">				gp.sauvegarderPartie();</span>
+<span class="nc" id="L45">				System.exit(0);</span>
+			} else {
+<span class="nc" id="L47">				gp.sauvegarderPartie(entree.substring(8)); // cr�er un fichier a partir des caract�res du 8ieme caract�re</span>
+<span class="nc" id="L48">				System.exit(0);</span>
+			}
+<span class="nc" id="L50">		} catch (IOException e) {</span>
+<span class="nc" id="L51">			e.printStackTrace();</span>
+<span class="nc" id="L52">		}</span>
+<span class="nc" id="L53">	}</span>
+
+	public static void sauvegarder(String entree) {
+
+		try {
+<span class="nc bnc" id="L58" title="All 2 branches missed.">			if(entree.length() &lt;= 11 ) { //si le mot est juste sauvegarder</span>
+<span class="nc" id="L59">				gp.sauvegarderPartie();</span>
+			} else {
+<span class="nc" id="L61">				gp.sauvegarderPartie(entree.substring(12)); // cr�er un fichier a partir des caract�res du 12ieme caract�re</span>
+			}
+<span class="nc" id="L63">		} catch (IOException e) {</span>
+<span class="nc" id="L64">			e.printStackTrace();</span>
+<span class="nc" id="L65">		}</span>
+
+<span class="nc" id="L67">	}</span>
+
+	public static void jouerTour() {
+<span class="nc" id="L70">		boolean entreeValide = false;</span>
+		
+<span class="nc bnc" id="L72" title="All 2 branches missed.">		while(!entreeValide) {</span>
+<span class="nc" id="L73">			afficherMessageDebutTour();</span>
+			
+<span class="nc" id="L75">			System.out.print(&quot;\nVeuillez entrer votre d�placement : &quot;);</span>
+			
+<span class="nc" id="L77">			String deplacement = sc.nextLine();</span>
+
+<span class="nc bnc" id="L79" title="All 2 branches missed.">			if(deplacement.contains(&quot;sauvegarder&quot;)) {</span>
+<span class="nc" id="L80">				sauvegarder(deplacement);</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">			} else if(deplacement.contains(&quot;quitter&quot;)) {</span>
+<span class="nc" id="L82">				quitter(deplacement);</span>
+			} else {
+<span class="nc bnc" id="L84" title="All 2 branches missed.">				if(verifSyntaxe(deplacement)) {</span>
+					try {
+<span class="nc" id="L86">						p.deplacer(convertChaine(deplacement));</span>
+<span class="nc" id="L87">						entreeValide = true;</span>
+<span class="nc" id="L88">					} catch(Exception e) {</span>
+<span class="nc" id="L89">						System.out.println(&quot;Erreur : &quot;+e.getMessage());</span>
+<span class="nc" id="L90">					}</span>
+				} else {
+<span class="nc" id="L92">					System.out.println(&quot;Erreur : Syntaxe invalide.&quot;);</span>
+				}
+			}
+<span class="nc" id="L95">		}</span>
+<span class="nc" id="L96">	}</span>
+
+	public static void initialisation() {
+<span class="nc" id="L99">		System.out.println(&quot;Bienvenue dans le jeu d'�chec.&quot;);</span>
+
+<span class="nc" id="L101">		boolean entree1Valide = false; // Sert � v�rifier la validit� du message saisi</span>
+
+<span class="nc bnc" id="L103" title="All 2 branches missed.">		while(!entree1Valide) {</span>
+<span class="nc" id="L104">			entree1Valide = true;</span>
+
+<span class="nc" id="L106">			System.out.println(&quot;\nVoulez vous d�marrer une nouvelle partie ou bien charger une ancienne partie ?&quot;); </span>
+<span class="nc" id="L107">			System.out.println(&quot;\t 1 - D�marrer une nouvelle partie&quot;);</span>
+<span class="nc" id="L108">			System.out.println(&quot;\t 2 - Charger une ancienne partie&quot;);</span>
+
+<span class="nc" id="L110">			System.out.print(&quot;\nVeuillez saisir 1 ou 2 : &quot;);</span>
+<span class="nc" id="L111">			String entree1 = sc.nextLine(); // On demande la proposition</span>
+
+<span class="nc bnc" id="L113" title="All 3 branches missed.">			switch (entree1) {</span>
+			case &quot;1&quot;: 
+				try {
+<span class="nc" id="L116">					gp.nouvellePartie(); // On charge un fichier qui se nomme : &quot;nouvellePartie.csv&quot;</span>
+<span class="nc" id="L117">				} catch(Exception e) {</span>
+<span class="nc" id="L118">					System.out.println(&quot;Erreur : &quot; + e.getMessage());</span>
+<span class="nc" id="L119">					entree1Valide=false; // Si on a une erreur IOException, on initialise le boolean a false.</span>
+<span class="nc" id="L120">				}</span>
+<span class="nc" id="L121">				break;</span>
+
+			case &quot;2&quot;:
+<span class="nc" id="L124">				boolean entree2Valide = false;</span>
+				
+<span class="nc bnc" id="L126" title="All 2 branches missed.">				while(!entree2Valide) {</span>
+<span class="nc" id="L127">					System.out.print(&quot;\nVeuillez saisir le nom du fichier de partie (ex : \&quot;maPartie.csv\&quot;), entrez \&quot;cancel\&quot; pour revenir en arri�re : &quot;);</span>
+<span class="nc" id="L128">					String entree2 = sc.nextLine(); // Un scan pour demander le nom du fichier</span>
+<span class="nc" id="L129">					entree2Valide = true; // </span>
+<span class="nc bnc" id="L130" title="All 4 branches missed.">					if(entree2.equals(&quot;cancel&quot;) || entree2.equals(&quot;retour&quot;)) {</span>
+<span class="nc" id="L131">						entree1Valide = false;</span>
+					} else {
+						try {
+<span class="nc" id="L134">							gp.chargerAnciennePartie(entree2); // On charger le nom du fichier entr�e</span>
+<span class="nc" id="L135">						} catch(Exception e) {</span>
+<span class="nc" id="L136">							System.out.println(&quot;Erreur : &quot; + e.getMessage());</span>
+<span class="nc" id="L137">							entree2Valide = false; // Si on a une erreur IOException, on initialise le boolean a false.</span>
+<span class="nc" id="L138">						}</span>
+					}
+<span class="nc" id="L140">				}</span>
+				break;
+
+			default:
+<span class="nc" id="L144">				System.out.println(&quot;Entr�e invalide, veuillez recommencer.&quot;); // Si le premier scan ne contient pas l'une des 2 propositions, on demande � l'utilisateur de ressaisir </span>
+<span class="nc" id="L145">				entree1Valide = false;</span>
+				break;
+			}
+<span class="nc" id="L148">		}</span>
+<span class="nc" id="L149">	}</span>
+
+	public static void main(String[] args) {
+<span class="nc" id="L152">		initialisation();</span>
+
+<span class="nc" id="L154">		System.out.println(&quot;\nLa partie commence !&quot;);</span>
+
+<span class="nc bnc" id="L156" title="All 2 branches missed.">		while(!p.verifMat()) {</span>
+<span class="nc" id="L157">			jouerTour();</span>
+		}
+
+<span class="nc" id="L160">		sc.close();</span>
+<span class="nc" id="L161">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

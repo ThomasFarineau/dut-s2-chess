@@ -2,113 +2,142 @@
 
 import java.util.Arrays;
 
+import fr.iut.gestionpartie.GestionnairePartie;
 import fr.iut.pieces.Cavalier;
-import fr.iut.pieces.Fou;
 import fr.iut.pieces.Piece;
 import fr.iut.pieces.Pion;
-import fr.iut.pieces.Reine;
 import fr.iut.pieces.Roi;
-import fr.iut.pieces.Tour;
 
-<span class="nc" id="L13">public class Plateau {</span>
-	private boolean tourJoueur;
+<span class="nc" id="L11">public class Plateau {</span>
+<span class="nc" id="L12">	private boolean tourJoueur = false;</span>
 	private Piece[][] echiquier;
 
-	public boolean deplacer(int x1, int y1, int x2, int y2) {
-		//CODE A IMPLEMENTER
+	public void deplacer(int[] coord) throws Exception {
+<span class="nc" id="L16">		int i = coord[0];</span>
+<span class="nc" id="L17">		int j = coord[1];</span>
+<span class="nc" id="L18">		int k = coord[2];</span>
+<span class="nc" id="L19">		int l = coord[3];</span>
 
-<span class="nc" id="L20">		return true;</span>
-	}
+<span class="nc bnc" id="L21" title="All 2 branches missed.">		if(echiquier[i][j] == null) {</span>
+<span class="nc" id="L22">			throw new Exception(&quot;Il n'y a pas de piece sur la premi�re case entr�e.&quot;);</span>
+		}
+		
+<span class="nc bnc" id="L25" title="All 2 branches missed.">		if(echiquier[i][j].getCouleur() != tourJoueur) {</span>
+<span class="nc" id="L26">			throw new Exception(&quot;La pi�ce selectionn�e ne vous appartient pas.&quot;);</span>
+		}
+		
+<span class="nc" id="L29">		boolean[][] deplacementsPiece = calculerDeplacementsPiece(i, j);</span>
+		
+<span class="nc bnc" id="L31" title="All 2 branches missed.">		if(!deplacementsPiece[k][l]) {</span>
+<span class="nc" id="L32">			throw new Exception(&quot;La pi�ce s�lectionn�e ne peut pas aller ici.&quot;);</span>
+		}
+
+<span class="nc" id="L35">		echiquier[k][l] = echiquier[i][j];</span>
+<span class="nc" id="L36">		echiquier[i][j] = null;</span>
+
+<span class="nc bnc" id="L38" title="All 2 branches missed.">		if(verifEchec()) {</span>
+<span class="nc" id="L39">			echiquier[i][j] = echiquier[k][l];</span>
+<span class="nc" id="L40">			echiquier[k][l] = null;</span>
+<span class="nc" id="L41">			throw new Exception(&quot;Mouvement impossible, vous �tes en �chec.&quot;);</span>
+		}
+<span class="nc" id="L43">		System.out.println(&quot;Le mouvement a �t� effectu�&quot;);</span>
+
+<span class="nc bnc" id="L45" title="All 2 branches missed.">		setTourJoueur(!tourJoueur);</span>
+<span class="nc" id="L46">	}</span>
 
 	public boolean[][] calculerDeplacementsPiece(int xP, int yP) {
-<span class="nc" id="L24">		boolean[][] deplacementsPlateau = new boolean[8][8]; // On cr�e la matrice retour</span>
-<span class="nc bnc" id="L25" title="All 2 branches missed.">		for (boolean[] ligne : deplacementsPlateau) // On la remplit de false</span>
-<span class="nc" id="L26">			Arrays.fill(ligne, false); // Ligne par ligne</span>
+<span class="nc" id="L49">		boolean[][] deplacementsPlateau = new boolean[8][8]; // On cr�e la matrice retour</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">		for (boolean[] ligne : deplacementsPlateau) // On la remplit de false</span>
+<span class="nc" id="L51">			Arrays.fill(ligne, false); // Ligne par ligne</span>
 
 		// On r�cup�re les diff�rents d�placements possible de la pi�ce dont les &quot;coordonn�es&quot; sont rentr�es en param�tre
-<span class="nc" id="L29">		boolean[][] deplacementsPiece = echiquier[xP][yP].getDeplacementsPoss(); </span>
+<span class="nc" id="L54">		boolean[][] deplacementsPiece = echiquier[xP][yP].getDeplacementsPoss(); </span>
 
-<span class="nc bnc" id="L31" title="All 2 branches missed.">		if (echiquier[xP][yP] instanceof Pion) {</span>
-<span class="nc bnc" id="L32" title="All 4 branches missed.">			if (echiquier[xP][yP].getCouleur() &amp;&amp; xP == 1) {</span>
-<span class="nc" id="L33">				deplacementsPiece[9][7] = true;</span>
-<span class="nc" id="L34">				deplacementsPiece[8][7] = false;</span>
-<span class="nc" id="L35">			}</span>
-				
-<span class="nc bnc" id="L37" title="All 4 branches missed.">			else if (!echiquier[xP][yP].getCouleur() &amp;&amp; xP == 6) {</span>
-<span class="nc" id="L38">				deplacementsPiece[5][7] = true;</span>
-<span class="nc" id="L39">				deplacementsPiece[6][7] = false;</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">		if (echiquier[xP][yP] instanceof Pion) {</span>
+<span class="nc bnc" id="L57" title="All 4 branches missed.">			if (echiquier[xP][yP].getCouleur() &amp;&amp; xP == 1) {</span>
+<span class="nc" id="L58">				deplacementsPiece[9][7] = true;</span>
+<span class="nc" id="L59">				deplacementsPiece[8][7] = false;</span>
+			}
+
+<span class="nc bnc" id="L62" title="All 4 branches missed.">			else if (!echiquier[xP][yP].getCouleur() &amp;&amp; xP == 6) {</span>
+<span class="nc" id="L63">				deplacementsPiece[5][7] = true;</span>
+<span class="nc" id="L64">				deplacementsPiece[6][7] = false;</span>
 			}
 		}
 
-<span class="nc bnc" id="L43" title="All 2 branches missed.">		if (echiquier[xP][yP] instanceof Cavalier) { // Algorithme pour le cavalier : pas de chemin � tracer</span>
-<span class="nc bnc" id="L44" title="All 2 branches missed.">			for (int i = 0; i &lt; deplacementsPiece.length; i++) {</span>
-<span class="nc bnc" id="L45" title="All 2 branches missed.">				for (int j = 0; j &lt; deplacementsPiece[0].length; j++) {</span>
-<span class="nc bnc" id="L46" title="All 2 branches missed.">					if (deplacementsPiece[i][j]) { //Pour chaque d�placement</span>
-<span class="nc" id="L47">						int xDeplacementPiece = xP + i - 7;</span>
-<span class="nc" id="L48">						int yDeplacementPiece = yP + j - 7;</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">		if (echiquier[xP][yP] instanceof Cavalier) { // Algorithme pour le cavalier : pas de chemin � tracer</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">			for (int i = 0; i &lt; deplacementsPiece.length; i++) {</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">				for (int j = 0; j &lt; deplacementsPiece[0].length; j++) {</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">					if (deplacementsPiece[i][j]) { //Pour chaque d�placement</span>
+<span class="nc" id="L72">						int xDeplacementPiece = xP + i - 7;</span>
+<span class="nc" id="L73">						int yDeplacementPiece = yP + j - 7;</span>
 
-<span class="nc bnc" id="L50" title="All 8 branches missed.">						if (xDeplacementPiece &gt;= 0 &amp;&amp; xDeplacementPiece &lt;= 7 &amp;&amp; yDeplacementPiece &gt;= 0 &amp;&amp; yDeplacementPiece &lt;= 7) {</span>
-<span class="nc bnc" id="L51" title="All 2 branches missed.">							if (echiquier[xDeplacementPiece][yDeplacementPiece] == null)</span>
-<span class="nc" id="L52">								deplacementsPlateau[xDeplacementPiece][yDeplacementPiece] = true;</span>
-<span class="nc bnc" id="L53" title="All 2 branches missed.">							else if (echiquier[xDeplacementPiece][yDeplacementPiece].getCouleur() != echiquier[xP][yP].getCouleur())</span>
-<span class="nc" id="L54">								deplacementsPlateau[xDeplacementPiece][yDeplacementPiece] = true;</span>
+<span class="nc bnc" id="L75" title="All 8 branches missed.">						if (xDeplacementPiece &gt;= 0 &amp;&amp; xDeplacementPiece &lt;= 7 &amp;&amp; yDeplacementPiece &gt;= 0 &amp;&amp; yDeplacementPiece &lt;= 7) {</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">							if (echiquier[xDeplacementPiece][yDeplacementPiece] == null) {</span>
+<span class="nc" id="L77">								deplacementsPlateau[xDeplacementPiece][yDeplacementPiece] = true;</span>
+							}
+
+<span class="nc bnc" id="L80" title="All 2 branches missed.">							else if (echiquier[xDeplacementPiece][yDeplacementPiece].getCouleur() != echiquier[xP][yP].getCouleur()) {</span>
+<span class="nc" id="L81">								deplacementsPlateau[xDeplacementPiece][yDeplacementPiece] = true;</span>
+							}
 						}
 					}
 				}
 			}
-<span class="nc" id="L59">		} else {</span>
+		} else {
 			// Calcul de la matrice retour
-<span class="nc bnc" id="L61" title="All 2 branches missed.">			for (int i = 0; i &lt; deplacementsPiece.length; i++) {</span>
-<span class="nc bnc" id="L62" title="All 2 branches missed.">				for (int j = 0; j &lt; deplacementsPiece[0].length; j++) {</span>
-<span class="nc bnc" id="L63" title="All 2 branches missed.">					if (deplacementsPiece[i][j]) { //Pour chaque d�placement maximal</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">			for (int i = 0; i &lt; deplacementsPiece.length; i++) {</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">				for (int j = 0; j &lt; deplacementsPiece[0].length; j++) {</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">					if (deplacementsPiece[i][j]) { //Pour chaque d�placement maximal</span>
 						// Calcul du d�placement maximal absolu (par rapport � (0;0))
-<span class="nc" id="L65">						int xDeplacementPiece = i-7;</span>
-<span class="nc" id="L66">						int yDeplacementPiece = j-7;</span>
+<span class="nc" id="L93">						int xDeplacementPiece = i-7;</span>
+<span class="nc" id="L94">						int yDeplacementPiece = j-7;</span>
 
 						// Calcul de la distance du d�placement unitaire (1, -1 ou 0)
-<span class="nc bnc" id="L69" title="All 2 branches missed.">						int xShift = (xDeplacementPiece == 0)?0 : (xDeplacementPiece/(Math.abs(xDeplacementPiece)));</span>
-<span class="nc bnc" id="L70" title="All 2 branches missed.">						int yShift = (yDeplacementPiece == 0)?0 : (yDeplacementPiece/(Math.abs(yDeplacementPiece)));</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">						int xShift = (xDeplacementPiece == 0)?0 : (xDeplacementPiece/(Math.abs(xDeplacementPiece)));</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">						int yShift = (yDeplacementPiece == 0)?0 : (yDeplacementPiece/(Math.abs(yDeplacementPiece)));</span>
 
 						//Calcul des premiers d�placements � v�rifier
-<span class="nc" id="L73">						int x = xP + xShift;</span>
-<span class="nc" id="L74">						int y = yP + yShift;</span>
+<span class="nc" id="L101">						int x = xP + xShift;</span>
+<span class="nc" id="L102">						int y = yP + yShift;</span>
 
-<span class="nc bnc" id="L76" title="All 2 branches missed.">						while ( //Tant que :</span>
-<span class="nc bnc" id="L77" title="All 8 branches missed.">								(x &gt;= 0 &amp;&amp; x &lt;= 7 &amp;&amp; y &gt;= 0 &amp;&amp; y &lt;= 7) &amp;&amp;  // On reste sur l'�chiquier et qu'</span>
+<span class="nc bnc" id="L104" title="All 8 branches missed.">						while ( //Tant que :</span>
+								(x &gt;= 0 &amp;&amp; x &lt;= 7 &amp;&amp; y &gt;= 0 &amp;&amp; y &lt;= 7) &amp;&amp;  // On reste sur l'�chiquier et qu'
 								// On ne d�passe pas le d�placement maximal
-<span class="nc bnc" id="L79" title="All 2 branches missed.">								(Math.abs(x - xP) &lt;= Math.abs(xDeplacementPiece) &amp;&amp; (Math.abs(y - yP) &lt;= Math.abs(yDeplacementPiece))) </span>
+<span class="nc bnc" id="L107" title="All 4 branches missed.">								(Math.abs(x - xP) &lt;= Math.abs(xDeplacementPiece) &amp;&amp; (Math.abs(y - yP) &lt;= Math.abs(yDeplacementPiece))) </span>
 								) {
-<span class="nc bnc" id="L81" title="All 2 branches missed.">							if (echiquier[xP][yP] instanceof Pion) {</span>
-<span class="nc bnc" id="L82" title="All 2 branches missed.">								if (echiquier[x][y] == null) {</span>
-<span class="nc bnc" id="L83" title="All 2 branches missed.">									if (y == yP) {</span>
-<span class="nc" id="L84">										deplacementsPlateau[x][y] = true;</span>
-<span class="nc" id="L85">										x += xShift;</span>
-<span class="nc" id="L86">									} else {</span>
-<span class="nc" id="L87">										x = 8;</span>
-<span class="nc" id="L88">										y = 8;</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">							if (echiquier[xP][yP] instanceof Pion) {</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">								if (echiquier[x][y] == null) {</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">									if (y == yP) {</span>
+<span class="nc" id="L112">										deplacementsPlateau[x][y] = true;</span>
+<span class="nc" id="L113">										x += xShift;</span>
+									} else {
+<span class="nc" id="L115">										x = 8;</span>
+<span class="nc" id="L116">										y = 8;</span>
 									}
-<span class="nc" id="L90">								} else {</span>
-<span class="nc bnc" id="L91" title="All 2 branches missed.">									if (y != yP)</span>
-<span class="nc bnc" id="L92" title="All 2 branches missed.">										if (echiquier[x][y].getCouleur() != echiquier[xP][yP].getCouleur())</span>
-<span class="nc" id="L93">											deplacementsPlateau[x][y] = true;</span>
-<span class="nc" id="L94">									x = 8;</span>
-<span class="nc" id="L95">									y = 8;</span>
+								} else {
+<span class="nc bnc" id="L119" title="All 2 branches missed.">									if (y != yP)</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">										if (echiquier[x][y].getCouleur() != echiquier[xP][yP].getCouleur())</span>
+<span class="nc" id="L121">											deplacementsPlateau[x][y] = true;</span>
+<span class="nc" id="L122">									x = 8;</span>
+<span class="nc" id="L123">									y = 8;</span>
 								}
-<span class="nc" id="L97">							} else {</span>
-<span class="nc bnc" id="L98" title="All 2 branches missed.">								if (echiquier[x][y] == null) { // S'il n'y a rien dans la case o� aller</span>
-<span class="nc" id="L99">									deplacementsPlateau[x][y] = true; // Le d�placement unitaire est possible</span>
+							} else {
+<span class="nc bnc" id="L126" title="All 2 branches missed.">								if (echiquier[x][y] == null) { // S'il n'y a rien dans la case o� aller</span>
+<span class="nc" id="L127">									deplacementsPlateau[x][y] = true; // Le d�placement unitaire est possible</span>
 
 									// On passe au d�placement unitaire suivant (s'il existe)
-<span class="nc" id="L102">									x += xShift;</span>
-<span class="nc" id="L103">									y += yShift;</span>
-<span class="nc" id="L104">								} else { // Sinon</span>
+<span class="nc" id="L130">									x += xShift;</span>
+<span class="nc" id="L131">									y += yShift;</span>
+								} else { // Sinon
 									// S'il y a une pi�ce de la couleur adverse, alors on peut tout de m�me y aller
-<span class="nc bnc" id="L106" title="All 2 branches missed.">									if (echiquier[x][y].getCouleur() != echiquier[xP][yP].getCouleur())</span>
-<span class="nc" id="L107">										deplacementsPlateau[x][y] = true;</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">									if (echiquier[x][y].getCouleur() != echiquier[xP][yP].getCouleur()) {</span>
+<span class="nc" id="L135">										deplacementsPlateau[x][y] = true;</span>
+									}
 
 									// On a fini de calculer les d�placements pour le d�placement maximal courant
-<span class="nc" id="L110">									x = 8;</span>
-<span class="nc" id="L111">									y = 8;</span>
+<span class="nc" id="L139">									x = 8;</span>
+<span class="nc" id="L140">									y = 8;</span>
 								} // Fin else
 							}
 						} // Fin while
@@ -118,100 +147,135 @@ import fr.iut.pieces.Tour;
 		}
 
 		// On retourne la matrice des d�placements possible de la pi�ce sur le plateau
-<span class="nc" id="L121">		return deplacementsPlateau;</span>
+<span class="nc" id="L150">		return deplacementsPlateau;</span>
 	} //Fin m�thode
 
 	public boolean verifEchec() {
-		//CODE A IMPLEMENTER
+<span class="nc bnc" id="L154" title="All 2 branches missed.">		for (int i = 0; i &lt; 8; i++) {</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">			for (int j = 0; j &lt; 8; j++) {</span>
+<span class="nc bnc" id="L156" title="All 2 branches missed.">				if (echiquier[i][j] != null) {</span>
+<span class="nc bnc" id="L157" title="All 4 branches missed.">					if (echiquier[i][j] instanceof Roi &amp;&amp; echiquier[i][j].getCouleur() == tourJoueur) {</span>
 
-<span class="nc" id="L127">		return true;</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">						for (int k = 0; k &lt; 8; k++) {</span>
+<span class="nc bnc" id="L160" title="All 2 branches missed.">							for (int l = 0; l &lt; 8; l++) {</span>
+
+<span class="nc bnc" id="L162" title="All 2 branches missed.">								if (echiquier[k][l] != null) {</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">									if (echiquier[k][l].getCouleur() != tourJoueur) {</span>
+
+<span class="nc bnc" id="L165" title="All 2 branches missed.">										if (calculerDeplacementsPiece(k,l)[i][j]) {</span>
+<span class="nc" id="L166">											return true;</span>
+										}
+
+									}
+								}
+							}
+						}
+
+<span class="nc" id="L174">						j = 8;</span>
+<span class="nc" id="L175">						i = 8;</span>
+					}
+				}
+
+			}
+		}
+
+
+<span class="nc" id="L183">		return false;</span>
 	}
 
 	public boolean verifMat() {
-		//CODE A IMPLEMENTER
+<span class="nc bnc" id="L187" title="All 2 branches missed.">		for (int i = 0; i &lt; 8; i++)</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">			for (int j = 0; j &lt; 8; j++) {</span>
+<span class="nc bnc" id="L189" title="All 2 branches missed.">				if (echiquier[i][j] != null) {</span>
+<span class="nc bnc" id="L190" title="All 2 branches missed.">					if (echiquier[i][j].getCouleur() == tourJoueur) {</span>
+<span class="nc" id="L191">						boolean[][] deplacementsPossPiece = calculerDeplacementsPiece(i,j);</span>
 
-<span class="nc" id="L133">		return true;</span>
+<span class="nc bnc" id="L193" title="All 2 branches missed.">						for (int k = 0; k &lt; 8; k++) {</span>
+<span class="nc bnc" id="L194" title="All 2 branches missed.">							for (int l = 0; l &lt; 8; l++) {</span>
+<span class="nc bnc" id="L195" title="All 2 branches missed.">								if (deplacementsPossPiece[k][l]) {</span>
+<span class="nc" id="L196">									Piece copiePiece = echiquier[k][l];</span>
+<span class="nc" id="L197">									echiquier[k][l] = echiquier[i][j];</span>
+<span class="nc" id="L198">									echiquier[i][j] = null;</span>
+
+<span class="nc bnc" id="L200" title="All 2 branches missed.">									if (!verifEchec()) {</span>
+<span class="nc" id="L201">										System.out.println(echiquier[k][l] + &quot; : &quot; +</span>
+												i + &quot; &quot; +
+												j + &quot; -&gt; &quot; +
+												k + &quot; &quot; +
+												l + &quot; &quot;);
+
+<span class="nc" id="L207">										echiquier[i][j] = echiquier[k][l];</span>
+<span class="nc" id="L208">										echiquier[k][l] = copiePiece;</span>
+<span class="nc" id="L209">										return false;</span>
+									}
+
+<span class="nc" id="L212">									echiquier[i][j] = echiquier[k][l];</span>
+<span class="nc" id="L213">									echiquier[k][l] = copiePiece;</span>
+								}
+							}
+						}
+
+					}
+				}
+			}
+
+<span class="nc" id="L222">		return true;</span>
 	}
 
 	@Override
 	public String toString() {
-<span class="nc" id="L138">		String retour=&quot;&quot;;</span>
-<span class="nc bnc" id="L139" title="All 2 branches missed.">		for(int i=0; i&lt;echiquier.length; i++) {</span>
-<span class="nc" id="L140">			retour += 8-i+&quot; &quot;;</span>
-<span class="nc bnc" id="L141" title="All 2 branches missed.">			for(int j=0; j&lt;echiquier.length; j++) {</span>
-<span class="nc bnc" id="L142" title="All 2 branches missed.">				if(echiquier[i][j] != null) {</span>
-<span class="nc bnc" id="L143" title="All 2 branches missed.">					if (echiquier[i][j].toString().length()==2) {</span>
-<span class="nc" id="L144">						retour+=echiquier[i][j].toString() + &quot;  &quot;;</span>
-<span class="nc" id="L145">					} else {</span>
-<span class="nc" id="L146">						retour+=echiquier[i][j].toString() + &quot; &quot;;</span>
+<span class="nc" id="L227">		StringBuilder retour = new StringBuilder();</span>
+<span class="nc bnc" id="L228" title="All 2 branches missed.">		for(int i = 0; i &lt; echiquier.length; i++) {</span>
+<span class="nc" id="L229">			retour.append(8 - i).append(&quot; &quot;);</span>
+<span class="nc bnc" id="L230" title="All 2 branches missed.">			for(int j = 0; j &lt; echiquier.length; j++) {</span>
+<span class="nc bnc" id="L231" title="All 2 branches missed.">				if(echiquier[i][j] != null) {</span>
+<span class="nc bnc" id="L232" title="All 2 branches missed.">					if (echiquier[i][j].toString().length() == 2) {</span>
+<span class="nc" id="L233">						retour.append(echiquier[i][j].toString()).append(&quot;  &quot;);</span>
+					} else {
+<span class="nc" id="L235">						retour.append(echiquier[i][j].toString()).append(&quot; &quot;);</span>
 					}
-<span class="nc" id="L148">				} else {</span>
-<span class="nc" id="L149">					retour += &quot; -  &quot;;  </span>
+				} else {
+<span class="nc" id="L238">					retour.append(&quot; -  &quot;);</span>
 				}
 			}
-<span class="nc" id="L152">			retour += &quot;\n&quot;;</span>
+<span class="nc" id="L241">			retour.append(&quot;\n&quot;);</span>
 		}
-<span class="nc" id="L154">		retour += &quot;   A   B   C   D   E   F   G   H&quot;;</span>
-<span class="nc" id="L155">		return retour;</span>
+<span class="nc" id="L243">		retour.append(&quot;   A   B   C   D   E   F   G   H&quot;);</span>
+<span class="nc" id="L244">		return retour.toString();</span>
 	}
 
 	public void setEchiquier(Piece[][] echiquier) {
-<span class="nc" id="L159">		this.echiquier = echiquier;</span>
-<span class="nc" id="L160">	}</span>
+<span class="nc" id="L248">		this.echiquier = echiquier;</span>
+<span class="nc" id="L249">	}</span>
 
-	@Deprecated
-	public String toString2() {
-<span class="nc" id="L164">		String toReturn = &quot;&quot;;</span>
-<span class="nc bnc" id="L165" title="All 2 branches missed.">		for (int i = 0; i &lt; echiquier.length; i++) {</span>
-<span class="nc" id="L166">			toReturn += 8 - i + &quot;\t&quot;;</span>
-<span class="nc bnc" id="L167" title="All 2 branches missed.">			for (int j = 0; j &lt; echiquier[i].length; j++) {</span>
-<span class="nc bnc" id="L168" title="All 2 branches missed.">				if (echiquier[i][j] != null) {</span>
-<span class="nc" id="L169">					toReturn += echiquier[i][j].toString() + &quot;\t&quot;;</span>
-<span class="nc" id="L170">				} else {</span>
-<span class="nc" id="L171">					toReturn += &quot;-\t&quot;;</span>
-				}
-			}
-<span class="nc" id="L174">			toReturn += &quot;\n\n&quot;;</span>
-		}
-<span class="nc" id="L176">		toReturn += &quot;\n\tA\tB\tC\tD\tE\tF\tG\tH&quot;;</span>
-<span class="nc" id="L177">		return toReturn;</span>
+	public Piece[][] getEchiquier() {
+<span class="nc" id="L252">		return echiquier;</span>
 	}
 
+	public boolean getTourJoueur() {
+<span class="nc" id="L256">		return tourJoueur;</span>
+	}
+
+	public void setTourJoueur(boolean tourJoueur) {
+<span class="nc" id="L260">		this.tourJoueur = tourJoueur;</span>
+<span class="nc" id="L261">	}</span>
+	
+
 	public static void main(String[] args) {
-<span class="nc" id="L181">		Piece[][] echiquier1 = {</span>
-<span class="nc" id="L182">				{new Reine(false), null, null, new Tour(false), null, null, null, new Fou(false)},</span>
-<span class="nc" id="L183">				{null, null, null, null, null, new Cavalier(false), null, new Roi(true)},</span>
-<span class="nc" id="L184">				{null, null, null, null, null, null, new Pion(true), new Pion(false)},</span>
-<span class="nc" id="L185">				{null, null, null, null, null, null, new Pion(false), null},</span>
-<span class="nc" id="L186">				{null, null, null, null, null, null, null, null},</span>
-<span class="nc" id="L187">				{null, new Pion(true), null, null, null, null, null, null},</span>
-<span class="nc" id="L188">				{null, new Pion(true), null, null, null, null, null, null},</span>
-<span class="nc" id="L189">				{null, new Roi(false), null, null, null, null, null, null}</span>
-		};
+<span class="nc" id="L265">		Plateau plat = new Plateau();</span>
+<span class="nc" id="L266">		GestionnairePartie gp = new GestionnairePartie(plat);</span>
+		try {
+<span class="nc" id="L268">			gp.chargerAnciennePartie(&quot;partieTest.csv&quot;);</span>
+<span class="nc" id="L269">		} catch (Exception e) {</span>
+<span class="nc" id="L270">			e.printStackTrace();</span>
+<span class="nc" id="L271">		}</span>
 
-<span class="nc" id="L192">		Plateau plat = new Plateau();</span>
-<span class="nc" id="L193">		plat.setEchiquier(echiquier1);</span>
+<span class="nc" id="L273">		System.out.println(plat);</span>
 
-<span class="nc bnc" id="L195" title="All 2 branches missed.">		for (int i = 0; i &lt; 8; i++) {</span>
-<span class="nc bnc" id="L196" title="All 2 branches missed.">			for (int j = 0; j &lt; 8; j++) {</span>
-<span class="nc bnc" id="L197" title="All 2 branches missed.">				if (echiquier1[i][j] != null) {</span>
-<span class="nc" id="L198">					System.out.println(plat);</span>
-<span class="nc" id="L199">					System.out.println(&quot;\nPiece : &quot; + echiquier1[i][j] + &quot;(&quot; + i + &quot;;&quot; + j + &quot;)&quot;);</span>
-<span class="nc" id="L200">					boolean[][] dep = plat.calculerDeplacementsPiece(i, j);</span>
-<span class="nc bnc" id="L201" title="All 2 branches missed.">					for (int k = 0; k &lt; 8; k++) {</span>
-<span class="nc bnc" id="L202" title="All 2 branches missed.">						for (int l = 0; l &lt; 8; l++) {</span>
-<span class="nc bnc" id="L203" title="All 4 branches missed.">							if (k == i &amp;&amp; l == j)</span>
-<span class="nc" id="L204">								System.out.print(&quot;p &quot;);</span>
-<span class="nc bnc" id="L205" title="All 2 branches missed.">							else if (dep[k][l])</span>
-<span class="nc" id="L206">								System.out.print(&quot;O &quot;);</span>
-							else
-<span class="nc" id="L208">								System.out.print(&quot;- &quot;);</span>
-						}
-<span class="nc" id="L210">						System.out.println();</span>
-					}
-				}
-			}
-		}
-<span class="nc" id="L215">	}</span>
+<span class="nc" id="L275">		plat.setTourJoueur(false);</span>
+
+<span class="nc" id="L277">		System.out.println(&quot;Echec : &quot; + plat.verifEchec());</span>
+<span class="nc" id="L278">		System.out.println(&quot;Echec et mat : &quot; + plat.verifMat());</span>
+<span class="nc" id="L279">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
