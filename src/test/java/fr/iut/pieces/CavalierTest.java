@@ -6,13 +6,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CavalierTest {
-	private Cavalier cavalierBlanc;
 	private Cavalier cavalierNoir;
+	private Cavalier cavalierBlanc;
 	
 	@BeforeEach
 	public void initialisation() {
-		cavalierBlanc = new Cavalier(false);
 		cavalierNoir = new Cavalier(true);
+		cavalierBlanc = new Cavalier(false);
 	}
 
 	@Test
