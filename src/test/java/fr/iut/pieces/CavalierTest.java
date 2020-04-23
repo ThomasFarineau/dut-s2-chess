@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import fr.iut.pieces.Cavalier;
 
 public class CavalierTest {
+	
 	private Cavalier cavalierBlanc;
 	private Cavalier cavalierNoir;
 	
