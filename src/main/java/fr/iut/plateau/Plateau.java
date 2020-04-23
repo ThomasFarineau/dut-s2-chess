@@ -12,11 +12,11 @@ public class Plateau {
 	private boolean tourJoueur = false;
 	private Piece[][] echiquier;
 
-	public void deplacer(int[] coordonnees) throws Exception {
-		int i = coordonnees[0];
-		int j = coordonnees[1];
-		int k = coordonnees[2];
-		int l = coordonnees[3];
+	public void deplacer(int[] coord) throws Exception {
+		int i = coord[0];
+		int j = coord[1];
+		int k = coord[2];
+		int l = coord[3];
 
 		if(echiquier[i][j] == null) {
 			throw new Exception("Il n'y a pas de piece sur la première case entrée.");
