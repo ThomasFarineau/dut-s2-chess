@@ -5,3 +5,5 @@ target
 /target/
 *.class
 /target/*
+*/target/**
+/.class
