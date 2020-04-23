@@ -25,16 +25,16 @@ public class ChessMain {
 
 	public static int[] convertChaine(String entree) {
 		char[] tabEntree = entree.toLowerCase().toCharArray();
-		return new int[] {tabEntree[0]-'a', 8-(tabEntree[1]-'0'), tabEntree[3]-'a', 8-(tabEntree[4]-'0')};
+		return new int[] {8-(tabEntree[1]-'0'), tabEntree[0]-'a', 8-(tabEntree[4]-'0'), tabEntree[3]-'a'};
 	}
 	
 	public static void afficherMessageDebutTour() {
 		System.out.println("\n\n\n\n\n");
-		System.out.print("C'est au tour du joueur " + (p.getTourJoueur() ? "noir." : "blanc.\n"));
+		System.out.print("C'est au tour du joueur " + (p.getTourJoueur() ? "noir." : "blanc."));
 		
 		//Afficher si le roi du joueur est en echec
 		
-		System.out.println(p);
+		System.out.println("\n\n"+p.toString());
 	}
 	
 	public static void jouerTour() {
