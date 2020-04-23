@@ -111,7 +111,7 @@ public class ChessMain {
 					System.out.print("\nVeuillez saisir le nom du fichier de partie (ex : \"maPartie.csv\"), entrez \"cancel\" pour revenir en arrière : ");
 					String entree2 = sc.nextLine(); // Un scan pour demander le nom du fichier
 					entree2Valide = true; // 
-					if(entree2.equals("cancel")) {
+					if(entree2.equals("cancel") || entree2.equals("retour")) {
 						entree1Valide = false;
 					} else {
 						try {
@@ -144,3 +144,4 @@ public class ChessMain {
 		sc.close();
 	}
 }
+//bonjour
