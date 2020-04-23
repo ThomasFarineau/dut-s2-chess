@@ -38,6 +38,20 @@ public class ChessMain {
 		System.out.println("\n\n"+p.toString());
 	}
 
+	public static void quitter(String entree) {
+		try {
+			if(entree.length() <= 7 ) { //si le mot est juste quitter
+				gp.sauvegarderPartie();
+				System.exit(0);
+			} else {
+				gp.sauvegarderPartie(entree.substring(8)); // créer un fichier a partir des caractères du 12ieme caractère
+				System.exit(0);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static void sauvegarder(String entree) {
 
 		try {
@@ -64,6 +78,8 @@ public class ChessMain {
 
 			if(deplacement.contains("sauvegarder")) {
 				sauvegarder(deplacement);
+			} else if(deplacement.contains("quitter")) {
+				quitter(deplacement);
 			} else {
 				if(verifSyntaxe(deplacement)) {
 					try {
