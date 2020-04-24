@@ -1,9 +1,2 @@
 /partieTest.csv
-target/
-target
 /target
-/target/
-*.class
-/target/*
-*/target/**
-/.class
