@@ -3,7 +3,6 @@ import java.util.Arrays;
 
 public abstract class Piece {
 	private boolean couleur;
-	
 	private boolean[][] deplacementsPoss = new boolean[15][15];
 	
 	public Piece(boolean couleur) {
@@ -12,10 +11,9 @@ public abstract class Piece {
 			Arrays.fill(ligne, false);
 	}
 	
-	public void setDeplacementsPossIndex(int x, int y, boolean val) {
+	protected void setDeplacementsPossIndex(int x, int y, boolean val) {
 		deplacementsPoss[x][y] = val;
 	}
-
 	
 	public boolean getCouleur() {
 		return couleur;
@@ -24,10 +22,6 @@ public abstract class Piece {
 
 	public boolean[][] getDeplacementsPoss() {
 		return deplacementsPoss;
-	}
-
-	public void setDeplacementsPoss(boolean[][] deplacementsPoss) {
-		this.deplacementsPoss = deplacementsPoss;
 	}
 	
 	public abstract String toString();
