@@ -38,7 +38,7 @@ public class FouTest {
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, // centre
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+	    		{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
