@@ -1,4 +1,4 @@
-
+  
 package fr.iut.pieces;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
