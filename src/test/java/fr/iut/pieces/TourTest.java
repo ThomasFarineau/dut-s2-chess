@@ -6,19 +6,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TourTest {
-    private Tour reineNoir;
-    private Tour reineBlanche;
+    private Tour tourNoir;
+    private Tour tourBlanche;
 
     @BeforeEach
     public void initialisation() {
-        reineNoir = new Tour(true);
-        reineBlanche = new Tour(false);
+    	tourNoir = new Tour(true);
+    	tourBlanche = new Tour(false);
     }
 
     @Test
     public void toStringTest() {
-        assertEquals("ReB", reineBlanche.toString());
-        assertEquals("ReN", reineNoir.toString());
+        assertEquals("Tb", tourBlanche.toString());
+        assertEquals("Tn", tourNoir.toString());
     }
 
 }
