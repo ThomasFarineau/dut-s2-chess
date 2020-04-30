@@ -41,7 +41,8 @@ public class CavalierTest {
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}};
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}
+				};
 		
 		boolean[][] deplacementsCalculés = cavalierBlanc.getDeplacementsPoss();
 		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
