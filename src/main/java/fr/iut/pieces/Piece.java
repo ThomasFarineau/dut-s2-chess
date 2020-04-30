@@ -25,10 +25,6 @@ public abstract class Piece {
 	public boolean[][] getDeplacementsPoss() {
 		return deplacementsPoss;
 	}
-
-	public void setDeplacementsPoss(boolean[][] deplacementsPoss) {
-		this.deplacementsPoss = deplacementsPoss;
-	}
 	
 	public abstract String toString();
 }
