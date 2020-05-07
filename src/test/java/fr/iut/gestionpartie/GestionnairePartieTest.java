@@ -9,5 +9,6 @@ public class GestionnairePartieTest {
 	@Test
 	public void chargerPartieTest() {
 		
+	
 	}
 }
