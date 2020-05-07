@@ -20,5 +20,30 @@ class ReineTest {
         assertEquals("ReB", reineBlanche.toString());
         assertEquals("ReN", reineNoir.toString());
     }
-
+    @Test
+	public void getDeplacementsPossTest() {
+		boolean[][] deplacementsAttendus = { //                   centre
+				{true, false, false, false, false, false, false, true, false, false, false, false, false, false, true},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{true, false, false, false, false, false, false, false, false, false, false, false, false, false, true}, // centre
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{true, false, false, false, false, false, false, true, false, false, false, false, false, false, true}
+				};
+		
+		boolean[][] deplacementsCalculés = reineBlanche.getDeplacementsPoss();
+		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
+		
+		deplacementsCalculés = reineNoir.getDeplacementsPoss();
+		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
+	}
 }
