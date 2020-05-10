@@ -25,13 +25,13 @@ public abstract class Piece {
 		return couleur;
 	}
 
-
 	public boolean[][] getDeplacementsPoss() {
 		return deplacementsPoss;
 	}
 	
 	protected static Image loadImage(String nomFichier) {
 		Image img = null;
+		
 		try {
 			img = ImageIO.read(new File(imgPath + nomFichier));
 		} catch (IOException e) {
@@ -44,4 +44,18 @@ public abstract class Piece {
 	public abstract Image getImage();
 	
 	public abstract String toString();
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o == null)
+			return false;
+		
+		if (!(o instanceof Piece))
+			return false;
+		
+		if (o == this)
+			return true;
+		
+		return this.toString().equals(o.toString());
+	}
 }
