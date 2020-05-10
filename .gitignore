@@ -1,2 +1,3 @@
-/partieTest.csv
+/parties
 /target
+!/parties/nouvellePartie.csv
