@@ -4,7 +4,7 @@ import java.awt.Image;
 
 public class Reine extends Piece {
 	private static Image imgB = loadImage("ReineBlanche.png");
-	private static Image imgN = loadImage("ReineNoir.png");
+	private static Image imgN = loadImage("ReineNoire.png");
 	
 	
 	public Reine (boolean couleur) {

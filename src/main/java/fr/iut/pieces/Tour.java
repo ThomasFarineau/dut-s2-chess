@@ -4,7 +4,7 @@ import java.awt.Image;
 
 public class Tour extends Piece {
 	private static Image imgB = loadImage("TourBlanche.png");
-	private static Image imgN = loadImage("TourNoir.png");
+	private static Image imgN = loadImage("TourNoire.png");
 	
 	public Tour(boolean couleur) {
 		super(couleur);
