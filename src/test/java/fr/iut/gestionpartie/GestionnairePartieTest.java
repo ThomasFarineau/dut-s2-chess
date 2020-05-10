@@ -1,32 +1,63 @@
 package fr.iut.gestionpartie;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import fr.iut.pieces.Piece;
 import fr.iut.plateau.Plateau;
 
 public class GestionnairePartieTest {
-	private Plateau p1,p2;
-	private GestionnairePartie gp1,gp2;
+	private Plateau p;
+	private GestionnairePartie gp;
 	
 	@BeforeEach
     public void init() {
-		p1 = new Plateau();
-		p2 = new Plateau();
-		gp1 = new GestionnairePartie (p1);
-		gp2 = new GestionnairePartie (p2);
+		p = new Plateau();
+		gp = new GestionnairePartie(p);
 	}
 	
 	@Test
-	public void chargerPartieTest() {
-    	Assertions.assertThrows(IOException.class, ()->{gp1.chargerAnciennePartie("fichier qui exite pas");});
+	public void chargerAnciennePartieTest() {
+		//exemple de chargement qui echoue
+		try {
+			gp.chargerAnciennePartie("fichierInexistant.csv");
+			//Si aucune exception n'est générée, le test échoue
+			fail();
+		} catch (Exception e) {
+			assertEquals("Insérer le message d'erreur attendu ici", e.getMessage());
+		}
+		
+		//exemple de chargement valide
+		try {
+			gp.chargerAnciennePartie("tests/partieTest.csv");
+		} catch (Exception e) {
+			// Si une exception est générée, le test échoue
+			fail();
+		}
+		
+		// A modifier
+		Piece[][] echiquierAttendu = {
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null}
+		};
+		
+		assertArrayEquals(echiquierAttendu, p.getEchiquier());
+		
+		// A FINIR
     }
+	
 	@Test
 	public void sauvegarderPartieTest() {
-		Assertions.assertThrows(Exception.class, ()->{gp2.sauvegarderPartie("nouvellePartie.csv");});
+		// PAREIL
 	}
+	
+	//TESTER LES AUTRES METHODES AUSSI
 }
