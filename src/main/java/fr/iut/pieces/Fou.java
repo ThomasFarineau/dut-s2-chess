@@ -1,6 +1,10 @@
 package fr.iut.pieces;
 
+import java.awt.Image;
+
 public class Fou extends Piece {
+	private static Image imgB = loadImage("FouBlanc.png");
+	private static Image imgN = loadImage("FouNoir.png");
 	
 	public Fou(boolean couleur) {
 		super(couleur);
@@ -9,10 +13,20 @@ public class Fou extends Piece {
 		setDeplacementsPossIndex(0,14, true);
 		setDeplacementsPossIndex(14,14, true);
 	}
-	 public String toString() {
-	        if(getCouleur())
-	            return"Fn";
-	        else
-	            return"Fb";
-	    }
+
+	@Override
+	public String toString() {
+		if(getCouleur())
+			return"Fn";
+		else
+			return"Fb";
+	}
+	
+	@Override
+	public Image getImage() {
+		if(getCouleur())
+			return imgB;
+		else
+			return imgN;
+	}
 }
