@@ -47,20 +47,19 @@ public class ChessMain {
 				gp.sauvegarderPartie(entree.substring(8)); // créer un fichier a partir des caractères du 8ieme caractère
 				System.exit(0);
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public static void sauvegarder(String entree) {
-
 		try {
 			if(entree.length() <= 11 ) { //si le mot est juste sauvegarder
 				gp.sauvegarderPartie();
 			} else {
 				gp.sauvegarderPartie(entree.substring(12)); // créer un fichier a partir des caractères du 12ieme caractère
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
