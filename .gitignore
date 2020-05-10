@@ -1,4 +1,4 @@
-/parties
+/parties/*
 /target
 !/parties/nouvellePartie.csv
 
