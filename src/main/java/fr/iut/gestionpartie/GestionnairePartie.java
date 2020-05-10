@@ -18,6 +18,8 @@ import fr.iut.pieces.Tour;
 import fr.iut.plateau.Plateau;
 
 public class GestionnairePartie {
+	private final static String partiesPath = "./parties/";
+	private final static String nomNouvellePartie = "nouvellePartie.csv";
 	private Plateau plat;
 	private String nomFichier = "partieActuelle.csv";
 
@@ -32,7 +34,7 @@ public class GestionnairePartie {
 		try {
 			br = new BufferedReader(
 					new FileReader(
-							new File(nomFichier)
+							new File(partiesPath+nomFichier)
 							)
 					);
 		} catch (FileNotFoundException e) {
@@ -102,8 +104,12 @@ public class GestionnairePartie {
 	}
 
 	public void chargerAnciennePartie(String nomFichier) throws IOException, Exception {
-		if (nomFichier.equals("nouvellePartie.csv"))
-			throw new Exception("Vous n'avez pas le droit de charger le fichier \"nouvellePartie.csv\".");
+		if (nomFichier.equals(nomNouvellePartie))
+			throw new Exception("Vous n'avez pas le droit de charger le fichier \"" + nomNouvellePartie + "\".");
+
+		if (!nomFichier.endsWith(".csv"))
+			nomFichier += ".csv";
+
 		this.nomFichier = nomFichier;
 		chargerPartie(nomFichier);
 	}
@@ -111,21 +117,19 @@ public class GestionnairePartie {
 	public void nouvellePartie() throws IOException {
 		chargerPartie("nouvellePartie.csv");
 	}
-	
+
 	public void sauvegarderPartie() throws IOException {
 		BufferedWriter bw;
-		
+
 		try {
-			File f = new File(nomFichier);
+			File f = new File(partiesPath+nomFichier);
 			if (!f.exists()) {
 				f.createNewFile();
 				System.out.println("Le fichier " + nomFichier + " vient d'être créé.");
 			}
-			
-			
+
 			bw = new BufferedWriter(new FileWriter(new File(nomFichier)));
-		
-			
+
 			for (Piece[] pieces : plat.getEchiquier()) {
 				for (int j = 0; j < pieces.length; j++) {
 					bw.write(
@@ -135,14 +139,20 @@ public class GestionnairePartie {
 				}
 				bw.write("\n");
 			}
-			
+
 			bw.close();
 		} catch (IOException e) {
 			throw new IOException("Erreur lors de la sauvegarde du fichier");
 		}
 	}
 
-	public void sauvegarderPartie(String nomFichier) throws IOException {
+	public void sauvegarderPartie(String nomFichier) throws IOException, Exception {
+		if (nomFichier.equals(nomNouvellePartie))
+			throw new Exception("Vous n'avez pas le droit de sauvegarder une partie de nom \"" + nomNouvellePartie + "\".");
+
+		if (!nomFichier.endsWith(".csv"))
+			nomFichier += ".csv";
+
 		this.nomFichier = nomFichier;
 		sauvegarderPartie();
 	}
