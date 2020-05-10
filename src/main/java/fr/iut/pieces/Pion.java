@@ -1,6 +1,11 @@
 package fr.iut.pieces;
 
+import java.awt.Image;
+
 public class Pion extends Piece {
+	private static Image imgB = loadImage("PionBlanc.png");
+	private static Image imgN = loadImage("PionNoir.png");
+	
 	public Pion(boolean couleur) {
 		super(couleur);
 		if (couleur) {
@@ -21,4 +26,11 @@ public class Pion extends Piece {
         else
             return"Pb";
     }
+	@Override
+	public Image getImage() {
+		if(getCouleur())
+			return imgB;
+		else
+			return imgN;
+	}
 }

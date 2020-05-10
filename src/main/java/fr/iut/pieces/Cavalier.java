@@ -1,6 +1,11 @@
 package fr.iut.pieces;
 
+import java.awt.Image;
+
 public class Cavalier extends Piece {
+	private static Image imgB = loadImage("CavalierBlanc.png");
+	private static Image imgN = loadImage("CavalierNoir.png");
+	
 	public Cavalier(boolean couleur) {
 		super(couleur);
 		setDeplacementsPossIndex(5,6, true);
@@ -19,5 +24,13 @@ public class Cavalier extends Piece {
 			return"Cn";
 		else
 			return"Cb";
+	}
+	
+	@Override
+	public Image getImage() {
+		if(getCouleur())
+			return imgB;
+		else
+			return imgN;
 	}
 }
