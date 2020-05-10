@@ -1,6 +1,11 @@
 package fr.iut.pieces;
 
+import java.awt.Image;
+
 public class Roi extends Piece {
+	private static Image imgB = loadImage("RoiBlanc.png");
+	private static Image imgN = loadImage("RoiNoir.png");
+	
 	public Roi(boolean couleur) {
 		super(couleur);
 		setDeplacementsPossIndex(6,6, true);
@@ -20,4 +25,12 @@ public class Roi extends Piece {
         else
             return"RoB";
     }
+	
+	@Override
+	public Image getImage() {
+		if(getCouleur())
+			return imgB;
+		else
+			return imgN;
+	}
 }
