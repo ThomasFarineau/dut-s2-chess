@@ -1,4 +1,5 @@
 /parties/*
 /target
 !/parties/nouvellePartie.csv
+!/parties/tests
 
