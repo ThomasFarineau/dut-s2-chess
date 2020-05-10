@@ -24,18 +24,20 @@ public class PlateauTest {
 	@Test
 	public void toStringTest() {
 		try {
-			gp.chargerAnciennePartie("partieTest.csv");
+			gp.chargerAnciennePartie("tests/partieTest.csv");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertEquals("8 RoB  -  ReN  -   -   -   -   -  \r\n" + 
-				"7 Pb  Tb   -   -   -  ReN  -   -  \r\n" + 
-				"6  -   -   -   -  Pb   -   -   -  \r\n" + 
-				"5  -   -   -   -   -   -   -  RoN \r\n" + 
-				"4  -   -   -   -   -   -   -   -  \r\n" + 
-				"3  -   -   -   -   -   -   -   -  \r\n" + 
-				"2  -   -   -   -   -   -   -   -  \r\n" + 
-				"1  -   -   -   -   -   -   -   -  \r\n" + 
-				"   A   B   C   D   E   F   G   H", plat.toString());	
+		
+		String valeurAttendue = "8 RoB  -  ReN  -   -   -   -   -  \n" + 
+				"7 Pb  Tb   -   -   -  ReN  -   -  \n" + 
+				"6  -   -   -   -  Pb   -   -   -  \n" + 
+				"5  -   -   -   -   -   -   -  RoN \n" + 
+				"4  -   -   -   -   -   -   -   -  \n" + 
+				"3  -   -   -   -   -   -   -   -  \n" + 
+				"2  -   -   -   -   -   -   -   -  \n" + 
+				"1  -   -   -   -   -   -   -   -  \n" + 
+				"   A   B   C   D   E   F   G   H";
+		assertEquals(valeurAttendue, plat.toString());	
 	}
 }
