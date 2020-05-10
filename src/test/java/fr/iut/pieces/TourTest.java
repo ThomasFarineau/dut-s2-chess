@@ -1,5 +1,6 @@
 package fr.iut.pieces;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -20,5 +21,32 @@ class TourTest {
         assertEquals("Tb", tourBlanche.toString());
         assertEquals("Tn", tourNoir.toString());
     }
+    
+    @Test
+	public void getDeplacementsPossTest() {
+		boolean[][] deplacementsAttendus = { //                   centre
+				{false, false, false, false, false, false, false, true, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{true, false, false, false, false, false, false, false, false, false, false, false, false, false, true}, // centre
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, true, false, false, false, false, false, false, false}
+				};
+		
+		boolean[][] deplacementsCalculés = tourBlanche.getDeplacementsPoss();
+		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
+		
+		deplacementsCalculés = tourNoir.getDeplacementsPoss();
+		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
+	}
 
 }

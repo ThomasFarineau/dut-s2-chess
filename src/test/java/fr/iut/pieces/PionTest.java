@@ -1,6 +1,7 @@
   
 package fr.iut.pieces;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -24,5 +25,5 @@ public class PionTest {
 		assertEquals("Pb", pionBlanc.toString());
 		assertEquals("Pn", pionNoir.toString());
 	}
-
+	
 }
