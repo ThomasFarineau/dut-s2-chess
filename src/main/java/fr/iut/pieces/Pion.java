@@ -14,6 +14,7 @@ public class Pion extends Piece {
 		}
 	}
 	
+	@Override
 	public String toString() {
         if(getCouleur())
             return"Pn";

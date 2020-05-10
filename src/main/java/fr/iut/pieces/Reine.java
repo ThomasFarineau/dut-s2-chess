@@ -13,6 +13,7 @@ public class Reine extends Piece {
 		setDeplacementsPossIndex(14,7, true);
 	}
 
+	@Override
 	public String toString() {
 		if(getCouleur())
 			return"ReN";

@@ -13,6 +13,7 @@ public class Roi extends Piece {
 		setDeplacementsPossIndex(8,8, true);
 	}
 	
+	@Override
 	public String toString() {
         if(getCouleur())
             return"RoN";

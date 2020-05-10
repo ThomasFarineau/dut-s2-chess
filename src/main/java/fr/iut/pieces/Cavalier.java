@@ -12,10 +12,12 @@ public class Cavalier extends Piece {
 		setDeplacementsPossIndex(9,8, true);
 		setDeplacementsPossIndex(8,9, true);
 	}
-	 public String toString() {
-	        if(getCouleur())
-	            return"Cn";
-	        else
-	            return"Cb";
-	    }
+
+	@Override
+	public String toString() {
+		if(getCouleur())
+			return"Cn";
+		else
+			return"Cb";
+	}
 }
