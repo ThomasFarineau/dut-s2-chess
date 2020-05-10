@@ -35,7 +35,7 @@ private JMenuBar menu = new JMenuBar();
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setTitle("epic java project");
+		this.setTitle("En Panne Corp. - Chess Game");
 		
 		this.setVisible(true);
 	}

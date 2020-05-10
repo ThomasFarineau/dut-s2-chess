@@ -29,8 +29,8 @@ public class Cavalier extends Piece {
 	@Override
 	public Image getImage() {
 		if(getCouleur())
-			return imgB;
-		else
 			return imgN;
+		else
+			return imgB;
 	}
 }
