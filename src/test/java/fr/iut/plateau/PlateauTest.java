@@ -272,6 +272,7 @@ public class PlateauTest {
     assertArrayEquals(deplacementsTest, deplacementAttendu);
 	}
 	
+	
 	@Test
 	public void calculerDeplacementsTest1() {
 		
@@ -338,9 +339,9 @@ public class PlateauTest {
 		assertArrayEquals(deplacementRoiValide, deplacementRoi);
 		
 		boolean[][] deplacementReineValide = {
-				{false, false, false, false, false, false, true, false},
-				{false, false, false, false, true, false, false, false},
-				{false, false, false, false, true, false, true, false},
+				{false, false, false, false, true, true, true, false},
+				{false, false, false, true, true, false, true, false},
+				{false, false, false, false, true, true, true, false},
 				{false, false, false, true, false, false, false, true},
 				{false, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false},
@@ -350,17 +351,17 @@ public class PlateauTest {
 		boolean[][] deplacementReine = plat.calculerDeplacementsPiece(1, 5); 
 		assertArrayEquals(deplacementReineValide, deplacementReine);
 		
-		boolean[][] deplacementFouValide = {
+		boolean[][] deplacementPionValide = {
 				{false, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false},
-				{true, false, false, false, true, false, false, false},
-				{false, true, false, true, false, false, false, false},
+				{true, false, false, false, false, false, false, false},
+				{true, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false},
-				{false, true, false, true, false, false, false, false},
-				{false, false, false, false, true, false, false, false},
-				{false, false, false, false, false, true, false, false}
+				{false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, false}
 		};
-		boolean[][] deplacementFou = plat.calculerDeplacementsPiece(4, 2); 
-		assertArrayEquals(deplacementFouValide, deplacementFou);
+		boolean[][] deplacementPion = plat.calculerDeplacementsPiece(1, 0); 
+		assertArrayEquals(deplacementPionValide, deplacementPion);
 	}
 }
