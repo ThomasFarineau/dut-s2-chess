@@ -41,9 +41,18 @@ public class GestionnairePartie {
 			throw new FileNotFoundException("Fichier introuvable : " + nomFichier);
 		}
 
+		
 		for (int i = 0; i < echiquier.length; i++) {
 			String line = br.readLine();
-			String[] values = line.split(",");
+			
+			String[] values = null;
+			
+			try {
+				values = line.split(",");
+			} catch (NullPointerException e) {
+				br.close();
+				throw new NullPointerException("Format du fichier \"" + nomFichier +"\" invalide");
+			} 
 
 			if (values.length != 8) {
 				br.close();
@@ -118,25 +127,28 @@ public class GestionnairePartie {
 		chargerPartie("nouvellePartie.csv");
 	}
 
-	public void sauvegarderPartie() throws IOException {
+	public String sauvegarderPartie() throws IOException {
 		BufferedWriter bw;
-
+		String retour = "";
+		
 		try {
 			File f = new File(partiesPath+nomFichier);
-			if (!f.exists()) {
-				f.createNewFile();
-				System.out.println("Le fichier " + nomFichier + " vient d'être créé.");
+			if (f.createNewFile()) {
+				retour = "Le fichier " + nomFichier + " vient d'être créé.";
 			}
 
-			bw = new BufferedWriter(new FileWriter(new File(nomFichier)));
+			bw = new BufferedWriter(new FileWriter(f));
+			
+			Piece[][] echiquierAEcrire = plat.getEchiquier();
 
-			for (Piece[] pieces : plat.getEchiquier()) {
-				for (int j = 0; j < pieces.length; j++) {
+			for (int i = 0; i < echiquierAEcrire.length; i++) {
+				for (int j = 0; j < echiquierAEcrire[i].length; j++) {
 					bw.write(
-							((pieces[j] == null) ? "V" : pieces[j].toString()) + 
-							((j == pieces.length - 1 )? "" : ",")
+							((echiquierAEcrire[i][j] == null) ? "V" : echiquierAEcrire[i][j].toString()) + 
+							((j == echiquierAEcrire[i].length - 1 )? "" : ",")
 							);
 				}
+
 				bw.write("\n");
 			}
 
@@ -144,9 +156,11 @@ public class GestionnairePartie {
 		} catch (IOException e) {
 			throw new IOException("Erreur lors de la sauvegarde du fichier");
 		}
+		
+		return retour;
 	}
 
-	public void sauvegarderPartie(String nomFichier) throws IOException, Exception {
+	public String sauvegarderPartie(String nomFichier) throws IOException, Exception {
 		if (nomFichier.equals(nomNouvellePartie))
 			throw new Exception("Vous n'avez pas le droit de sauvegarder une partie de nom \"" + nomNouvellePartie + "\".");
 
@@ -154,6 +168,6 @@ public class GestionnairePartie {
 			nomFichier += ".csv";
 
 		this.nomFichier = nomFichier;
-		sauvegarderPartie();
+		return sauvegarderPartie();
 	}
 }
