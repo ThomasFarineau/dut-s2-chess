@@ -231,7 +231,7 @@ public class PlateauTest {
             e.printStackTrace();
         }
 
-    boolean[][] deplacementsTest = { 
+    boolean[][] deplacementsFouNoir = { 
                 {false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false},
@@ -244,8 +244,64 @@ public class PlateauTest {
     };
     
     boolean[][] deplacementAttendu = plat.calculerDeplacementsPiece(7, 5);
-    assertArrayEquals(deplacementsTest, deplacementAttendu);
-	}
+    assertArrayEquals(deplacementsFouNoir, deplacementAttendu);
+	System.out.println(plat);
+	
+	boolean[][] deplacementTourValide = {
+			{true, true, true, false, true, true, false, false},
+			{false, false, false, true, false, false, false, false},
+			{false, false, false, true, false, false, false, false},
+			{false, false, false, true, false, false, false, false},
+			{false, false, false, true, false, false, false, false},
+			{false, false, false, true, false, false, false, false},
+			{false, false, false, true, false, false, false, false},
+			{false, false, false, true, false, false, false, false}
+	};
+	
+	boolean[][] deplacementTour = plat.calculerDeplacementsPiece(0, 3); 
+	assertArrayEquals(deplacementTourValide, deplacementTour);
+	
+	boolean[][] deplacementFouValide = {
+			{false, false, false, false, false, false, false, false},
+			{false, false, true, false, false, false, false, false},
+			{false, true, false, false, false, false, false, false},
+			{false, false, false, false, false, false, false, false},
+			{false, true, false, false, false, false, false, false},
+			{false, false, true, false, false, false, false, false},
+			{false, false, false, true, false, false, false, false},
+			{false, false, false, false, true, false, false, false}
+	};
+	boolean[][] deplacementFou = plat.calculerDeplacementsPiece(3, 0); 
+	assertArrayEquals(deplacementFouValide, deplacementFou);
+	
+	boolean[][] deplacementRoiValide = {
+			{false, false, false, false, false, false, false, false},
+			{false, false, false, false, false, false, false, false},
+			{false, false, false, false, false, false, false, false},
+			{false, false, false, false, false, false, false, false},
+			{false, false, false, false, false, false, false, false},
+			{false, false, false, false, false, false, false, false},
+			{false, false, false, true, false, false, false, false},
+			{false, false, false, true, false, false, false, false}
+	};
+	boolean[][] deplacementRoi = plat.calculerDeplacementsPiece(7, 4); 
+	assertArrayEquals(deplacementRoiValide, deplacementRoi);
+	
+	boolean[][] deplacementPionValide = {
+			{false, false, false, false, false, false, false, false},
+			{false, false, false, false, false, false, false, false},
+			{false, false, false, false, false, false, false, false},
+			{false, false, false, false, false, false, false, false},
+			{false, false, false, false, true, false, false, false},
+			{false, false, false, false, true, false, false, false},
+			{false, false, false, false, false, false, false, false},
+			{false, false, false, false, false, false, false, false}
+	};
+	boolean[][] deplacementPion = plat.calculerDeplacementsPiece(6, 4); 
+	assertArrayEquals(deplacementPionValide, deplacementPion);
+}
+	
+	
 	
 	@Test
 	public void calculerDeplacementTest9()
