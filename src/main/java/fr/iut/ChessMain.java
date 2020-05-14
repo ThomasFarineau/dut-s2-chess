@@ -1,6 +1,5 @@
 package fr.iut;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 import fr.iut.gestionpartie.GestionnairePartie;
@@ -10,6 +9,7 @@ public class ChessMain {
 	private static Scanner sc = new Scanner(System.in); // On crée un scanner pour récupérer les entrées de l'utilisateur
 	private static Plateau p = new Plateau(); // On charge le plateau
 	private static GestionnairePartie gp = new GestionnairePartie(p); // On initialise un fichier avec le plateau
+	private static String erreur = "";
 
 	public static boolean verifSyntaxe(String entree) {
 		if(entree.length() != 5)
@@ -31,67 +31,16 @@ public class ChessMain {
 	
 	public static void afficherMessageDebutTour() {
 		System.out.println("\n\n\n\n\n");
-		System.out.print("C'est au tour du joueur " + (p.getTourJoueur() ? "noir." : "blanc."));
-		
-		//Afficher si le roi du joueur est en echec
 		
 		System.out.println("\n\n"+p.toString());
-	}
-
-	public static void quitter(String entree) {
-		try {
-			if(entree.length() <= 7 ) { //si le mot est juste quitter
-				gp.sauvegarderPartie();
-				System.exit(0);
-			} else {
-				gp.sauvegarderPartie(entree.substring(8)); // créer un fichier a partir des caractères du 8ieme caractère
-				System.exit(0);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void sauvegarder(String entree) {
-		try {
-			if(entree.length() <= 11 ) { //si le mot est juste sauvegarder
-				gp.sauvegarderPartie();
-			} else {
-				gp.sauvegarderPartie(entree.substring(12)); // créer un fichier a partir des caractères du 12ieme caractère
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public static void jouerTour() {
-		boolean entreeValide = false;
+		System.out.print(erreur);
 		
-		while(!entreeValide) {
-			afficherMessageDebutTour();
-			
-			System.out.print("\nVeuillez entrer votre déplacement : ");
-			
-			String deplacement = sc.nextLine();
-
-			if(deplacement.contains("sauvegarder")) {
-				sauvegarder(deplacement);
-			} else if(deplacement.contains("quitter")) {
-				quitter(deplacement);
-			} else {
-				if(verifSyntaxe(deplacement)) {
-					try {
-						p.deplacer(convertChaine(deplacement));
-						entreeValide = true;
-					} catch(Exception e) {
-						System.out.println("Erreur : "+e.getMessage());
-					}
-				} else {
-					System.out.println("Erreur : Syntaxe invalide.");
-				}
-			}
-		}
+		System.out.println();
+		
+		System.out.println("C'est au tour du joueur " + (p.getTourJoueur() ? "noir." : "blanc."));
+		
+		if (p.verifEchec())
+			System.out.println("Le roi " + (p.getTourJoueur() ? "noir" : "blanc") + " est en échec");
 	}
 
 	public static void initialisation() {
@@ -145,6 +94,63 @@ public class ChessMain {
 				break;
 			}
 		}
+	}
+
+	public static void jouerTour() {
+		boolean entreeValide = false;
+		
+		while(!entreeValide) {
+			afficherMessageDebutTour();
+			
+			System.out.print("\nVeuillez entrer votre déplacement : ");
+			
+			String deplacement = sc.nextLine();
+
+			if(deplacement.contains("sauvegarder")) {
+				sauvegarder(deplacement);
+			} else if(deplacement.contains("quitter")) {
+				quitter(deplacement);
+			} else {
+				if(verifSyntaxe(deplacement)) {
+					try {
+						p.deplacer(convertChaine(deplacement));
+						erreur = "";
+						entreeValide = true;
+					} catch(Exception e) {
+						erreur = "Erreur : "+e.getMessage() + "\n";
+					}
+				} else {
+					erreur = "Erreur : Syntaxe invalide.\n";
+				}
+			}
+		}
+	}
+	
+	public static void quitter(String entree) {
+		try {
+			if(entree.length() <= 7 ) { //si le mot est juste quitter
+				gp.sauvegarderPartie();
+				System.exit(0);
+			} else {
+				gp.sauvegarderPartie(entree.substring(8)); // créer un fichier a partir des caractères du 8ieme caractère
+				System.exit(0);
+			}
+		} catch (Exception e) {
+			erreur = "Erreur : " + e.getMessage() + "\n";
+		}
+	}
+
+	public static void sauvegarder(String entree) {
+		try {
+			if(entree.length() <= 11 ) { //si le mot est juste sauvegarder
+				erreur = gp.sauvegarderPartie();
+			} else {
+				erreur = gp.sauvegarderPartie(entree.substring(12)); // créer un fichier a partir des caractères du 12ieme caractère
+			}
+		} catch (Exception e) {
+			erreur = "Erreur : " + e.getMessage() + "\n";
+		}
+
 	}
 
 	public static void main(String[] args) {
