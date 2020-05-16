@@ -39,7 +39,7 @@ public class ChessMain {
 		
 		System.out.println("C'est au tour du joueur " + (p.getTourJoueur() ? "noir." : "blanc."));
 		
-		if (p.verifEchec())
+		if (p.verifEchec() != null)
 			System.out.println("Le roi " + (p.getTourJoueur() ? "noir" : "blanc") + " est en échec");
 	}
 
