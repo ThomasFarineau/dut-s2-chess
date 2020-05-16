@@ -32,15 +32,15 @@ public class Plateau {
 			throw new Exception("La pièce sélectionnée ne peut pas aller ici.");
 		}
 
+		Piece copiePiece = echiquier[k][l];
 		echiquier[k][l] = echiquier[i][j];
 		echiquier[i][j] = null;
 
-		if(verifEchec()) {
+		if(verifEchec() != null) {
 			echiquier[i][j] = echiquier[k][l];
-			echiquier[k][l] = null;
+			echiquier[k][l] = copiePiece;
 			throw new Exception("Mouvement impossible, vous êtes en échec.");
 		}
-		System.out.println("Le mouvement a été effectué");
 
 		setTourJoueur(!tourJoueur);
 	}
@@ -150,7 +150,7 @@ public class Plateau {
 		return deplacementsPlateau;
 	} //Fin méthode
 
-	public boolean verifEchec() {
+	public int[] verifEchec() {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (echiquier[i][j] != null) {
@@ -163,7 +163,7 @@ public class Plateau {
 									if (echiquier[k][l].getCouleur() != tourJoueur) {
 
 										if (calculerDeplacementsPiece(k,l)[i][j]) {
-											return true;
+											return new int[] {k, l, i, j};
 										}
 
 									}
@@ -180,7 +180,7 @@ public class Plateau {
 		}
 
 
-		return false;
+		return null;
 	}
 
 	public boolean verifMat() {
@@ -197,13 +197,7 @@ public class Plateau {
 									echiquier[k][l] = echiquier[i][j];
 									echiquier[i][j] = null;
 
-									if (!verifEchec()) {
-										System.out.println(echiquier[k][l] + " : " +
-												i + " " +
-												j + " -> " +
-												k + " " +
-												l + " ");
-
+									if ((verifEchec() != null)) {
 										echiquier[i][j] = echiquier[k][l];
 										echiquier[k][l] = copiePiece;
 										return false;
@@ -258,23 +252,5 @@ public class Plateau {
 
 	public void setTourJoueur(boolean tourJoueur) {
 		this.tourJoueur = tourJoueur;
-	}
-	
-
-	public static void main(String[] args) {
-		Plateau plat = new Plateau();
-		GestionnairePartie gp = new GestionnairePartie(plat);
-		try {
-			gp.chargerAnciennePartie("partieTest.csv");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		System.out.println(plat);
-
-		plat.setTourJoueur(false);
-
-		System.out.println("Echec : " + plat.verifEchec());
-		System.out.println("Echec et mat : " + plat.verifMat());
 	}
 }
