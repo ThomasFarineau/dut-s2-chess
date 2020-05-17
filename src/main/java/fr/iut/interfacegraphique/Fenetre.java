@@ -2,6 +2,7 @@ package fr.iut.interfacegraphique;
 
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -10,6 +11,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
+import fr.iut.gestionpartie.GestionnairePartie;
 import fr.iut.plateau.Plateau;
 
 public class Fenetre extends JFrame {
@@ -75,5 +77,15 @@ public class Fenetre extends JFrame {
 		Plateau p = new Plateau();
 
 		JFrame f = new Fenetre(p, null);
+		
+		for (int i = 1; i < 36; i++) {
+			//CODE TEMPORAIRE
+			GestionnairePartie gp = new GestionnairePartie(p);
+			try {
+				gp.chargerAnciennePartie("tests/test"+i);
+			} catch (Exception e) {
+				System.out.println(i + " : " + e.getMessage());
+			}
+		}
 	}
 }
