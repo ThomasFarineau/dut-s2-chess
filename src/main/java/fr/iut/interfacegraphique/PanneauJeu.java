@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +16,7 @@ import fr.iut.gestionpartie.GestionnairePartie;
 import fr.iut.pieces.Piece;
 import fr.iut.plateau.Plateau;
 
-public class PanneauJeu extends JPanel {
+public class PanneauJeu extends JPanel implements MouseListener {
 	private final static String imgPath = "./img/";
 	private Image fondEchiquier = null;
 	private Plateau plat;
@@ -26,8 +27,9 @@ public class PanneauJeu extends JPanel {
 	
 	public PanneauJeu(Plateau plat) {
 		this.plat = plat;
-		this.addMouseListener(null); // Remplacer null par le listener pour la souris quand il sera programmé
-		
+
+		this.addMouseListener(this);
+
 		//CODE TEMPORAIRE
 		GestionnairePartie gp = new GestionnairePartie(plat);
 		try {
@@ -43,10 +45,10 @@ public class PanneauJeu extends JPanel {
 			e.printStackTrace();
 		}
 		
-		this.setCasesEchec(new int[] {0,1, 5,6});
+		//this.setCasesEchec(new int[] {0,1, 5,6});
 		//this.selectionner(6, 3);
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
 		g.setColor(Color.red);
@@ -113,9 +115,11 @@ public class PanneauJeu extends JPanel {
 			if (plat.getEchiquier()[i][j].getCouleur() == plat.getTourJoueur()) {
 				this.selection = new int[] {i,j};
 				this.selectionDeplacementsPoss = plat.calculerDeplacementsPiece(i, j);
+				System.out.println("Piece " + plat.getEchiquier()[i][j] + " selectionné");
 			}
 		} else {
 			this.resetSelection();
+			System.out.println("Erreur lors de la selection");
 		}
 	}
 	
@@ -139,5 +143,42 @@ public class PanneauJeu extends JPanel {
 	
 	public void setCasesEchec(int[] casesEchec) {
 		this.casesEchec = casesEchec;
+	}
+
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		int x = ((e.getX()-40)/70);
+		int y = (e.getY()/70);
+		if(e.getX() >= 40 && e.getY() <= 560) {
+			if (!this.hasSelection()) {
+				selectionner(y, x);
+			} else {
+				deplacer(y, x);
+			}
+		} else {
+			System.out.println("Hors du plateau");
+		}
+		repaint();
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+
 	}
 }
