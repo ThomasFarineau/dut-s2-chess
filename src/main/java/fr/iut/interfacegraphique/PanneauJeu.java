@@ -154,7 +154,11 @@ public class PanneauJeu extends JPanel implements MouseListener {
 			if (!this.hasSelection()) {
 				selectionner(y, x);
 			} else {
-				deplacer(y, x);
+				if(plat.getEchiquier()[y][x] == null) {
+					deplacer(y, x);
+				} else {
+					selectionner(y, x);
+				}
 			}
 		} else {
 			System.out.println("Hors du plateau");
