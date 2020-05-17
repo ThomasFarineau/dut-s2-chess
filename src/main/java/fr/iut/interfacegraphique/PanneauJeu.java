@@ -154,7 +154,7 @@ public class PanneauJeu extends JPanel implements MouseListener {
 			if (!this.hasSelection()) {
 				selectionner(y, x);
 			} else {
-				if(plat.getEchiquier()[y][x] == null) {
+				if(plat.getEchiquier()[y][x] == null || plat.getEchiquier()[y][x].getCouleur() != plat.getTourJoueur()) {
 					deplacer(y, x);
 				} else {
 					selectionner(y, x);
