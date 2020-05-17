@@ -11,6 +11,7 @@ import fr.iut.pieces.Roi;
 public class Plateau {
 	private boolean tourJoueur = false;
 	private Piece[][] echiquier;
+	private int[] dernierEchec = null;
 
 	public void deplacer(int[] coord) throws Exception {
 		int i = coord[0];
@@ -36,13 +37,13 @@ public class Plateau {
 		echiquier[k][l] = echiquier[i][j];
 		echiquier[i][j] = null;
 
-		if(verifEchec() != null) {
+		if((dernierEchec = verifEchec()) != null) {
 			echiquier[i][j] = echiquier[k][l];
 			echiquier[k][l] = copiePiece;
 			throw new Exception("Mouvement impossible, vous êtes en échec.");
 		}
 
-		setTourJoueur(!tourJoueur);
+		tourJoueur = !tourJoueur;
 	}
 
 	public boolean[][] calculerDeplacementsPiece(int xP, int yP) {
@@ -51,7 +52,14 @@ public class Plateau {
 			Arrays.fill(ligne, false); // Ligne par ligne
 
 		// On récupère les différents déplacements possible de la pièce dont les "coordonnées" sont rentrées en paramètre
-		boolean[][] deplacementsPiece = echiquier[xP][yP].getDeplacementsPoss(); 
+		boolean[][] deplacementsPiece = new boolean[15][15];
+		
+		boolean[][] deplementsACopier = echiquier[xP][yP].getDeplacementsPoss();
+		for (int i = 0; i < 15; i++) {
+			for (int j = 0; j < 15; j++) {
+				deplacementsPiece[i][j] = deplementsACopier[i][j];
+			}
+		}
 
 		if (echiquier[xP][yP] instanceof Pion) {
 			if (echiquier[xP][yP].getCouleur() && xP == 1) {
@@ -184,6 +192,9 @@ public class Plateau {
 	}
 
 	public boolean verifMat() {
+		if ((dernierEchec = verifEchec()) == null)
+			return false;
+			
 		for (int i = 0; i < 8; i++)
 			for (int j = 0; j < 8; j++) {
 				if (echiquier[i][j] != null) {
@@ -252,5 +263,9 @@ public class Plateau {
 
 	public void setTourJoueur(boolean tourJoueur) {
 		this.tourJoueur = tourJoueur;
+	}
+	
+	public int[] getDernierEchec() {
+		return dernierEchec;
 	}
 }
