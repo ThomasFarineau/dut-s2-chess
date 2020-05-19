@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -21,22 +23,18 @@ public class PanneauJeu extends JPanel {
 	private Plateau plat;
 	private int[] selection = null; // coordonnées de la 1re sélection, si elle est valide
 	private boolean[][] selectionDeplacementsPoss; // déplacements possibles de la sélection
+
 	private int[] casesEchec = null; // coordonnées des cases de l'échec (case du roi + case de la pièce qui le met en échec)
 
 	public PanneauJeu(Plateau plat) {
 		this.plat = plat;
-
-		this.addMouseListener(new EchiquierListener(this));
-
-		// CODE POUR CREER LA PARTIE, A ENLEVER QUAND LE GESTIONNAIRE
-		// SERA INTEGRE A L'INTERFACE
-		GestionnairePartie gp = new GestionnairePartie(plat);
 		try {
-			gp.nouvellePartie();
+			Fenetre.getGp().nouvellePartie();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		this.addMouseListener(new EchiquierListener(this));
 
 		try {
 			fondEchiquier = ImageIO.read(new File(imgPath+"tempEchiquier.png"));
@@ -49,7 +47,7 @@ public class PanneauJeu extends JPanel {
 	public void paintComponent(Graphics g) {
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 600, 600, 40);
-		
+
 		int xOffset = 40;
 		g.drawImage(fondEchiquier, 0, 0, null);
 
@@ -74,12 +72,6 @@ public class PanneauJeu extends JPanel {
 			g.setColor(new Color(80, 0, 0, 75));
 			g.drawRect(xOffset+70*selection[1], 70*selection[0], 69, 69);
 			g.drawRect(xOffset+70*selection[1]+1, 70*selection[0]+1, 67, 67);
-
-			for (int k = 0; k < selectionDeplacementsPoss.length; k++) {
-				for (int l = 0; l < selectionDeplacementsPoss[k].length; l++) {
-					
-				}
-			}
 		}
 
 		for (int i = 0; i < echiquier.length; i++) {
@@ -94,7 +86,7 @@ public class PanneauJeu extends JPanel {
 						g.drawRect(xOffset+70*j+1, 70*i+1, 67, 67);
 					}
 				}
-				
+
 				if (echiquier[i][j] != null) {
 					g.drawImage(echiquier[i][j].getImage(), xOffset+70*j, 70*i, null);
 				}
@@ -139,8 +131,8 @@ public class PanneauJeu extends JPanel {
 		try {
 			plat.deplacer(new int[] {selection[0], selection[1], i, j});
 			System.out.println(plat.verifMat());
-		} catch (Exception e) {}
-		
+		} catch (Exception ignored) {}
+
 		resetSelection();
 		this.casesEchec = plat.getDernierEchec();
 	}
@@ -148,5 +140,4 @@ public class PanneauJeu extends JPanel {
 	public void setCasesEchec(int[] casesEchec) {
 		this.casesEchec = casesEchec;
 	}
-
 }

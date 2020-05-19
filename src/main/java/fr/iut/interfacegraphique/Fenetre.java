@@ -2,30 +2,40 @@ package fr.iut.interfacegraphique;
 
 import javax.swing.*;
 
+import fr.iut.gestionpartie.GestionnairePartie;
 import fr.iut.plateau.Plateau;
 
+import java.io.IOException;
+
 public class Fenetre extends JFrame {
+	private static Plateau p = new Plateau();
+	private static GestionnairePartie gp = new GestionnairePartie(p);
+	private static JPanel jeu = new PanneauJeu(p);
+	private static JMenuBar menu = new MenuFenetre();
 
-	public Fenetre(Plateau p) {
-		JPanel jeu = new PanneauJeu(p);
-		this.setContentPane(jeu);
-
-		JMenuBar menu = new MenuFenetre(); // Demander un GestionnairePartie en paramètre
-		this.setJMenuBar(menu);
-
-		this.pack();
-
+	public Fenetre() {
+		this.setTitle("En Panne Corp. - Chess Game");
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setTitle("En Panne Corp. - Chess Game");
+		// Ajout du menu
+		this.setJMenuBar(menu);
+		// Ajout de l'affichage
+		this.setContentPane(jeu);
 
+		this.pack();
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
 
-	public static void main(String[] args) {
-		Plateau p = new Plateau();
+	public static void main(String[] args) throws IOException {
+		JFrame f = new Fenetre();
+	}
 
-		JFrame f = new Fenetre(p);
+	public static GestionnairePartie getGp() {
+		return gp;
+	}
+
+	public static JPanel getJeu() {
+		return jeu;
 	}
 }
