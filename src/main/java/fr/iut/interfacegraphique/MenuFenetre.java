@@ -4,7 +4,6 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,8 +29,8 @@ public class MenuFenetre extends JMenuBar {
         partie.add(chargerPartie);
 
         enregistrerPartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK));
-        enregistrerPartie.addActionListener(null);
-        enregistrerPartie.setEnabled(false);
+        enregistrerPartie.addActionListener(e -> sauvegarderPartie());
+        enregistrerPartie.setEnabled(true);
         partie.add(enregistrerPartie);
 
         enregistrerPartieSous.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK + KeyEvent.SHIFT_DOWN_MASK));
@@ -49,7 +48,7 @@ public class MenuFenetre extends JMenuBar {
     public String convertCheminRelatif(String cheminAbsolu) {
         String path = System.getProperty("user.dir");
 
-        Path pathDesParties = Paths.get(path+"/parties");
+        Path pathDesParties = Paths.get(path + "/parties");
         Path cheminAbsoluFichier = Paths.get(cheminAbsolu);
         Path pathRelative = pathDesParties.relativize(cheminAbsoluFichier);
 
@@ -77,7 +76,14 @@ public class MenuFenetre extends JMenuBar {
                 System.out.println("Erreur: " + e.getMessage());
             }
         }
+    }
 
+    public void sauvegarderPartie() {
+        try {
+            Fenetre.getGp().sauvegarderPartie();
+        } catch (IOException e) {
+            System.out.println("Erreur: " + e.getMessage());
+        }
     }
 
     public void nouvellePartie() {
@@ -96,13 +102,13 @@ public class MenuFenetre extends JMenuBar {
         UIManager.put("OptionPane.minimumSize", new Dimension(430, 100));
 
         // Ajout des options oui et non
-        String[] options = { "Oui", "Non"};
+        String[] options = {"Oui", "Non"};
 
         // Affichage du dialogue et recuperation de la réponse sous resp
-        int resp = JOptionPane.showOptionDialog(null, panel, "Nouvelle partie", 0,JOptionPane.PLAIN_MESSAGE,null,options,null);
+        int resp = JOptionPane.showOptionDialog(null, panel, "Nouvelle partie", 0, JOptionPane.PLAIN_MESSAGE, null, options, null);
 
         // Utilisation de la réponse
-        if(resp == 0) {
+        if (resp == 0) {
             try {
                 Fenetre.getGp().nouvellePartie();
                 Fenetre.getJeu().repaint();
