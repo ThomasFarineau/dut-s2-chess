@@ -10,7 +10,7 @@ public class Fenetre extends JFrame {
 		JPanel jeu = new PanneauJeu(p);
 		this.setContentPane(jeu);
 
-		JMenuBar menu = new MenuFenetre();
+		JMenuBar menu = new MenuFenetre(); // Demander un GestionnairePartie en paramètre
 		this.setJMenuBar(menu);
 
 		this.pack();
@@ -27,15 +27,5 @@ public class Fenetre extends JFrame {
 		Plateau p = new Plateau();
 
 		JFrame f = new Fenetre(p);
-		
-		/*for (int i = 1; i < 36; i++) {
-			//CODE TEMPORAIRE
-			GestionnairePartie gp = new GestionnairePartie(p);
-			try {
-				gp.chargerAnciennePartie("tests/test"+i);
-			} catch (Exception e) {
-				System.out.println(i + " : " + e.getMessage());
-			}
-		}*/
 	}
 }
