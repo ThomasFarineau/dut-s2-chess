@@ -137,9 +137,9 @@ public class PanneauJeu extends JPanel {
 	public void deplacer(int i, int j) {
 		try {
 			plat.deplacer(new int[] {selection[0], selection[1], i, j});
+			resetSelection();
 		} catch (Exception e) {}
 		
-		resetSelection();
 	}
 
 	public Plateau getPlat() {

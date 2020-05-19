@@ -20,10 +20,6 @@ public class EchiquierListener implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 		int x = (e.getX() >= 40 ?((e.getX()-40)/70) : -1);
 		int y = (e.getY()/70);
-		
-		listenedPanel.selectionner(y, x);
-		listenedPanel.repaint();
-
 
 		if(e.getX() >= 40 && e.getY() <= 560) {
 			if (!listenedPanel.hasSelection()) {
