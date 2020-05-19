@@ -29,13 +29,11 @@ public class MenuFenetre extends JMenuBar {
         partie.add(chargerPartie);
 
         enregistrerPartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK));
-        enregistrerPartie.addActionListener(e -> sauvegarderPartie());
-        enregistrerPartie.setEnabled(true);
+        enregistrerPartie.addActionListener(e -> enregistrerPartie());
         partie.add(enregistrerPartie);
 
         enregistrerPartieSous.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK + KeyEvent.SHIFT_DOWN_MASK));
-        enregistrerPartieSous.addActionListener(null);
-        enregistrerPartieSous.setEnabled(false);
+        enregistrerPartieSous.addActionListener(e -> enregistrerPartieSous());
         partie.add(enregistrerPartieSous);
 
         regles.addActionListener(null);
@@ -78,11 +76,34 @@ public class MenuFenetre extends JMenuBar {
         }
     }
 
-    public void sauvegarderPartie() {
+    public void enregistrerPartie() {
         try {
             Fenetre.getGp().sauvegarderPartie();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(Fenetre.getJeu(), "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void enregistrerPartieSous() {
+        JPanel panel = new JPanel();
+        panel.setSize(new Dimension(500, 500));
+        panel.setLayout(null);
+
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new java.io.File("./parties"));
+        chooser.setDialogTitle("Ouvrir un fichier");
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("Tableau", "csv"));
+        chooser.setAcceptAllFileFilterUsed(false);
+
+        if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            String file = convertCheminRelatif(chooser.getSelectedFile().getAbsolutePath());
+            try {
+                Fenetre.getGp().sauvegarderPartie(file);
+                Fenetre.getJeu().repaint();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(Fenetre.getJeu(), "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
