@@ -73,7 +73,7 @@ public class MenuFenetre extends JMenuBar {
                 Fenetre.getGp().chargerAnciennePartie(file);
                 Fenetre.getJeu().repaint();
             } catch (Exception e) {
-                System.out.println("Erreur: " + e.getMessage());
+                JOptionPane.showMessageDialog(Fenetre.getJeu(), "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -82,7 +82,7 @@ public class MenuFenetre extends JMenuBar {
         try {
             Fenetre.getGp().sauvegarderPartie();
         } catch (IOException e) {
-            System.out.println("Erreur: " + e.getMessage());
+            JOptionPane.showMessageDialog(Fenetre.getJeu(), "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -113,7 +113,7 @@ public class MenuFenetre extends JMenuBar {
                 Fenetre.getGp().nouvellePartie();
                 Fenetre.getJeu().repaint();
             } catch (IOException e) {
-                System.out.println("Erreur: " + e.getMessage());
+                JOptionPane.showMessageDialog(Fenetre.getJeu(), "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
