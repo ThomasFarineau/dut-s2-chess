@@ -1,9 +1,13 @@
 package fr.iut.interfacegraphique;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class MenuFenetre extends JMenuBar {
 
@@ -22,7 +26,7 @@ public class MenuFenetre extends JMenuBar {
         partie.add(nouvellePartie);
 
         chargerPartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK));
-        chargerPartie.addActionListener(null);
+        chargerPartie.addActionListener(e -> chargerPartie());
         partie.add(chargerPartie);
 
         enregistrerPartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK));
@@ -42,7 +46,37 @@ public class MenuFenetre extends JMenuBar {
         this.add(informations);
     }
 
+    public String convertCheminRelatif(String cheminAbsolu) {
+        String path = System.getProperty("user.dir");
+
+        Path pathDesParties = Paths.get(path+"/parties");
+        Path cheminAbsoluFichier = Paths.get(cheminAbsolu);
+        Path pathRelative = pathDesParties.relativize(cheminAbsoluFichier);
+
+        return (pathRelative.toString()).replace('\\', '/');
+    }
+
     public void chargerPartie() {
+        JPanel panel = new JPanel();
+        panel.setSize(new Dimension(500, 500));
+        panel.setLayout(null);
+
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new java.io.File("./parties"));
+        chooser.setDialogTitle("Ouvrir un fichier");
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("Tableau", "csv"));
+        chooser.setAcceptAllFileFilterUsed(false);
+
+        if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            String file = convertCheminRelatif(chooser.getSelectedFile().getAbsolutePath());
+            try {
+                Fenetre.getGp().chargerAnciennePartie(file);
+                Fenetre.getJeu().repaint();
+            } catch (Exception e) {
+                System.out.println("Erreur: " + e.getMessage());
+            }
+        }
 
     }
 

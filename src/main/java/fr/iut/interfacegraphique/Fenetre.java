@@ -15,14 +15,14 @@ public class Fenetre extends JFrame {
 
 	public Fenetre() {
 		this.setTitle("En Panne Corp. - Chess Game");
-		this.setLocationRelativeTo(null);
-		this.setResizable(false);
 		// Ajout du menu
 		this.setJMenuBar(menu);
 		// Ajout de l'affichage
 		this.setContentPane(jeu);
 
 		this.pack();
+		this.setLocationRelativeTo(null);
+		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
