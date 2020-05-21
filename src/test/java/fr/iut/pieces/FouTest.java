@@ -60,14 +60,17 @@ public class FouTest {
 	   Fou cb2 = new Fou(false);
 	   Fou cn3 = new Fou(true);
 	   Tour tb1 = new Tour(false);
-
-	   assertTrue(cb1.equals(cb2));
+	   
+	   assertFalse(cb1.equals(null));
 	   assertFalse(cb1.equals(new Object()));
+	   
 	   assertFalse(cb1.equals(tb1));
 	   assertFalse(cn3.equals(tb1));
 	   assertFalse(cb1.equals(cn3));
+	   
 	   assertTrue(cb1.equals(cb1));
-	   assertFalse(cb1.equals(null));
+	   assertTrue(cb1.equals(cb2));
+	   
 	}
 
 }
