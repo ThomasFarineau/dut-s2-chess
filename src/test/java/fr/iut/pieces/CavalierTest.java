@@ -52,14 +52,17 @@ public class CavalierTest {
 	
 	@Test
 	public void equalsTest() {
-	   Cavalier c1 = new Cavalier(false);
-	   Cavalier c2 = new Cavalier(false);
-	   Cavalier c3 = new Cavalier(true);
+	   Cavalier cb1 = new Cavalier(false);
+	   Cavalier cb2 = new Cavalier(false);
+	   Cavalier cn3 = new Cavalier(true);
 	   Tour tb1 = new Tour(false);
 
-	   assertTrue(c1.equals(c2));
-	   assertFalse(c1.equals(new Object()));
-	   assertFalse(c1.equals(tb1));
-	   assertFalse(c1.equals(c3));
+	   assertTrue(cb1.equals(cb2));
+	   assertFalse(cb1.equals(new Object()));
+	   assertFalse(cb1.equals(tb1));
+	   assertFalse(cn3.equals(tb1));
+	   assertFalse(cb1.equals(cn3));
+	   assertTrue(cb1.equals(cb1));
+	   assertFalse(cb1.equals(null));
 	}
 }
