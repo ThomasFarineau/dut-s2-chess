@@ -2,6 +2,8 @@ package fr.iut.pieces;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +11,7 @@ import org.junit.jupiter.api.Test;
 class TourTest {
     private Tour tourNoir;
     private Tour tourBlanche;
+	private Reine Rren1;
 
     @BeforeEach
     public void initialisation() {
@@ -47,6 +50,19 @@ class TourTest {
 		
 		deplacementsCalculés = tourNoir.getDeplacementsPoss();
 		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
+	}
+    
+    @Test
+	public void equalsTest(){
+	   Tour tb1 = new Tour(false);
+	   Tour tb2 = new Tour(false);
+	   Tour tn1 = new Tour(true);
+	   Reine ren1 = new Reine(true);
+
+	   assertTrue(tb1.equals(tb2));
+	   assertFalse(tb1.equals(tn1));
+	   assertFalse(tb1.equals(new Object()));
+	   assertFalse(tb1.equals(ren1));
 	}
 
 }

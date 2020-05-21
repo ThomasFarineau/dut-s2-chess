@@ -3,6 +3,8 @@ package fr.iut.pieces;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,5 +53,19 @@ public class RoiTest {
 		deplacementsCalculés = roiNoir.getDeplacementsPoss();
 		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
 	}
+	
+	 @Test
+		public void equalsTest(){
+		   Roi rb1 = new Roi(false);
+		   Roi rb2 = new Roi(false);
+		   Roi rn1 = new Roi(true);
+		   Reine ren1 = new Reine(true);
+
+		   assertTrue(rb1.equals(rb2));
+		   assertFalse(rb1.equals(rn1));
+		   assertFalse(rb1.equals(new Object()));
+		   assertFalse(rb1.equals(ren1));
+		}
+
 
 }
