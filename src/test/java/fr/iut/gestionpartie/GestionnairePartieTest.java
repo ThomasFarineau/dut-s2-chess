@@ -63,7 +63,12 @@ public class GestionnairePartieTest {
 	}
 
 	@Test
-	public void sauvegarderPartieTest() {
+	public void nouvellePartieTest() {
+		// a faire
+	}
+	
+	@Test
+	public void sauvegarderPartieSansParamTest() {
 		Piece[][] echiquierASave = {
 				{new Roi(false), null, new Reine(true), null, null, null, null, null},
 				{new Pion(false), new Tour(false), null, null, null, new Reine(true), null, null},
@@ -108,5 +113,9 @@ public class GestionnairePartieTest {
 
 	}
 
-	//TESTER LES AUTRES METHODES AUSSI
+	@Test
+	public void sauvegarderPartieAvecParamTest() {
+		//a faire
+	}
+
 }
