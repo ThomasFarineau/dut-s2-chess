@@ -49,4 +49,17 @@ public class CavalierTest {
 		deplacementsCalculés = cavalierNoir.getDeplacementsPoss();
 		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
 	}
+	
+	@Test
+	public void equalsTest() {
+	   Cavalier c1 = new Cavalier(false);
+	   Cavalier c2 = new Cavalier(false);
+	   Cavalier c3 = new Cavalier(true);
+	   Tour tb1 = new Tour(false);
+
+	   assertTrue(c1.equals(c2));
+	   assertFalse(c1.equals(new Object()));
+	   assertFalse(c1.equals(tb1));
+	   assertFalse(c1.equals(c3));
+	}
 }

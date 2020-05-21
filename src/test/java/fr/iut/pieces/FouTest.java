@@ -3,6 +3,8 @@ package fr.iut.pieces;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -50,6 +52,19 @@ public class FouTest {
 		
 		deplacementsCalculés = fouNoir.getDeplacementsPoss();
 		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
+	}
+	
+	@Test
+	public void equalsTest() {
+	   Fou f1 = new Fou(false);
+	   Fou f2 = new Fou(false);
+	   Fou f3 = new Fou(true);
+	   Tour tb1 = new Tour(false);
+
+	   assertTrue(f1.equals(f2));
+	   assertFalse(f1.equals(new Object()));
+	   assertFalse(f1.equals(tb1));
+	   assertFalse(f1.equals(f3));
 	}
 
 }
