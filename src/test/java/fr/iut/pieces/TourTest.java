@@ -60,9 +60,19 @@ class TourTest {
 	   Reine ren1 = new Reine(true);
 
 	   assertTrue(tb1.equals(tb2));
+	   assertTrue(tb1.equals(tb1));
+	   
 	   assertFalse(tb1.equals(tn1));
 	   assertFalse(tb1.equals(new Object()));
+	   assertFalse(tb1.equals(null));
 	   assertFalse(tb1.equals(ren1));
+	   assertFalse(tn1.equals(ren1));
+	
+	   
+	   
+	  
+
+	  
 	}
 
 }
