@@ -11,6 +11,8 @@ import java.util.Scanner;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import fr.iut.pieces.Cavalier;
+import fr.iut.pieces.Fou;
 import fr.iut.pieces.Piece;
 import fr.iut.pieces.Pion;
 import fr.iut.pieces.Reine;
@@ -64,8 +66,26 @@ public class GestionnairePartieTest {
 
 	@Test
 	public void nouvellePartieTest() {
-		// a faire
+		try {
+			gp.nouvellePartie();
+		}catch(Exception e) {
+			fail();
+		}
+		Piece[][] echiquierACharger ={
+		{new Tour(true), new Cavalier(true), new Fou(true), new Reine(true), new Roi(true), new Fou(true), new Cavalier(true), new Tour(true)},
+	    {new Pion(true), new Pion(true), new Pion(true), new Pion(true), new Pion(true), new Pion(true), new Pion(true), new Pion(true)},
+	    {null, null, null, null, null, null, null, null},
+	    {null, null, null, null, null, null, null, null},
+	    {null, null, null, null, null, null, null, null},
+	    {null, null, null, null, null, null, null, null},
+	    {new Pion(false), new Pion(false), new Pion(false), new Pion(false), new Pion(false), new Pion(false), new Pion(false), new Pion(false)},
+	    {new Tour(false), new Cavalier(false), new Fou(false), new Reine(false), new Roi(false), new Fou(false), new Cavalier(false), new Tour(false)}
+		};
+		
+		assertArrayEquals(echiquierACharger, p.getEchiquier());
+
 	}
+	
 	
 	@Test
 	public void sauvegarderPartieSansParamTest() {
@@ -115,7 +135,47 @@ public class GestionnairePartieTest {
 
 	@Test
 	public void sauvegarderPartieAvecParamTest() {
-		//a faire
-	}
+		Piece[][] echiquierASave ={
+				{new Tour(true), new Cavalier(true), new Fou(true), new Reine(true), new Roi(true), new Fou(true), new Cavalier(true), new Tour(true)},
+			    {new Pion(true), new Pion(true), new Pion(true), new Pion(true), new Pion(true), new Pion(true), new Pion(true), new Pion(true)},
+			    {null, null, null, null, null, null, null, null},
+			    {null, null, null, null, null, null, null, null},
+			    {null, null, null, null, null, null, null, null},
+			    {null, new Pion(false), null, null, null, null, null, null},
+			    {new Pion(false), null, new Pion(false), new Pion(false), new Pion(false), new Pion(false), new Pion(false), new Pion(false)},
+			    {new Tour(false), new Cavalier(false), new Fou(false), new Reine(false), new Roi(false), new Fou(false), new Cavalier(false), new Tour(false)}
+				};
+		Plateau aSave = new Plateau();
+		aSave.setEchiquier(echiquierASave);
+		GestionnairePartie gp2= new GestionnairePartie(aSave);
+		try {
+			gp2.sauvegarderPartie("tests/sauvegarde1.csv");
+		} catch (Exception e) {
+			fail();
+		}
 
+		String[] echiquierAttendu= {
+				"Tn,Cn,Fn,ReN,RoN,Fn,Cn,Tn",
+				"Pn,Pn,Pn,Pn,Pn,Pn,Pn,Pn",
+				"V,V,V,V,V,V,V,V",
+				"V,V,V,V,V,V,V,V",
+				"V,V,V,V,V,V,V,V",
+				"V,Pb,V,V,V,V,V,V",
+				"Pb,V,Pb,Pb,Pb,Pb,Pb,Pb",
+				"Tb,Cb,Fb,ReB,RoB,Fb,Cb,Tb"};
+		Scanner scan;
+		
+		try {
+			scan = new Scanner(new File("parties/tests/sauvegarde1.csv")); //a changer
+			int id=0;
+			while (scan.hasNext()) {
+				String ligneString = scan.nextLine();
+				assertEquals(ligneString, echiquierAttendu[id]);
+				id++;
+			}
+			scan.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 }
