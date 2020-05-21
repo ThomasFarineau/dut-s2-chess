@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 class TourTest {
     private Tour tourNoir;
     private Tour tourBlanche;
-	private Reine Rren1;
+
 
     @BeforeEach
     public void initialisation() {
