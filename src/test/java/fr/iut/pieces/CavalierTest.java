@@ -57,14 +57,15 @@ public class CavalierTest {
 	   Cavalier cn3 = new Cavalier(true);
 	   Tour tb1 = new Tour(false);
 
+	   // Cas particulier
 	   assertFalse(cb1.equals(new Object()));
 	   assertFalse(cb1.equals(null));
-	   
+	   assertTrue(cb1.equals(cb1));
+	   // Autres cas particuliers
 	   assertFalse(cb1.equals(tb1));
 	   assertFalse(cn3.equals(tb1));
 	   assertFalse(cb1.equals(cn3));
-	   
 	   assertTrue(cb1.equals(cb2));
-	   assertTrue(cb1.equals(cb1));
+	   
 	}
 }

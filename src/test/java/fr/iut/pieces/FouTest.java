@@ -56,19 +56,19 @@ public class FouTest {
 	
 	@Test
 	public void equalsTest() {
-	   Fou cb1 = new Fou(false);
-	   Fou cb2 = new Fou(false);
-	   Fou cn3 = new Fou(true);
+	   Fou fb1 = new Fou(false);
+	   Fou fb2 = new Fou(false);
+	   Fou fn3 = new Fou(true);
 	   Tour tb1 = new Tour(false);
 	   
-	   assertFalse(cb1.equals(null));
-	   assertFalse(cb1.equals(new Object()));
-	   
-	   assertFalse(cb1.equals(tb1));
-	   assertFalse(cn3.equals(tb1));
-	   assertFalse(cb1.equals(cn3));
-	    
-	   assertTrue(cb1.equals(cb1));
-	   assertTrue(cb1.equals(cb2));
+	   // Cas particulier
+	   assertFalse(fb1.equals(null));
+	   assertFalse(fb1.equals(new Object()));
+	   assertTrue(fb1.equals(fb1));
+	   // Autres cas particuliers
+	   assertFalse(fb1.equals(tb1));
+	   assertFalse(fn3.equals(tb1));
+	   assertFalse(fb1.equals(fn3));
+	   assertTrue(fb1.equals(fb2));
 	}
 }
