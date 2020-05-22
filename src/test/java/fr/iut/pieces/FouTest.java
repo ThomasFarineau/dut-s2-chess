@@ -71,5 +71,4 @@ public class FouTest {
 	   assertTrue(cb1.equals(cb1));
 	   assertTrue(cb1.equals(cb2));
 	}
-
 }
