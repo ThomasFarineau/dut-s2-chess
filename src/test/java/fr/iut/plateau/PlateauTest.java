@@ -1,7 +1,7 @@
 package fr.iut.plateau;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -562,17 +562,59 @@ public class PlateauTest {
 	@Test
 	public void verifEchecTest() {
 		int[][] echecAttendu= {
-				{2, 5, 0, 4},
+				{1, 5, 0, 4},
 				{1, 6, 0, 7},
 				{1, 5, 0, 7},
 				null,
 				{6, 2, 4, 3},
-				{6, 1, 5, 0}
-				
+				{6, 1, 5, 0},
+				{3, 0, 7, 4},
+				{1, 5, 0, 4},
+				{1, 5, 0, 3},
+				{4, 2, 4, 3},
+				{1, 2, 0, 4},
+				{0, 2, 0, 4},
+				{1, 3, 1, 4},
+				{7, 0, 7, 4},
+				{6, 7, 6, 4},
+				{3, 4, 5, 5},
+				{3, 7, 3, 3},
+				{4, 7, 7, 4},
+				{3, 7, 0, 4},
+				{0, 5, 2, 7},
+				{2, 2, 1, 3},
+				{7, 1, 5, 1},
+				null,
+				{3, 7, 3, 3},
+				{2, 4, 3, 3},
+				{4, 5, 3, 6},
+				{7, 7, 7, 3},
+				{3, 1, 2, 2},
+				{3, 4, 3, 5},
+				{4, 3, 3, 4},
+				{3, 2, 3, 4},
+				{7, 0, 7, 4},
+				{3, 2, 3, 3},
+				{4, 5, 6, 3},
+				null,
+				{0, 2, 0, 0}
 		};
 		
-		for(int i=1; i<=36; i++) {
+		boolean[] tourJoueur= {true, true, true,false, false, true, false, true, true, false, true, true, true, false, false, false, false, false, true, false, true, true, true, false, false, true, false, true, false, false, true, true, true, true, false, false};
+
+		
+		for(int i=1; i <= 36; i++) {
 			
+			plat.setTourJoueur(tourJoueur[i-1]);
+			
+			try {
+				gp.chargerAnciennePartie("tests/test"+i+".csv");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if (echecAttendu[i-1] != null) 
+				assertArrayEquals(echecAttendu[i-1], plat.verifEchec());
+
 		}
 	}
 	
@@ -590,7 +632,6 @@ public class PlateauTest {
 			}
 			
 			plat.setTourJoueur(tourJoueur[i-1]);
-			System.out.println(plat.verifMat()+"\t"+matAttendu[i-1]);
 			assertEquals(matAttendu[i-1], plat.verifMat());
 		}
 	}
