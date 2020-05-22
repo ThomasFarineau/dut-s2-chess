@@ -558,4 +558,55 @@ public class PlateauTest {
 		boolean[][] deplacementPion = plat.calculerDeplacementsPiece(1, 0); 
 		assertArrayEquals(deplacementPionValide, deplacementPion);
 	}
+	
+	@Test
+	public void verifEchecTest() {
+		int[][] echecAttendu= {
+				{2, 5, 0, 4},
+				{1, 6, 0, 7},
+				{1, 5, 0, 7},
+				null,
+				{6, 2, 4, 3},
+				{6, 1, 5, 0}
+				
+		};
+		
+		for(int i=1; i<=36; i++) {
+			
+		}
+	}
+	
+	@Test
+	public void verifMatTest() {
+		boolean[] matAttendu= {true, true, true, false, false, false, true, true, false, true,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false, false, false, false};
+		boolean[] tourJoueur= {true, true, true,false, false, true, false, true, true, false, true, true, true, false, false, false, false, false, true, false, true, true, true, false, false, true, false, true, false, false, true, true, true, true, false, false};
+		
+		for(int i=1; i<=36; i++) {
+			
+			try {
+				gp.chargerAnciennePartie("tests/test"+i+".csv");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			plat.setTourJoueur(tourJoueur[i-1]);
+			System.out.println(plat.verifMat()+"\t"+matAttendu[i-1]);
+			assertEquals(matAttendu[i-1], plat.verifMat());
+		}
+	}
+	
+	@Test
+	public void deplacerTest() {
+		
+		try {
+			gp.chargerAnciennePartie("tests/test1.csv");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(plat);
+		
+		int coord[] = {0, 1, 2, 3};
+		
+	}
 }
