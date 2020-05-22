@@ -3,6 +3,7 @@ package fr.iut;
 import java.util.Scanner;
 
 import fr.iut.gestionpartie.GestionnairePartie;
+import fr.iut.interfacegraphique.Fenetre;
 import fr.iut.plateau.Plateau;
 
 public class ChessMain {
@@ -10,6 +11,10 @@ public class ChessMain {
 	private static Plateau p = new Plateau(); // On charge le plateau
 	private static GestionnairePartie gp = new GestionnairePartie(p); // On initialise un fichier avec le plateau
 	private static String erreur = "";
+	private static boolean recommencer = true;
+	
+	// Pour l'interface graphique
+	private static Fenetre f = null;
 
 	public static boolean verifSyntaxe(String entree) {
 		if(entree.length() != 5)
@@ -29,23 +34,22 @@ public class ChessMain {
 		return new int[] {8-(tabEntree[1]-'0'), tabEntree[0]-'a', 8-(tabEntree[4]-'0'), tabEntree[3]-'a'};
 	}
 	
-	public static void afficherMessageDebutTour() {
-		System.out.println("\n\n\n\n\n");
+	public static String getMessageDebutTour() {
+		StringBuilder retour = new StringBuilder();
+		retour.append("\n\n\n\n\n\n");
+
+		retour.append("\n\n"+p.toString()+"\n");
+		retour.append(erreur);
 		
-		System.out.println("\n\n"+p.toString());
-		System.out.print(erreur);
-		
-		System.out.println();
-		
-		System.out.println("C'est au tour du joueur " + (p.getTourJoueur() ? "noir." : "blanc."));
+		retour.append("\nC'est au tour du joueur " + (p.getTourJoueur() ? "noir." : "blanc.") + "\n");
 		
 		if (p.verifEchec() != null)
-			System.out.println("Le roi " + (p.getTourJoueur() ? "noir" : "blanc") + " est en échec");
+			retour.append("Le roi " + (p.getTourJoueur() ? "noir" : "blanc") + " est en échec.\n");
+		
+		return retour.toString();
 	}
 
 	public static void initialisation() {
-		System.out.println("Bienvenue dans le jeu d'échec.");
-
 		boolean entree1Valide = false; // Sert à vérifier la validité du message saisi
 
 		while(!entree1Valide) {
@@ -100,7 +104,7 @@ public class ChessMain {
 		boolean entreeValide = false;
 		
 		while(!entreeValide) {
-			afficherMessageDebutTour();
+			System.out.print(getMessageDebutTour());
 			
 			System.out.print("\nVeuillez entrer votre déplacement : ");
 			
@@ -152,8 +156,8 @@ public class ChessMain {
 		}
 
 	}
-
-	public static void main(String[] args) {
+	
+	public static void partie() {
 		initialisation();
 
 		System.out.println("\nLa partie commence !");
@@ -161,7 +165,30 @@ public class ChessMain {
 		while(!p.verifMat()) {
 			jouerTour();
 		}
+		
+		System.out.println("Félicitations, les " + (p.getTourJoueur()?"noirs":"blancs") + " ont gagné !");
+	}
+	
+	public static void demanderRecommencer() {
+		
+	}
+	
+	public static void mainConsole() {
+		System.out.println("Bienvenue dans le jeu d'échec.");
+		
+		while (recommencer) {
+			partie();
+			demanderRecommencer();
+		}
 
 		sc.close();
+	}
+	
+	public static void mainGraphique() {
+		f = new Fenetre(gp, p);
+	}
+
+	public static void main(String[] args) {
+		mainConsole();
 	}
 }
