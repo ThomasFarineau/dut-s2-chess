@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import fr.iut.pieces.Cavalier;
 import fr.iut.pieces.Fou;
@@ -18,7 +20,7 @@ import fr.iut.pieces.Tour;
 import fr.iut.plateau.Plateau;
 
 public class GestionnairePartie {
-	private final static String partiesPath = "./parties/";
+	private final static Path partiesPath = Paths.get(System.getProperty("user.dir") + "/parties");
 	private final static String nomNouvellePartie = "nouvellePartie.csv";
 	private Plateau plat;
 	private String nomFichier = "partieActuelle.csv";
@@ -34,7 +36,7 @@ public class GestionnairePartie {
 		try {
 			br = new BufferedReader(
 					new FileReader(
-							new File(partiesPath+nomFichier)
+							new File(partiesPath+"//"+nomFichier)
 							)
 					);
 		} catch (FileNotFoundException e) {
@@ -132,7 +134,7 @@ public class GestionnairePartie {
 		String retour = "";
 		
 		try {
-			File f = new File(partiesPath+nomFichier);
+			File f = new File(partiesPath+"//"+nomFichier);
 			if (f.createNewFile()) {
 				retour = "Le fichier " + nomFichier + " vient d'être créé.";
 			}
@@ -169,5 +171,9 @@ public class GestionnairePartie {
 
 		this.nomFichier = nomFichier;
 		return sauvegarderPartie();
+	}
+	
+	public static Path getPartiesPath() {
+		return partiesPath;
 	}
 }
