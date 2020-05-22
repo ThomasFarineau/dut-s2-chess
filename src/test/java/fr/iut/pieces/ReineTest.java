@@ -46,4 +46,22 @@ class ReineTest {
 		deplacementsCalculés = reineNoir.getDeplacementsPoss();
 		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
 	}
+    
+    @Test
+	public void equalsTest() {
+	   Reine rb1 = new Reine(false);
+	   Reine rb2 = new Reine(false);
+	   Reine rn1 = new Reine(true);
+	   Tour tb1 = new Tour(false);
+
+	   // Cas particulier
+	   assertFalse(rb1.equals(null));
+	   assertFalse(rb1.equals(new Object()));
+	   assertTrue(rb1.equals(rb1));
+	   // Autres cas
+	   assertTrue(rb1.equals(rb2));
+	   assertFalse(rb1.equals(tb1));
+	   assertFalse(rn1.equals(tb1));
+	   assertFalse(rb1.equals(rn1));
+	}
 }
