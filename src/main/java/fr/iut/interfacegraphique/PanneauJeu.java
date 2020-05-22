@@ -28,12 +28,6 @@ public class PanneauJeu extends JPanel {
 
 	public PanneauJeu(Plateau plat) {
 		this.plat = plat;
-		try {
-			Fenetre.getGp().nouvellePartie();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 		this.addMouseListener(new EchiquierListener(this));
 
 		try {
@@ -96,11 +90,11 @@ public class PanneauJeu extends JPanel {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(600,600);
+		return new Dimension(600,640);
 	}
 
 	public void selectionner(int i, int j) {
-		// La slection ne fonctionne que si elle est sur une pice de la bonne couleur
+		// La sélection ne fonctionne que si elle est sur une pièce de la bonne couleur
 		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
 			if (plat.getEchiquier()[i][j] != null) {
 				if (plat.getEchiquier()[i][j].getCouleur() == plat.getTourJoueur()) {
@@ -123,7 +117,7 @@ public class PanneauJeu extends JPanel {
 	}
 
 	public boolean hasSelection() {
-		// Retourne si une case a t slectionne
+		// Retourne si une case a été sélectionnée
 		return (selection != null);
 	}
 

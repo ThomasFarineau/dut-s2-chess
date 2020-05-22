@@ -1,15 +1,26 @@
 package fr.iut.interfacegraphique;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class MenuFenetre extends JMenuBar {
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
+import javax.swing.UIManager;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
+import fr.iut.gestionpartie.GestionnairePartie;
+
+public class MenuFenetre extends JMenuBar {
     private JMenu partie = new JMenu("Partie");
     private JMenuItem nouvellePartie = new JMenuItem("Nouvelle Partie");
     private JMenuItem chargerPartie = new JMenuItem("Charger une Partie...");
@@ -18,8 +29,11 @@ public class MenuFenetre extends JMenuBar {
 
     private JMenu informations = new JMenu("Informations");
     private JMenuItem regles = new JMenuItem("Règles du jeu");
+    
+    private PanneauJeu pj = null;
+    private GestionnairePartie gp = null;
 
-    public MenuFenetre() {
+    public MenuFenetre(PanneauJeu pj, GestionnairePartie gp) {
         nouvellePartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK));
         nouvellePartie.addActionListener(e -> nouvellePartie());
         partie.add(nouvellePartie);
@@ -41,14 +55,14 @@ public class MenuFenetre extends JMenuBar {
 
         this.add(partie);
         this.add(informations);
+        
+        this.pj = pj;
+        this.gp = gp;
     }
 
-    public String convertCheminRelatif(String cheminAbsolu) {
-        String path = System.getProperty("user.dir");
-
-        Path pathDesParties = Paths.get(path + "/parties");
+    public static String convertCheminRelatif(String cheminAbsolu) {
         Path cheminAbsoluFichier = Paths.get(cheminAbsolu);
-        Path pathRelative = pathDesParties.relativize(cheminAbsoluFichier);
+        Path pathRelative = GestionnairePartie.getPartiesPath().relativize(cheminAbsoluFichier);
 
         return (pathRelative.toString()).replace('\\', '/');
     }
@@ -68,19 +82,19 @@ public class MenuFenetre extends JMenuBar {
         if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             String file = convertCheminRelatif(chooser.getSelectedFile().getAbsolutePath());
             try {
-                Fenetre.getGp().chargerAnciennePartie(file);
-                Fenetre.getJeu().repaint();
+                gp.chargerAnciennePartie(file);
+                pj.repaint();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(Fenetre.getJeu(), "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(pj, "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
     public void enregistrerPartie() {
         try {
-            Fenetre.getGp().sauvegarderPartie();
+            gp.sauvegarderPartie();
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(Fenetre.getJeu(), "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(pj, "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -99,10 +113,9 @@ public class MenuFenetre extends JMenuBar {
         if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             String file = convertCheminRelatif(chooser.getSelectedFile().getAbsolutePath());
             try {
-                Fenetre.getGp().sauvegarderPartie(file);
-                Fenetre.getJeu().repaint();
+                gp.sauvegarderPartie(file);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(Fenetre.getJeu(), "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(pj, "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -131,10 +144,10 @@ public class MenuFenetre extends JMenuBar {
         // Utilisation de la réponse
         if (resp == 0) {
             try {
-                Fenetre.getGp().nouvellePartie();
-                Fenetre.getJeu().repaint();
+                gp.nouvellePartie();
+                pj.repaint();
             } catch (IOException e) {
-                JOptionPane.showMessageDialog(Fenetre.getJeu(), "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(pj, "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

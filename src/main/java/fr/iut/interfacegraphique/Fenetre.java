@@ -8,34 +8,19 @@ import fr.iut.plateau.Plateau;
 import java.io.IOException;
 
 public class Fenetre extends JFrame {
-	private static Plateau p = new Plateau();
-	private static GestionnairePartie gp = new GestionnairePartie(p);
-	private static JPanel jeu = new PanneauJeu(p);
-	private static JMenuBar menu = new MenuFenetre();
-
-	public Fenetre() {
+	public Fenetre(GestionnairePartie gp, Plateau p) {
+		PanneauJeu pj = new PanneauJeu(p);
+		
 		this.setTitle("En Panne Corp. - Chess Game");
 		// Ajout du menu
-		this.setJMenuBar(menu);
+		this.setJMenuBar(new MenuFenetre(pj, gp));
 		// Ajout de l'affichage
-		this.setContentPane(jeu);
+		this.setContentPane(pj);
 
 		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
-	}
-
-	public static void main(String[] args) throws IOException {
-		JFrame f = new Fenetre();
-	}
-
-	public static GestionnairePartie getGp() {
-		return gp;
-	}
-
-	public static JPanel getJeu() {
-		return jeu;
 	}
 }
