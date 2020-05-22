@@ -28,21 +28,21 @@ class TourTest {
     @Test
 	public void getDeplacementsPossTest() {
 		boolean[][] deplacementsAttendus = { //                   centre
-				{false, false, false, false, false, false, false, true, false, false, false, false, false, false, false},
+				{false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-				{true, false, false, false, false, false, false, false, false, false, false, false, false, false, true}, // centre
+				{true , false, false, false, false, false, false, false, false, false, false, false, false, false, true }, // centre
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-				{false, false, false, false, false, false, false, true, false, false, false, false, false, false, false}
+				{false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false}
 				};
 		
 		boolean[][] deplacementsCalculés = tourBlanche.getDeplacementsPoss();
@@ -61,8 +61,8 @@ class TourTest {
 
 	   assertTrue(tb1.equals(tb2));
 	   assertTrue(tb1.equals(tb1));
-	   
 	   assertFalse(tb1.equals(tn1));
+	   
 	   assertFalse(tb1.equals(new Object()));
 	   assertFalse(tb1.equals(null));
 	   assertFalse(tb1.equals(ren1));
