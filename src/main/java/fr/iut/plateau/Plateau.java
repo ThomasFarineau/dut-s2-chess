@@ -22,13 +22,13 @@ public class Plateau {
 		if(echiquier[i][j] == null) {
 			throw new Exception("Il n'y a pas de piece sur la première case entrée.");
 		}
-		
+
 		if(echiquier[i][j].getCouleur() != tourJoueur) {
 			throw new Exception("La pièce selectionnée ne vous appartient pas.");
 		}
-		
+
 		boolean[][] deplacementsPiece = calculerDeplacementsPiece(i, j);
-		
+
 		if(!deplacementsPiece[k][l]) {
 			throw new Exception("La pièce sélectionnée ne peut pas aller ici.");
 		}
@@ -53,7 +53,7 @@ public class Plateau {
 
 		// On récupère les différents déplacements possible de la pièce dont les "coordonnées" sont rentrées en paramètre
 		boolean[][] deplacementsPiece = new boolean[15][15];
-		
+
 		boolean[][] deplementsACopier = echiquier[xP][yP].getDeplacementsPoss();
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
@@ -194,7 +194,7 @@ public class Plateau {
 	public boolean verifMat() {
 		if ((dernierEchec = verifEchec()) == null)
 			return false;
-			
+
 		for (int i = 0; i < 8; i++)
 			for (int j = 0; j < 8; j++) {
 				if (echiquier[i][j] != null) {
@@ -208,7 +208,7 @@ public class Plateau {
 									echiquier[k][l] = echiquier[i][j];
 									echiquier[i][j] = null;
 
-									if ((verifEchec() != null)) {
+									if ((verifEchec() == null)) {
 										echiquier[i][j] = echiquier[k][l];
 										echiquier[k][l] = copiePiece;
 										return false;
@@ -264,7 +264,7 @@ public class Plateau {
 	public void setTourJoueur(boolean tourJoueur) {
 		this.tourJoueur = tourJoueur;
 	}
-	
+
 	public int[] getDernierEchec() {
 		return dernierEchec;
 	}
