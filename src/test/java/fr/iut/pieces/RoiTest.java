@@ -61,12 +61,12 @@ public class RoiTest {
 		   Roi rn1 = new Roi(true);
 		   Reine ren1 = new Reine(true);
 
-		   assertTrue(rb1.equals(rb2));
-		   assertTrue(rb1.equals(rb1));
-		   assertFalse(rb1.equals(rn1));
-		   
 		   assertFalse(rb1.equals(null));
 		   assertFalse(rb1.equals(new Object()));
+		   assertTrue(rb1.equals(rb1));
+		   
+		   assertFalse(rb1.equals(rn1));
+		   assertTrue(rb1.equals(rb2));
 		   assertFalse(rb1.equals(ren1));
 		   assertFalse(rn1.equals(ren1));
 		
