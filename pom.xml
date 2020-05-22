@@ -29,6 +29,13 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.2</version>
+				<configuration>
+					<excludes>
+					  <!-- exclude all classes in package com.acme.generated -->
+					  <exclude>fr/iut/interfacegraphique/**/*</exclude>
+					  <exclude>fr/iut/listener/**/*</exclude>
+					</excludes>
+				</configuration>
                 <executions>
                     <execution>
                         <goals>
