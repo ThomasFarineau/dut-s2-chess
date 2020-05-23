@@ -118,7 +118,7 @@ public class GestionnairePartie {
 		if (!nomFichier.endsWith(".csv"))
 			nomFichier += ".csv";
 		
-		if (nomFichier.equals(nomNouvellePartie))
+		if (nomFichier.endsWith(nomNouvellePartie))
 			throw new Exception("Vous n'avez pas le droit de charger le fichier \"" + nomNouvellePartie + "\".");
 
 		this.nomFichier = nomFichier;
@@ -136,7 +136,7 @@ public class GestionnairePartie {
 		try {
 			File f = new File(partiesPath+"//"+nomFichier);
 			if (f.createNewFile()) {
-				retour = "Le fichier " + nomFichier + " vient d'être créé.";
+				retour = "Le fichier " + nomFichier + " vient d'être créé.\n";
 			}
 
 			bw = new BufferedWriter(new FileWriter(f));
@@ -163,14 +163,18 @@ public class GestionnairePartie {
 	}
 
 	public String sauvegarderPartie(String nomFichier) throws IOException, Exception {
-		if (nomFichier.equals(nomNouvellePartie))
-			throw new Exception("Vous n'avez pas le droit de sauvegarder une partie de nom \"" + nomNouvellePartie + "\".");
-
 		if (!nomFichier.endsWith(".csv"))
 			nomFichier += ".csv";
+		
+		if (nomFichier.endsWith(nomNouvellePartie))
+			throw new Exception("Vous n'avez pas le droit de sauvegarder une partie de nom \"" + nomNouvellePartie + "\".");
 
 		this.nomFichier = nomFichier;
 		return sauvegarderPartie();
+	}
+	
+	public String getNomFichier() {
+		return nomFichier;
 	}
 	
 	public static Path getPartiesPath() {
