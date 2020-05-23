@@ -68,21 +68,23 @@ public class PanneauJeu extends JPanel {
 			g.drawRect(xOffset+70*selection[1]+1, 70*selection[0]+1, 67, 67);
 		}
 
-		for (int i = 0; i < echiquier.length; i++) {
-			for (int j = 0; j < echiquier[i].length; j++) {
-				if (selectionDeplacementsPoss != null) {
-					if (selectionDeplacementsPoss[i][j]) {
-						g.setColor(new Color(150, 255, 255));
-						g.fillRect(xOffset+70*j, 70*i, 70, 70);
+		if (echiquier != null) {
+			for (int i = 0; i < echiquier.length; i++) {
+				for (int j = 0; j < echiquier[i].length; j++) {
+					if (selectionDeplacementsPoss != null) {
+						if (selectionDeplacementsPoss[i][j]) {
+							g.setColor(new Color(150, 255, 255));
+							g.fillRect(xOffset+70*j, 70*i, 70, 70);
 
-						g.setColor(new Color(0, 0, 0, 75));
-						g.drawRect(xOffset+70*j, 70*i, 69, 69);
-						g.drawRect(xOffset+70*j+1, 70*i+1, 67, 67);
+							g.setColor(new Color(0, 0, 0, 75));
+							g.drawRect(xOffset+70*j, 70*i, 69, 69);
+							g.drawRect(xOffset+70*j+1, 70*i+1, 67, 67);
+						}
 					}
-				}
 
-				if (echiquier[i][j] != null) {
-					g.drawImage(echiquier[i][j].getImage(), xOffset+70*j, 70*i, null);
+					if (echiquier[i][j] != null) {
+						g.drawImage(echiquier[i][j].getImage(), xOffset+70*j, 70*i, null);
+					}
 				}
 			}
 		}
@@ -124,11 +126,16 @@ public class PanneauJeu extends JPanel {
 	public void deplacer(int i, int j) {
 		try {
 			plat.deplacer(new int[] {selection[0], selection[1], i, j});
-			System.out.println(plat.verifMat());
-		} catch (Exception ignored) {}
+			this.casesEchec = plat.verifEchec();
+		} catch (Exception e) {
+			this.casesEchec = plat.getDernierEchec();
+		}
 
 		resetSelection();
-		this.casesEchec = plat.getDernierEchec();
+
+		if (plat.verifMat()) {
+			System.out.println("Echec et mat");
+		} 
 	}
 
 	public void setCasesEchec(int[] casesEchec) {
