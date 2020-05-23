@@ -190,25 +190,26 @@ public class ChessMain {
 		
 		while(!entreeValide) {
 			System.out.println("Voulez vous jouer en mode console ou bien en mode graphique ?"); 
-			System.out.println("\t 1 - Mode Graphique");
-			System.out.println("\t 2 - Mode Console");
+			System.out.println("\t 1 - Mode Console");
+			System.out.println("\t 2 - Mode Graphique");
 
 			System.out.print("\nVeuillez saisir votre choix : ");
 			String entree1 = sc.nextLine();
 
 			switch (entree1.toLowerCase()) {
 			case "1":
-			case "mode graphique":
-			case "graphique":
-				System.out.println("Vous avez décidé de jouer en mode Graphique.\n\n");
-				mainGraphique();
-				entreeValide = true;
-				break;
-			case "2":
 			case "mode console":
 			case "console":
 				System.out.println("Vous avez décidé de jouer en mode Console.\n\n");
 				mainConsole();
+				entreeValide = true;
+				break;
+				
+			case "2":
+			case "mode graphique":
+			case "graphique":
+				System.out.println("Vous avez décidé de jouer en mode Graphique.\n\n");
+				mainGraphique();
 				entreeValide = true;
 				break;
 
