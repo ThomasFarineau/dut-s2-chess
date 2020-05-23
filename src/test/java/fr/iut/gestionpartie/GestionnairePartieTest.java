@@ -64,6 +64,14 @@ public class GestionnairePartieTest {
 		} catch (Exception e) {
 			assertEquals("Nom de pièce invalide poutre à la ligne 5 du fichier tests/pieceInconnue.csv", e.getMessage());
 		}
+		
+		try {
+			gp.chargerAnciennePartie("tests/formatInvalide.csv");
+			//Si aucune exception n'est générée, le test échoue
+			fail();
+		} catch (Exception e) {
+			assertEquals("Format du fichier \"tests/formatInvalide.csv\" invalide", e.getMessage());
+		}
 	}
 	
 	@Test
@@ -145,7 +153,8 @@ public class GestionnairePartieTest {
 				"V,V,V,V,V,V,V,V"};
 		Scanner scan;
 		try {
-			scan = new Scanner(new File("parties/tests/sauvegarde1.csv"));
+			File sauvegarde1 = new File("parties/tests/sauvegarde1.csv");
+			scan = new Scanner(sauvegarde1);
 			int id=0;
 			while (scan.hasNext()) {
 				String ligneString = scan.nextLine();
@@ -153,10 +162,11 @@ public class GestionnairePartieTest {
 				id++;
 			}
 			scan.close();
+			sauvegarde1.delete();
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Test
