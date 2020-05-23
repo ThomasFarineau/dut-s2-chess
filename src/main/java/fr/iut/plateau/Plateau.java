@@ -2,7 +2,7 @@ package fr.iut.plateau;
 
 import java.util.Arrays;
 
-import fr.iut.gestionpartie.GestionnairePartie;
+import fr.iut.fonctions.Fonctions;
 import fr.iut.pieces.Cavalier;
 import fr.iut.pieces.Piece;
 import fr.iut.pieces.Pion;
@@ -38,9 +38,11 @@ public class Plateau {
 		echiquier[i][j] = null;
 
 		if((dernierEchec = verifEchec()) != null) {
+			char[] charsEchec = Fonctions.convertEnCaracteres(dernierEchec);
+			String etatEchec = echiquier[dernierEchec[0]][dernierEchec[1]].toString() + "(" + charsEchec[0] + charsEchec[1] + " -> " + charsEchec[2] + charsEchec[3];
 			echiquier[i][j] = echiquier[k][l];
 			echiquier[k][l] = copiePiece;
-			throw new Exception("Mouvement impossible, vous êtes en échec.");
+			throw new Exception("Mouvement impossible, il vous met en échec : " + etatEchec);
 		}
 
 		tourJoueur = !tourJoueur;

@@ -3,9 +3,9 @@ package fr.iut.interfacegraphique;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -18,7 +18,9 @@ import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import fr.iut.fonctions.Fonctions;
 import fr.iut.gestionpartie.GestionnairePartie;
+import fr.iut.listener.EchiquierListener;
 
 public class MenuFenetre extends JMenuBar {
     private JMenu partie = new JMenu("Partie");
@@ -44,10 +46,12 @@ public class MenuFenetre extends JMenuBar {
 
         enregistrerPartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK));
         enregistrerPartie.addActionListener(e -> enregistrerPartie());
+        enregistrerPartie.setEnabled(false);
         partie.add(enregistrerPartie);
 
         enregistrerPartieSous.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK + KeyEvent.SHIFT_DOWN_MASK));
         enregistrerPartieSous.addActionListener(e -> enregistrerPartieSous());
+        enregistrerPartieSous.setEnabled(false);
         partie.add(enregistrerPartieSous);
 
         regles.addActionListener(null);
@@ -60,27 +64,20 @@ public class MenuFenetre extends JMenuBar {
         this.gp = gp;
     }
 
-    public static String convertCheminRelatif(String cheminAbsolu) {
-        Path cheminAbsoluFichier = Paths.get(cheminAbsolu);
-        Path pathRelative = GestionnairePartie.getPartiesPath().relativize(cheminAbsoluFichier);
-
-        return (pathRelative.toString()).replace('\\', '/');
-    }
-
     public void chargerPartie() {
         JPanel panel = new JPanel();
         panel.setSize(new Dimension(500, 500));
         panel.setLayout(null);
 
         JFileChooser chooser = new JFileChooser();
-        chooser.setCurrentDirectory(new java.io.File("./parties"));
+        chooser.setCurrentDirectory(new File("./parties"));
         chooser.setDialogTitle("Ouvrir un fichier");
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         chooser.addChoosableFileFilter(new FileNameExtensionFilter("Tableau", "csv"));
         chooser.setAcceptAllFileFilterUsed(false);
 
         if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            String file = convertCheminRelatif(chooser.getSelectedFile().getAbsolutePath());
+            String file = Fonctions.convertCheminRelatif(chooser.getSelectedFile().getAbsolutePath());
             try {
                 gp.chargerAnciennePartie(file);
                 pj.repaint();
@@ -104,14 +101,14 @@ public class MenuFenetre extends JMenuBar {
         panel.setLayout(null);
 
         JFileChooser chooser = new JFileChooser();
-        chooser.setCurrentDirectory(new java.io.File("./parties"));
-        chooser.setDialogTitle("Ouvrir un fichier");
+        chooser.setCurrentDirectory(new File("./parties"));
+        chooser.setDialogTitle("Enregistrer un fichier");
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         chooser.addChoosableFileFilter(new FileNameExtensionFilter("Tableau", "csv"));
         chooser.setAcceptAllFileFilterUsed(false);
 
         if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-            String file = convertCheminRelatif(chooser.getSelectedFile().getAbsolutePath());
+            String file = Fonctions.convertCheminRelatif(chooser.getSelectedFile().getAbsolutePath());
             try {
                 gp.sauvegarderPartie(file);
             } catch (Exception e) {
@@ -146,6 +143,7 @@ public class MenuFenetre extends JMenuBar {
             try {
                 gp.nouvellePartie();
                 pj.repaint();
+                ((EchiquierListener)pj.getListeners(MouseListener.class)[0]).setInteractable(true);
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(pj, "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
             }

@@ -136,7 +136,7 @@ public class GestionnairePartie {
 		try {
 			File f = new File(partiesPath+"//"+nomFichier);
 			if (f.createNewFile()) {
-				retour = "Le fichier " + nomFichier + " vient d'être créé.\n";
+				retour = "Le fichier \"" + nomFichier + "\" vient d'être créé. ";
 			}
 
 			bw = new BufferedWriter(new FileWriter(f));
@@ -158,6 +158,8 @@ public class GestionnairePartie {
 		} catch (IOException e) {
 			throw new IOException("Erreur lors de la sauvegarde du fichier");
 		}
+		
+		retour += "La sauvegarde vers \"" + nomFichier + "\" a été effectuée avec succès !";
 		
 		return retour;
 	}
