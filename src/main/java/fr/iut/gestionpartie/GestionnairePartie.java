@@ -115,11 +115,11 @@ public class GestionnairePartie {
 	}
 
 	public void chargerAnciennePartie(String nomFichier) throws IOException, Exception {
-		if (nomFichier.equals(nomNouvellePartie))
-			throw new Exception("Vous n'avez pas le droit de charger le fichier \"" + nomNouvellePartie + "\".");
-
 		if (!nomFichier.endsWith(".csv"))
 			nomFichier += ".csv";
+		
+		if (nomFichier.equals(nomNouvellePartie))
+			throw new Exception("Vous n'avez pas le droit de charger le fichier \"" + nomNouvellePartie + "\".");
 
 		this.nomFichier = nomFichier;
 		chargerPartie(nomFichier);
