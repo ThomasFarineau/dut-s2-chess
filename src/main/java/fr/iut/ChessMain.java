@@ -2,6 +2,9 @@ package fr.iut;
 
 import java.util.Scanner;
 
+import javax.swing.UIManager;
+
+import fr.iut.fonctions.Fonctions;
 import fr.iut.gestionpartie.GestionnairePartie;
 import fr.iut.interfacegraphique.Fenetre;
 import fr.iut.plateau.Plateau;
@@ -10,42 +13,29 @@ public class ChessMain {
 	private static Scanner sc = new Scanner(System.in); // On crée un scanner pour récupérer les entrées de l'utilisateur
 	private static Plateau p = new Plateau(); // On charge le plateau
 	private static GestionnairePartie gp = new GestionnairePartie(p); // On initialise un fichier avec le plateau
-	private static String erreur = "";
+	private static String alerte = "";
 	private static boolean recommencer = true;
-	
+
 	// Pour l'interface graphique
 	private static Fenetre f = null;
 
-	public static boolean verifSyntaxe(String entree) {
-		if(entree.length() != 5)
-			return false;
-
-		char[] tabEntree = entree.toUpperCase().toCharArray();
-
-		return (tabEntree[2] == ' ') &&
-				(tabEntree[0] >= 'A' && tabEntree[0] <= 'H') &&
-				(tabEntree[1] >= '1' && tabEntree[1] <= '8') &&
-				(tabEntree[3] >= 'A' && tabEntree[3] <= 'H') &&
-				(tabEntree[4] >= '1' && tabEntree[4] <= '8');
-	}
-
-	public static int[] convertChaine(String entree) {
-		char[] tabEntree = entree.toLowerCase().toCharArray();
-		return new int[] {8-(tabEntree[1]-'0'), tabEntree[0]-'a', 8-(tabEntree[4]-'0'), tabEntree[3]-'a'};
-	}
-	
 	public static String getMessageDebutTour() {
 		StringBuilder retour = new StringBuilder();
 		retour.append("\n\n\n\n\n\n");
 
-		retour.append("\n\n"+p.toString()+"\n");
-		retour.append(erreur);
+		retour.append("\n\n"+p.toString()+"\n\n");
 		
+		retour.append("Pour sauvegarder votre partie, entrez \"sauvegarder (ficherSauvegarde)\".\n");
+		retour.append("Pour quitter le jeu, entrez \"quitter\".\n");
+		retour.append(alerte + "\n");
+
 		retour.append("\nC'est au tour du joueur " + (p.getTourJoueur() ? "noir." : "blanc.") + "\n");
-		
+
 		if (p.verifEchec() != null)
 			retour.append("Le roi " + (p.getTourJoueur() ? "noir" : "blanc") + " est en échec.\n");
 		
+		retour.append("\nVeuillez entrer votre déplacement : ");
+
 		return retour.toString();
 	}
 
@@ -62,8 +52,10 @@ public class ChessMain {
 			System.out.print("\nVeuillez saisir 1 ou 2 : ");
 			String entree1 = sc.nextLine(); // On demande la proposition
 
-			switch (entree1) {
-			case "1": 
+			switch (entree1.toLowerCase()) {
+			case "1":
+			case "nouvelle":
+			case "demarrer":
 				try {
 					gp.nouvellePartie(); // On charge un fichier qui se nomme : "nouvellePartie.csv"
 				} catch(Exception e) {
@@ -73,20 +65,21 @@ public class ChessMain {
 				break;
 
 			case "2":
+			case "charger":
 				boolean entree2Valide = false;
-				
+
 				while(!entree2Valide) {
 					System.out.print("\nVeuillez saisir le nom du fichier de partie (ex : \"maPartie.csv\"), entrez \"cancel\" pour revenir en arrière : ");
 					String entree2 = sc.nextLine(); // Un scan pour demander le nom du fichier
-					entree2Valide = true; // 
-					if(entree2.equals("cancel") || entree2.equals("retour")) {
+					entree2Valide = true; // L'entrée est supposée valide
+					if(entree2.toLowerCase().equals("cancel") || entree2.toLowerCase().equals("retour")) {
 						entree1Valide = false;
 					} else {
 						try {
-							gp.chargerAnciennePartie(entree2); // On charger le nom du fichier entrée
+							gp.chargerAnciennePartie(entree2); // On charge le nom du fichier en entrée
 						} catch(Exception e) {
 							System.out.println("Erreur : " + e.getMessage());
-							entree2Valide = false; // Si on a une erreur IOException, on initialise le boolean a false.
+							entree2Valide = false; // Si on a une Exception, l'entrée n'est pas validée
 						}
 					}
 				}
@@ -102,89 +95,93 @@ public class ChessMain {
 
 	public static void jouerTour() {
 		boolean entreeValide = false;
-		
+
 		while(!entreeValide) {
 			System.out.print(getMessageDebutTour());
-			
-			System.out.print("\nVeuillez entrer votre déplacement : ");
-			
-			String deplacement = sc.nextLine();
+			String entree = sc.nextLine();
 
-			if(deplacement.contains("sauvegarder")) {
-				sauvegarder(deplacement);
-			} else if(deplacement.contains("quitter")) {
-				quitter(deplacement);
+			if(entree.toLowerCase().equals("sauvegarder")) {
+				try {
+					alerte = gp.sauvegarderPartie();
+				} catch (Exception e) {
+					alerte = "Erreur : " + e.getMessage();
+				}
+			} else if (entree.toLowerCase().startsWith("sauvegarder ") && entree.length() >= 13) {
+				try {
+					alerte = gp.sauvegarderPartie(entree.substring(12));
+				} catch (Exception e) {
+					alerte = "Erreur : " + e.getMessage();
+				}	
+			} else if(entree.toLowerCase().equals("quitter")) {
+				sc.close();
+				System.out.println("Au revoir !");
+				System.exit(0);
 			} else {
-				if(verifSyntaxe(deplacement)) {
+				if(Fonctions.verifSyntaxe(entree)) {
 					try {
-						p.deplacer(convertChaine(deplacement));
-						erreur = "";
+						p.deplacer(Fonctions.convertEnIndices(entree));
+						alerte = "";
 						entreeValide = true;
 					} catch(Exception e) {
-						erreur = "Erreur : "+e.getMessage() + "\n";
+						alerte = "Erreur : " + e.getMessage();
 					}
 				} else {
-					erreur = "Erreur : Syntaxe invalide.\n";
+					alerte = "Erreur : Syntaxe de déplacement invalide.";
 				}
 			}
 		}
 	}
-	
-	public static void quitter(String entree) {
-		try {
-			if(entree.length() <= 7 ) { //si le mot est juste quitter
-				gp.sauvegarderPartie();
-				System.exit(0);
-			} else {
-				gp.sauvegarderPartie(entree.substring(8)); // créer un fichier a partir des caractères du 8ieme caractère
-				System.exit(0);
-			}
-		} catch (Exception e) {
-			erreur = "Erreur : " + e.getMessage() + "\n";
-		}
-	}
 
-	public static void sauvegarder(String entree) {
-		try {
-			if(entree.length() <= 11 ) { //si le mot est juste sauvegarder
-				erreur = gp.sauvegarderPartie();
-			} else {
-				erreur = gp.sauvegarderPartie(entree.substring(12)); // créer un fichier a partir des caractères du 12ieme caractère
-			}
-		} catch (Exception e) {
-			erreur = "Erreur : " + e.getMessage() + "\n";
-		}
-
-	}
-	
 	public static void partie() {
 		initialisation();
 
-		System.out.println("\nLa partie commence !");
+		alerte = "La partie vient de commencer !";
 
 		while(!p.verifMat()) {
 			jouerTour();
 		}
 		
-		System.out.println("Félicitations, les " + (p.getTourJoueur()?"noirs":"blancs") + " ont gagné !");
+		System.out.println("\n" + p);
+		System.out.println("\nFélicitations, les " + (p.getTourJoueur()?"blancs":"noirs") + " ont gagné !\n");
 	}
-	
-	public static void demanderRecommencer() {
-		
+
+	public static boolean demanderRecommencer() {
+		while (true) {
+			System.out.print("Voulez vous jouer une autre partie ? (Oui/Non) : ");
+
+			String reponse = sc.nextLine().toUpperCase();
+			switch (reponse) {
+			case "OUI":
+			case "O":
+				return true;
+			case "NON":
+			case "N":
+				return false;
+			default:
+				System.out.println("Réponse invalide, veuillez recommencer.");
+			}
+		}
 	}
-	
+
 	public static void mainConsole() {
 		System.out.println("Bienvenue dans le jeu d'échec.");
-		
+
 		while (recommencer) {
 			partie();
-			demanderRecommencer();
+			recommencer = demanderRecommencer();
 		}
-
+		
+		System.out.println("Au revoir !");
 		sc.close();
 	}
-	
+
 	public static void mainGraphique() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+			System.out.println("Erreur lors du chargement de l'UI du système.");
+		}
+		
 		f = new Fenetre(gp, p);
 	}
 
