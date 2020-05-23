@@ -30,9 +30,9 @@ public class GestionnairePartieTest {
 		gp = new GestionnairePartie(p);
 	}
 
+	
 	@Test
-	public void chargerAnciennePartieTest() {
-		//exemple de chargement qui echoue
+	public void chargerAnciennePartieExceptionsTest() {
 		try {
 			gp.chargerAnciennePartie("fichierInexistant.csv");
 			//Si aucune exception n'est générée, le test échoue
@@ -40,7 +40,34 @@ public class GestionnairePartieTest {
 		} catch (Exception e) {
 			assertEquals("Fichier introuvable : fichierInexistant.csv", e.getMessage());
 		}
-
+		
+		try {
+			gp.chargerAnciennePartie("fichierInexistant2");
+			//Si aucune exception n'est générée, le test échoue
+			fail();
+		} catch (Exception e) {
+			assertEquals("Fichier introuvable : fichierInexistant2.csv", e.getMessage());
+		}
+		
+		try {
+			gp.chargerAnciennePartie("tests/tropDeColonnes2.csv");
+			//Si aucune exception n'est générée, le test échoue
+			fail();
+		} catch (Exception e) {
+			assertEquals("Ligne 7 invalide dans le fichier tests/tropDeColonnes2.csv", e.getMessage());
+		}
+		
+		try {
+			gp.chargerAnciennePartie("tests/pieceInconnue.csv");
+			//Si aucune exception n'est générée, le test échoue
+			fail();
+		} catch (Exception e) {
+			assertEquals("Nom de pièce invalide poutre à la ligne 5 du fichier tests/pieceInconnue.csv", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void chargerAnciennePartieTest() {		
 		//exemple de chargement valide
 		try {
 			gp.chargerAnciennePartie("tests/partieTest.csv");
@@ -61,7 +88,6 @@ public class GestionnairePartieTest {
 		};
 
 		assertArrayEquals(echiquierAttendu, p.getEchiquier());
-
 	}
 
 	@Test
@@ -116,7 +142,7 @@ public class GestionnairePartieTest {
 				"V,V,V,V,V,V,V,V",
 				"V,V,V,V,V,V,V,V",
 				"V,V,V,V,V,V,V,V",
-		"V,V,V,V,V,V,V,V"};
+				"V,V,V,V,V,V,V,V"};
 		Scanner scan;
 		try {
 			scan = new Scanner(new File("parties/tests/sauvegarde1.csv"));
@@ -164,7 +190,6 @@ public class GestionnairePartieTest {
 				"Pb,V,Pb,Pb,Pb,Pb,Pb,Pb",
 				"Tb,Cb,Fb,ReB,RoB,Fb,Cb,Tb"};
 		Scanner scan;
-		
 		try {
 			scan = new Scanner(new File("parties/tests/sauvegarde1.csv")); //a changer
 			int id=0;
@@ -178,4 +203,6 @@ public class GestionnairePartieTest {
 			e.printStackTrace();
 		}
 	}
+	
+	
 }
