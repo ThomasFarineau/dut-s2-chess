@@ -39,7 +39,7 @@ public class ChessMain {
 		return retour.toString();
 	}
 
-	public static void initialisation() {
+	public static void initialisationConsole() {
 		boolean entree1Valide = false; // Sert à vérifier la validité du message saisi
 
 		while(!entree1Valide) {
@@ -49,7 +49,7 @@ public class ChessMain {
 			System.out.println("\t 1 - Démarrer une nouvelle partie");
 			System.out.println("\t 2 - Charger une ancienne partie");
 
-			System.out.print("\nVeuillez saisir 1 ou 2 : ");
+			System.out.print("\nVeuillez saisir votre choix : ");
 			String entree1 = sc.nextLine(); // On demande la proposition
 
 			switch (entree1.toLowerCase()) {
@@ -132,8 +132,8 @@ public class ChessMain {
 		}
 	}
 
-	public static void partie() {
-		initialisation();
+	public static void partieConsole() {
+		initialisationConsole();
 
 		alerte = "La partie vient de commencer !";
 
@@ -167,7 +167,7 @@ public class ChessMain {
 		System.out.println("Bienvenue dans le jeu d'échec.");
 
 		while (recommencer) {
-			partie();
+			partieConsole();
 			recommencer = demanderRecommencer();
 		}
 		
@@ -184,8 +184,42 @@ public class ChessMain {
 		
 		f = new Fenetre(gp, p);
 	}
+	
+	public static void initialisationModeDeJeu() {
+		boolean entreeValide = false;
+		
+		while(!entreeValide) {
+			System.out.println("Voulez vous jouer en mode console ou bien en mode graphique ?"); 
+			System.out.println("\t 1 - Mode Graphique");
+			System.out.println("\t 2 - Mode Console");
+
+			System.out.print("\nVeuillez saisir votre choix : ");
+			String entree1 = sc.nextLine();
+
+			switch (entree1.toLowerCase()) {
+			case "1":
+			case "mode graphique":
+			case "graphique":
+				System.out.println("Vous avez décidé de jouer en mode Graphique.\n\n");
+				mainGraphique();
+				entreeValide = true;
+				break;
+			case "2":
+			case "mode console":
+			case "console":
+				System.out.println("Vous avez décidé de jouer en mode Console.\n\n");
+				mainConsole();
+				entreeValide = true;
+				break;
+
+			default:
+				System.out.println("Entrée invalide, veuillez recommencer.\n"); 
+				break;
+			}
+		}
+	}
 
 	public static void main(String[] args) {
-		mainConsole();
+		initialisationModeDeJeu();
 	}
 }
