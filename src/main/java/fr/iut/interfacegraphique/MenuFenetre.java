@@ -30,7 +30,8 @@ public class MenuFenetre extends JMenuBar {
     private JMenuItem enregistrerPartieSous = new JMenuItem("Enregistrer sous...");
 
     private JMenu informations = new JMenu("Informations");
-    private JMenuItem regles = new JMenuItem("Règles du jeu");
+    private JMenuItem credits = new JMenuItem("Crédits");
+    private JMenuItem version = new JMenuItem("Version du Jeu");
     
     private PanneauJeu pj = null;
     private GestionnairePartie gp = null;
@@ -54,8 +55,11 @@ public class MenuFenetre extends JMenuBar {
         enregistrerPartieSous.setEnabled(false);
         partie.add(enregistrerPartieSous);
 
-        regles.addActionListener(null);
-        informations.add(regles);
+        credits.addActionListener(null);
+        informations.add(credits);
+        
+        version.addActionListener(null);
+        informations.add(version);
 
         this.add(partie);
         this.add(informations);
