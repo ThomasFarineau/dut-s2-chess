@@ -7,9 +7,11 @@ import fr.iut.interfacegraphique.PanneauJeu;
 
 public class EchiquierListener implements MouseListener {
 	private PanneauJeu listenedPanel = null;
+	private boolean interactable;
 	
 	public EchiquierListener(PanneauJeu listenedPanel) {
 		this.listenedPanel = listenedPanel;
+		interactable = false;
 	}
 
 	@Override
@@ -18,11 +20,13 @@ public class EchiquierListener implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		int x = (e.getX() >= 40 ?((e.getX()-40)/70) : -1);
-		int y = (e.getY()/70);
+		if (interactable) {
+			int x = (e.getX() >= 40 ?((e.getX()-40)/70) : -1);
+			int y = (e.getY()/70);
 
-		listenedPanel.selectionner(y, x);
-		listenedPanel.repaint();
+			listenedPanel.selectionner(y, x);
+			listenedPanel.repaint();
+		}
 	}
 
 	@Override
@@ -35,5 +39,9 @@ public class EchiquierListener implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+	}
+	
+	public void setInteractable(boolean interactable) {
+		this.interactable = interactable;
 	}
 }
