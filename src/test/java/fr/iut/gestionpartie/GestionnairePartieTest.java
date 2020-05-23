@@ -202,7 +202,5 @@ public class GestionnairePartieTest {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	
+	}	
 }
