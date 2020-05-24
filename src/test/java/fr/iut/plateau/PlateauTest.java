@@ -37,6 +37,8 @@ public class PlateauTest {
 			e.printStackTrace();
 		}
 		
+		Piece[][] echiquierInitial = plat.getEchiquier();
+		
 		try {
 			int[] coord = {2, 0, 2, 3};
 			plat.setTourJoueur(false);
@@ -45,6 +47,7 @@ public class PlateauTest {
 		}catch(Exception e) {
 			assertEquals("Il n'y a pas de piece sur la première case entrée.", e.getMessage());
 			assertFalse(plat.getTourJoueur());
+			assertEquals(echiquierInitial, plat.getEchiquier());
 		}
 		
 		try {
@@ -55,6 +58,7 @@ public class PlateauTest {
 		}catch(Exception e) {
 		    assertEquals("La pièce selectionnée ne vous appartient pas.", e.getMessage());
 		    assertFalse(plat.getTourJoueur());
+		    assertEquals(echiquierInitial, plat.getEchiquier());
 		}
 		
 		try {
@@ -65,6 +69,7 @@ public class PlateauTest {
 		}catch(Exception e) {
 			assertEquals("La pièce sélectionnée ne peut pas aller ici.", e.getMessage());
 			assertTrue(plat.getTourJoueur());
+			assertEquals(echiquierInitial, plat.getEchiquier());
 		}
 		
 		try {
@@ -75,6 +80,7 @@ public class PlateauTest {
 		}catch(Exception e) {
 			assertEquals("La pièce sélectionnée ne peut pas aller ici.", e.getMessage());
 			assertTrue(plat.getTourJoueur());
+			assertEquals(echiquierInitial, plat.getEchiquier());
 		}
 		
 		try {
@@ -85,14 +91,7 @@ public class PlateauTest {
 		}catch(Exception e) {
 		    assertEquals("Mouvement impossible, il vous met en échec : ReB(C8 -> D8)", e.getMessage());
 		    assertTrue(plat.getTourJoueur());
-		}
-		
-		try {
-			int[] coord = {0, 4, 1, 4};
-			plat.setTourJoueur(true);
-			plat.deplacer(coord);
-		}catch(Exception e) {
-			e.getMessage();
+		    assertEquals(echiquierInitial, plat.getEchiquier());
 		}
 		
 		Piece[][] sauvegardeEchiquier = plat.getEchiquier();
@@ -117,9 +116,18 @@ public class PlateauTest {
 		}catch(Exception e) {
 		    assertEquals("Mouvement impossible, il vous met en échec : ReB(H5 -> E8)", e.getMessage());
 		    assertTrue(plat.getTourJoueur());
+		    assertEquals(echiquierInitial, plat.getEchiquier());
 		}
 		
 		plat.setEchiquier(sauvegardeEchiquier);
+		
+		try {
+			int[] coord = {0, 4, 1, 4};
+			plat.setTourJoueur(true);
+			plat.deplacer(coord);
+		}catch(Exception e) {
+			e.getMessage();
+		}
 		
 		Piece[][] echiquierAttendu1 = {
 				{new Tour(true), new Cavalier(true), new Reine(false), null, null, new Fou(true), new Cavalier(true), new Tour(true)},
@@ -133,7 +141,6 @@ public class PlateauTest {
 		};
 		
 		assertArrayEquals(echiquierAttendu1, plat.getEchiquier());
-		
 		
 		try {
 			int[] coord = {1, 0, 2, 0};
