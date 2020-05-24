@@ -125,7 +125,6 @@ public class PlateauTest {
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
 		valeurAttendue = 
 				"8 Tn  Cn  ReB  -   -  Fn  Cn  Tn  \n" + 
 				"7  -  Pn  Cb  Pn  RoN Pn   -   -  \n" + 
