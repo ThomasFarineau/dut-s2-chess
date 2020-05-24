@@ -89,8 +89,9 @@ public class PlateauTest {
 			int[] coord = {0, 4, 1, 4};
 			plat.setTourJoueur(true);
 			plat.deplacer(coord);
+			fail();
 		}catch(Exception e) {
-			System.out.println(e.getMessage()+" 1 ");
+			System.out.println(e.getMessage());
 		}
 		
 		Piece[][] echiquierAttendu1 = {
@@ -111,8 +112,9 @@ public class PlateauTest {
 			int[] coord = {1, 0, 2, 0};
 			plat.setTourJoueur(true);
 			plat.deplacer(coord);
+			fail();
 		}catch(Exception e) {
-			System.out.println(e.getMessage()+" 2 ");
+			System.out.println(e.getMessage());
 		}
 		
 		Piece[][] echiquierAttendu2 = {
@@ -132,8 +134,9 @@ public class PlateauTest {
 			int[] coord = {1, 1, 3, 1};
 			plat.setTourJoueur(true);
 			plat.deplacer(coord);
+			fail();
 		}catch(Exception e) {
-			System.out.println(e.getMessage()+" 3 ");
+			System.out.println(e.getMessage());
 		}
 		
 		Piece[][] echiquierAttendu3 = {
@@ -153,8 +156,9 @@ public class PlateauTest {
 			int[] coord = {7, 6, 5, 5};
 			plat.setTourJoueur(false);
 			plat.deplacer(coord);
+			fail();
 		}catch(Exception e) {
-			System.out.println(e.getMessage()+" 4 ");
+			System.out.println(e.getMessage());
 		}
 		
 		Piece[][] echiquierAttendu4 = {
