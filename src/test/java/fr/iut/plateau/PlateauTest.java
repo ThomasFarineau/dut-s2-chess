@@ -36,8 +36,17 @@ public class PlateauTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		Piece[][] echiquierInitial = plat.getEchiquier();
+		System.out.println(plat);
+		Piece[][] echiquierInitial = {
+				{new Tour(true), new Cavalier(true), new Reine(false), null, new Roi(true), new Fou(true), new Cavalier(true), new Tour(true)},
+				{new Pion(true), new Pion(true), new Cavalier(false), new Pion(true), null, new Pion(true), null, null},
+				{null, null, null, null, null, null, new Pion(true), null},
+				{null, null, null, null, new Pion(true), null, null, new Pion(true)},
+				{null, new Pion(false), null, null, new Pion(false), null, null, null},
+				{null, null, null, null, null, null, null, null},
+				{new Pion(false), null, null, new Pion(false), null, new Pion(false), new Pion(false), new Pion(false)},
+				{new Tour(false), null, null, null, new Roi(false), new Fou(false), new Cavalier(false), new Tour(false)}
+		};
 		
 		try {
 			int[] coord = {2, 0, 2, 3};
@@ -47,7 +56,7 @@ public class PlateauTest {
 		}catch(Exception e) {
 			assertEquals("Il n'y a pas de piece sur la première case entrée.", e.getMessage());
 			assertFalse(plat.getTourJoueur());
-			assertEquals(echiquierInitial, plat.getEchiquier());
+			assertArrayEquals(echiquierInitial, plat.getEchiquier());
 		}
 		
 		try {
@@ -58,7 +67,7 @@ public class PlateauTest {
 		}catch(Exception e) {
 		    assertEquals("La pièce selectionnée ne vous appartient pas.", e.getMessage());
 		    assertFalse(plat.getTourJoueur());
-		    assertEquals(echiquierInitial, plat.getEchiquier());
+		    assertArrayEquals(echiquierInitial, plat.getEchiquier());
 		}
 		
 		try {
@@ -69,7 +78,7 @@ public class PlateauTest {
 		}catch(Exception e) {
 			assertEquals("La pièce sélectionnée ne peut pas aller ici.", e.getMessage());
 			assertTrue(plat.getTourJoueur());
-			assertEquals(echiquierInitial, plat.getEchiquier());
+			assertArrayEquals(echiquierInitial, plat.getEchiquier());
 		}
 		
 		try {
@@ -80,7 +89,7 @@ public class PlateauTest {
 		}catch(Exception e) {
 			assertEquals("La pièce sélectionnée ne peut pas aller ici.", e.getMessage());
 			assertTrue(plat.getTourJoueur());
-			assertEquals(echiquierInitial, plat.getEchiquier());
+			assertArrayEquals(echiquierInitial, plat.getEchiquier());
 		}
 		
 		try {
@@ -91,7 +100,7 @@ public class PlateauTest {
 		}catch(Exception e) {
 		    assertEquals("Mouvement impossible, il vous met en échec : ReB(C8 -> D8)", e.getMessage());
 		    assertTrue(plat.getTourJoueur());
-		    assertEquals(echiquierInitial, plat.getEchiquier());
+		    assertArrayEquals(echiquierInitial, plat.getEchiquier());
 		}
 		
 		Piece[][] sauvegardeEchiquier = plat.getEchiquier();
@@ -116,7 +125,6 @@ public class PlateauTest {
 		}catch(Exception e) {
 		    assertEquals("Mouvement impossible, il vous met en échec : ReB(H5 -> E8)", e.getMessage());
 		    assertTrue(plat.getTourJoueur());
-		    assertEquals(echiquierInitial, plat.getEchiquier());
 		}
 		
 		plat.setEchiquier(sauvegardeEchiquier);
@@ -125,8 +133,9 @@ public class PlateauTest {
 			int[] coord = {0, 4, 1, 4};
 			plat.setTourJoueur(true);
 			plat.deplacer(coord);
+			assertFalse(plat.getTourJoueur());
 		}catch(Exception e) {
-			e.getMessage();
+			fail();
 		}
 		
 		Piece[][] echiquierAttendu1 = {
@@ -146,8 +155,9 @@ public class PlateauTest {
 			int[] coord = {1, 0, 2, 0};
 			plat.setTourJoueur(true);
 			plat.deplacer(coord);
+			assertFalse(plat.getTourJoueur());
 		}catch(Exception e) {
-			e.getMessage();
+			fail();
 		}
 		
 		Piece[][] echiquierAttendu2 = {
@@ -167,8 +177,9 @@ public class PlateauTest {
 			int[] coord = {1, 1, 3, 1};
 			plat.setTourJoueur(true);
 			plat.deplacer(coord);
+			assertFalse(plat.getTourJoueur());
 		}catch(Exception e) {
-			e.getMessage();
+			fail();
 		}
 		
 		Piece[][] echiquierAttendu3 = {
@@ -188,8 +199,9 @@ public class PlateauTest {
 			int[] coord = {7, 6, 5, 5};
 			plat.setTourJoueur(false);
 			plat.deplacer(coord);
+			assertTrue(plat.getTourJoueur());
 		}catch(Exception e) {
-			e.getMessage();
+			fail();
 		}
 		
 		Piece[][] echiquierAttendu4 = {
