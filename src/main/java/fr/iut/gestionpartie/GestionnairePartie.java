@@ -40,7 +40,7 @@ public class GestionnairePartie {
 							)
 					);
 		} catch (FileNotFoundException e) {
-			throw new FileNotFoundException("Fichier introuvable : " + nomFichier);
+			throw new FileNotFoundException("Fichier introuvable : \"" + nomFichier + "\"");
 		}
 
 		
@@ -58,8 +58,7 @@ public class GestionnairePartie {
 
 			if (values.length != 8) {
 				br.close();
-				throw new IOException("Ligne " + (i+1) + " invalide dans le fichier " +
-						nomFichier);
+				throw new IOException("Ligne " + (i+1) + " invalide dans le fichier \"" + nomFichier + "\"");
 			}
 
 			for (int j = 0; j < values.length; j++) {
@@ -103,8 +102,8 @@ public class GestionnairePartie {
 				case "V": 
 					break;
 				default:
-					throw new IOException("Nom de pièce invalide " + values[j] + 
-							" à la ligne " + (i+1) + " du fichier " + nomFichier);
+					throw new IOException("Nom de pièce invalide \"" + values[j] + 
+							"\" à la ligne " + (i+1) + " du fichier \"" + nomFichier + "\"");
 				}
 			}
 		}
