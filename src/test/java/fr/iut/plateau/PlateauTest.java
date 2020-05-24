@@ -28,43 +28,115 @@ public class PlateauTest {
 			e.printStackTrace();
 		}
 		
-		int[] coord = {2, 0, 2, 3};
-		
 		try {
+			int[] coord = {2, 0, 2, 3};
+			plat.setTourJoueur(false);
 			plat.deplacer(coord);
 			fail();
 		}catch(Exception e) {
 			assertEquals("Il n'y a pas de piece sur la première case entrée.", e.getMessage());
+			assertEquals(plat.getTourJoueur(), false);
 		}
 		
-		int[] coord2 = {1, 1, 1, 2};
-		plat.setTourJoueur(false);
 		try {
-		     plat.deplacer(coord2);
-		     fail();
+			int[] coord2 = {1, 1, 1, 2};
+			plat.setTourJoueur(false);
+		    plat.deplacer(coord2);
+		    fail();
 		}catch(Exception e) {
 		    assertEquals("La pièce selectionnée ne vous appartient pas.", e.getMessage());
+		    assertEquals(plat.getTourJoueur(), false);
 		}
 		
-		int[] coord3 = {1, 0, 5, 0}; 
-		int[] coord4 = {3, 7, 5, 7};//Test pion déjà déplacer et veut aller deux cases plus loin
-		plat.setTourJoueur(true);
 		try {
+			int[] coord3 = {1, 0, 5, 0}; 
+			plat.setTourJoueur(true);
 			plat.deplacer(coord3);
+			fail();
+		}catch(Exception e) {
+			assertEquals("La pièce sélectionnée ne peut pas aller ici.", e.getMessage());
+			assertEquals(plat.getTourJoueur(), true);
+		}
+		
+		try {
+			int[] coord4 = {3, 7, 5, 7};//Test pion déjà déplacer et veut aller deux cases plus loin
+			plat.setTourJoueur(true);
 			plat.deplacer(coord4);
 			fail();
 		}catch(Exception e) {
 			assertEquals("La pièce sélectionnée ne peut pas aller ici.", e.getMessage());
+			assertEquals(plat.getTourJoueur(), true);
 		}
 		
-		int[] coord5 = {0, 4, 0, 3};
-		plat.setTourJoueur(true);
 		try {
+			int[] coord5 = {0, 4, 0, 3};
+			plat.setTourJoueur(true);
 		    plat.deplacer(coord5);
 		    fail();
 		}catch(Exception e) {
 		    assertEquals("Mouvement impossible, il vous met en échec : ReB(C8 -> D8)", e.getMessage());
+		    assertEquals(plat.getTourJoueur(), true);
 		}
+		
+		try {
+			int[] coord = {0, 4, 1, 4};
+			plat.setTourJoueur(true);
+			plat.deplacer(coord);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		String valeurAttendue = 
+				"8 Tn  Cn  ReB  -   -  Fn  Cn  Tn  \n" + 
+				"7 Pn  Pn  Cb  Pn  RoN Pn   -   -  \n" + 
+				"6  -   -   -   -   -   -  Pn   -  \n" + 
+				"5  -   -   -   -  Pn   -   -  Pn  \n" + 
+				"4  -  Pb   -   -  Pb   -   -   -  \n" + 
+				"3  -   -   -   -   -   -   -   -  \n" + 
+				"2 Pb   -   -  Pb   -  Pb  Pb  Pb  \n" + 
+				"1 Tb   -   -   -  RoB Fb  Cb  Tb  \n" + 
+				"   A   B   C   D   E   F   G   H";
+		assertEquals(valeurAttendue, plat.toString());
+		
+		try {
+			int[] coord = {1, 0, 2, 0};
+			plat.setTourJoueur(true);
+			plat.deplacer(coord);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		valeurAttendue = 
+				"8 Tn  Cn  ReB  -   -  Fn  Cn  Tn  \n" + 
+				"7  -  Pn  Cb  Pn  RoN Pn   -   -  \n" + 
+				"6 Pn   -   -   -   -   -  Pn   -  \n" + 
+				"5  -   -   -   -  Pn   -   -  Pn  \n" + 
+				"4  -  Pb   -   -  Pb   -   -   -  \n" + 
+				"3  -   -   -   -   -   -   -   -  \n" + 
+				"2 Pb   -   -  Pb   -  Pb  Pb  Pb  \n" + 
+				"1 Tb   -   -   -  RoB Fb  Cb  Tb  \n" + 
+				"   A   B   C   D   E   F   G   H";
+		assertEquals(valeurAttendue, plat.toString());
+		
+		try {
+			int[] coord = {4, 1, 3, 1};
+			plat.setTourJoueur(false);
+			plat.deplacer(coord);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		valeurAttendue = 
+				"8 Tn  Cn  ReB  -   -  Fn  Cn  Tn  \n" + 
+				"7  -  Pn  Cb  Pn  RoN Pn   -   -  \n" + 
+				"6 Pn   -   -   -   -   -  Pn   -  \n" + 
+				"5  -  Pb   -   -  Pn   -   -  Pn  \n" + 
+				"4  -   -   -   -  Pb   -   -   -  \n" + 
+				"3  -   -   -   -   -   -   -   -  \n" + 
+				"2 Pb   -   -  Pb   -  Pb  Pb  Pb  \n" + 
+				"1 Tb   -   -   -  RoB Fb  Cb  Tb  \n" + 
+				"   A   B   C   D   E   F   G   H";
+		assertEquals(valeurAttendue, plat.toString());
 	}
 	
 	@Test
