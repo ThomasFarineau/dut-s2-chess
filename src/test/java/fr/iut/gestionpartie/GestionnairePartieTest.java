@@ -38,7 +38,7 @@ public class GestionnairePartieTest {
 			//Si aucune exception n'est générée, le test échoue
 			fail();
 		} catch (Exception e) {
-			assertEquals("Fichier introuvable : fichierInexistant.csv", e.getMessage());
+			assertEquals("Fichier introuvable : \"fichierInexistant.csv\"", e.getMessage());
 		}
 		
 		try {
@@ -46,7 +46,7 @@ public class GestionnairePartieTest {
 			//Si aucune exception n'est générée, le test échoue
 			fail();
 		} catch (Exception e) {
-			assertEquals("Fichier introuvable : fichierInexistant2.csv", e.getMessage());
+			assertEquals("Fichier introuvable : \"fichierInexistant2.csv\"", e.getMessage());
 		}
 		
 		try {
@@ -54,7 +54,7 @@ public class GestionnairePartieTest {
 			//Si aucune exception n'est générée, le test échoue
 			fail();
 		} catch (Exception e) {
-			assertEquals("Ligne 7 invalide dans le fichier tests/tropDeColonnes2.csv", e.getMessage());
+			assertEquals("Ligne 7 invalide dans le fichier \"tests/tropDeColonnes2.csv\"", e.getMessage());
 		}
 		
 		try {
@@ -62,7 +62,7 @@ public class GestionnairePartieTest {
 			//Si aucune exception n'est générée, le test échoue
 			fail();
 		} catch (Exception e) {
-			assertEquals("Nom de pièce invalide poutre à la ligne 5 du fichier tests/pieceInconnue.csv", e.getMessage());
+			assertEquals("Nom de pièce invalide \"poutre\" à la ligne 5 du fichier \"tests/pieceInconnue.csv\"", e.getMessage());
 		}
 		
 		try {
