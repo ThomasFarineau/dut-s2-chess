@@ -184,7 +184,7 @@ public class PlateauTest {
 				{null,new Pion(false),new Pion(false),new Pion(false),null,new Pion(false),new Pion(false),new Pion(false)},
 				{new Tour(false),new Cavalier(false),new Fou(false),null,new Roi(false),null,new Cavalier(false),new Tour(false)}
 		};
-		System.out.println(plat);
+		
 		try {
 			int[] coord = {1, 5, 2, 5};
 			plat.setEchiquier(echiquier);
