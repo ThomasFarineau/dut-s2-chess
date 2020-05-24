@@ -2,6 +2,7 @@ package fr.iut.plateau;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,15 +23,50 @@ public class PlateauTest {
 	public void deplacerTest() {
 		
 		try {
-			gp.chargerAnciennePartie("tests/test1.csv");
+			gp.chargerAnciennePartie("tests/test12.csv");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		System.out.println(plat);
 		
-		int coord[] = {0, 1, 2, 3};
+		int[] coord = {2, 0, 2, 3};
 		
+		try {
+			plat.deplacer(coord);
+			fail();
+		}catch(Exception e) {
+			assertEquals("Il n'y a pas de piece sur la première case entrée.", e.getMessage());
+		}
+		
+		int[] coord2 = {1, 1, 1, 2};
+		plat.setTourJoueur(false);
+		try {
+		     plat.deplacer(coord2);
+		     fail();
+		}catch(Exception e) {
+		    assertEquals("La pièce selectionnée ne vous appartient pas.", e.getMessage());
+		}
+		
+		int[] coord3 = {1, 0, 5, 0}; 
+		int[] coord4 = {3, 7, 5, 7};//Test pion déjà déplacer et veut aller deux cases plus loin
+		plat.setTourJoueur(true);
+		try {
+			plat.deplacer(coord3);
+			plat.deplacer(coord4);
+			fail();
+		}catch(Exception e) {
+			assertEquals("La pièce sélectionnée ne peut pas aller ici.", e.getMessage());
+		}
+		
+		int[] coord5 = {0, 4, 0, 3};
+		plat.setTourJoueur(true);
+		try {
+		    plat.deplacer(coord5);
+		    fail();
+		}catch(Exception e) {
+		    assertEquals("Mouvement impossible, il vous met en échec : ReB(C8 -> D8)", e.getMessage());
+		}
 	}
 	
 	@Test
