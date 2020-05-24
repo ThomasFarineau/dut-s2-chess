@@ -36,7 +36,7 @@ public class PlateauTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(plat);
+
 		Piece[][] echiquierInitial = {
 				{new Tour(true), new Cavalier(true), new Reine(false), null, new Roi(true), new Fou(true), new Cavalier(true), new Tour(true)},
 				{new Pion(true), new Pion(true), new Cavalier(false), new Pion(true), null, new Pion(true), null, null},
@@ -105,7 +105,18 @@ public class PlateauTest {
 		
 		Piece[][] sauvegardeEchiquier = plat.getEchiquier();
 		
-		Piece[][] echiquier = {
+		Piece[][] nouvelEchiquier = {
+				{new Tour(true),null,new Fou(true),new Reine(true),new Roi(true),new Fou(true),new Cavalier(true),new Tour(true)},
+				{new Pion(true),new Pion(true),new Pion(true),new Pion(true),null,new Pion(true),new Pion(true),new Pion(true)},
+				{null,null,null,null,null,null,null,null},
+				{null,null,null,null,new Pion(true),null,null,new Reine(false)},
+				{null,new Cavalier(true),new Fou(false),null,new Pion(false),null,null,null},
+				{new Pion(false),null,null,null,null,null,null,null},
+				{null,new Pion(false),new Pion(false),new Pion(false),null,new Pion(false),new Pion(false),new Pion(false)},
+				{new Tour(false),new Cavalier(false),new Fou(false),null,new Roi(false),null,new Cavalier(false),new Tour(false)}
+		};
+		
+		Piece[][] memeEchiquier = {
 				{new Tour(true),null,new Fou(true),new Reine(true),new Roi(true),new Fou(true),new Cavalier(true),new Tour(true)},
 				{new Pion(true),new Pion(true),new Pion(true),new Pion(true),null,new Pion(true),new Pion(true),new Pion(true)},
 				{null,null,null,null,null,null,null,null},
@@ -118,13 +129,14 @@ public class PlateauTest {
 		
 		try {
 			int[] coord = {1, 5, 2, 5};
-			plat.setEchiquier(echiquier);
+			plat.setEchiquier(nouvelEchiquier);
 			plat.setTourJoueur(true);
 		    plat.deplacer(coord);
 		    fail();
 		}catch(Exception e) {
 		    assertEquals("Mouvement impossible, il vous met en échec : ReB(H5 -> E8)", e.getMessage());
 		    assertTrue(plat.getTourJoueur());
+		    assertArrayEquals(memeEchiquier, plat.getEchiquier());
 		}
 		
 		plat.setEchiquier(sauvegardeEchiquier);
