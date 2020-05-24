@@ -39,7 +39,7 @@ public class Plateau {
 
 		if((dernierEchec = verifEchec()) != null) {
 			char[] charsEchec = Fonctions.convertEnCaracteres(dernierEchec);
-			String etatEchec = echiquier[dernierEchec[0]][dernierEchec[1]].toString() + "(" + charsEchec[0] + charsEchec[1] + " -> " + charsEchec[2] + charsEchec[3];
+			String etatEchec = echiquier[dernierEchec[0]][dernierEchec[1]].toString() + "(" + charsEchec[0] + charsEchec[1] + " -> " + charsEchec[2] + charsEchec[3] +")";
 			echiquier[i][j] = echiquier[k][l];
 			echiquier[k][l] = copiePiece;
 			throw new Exception("Mouvement impossible, il vous met en échec : " + etatEchec);
