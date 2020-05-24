@@ -92,7 +92,7 @@ public class PlateauTest {
 			plat.setTourJoueur(true);
 			plat.deplacer(coord);
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 			fail();
 		}
 		
@@ -115,7 +115,7 @@ public class PlateauTest {
 			plat.setTourJoueur(true);
 			plat.deplacer(coord);
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 			fail();
 		}
 		
@@ -137,7 +137,7 @@ public class PlateauTest {
 			plat.setTourJoueur(true);
 			plat.deplacer(coord);
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 			fail();
 		}
 		
@@ -159,7 +159,7 @@ public class PlateauTest {
 			plat.setTourJoueur(false);
 			plat.deplacer(coord);
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 			fail();
 		}
 		
