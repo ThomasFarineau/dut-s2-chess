@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-public class ChessTest {
+public class ChessMainTest {
 	
     @Test
-    public void premierTest() {
-    	assertTrue(true);
+    public void demanderRecommencerTest() {
+    	
     }
 }
