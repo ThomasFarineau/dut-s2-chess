@@ -2,6 +2,8 @@ package fr.iut.plateau;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -42,7 +44,7 @@ public class PlateauTest {
 			fail();
 		}catch(Exception e) {
 			assertEquals("Il n'y a pas de piece sur la première case entrée.", e.getMessage());
-			assertEquals(plat.getTourJoueur(), false);
+			assertFalse(plat.getTourJoueur());
 		}
 		
 		try {
@@ -52,7 +54,7 @@ public class PlateauTest {
 		    fail();
 		}catch(Exception e) {
 		    assertEquals("La pièce selectionnée ne vous appartient pas.", e.getMessage());
-		    assertEquals(plat.getTourJoueur(), false);
+		    assertFalse(plat.getTourJoueur());
 		}
 		
 		try {
@@ -62,7 +64,7 @@ public class PlateauTest {
 			fail();
 		}catch(Exception e) {
 			assertEquals("La pièce sélectionnée ne peut pas aller ici.", e.getMessage());
-			assertEquals(plat.getTourJoueur(), true);
+			assertTrue(plat.getTourJoueur());
 		}
 		
 		try {
@@ -72,7 +74,7 @@ public class PlateauTest {
 			fail();
 		}catch(Exception e) {
 			assertEquals("La pièce sélectionnée ne peut pas aller ici.", e.getMessage());
-			assertEquals(plat.getTourJoueur(), true);
+			assertTrue(plat.getTourJoueur());
 		}
 		
 		try {
@@ -82,7 +84,7 @@ public class PlateauTest {
 		    fail();
 		}catch(Exception e) {
 		    assertEquals("Mouvement impossible, il vous met en échec : ReB(C8 -> D8)", e.getMessage());
-		    assertEquals(plat.getTourJoueur(), true);
+		    assertTrue(plat.getTourJoueur());
 		}
 		
 		try {
@@ -192,7 +194,7 @@ public class PlateauTest {
 		    fail();
 		}catch(Exception e) {
 		    assertEquals("Mouvement impossible, il vous met en échec : ReB(H5 -> E8)", e.getMessage());
-		    assertEquals(plat.getTourJoueur(), true);
+		    assertTrue(plat.getTourJoueur());
 		}
 	}
 	
