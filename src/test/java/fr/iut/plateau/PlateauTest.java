@@ -28,8 +28,6 @@ public class PlateauTest {
 			e.printStackTrace();
 		}
 		
-		System.out.println(plat);
-		
 		int[] coord = {2, 0, 2, 3};
 		
 		try {
