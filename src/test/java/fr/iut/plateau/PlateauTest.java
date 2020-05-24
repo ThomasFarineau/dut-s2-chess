@@ -8,6 +8,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import fr.iut.gestionpartie.GestionnairePartie;
+import fr.iut.pieces.Cavalier;
+import fr.iut.pieces.Fou;
+import fr.iut.pieces.Piece;
+import fr.iut.pieces.Pion;
+import fr.iut.pieces.Reine;
+import fr.iut.pieces.Roi;
+import fr.iut.pieces.Tour;
 
 public class PlateauTest {
 	private Plateau plat;
@@ -83,60 +90,85 @@ public class PlateauTest {
 			plat.setTourJoueur(true);
 			plat.deplacer(coord);
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage()+" 1 ");
 		}
 		
-		String valeurAttendue = 
-				"8 Tn  Cn  ReB  -   -  Fn  Cn  Tn  \n" + 
-				"7 Pn  Pn  Cb  Pn  RoN Pn   -   -  \n" + 
-				"6  -   -   -   -   -   -  Pn   -  \n" + 
-				"5  -   -   -   -  Pn   -   -  Pn  \n" + 
-				"4  -  Pb   -   -  Pb   -   -   -  \n" + 
-				"3  -   -   -   -   -   -   -   -  \n" + 
-				"2 Pb   -   -  Pb   -  Pb  Pb  Pb  \n" + 
-				"1 Tb   -   -   -  RoB Fb  Cb  Tb  \n" + 
-				"   A   B   C   D   E   F   G   H";
-		assertEquals(valeurAttendue, plat.toString());
+		Piece[][] echiquierAttendu1 = {
+				{new Tour(true), new Cavalier(true), new Reine(false), null, null, new Fou(true), new Cavalier(true), new Tour(true)},
+				{new Pion(true), new Pion(true), new Cavalier(false), new Pion(true), new Roi(true), new Pion(true), null, null},
+				{null, null, null, null, null, null, new Pion(true), null},
+				{null, null, null, null, new Pion(true), null, null, new Pion(true)},
+				{null, new Pion(false), null, null, new Pion(false), null, null, null},
+				{null, null, null, null, null, null, null, null},
+				{new Pion(false), null, null, new Pion(false), null, new Pion(false), new Pion(false), new Pion(false)},
+				{new Tour(false), null, null, null, new Roi(false), new Fou(false), new Cavalier(false), new Tour(false)}
+		};
+		
+		assertArrayEquals(echiquierAttendu1, plat.getEchiquier());
+		
 		
 		try {
 			int[] coord = {1, 0, 2, 0};
 			plat.setTourJoueur(true);
 			plat.deplacer(coord);
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage()+" 2 ");
 		}
 		
-		valeurAttendue = 
-				"8 Tn  Cn  ReB  -   -  Fn  Cn  Tn  \n" + 
-				"7  -  Pn  Cb  Pn  RoN Pn   -   -  \n" + 
-				"6 Pn   -   -   -   -   -  Pn   -  \n" + 
-				"5  -   -   -   -  Pn   -   -  Pn  \n" + 
-				"4  -  Pb   -   -  Pb   -   -   -  \n" + 
-				"3  -   -   -   -   -   -   -   -  \n" + 
-				"2 Pb   -   -  Pb   -  Pb  Pb  Pb  \n" + 
-				"1 Tb   -   -   -  RoB Fb  Cb  Tb  \n" + 
-				"   A   B   C   D   E   F   G   H";
-		assertEquals(valeurAttendue, plat.toString());
+		Piece[][] echiquierAttendu2 = {
+				{new Tour(true), new Cavalier(true), new Reine(false), null, null, new Fou(true), new Cavalier(true), new Tour(true)},
+				{null, new Pion(true), new Cavalier(false), new Pion(true), new Roi(true), new Pion(true), null, null},
+				{new Pion(true), null, null, null, null, null, new Pion(true), null},
+				{null, null, null, null, new Pion(true), null, null, new Pion(true)},
+				{null, new Pion(false), null, null, new Pion(false), null, null, null},
+				{null, null, null, null, null, null, null, null},
+				{new Pion(false), null, null, new Pion(false), null, new Pion(false), new Pion(false), new Pion(false)},
+				{new Tour(false), null, null, null, new Roi(false), new Fou(false), new Cavalier(false), new Tour(false)}
+		};
+		
+		assertArrayEquals(echiquierAttendu2, plat.getEchiquier());
 		
 		try {
-			int[] coord = {4, 1, 3, 1};
+			int[] coord = {1, 1, 3, 1};
+			plat.setTourJoueur(true);
+			plat.deplacer(coord);
+		}catch(Exception e) {
+			System.out.println(e.getMessage()+" 3 ");
+		}
+		
+		Piece[][] echiquierAttendu3 = {
+				{new Tour(true), new Cavalier(true), new Reine(false), null, null, new Fou(true), new Cavalier(true), new Tour(true)},
+				{null, null, new Cavalier(false), new Pion(true), new Roi(true), new Pion(true), null, null},
+				{new Pion(true), null, null, null, null, null, new Pion(true), null},
+				{null, new Pion(true), null, null, new Pion(true), null, null, new Pion(true)},
+				{null, new Pion(false), null, null, new Pion(false), null, null, null},
+				{null, null, null, null, null, null, null, null},
+				{new Pion(false), null, null, new Pion(false), null, new Pion(false), new Pion(false), new Pion(false)},
+				{new Tour(false), null, null, null, new Roi(false), new Fou(false), new Cavalier(false), new Tour(false)}
+		};
+		
+		assertArrayEquals(echiquierAttendu3, plat.getEchiquier());
+		
+		try {
+			int[] coord = {7, 6, 5, 5};
 			plat.setTourJoueur(false);
 			plat.deplacer(coord);
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage()+" 4 ");
 		}
 		
-		valeurAttendue = 
-				"8 Tn  Cn  ReB  -   -  Fn  Cn  Tn  \n" + 
-				"7  -  Pn  Cb  Pn  RoN Pn   -   -  \n" + 
-				"6 Pn   -   -   -   -   -  Pn   -  \n" + 
-				"5  -  Pb   -   -  Pn   -   -  Pn  \n" + 
-				"4  -   -   -   -  Pb   -   -   -  \n" + 
-				"3  -   -   -   -   -   -   -   -  \n" + 
-				"2 Pb   -   -  Pb   -  Pb  Pb  Pb  \n" + 
-				"1 Tb   -   -   -  RoB Fb  Cb  Tb  \n" + 
-				"   A   B   C   D   E   F   G   H";
-		assertEquals(valeurAttendue, plat.toString());
+		Piece[][] echiquierAttendu4 = {
+				{new Tour(true), new Cavalier(true), new Reine(false), null, null, new Fou(true), new Cavalier(true), new Tour(true)},
+				{null, null, new Cavalier(false), new Pion(true), new Roi(true), new Pion(true), null, null},
+				{new Pion(true), null, null, null, null, null, new Pion(true), null},
+				{null, new Pion(true), null, null, new Pion(true), null, null, new Pion(true)},
+				{null, new Pion(false), null, null, new Pion(false), null, null, null},
+				{null, null, null, null, null, new Cavalier(false), null, null},
+				{new Pion(false), null, null, new Pion(false), null, new Pion(false), new Pion(false), new Pion(false)},
+				{new Tour(false), null, null, null, new Roi(false), new Fou(false), null, new Tour(false)}
+		};
+		
+		assertArrayEquals(echiquierAttendu4, plat.getEchiquier());
 	}
 	
 	@Test
