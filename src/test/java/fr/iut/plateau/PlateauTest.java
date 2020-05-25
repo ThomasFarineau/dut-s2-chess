@@ -228,7 +228,74 @@ public class PlateauTest {
 		};
 		
 		assertArrayEquals(echiquierAttendu4, plat.getEchiquier());
+		
+		try {
+			int[] coord = {0, 5, 1, 6};
+			plat.setTourJoueur(true);
+			plat.deplacer(coord);
+			assertFalse(plat.getTourJoueur());
+		}catch(Exception e) {
+			fail();
+		}
+		
+		Piece[][] echiquierAttendu5 = { // Fou
+				{new Tour(true), new Cavalier(true), new Reine(false), null, null, null, new Cavalier(true), new Tour(true)},
+				{null, null, new Cavalier(false), new Pion(true), new Roi(true), new Pion(true), new Fou(true), null},
+				{new Pion(true), null, null, null, null, null, new Pion(true), null},
+				{null, new Pion(true), null, null, new Pion(true), null, null, new Pion(true)},
+				{null, new Pion(false), null, null, new Pion(false), null, null, null},
+				{null, null, null, null, null, new Cavalier(false), null, null},
+				{new Pion(false), null, null, new Pion(false), null, new Pion(false), new Pion(false), new Pion(false)},
+				{new Tour(false), null, null, null, new Roi(false), new Fou(false), null, new Tour(false)}
+		};
+		
+		assertArrayEquals(echiquierAttendu5, plat.getEchiquier());
+		
+		try {
+			int[] coord = {0, 2, 0, 6};
+			plat.setTourJoueur(false);
+			plat.deplacer(coord);
+			assertTrue(plat.getTourJoueur());
+		}catch(Exception e) {
+			fail();
+		}
+		
+		Piece[][] echiquierAttendu6 = { // Reine
+				{new Tour(true), new Cavalier(true), null, null, null, null, new Reine(false), new Tour(true)},
+				{null, null, new Cavalier(false), new Pion(true), new Roi(true), new Pion(true), new Fou(true), null},
+				{new Pion(true), null, null, null, null, null, new Pion(true), null},
+				{null, new Pion(true), null, null, new Pion(true), null, null, new Pion(true)},
+				{null, new Pion(false), null, null, new Pion(false), null, null, null},
+				{null, null, null, null, null, new Cavalier(false), null, null},
+				{new Pion(false), null, null, new Pion(false), null, new Pion(false), new Pion(false), new Pion(false)},
+				{new Tour(false), null, null, null, new Roi(false), new Fou(false), null, new Tour(false)}
+		};
+		
+		assertArrayEquals(echiquierAttendu6, plat.getEchiquier());
+		
+		try {
+			int[] coord = {0, 7, 0, 6};
+			plat.setTourJoueur(true);
+			plat.deplacer(coord);
+			assertFalse(plat.getTourJoueur());
+		}catch(Exception e) {
+			fail();
+		}
+		
+		Piece[][] echiquierAttendu7 = { // Tour
+				{new Tour(true), new Cavalier(true), null, null, null, null, new Tour(true), null},
+				{null, null, new Cavalier(false), new Pion(true), new Roi(true), new Pion(true), new Fou(true), null},
+				{new Pion(true), null, null, null, null, null, new Pion(true), null},
+				{null, new Pion(true), null, null, new Pion(true), null, null, new Pion(true)},
+				{null, new Pion(false), null, null, new Pion(false), null, null, null},
+				{null, null, null, null, null, new Cavalier(false), null, null},
+				{new Pion(false), null, null, new Pion(false), null, new Pion(false), new Pion(false), new Pion(false)},
+				{new Tour(false), null, null, null, new Roi(false), new Fou(false), null, new Tour(false)}
+		};
+		
+		assertArrayEquals(echiquierAttendu7, plat.getEchiquier());
 	}
+	
 	
 	@Test
 	public void calculerDeplacementTest2()
