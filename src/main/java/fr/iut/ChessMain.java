@@ -23,16 +23,16 @@ public class ChessMain {
 		StringBuilder retour = new StringBuilder();
 		retour.append("\n\n\n\n\n\n");
 
-		retour.append("\n\n"+p.toString()+"\n\n");
+		retour.append("\n\n").append(p.toString()).append("\n\n");
 		
 		retour.append("Pour sauvegarder votre partie, entrez \"sauvegarder (ficherSauvegarde)\".\n");
 		retour.append("Pour quitter le jeu, entrez \"quitter\".\n");
-		retour.append(alerte + "\n");
+		retour.append(alerte).append("\n");
 
-		retour.append("\nC'est au tour du joueur " + (p.getTourJoueur() ? "noir." : "blanc.") + "\n");
+		retour.append("\nC'est au tour du joueur ").append(p.getTourJoueur() ? "noir." : "blanc.").append("\n");
 
 		if (p.verifEchec() != null)
-			retour.append("Le roi " + (p.getTourJoueur() ? "noir" : "blanc") + " est en échec.\n");
+			retour.append("Le roi ").append(p.getTourJoueur() ? "noir" : "blanc").append(" est en échec.\n");
 		
 		retour.append("\nVeuillez entrer votre déplacement : ");
 
@@ -181,7 +181,7 @@ public class ChessMain {
 		} catch (Exception e) {
 			System.out.println("Erreur lors du chargement de l'UI du système.");
 		}
-		
+
 		f = new Fenetre(gp, p);
 	}
 	
