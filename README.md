@@ -21,8 +21,8 @@ Chaque joueur possède au départ seize pièces: un roi, une dame, deux tours, d
 ```
 > Vous allez avoir le choix entre le mode console (écrire 1) et le mode graphique (écrire 2)
 
-* [Utilisation avec le mode "Console"](#Console)
-* [Utilisation avec le mode "Graphique"](#Graphique)
+* [Utilisation avec le mode "Console"](#console)
+* [Utilisation avec le mode "Graphique"](#graphique)
 
 
 ### Console
