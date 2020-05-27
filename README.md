@@ -54,3 +54,21 @@ Votre ancienne partie sera automatiquement rechargé et vous reprendrez la ou vo
 Pour quitter le jeu, il vous suffit d'écrire "quitter" à la place de votre saisi pour le déplacement.
 
 ### Graphique
+Une fois la commande d'[exécution](#-comment-jouer) lancée, écrire "2" pour lancer le mode Graphique.
+
+#### Lancer une nouvelle partie
+Pour lancer une nouvelle partie faites CTRL + N
+
+#### Sauvegarder une partie
+Pour sauvegarder une partie faites CTRL + S
+
+##### Pour sauvegarder sous
+Pour sauvegarder une partie sous un fichier spécifique faites CTRL + SHIFT + S
+
+#### Pour charger une partie
+Pour charger une partie faites CTRL + C
+
+
+
+
+  
