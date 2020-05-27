@@ -19,6 +19,18 @@ public class ChessMain {
 	// Pour l'interface graphique
 	private static Fenetre f = null;
 
+	// Méthode utilisée pour les tests JUnit
+	public static void reInitVars() {
+		sc.close();
+		
+		sc = new Scanner(System.in);
+		p = new Plateau();
+		gp = new GestionnairePartie(p);
+		alerte = "";
+		recommencer = true;
+		f = null;
+	}
+	
 	public static String getMessageDebutTour() {
 		StringBuilder retour = new StringBuilder();
 		retour.append("\n\n\n\n\n\n");
@@ -221,6 +233,8 @@ public class ChessMain {
 	}
 
 	public static void main(String[] args) {
-		initialisationModeDeJeu();
+		System.out.println(demanderRecommencer());
+		
+		//initialisationModeDeJeu();
 	}
 }
