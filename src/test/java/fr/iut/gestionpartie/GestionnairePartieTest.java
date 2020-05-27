@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -74,6 +75,22 @@ public class GestionnairePartieTest {
 		} catch (Exception e) {
 			assertEquals("Format du fichier \"tests/formatInvalide.csv\" invalide", e.getMessage());
 		}
+		
+		try {
+			gp.chargerAnciennePartie("nouvellePartie.csv");
+			//Si aucune exception n'est générée, le test échoue
+			fail();
+		} catch (Exception e) {
+			assertEquals("Vous n'avez pas le droit de charger le fichier \"nouvellePartie.csv\".", e.getMessage());
+		}
+		
+		try {
+			gp.chargerAnciennePartie("tests/../noUvEllEpartiE");
+			//Si aucune exception n'est générée, le test échoue
+			fail();
+		} catch (Exception e) {
+			assertEquals("Vous n'avez pas le droit de charger le fichier \"nouvellePartie.csv\".", e.getMessage());
+		}
 	}
 
 	@Test
@@ -98,8 +115,32 @@ public class GestionnairePartieTest {
 		};
 
 		assertArrayEquals(echiquierAttendu, p.getEchiquier());
-	}
+		assertEquals("tests/partieTest.csv", gp.getNomFichier());
+		
+		
+		try {
+			gp.chargerAnciennePartie("tests/test28.csv");
+		} catch (Exception e) {
+			// Si une exception est générée, le test échoue
+			fail();
+		}
 
+		echiquierAttendu = new Piece[][] {
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, new Tour(false), null, null, null, null},
+				{null, null, new Roi(true), null, new Pion(false), null, null, null},
+				{null, new Pion(false), null, null, null, null, null, null},
+				{null, null, null, new Fou(false), null, null, null, null},
+				{null, null, null, null, new Roi(false), null, null, null},
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, new Tour(true)}
+		};
+
+		assertArrayEquals(echiquierAttendu, p.getEchiquier());
+		assertEquals("tests/test28.csv", gp.getNomFichier());
+
+	}
+	
 	@Test
 	public void nouvellePartieTest() {
 		try {
@@ -119,10 +160,9 @@ public class GestionnairePartieTest {
 		};
 
 		assertArrayEquals(echiquierACharger, p.getEchiquier());
-
+		assertEquals(gp.getNomFichier(),"partieActuelle.csv");
 	}
-
-
+	
 	@Test
 	public void sauvegarderPartieSansParamTest() {
 		Piece[][] echiquierASave = {
@@ -147,7 +187,7 @@ public class GestionnairePartieTest {
 		"V,V,V,V,V,V,V,V"};
 
 	}
-
+	
 	@Test
 	public void sauvegarderPartieAvecParamTest() {
 		Piece[][] echiquierASave ={
@@ -282,5 +322,10 @@ public class GestionnairePartieTest {
 			new File("parties/partieActuelle.csv").delete();
 			new File("parties/savGetNomTest.csv").delete();
 		} catch (Exception e) {}
+	}
+	
+	@Test 
+	public void getPartiesPathTest() {
+		assertEquals(Paths.get(System.getProperty("user.dir") + "/parties"), GestionnairePartie.getPartiesPath());
 	}
 }
