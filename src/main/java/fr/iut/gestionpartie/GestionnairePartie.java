@@ -117,7 +117,7 @@ public class GestionnairePartie {
 		if (!nomFichier.endsWith(".csv"))
 			nomFichier += ".csv";
 		
-		if (nomFichier.endsWith(nomNouvellePartie))
+		if (nomFichier.toLowerCase().endsWith(nomNouvellePartie.toLowerCase()))
 			throw new Exception("Vous n'avez pas le droit de charger le fichier \"" + nomNouvellePartie + "\".");
 
 		this.nomFichier = nomFichier;
@@ -167,7 +167,7 @@ public class GestionnairePartie {
 		if (!nomFichier.endsWith(".csv"))
 			nomFichier += ".csv";
 		
-		if (nomFichier.endsWith(nomNouvellePartie))
+		if (nomFichier.toLowerCase().endsWith(nomNouvellePartie.toLowerCase()))
 			throw new Exception("Vous n'avez pas le droit de sauvegarder une partie de nom \"" + nomNouvellePartie + "\".");
 
 		this.nomFichier = nomFichier;
