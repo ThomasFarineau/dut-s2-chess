@@ -143,6 +143,89 @@ public class GestionnairePartieTest {
 		assertArrayEquals(echiquierAttendu, p.getEchiquier());
 		assertEquals("tests/test28.csv", gp.getNomFichier());
 		
+		try {
+			gp.chargerAnciennePartie("tests/test10.csv");
+		} catch (Exception e) {
+			// Si une exception est générée, le test échoue
+			fail();
+		}
+
+		echiquierAttendu = new Piece[][] {
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null},
+				{null, null, new Tour(true), null, null, new Roi(true), null, null},
+				{null, null, null, null, null, null, null, null},
+				{null, null, new Reine(true), new Roi(false), null, null, null, null},
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, null, new Tour(true), null, null, null}
+		};
+
+		assertArrayEquals(echiquierAttendu, p.getEchiquier());
+		assertEquals("tests/test10.csv", gp.getNomFichier());
+		
+		try {
+			gp.chargerAnciennePartie("tests/test15.csv");
+		} catch (Exception e) {
+			// Si une exception est générée, le test échoue
+			fail();
+		}
+
+		echiquierAttendu = new Piece[][] {
+				{null, null, null, null, null, null, null, new Tour(true)},
+				{null, new Pion(true), null, new Roi(true), null, null, null, null},
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, new Cavalier(true), null},
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, new Pion(false), new Roi(false), null, null, new Tour(true)},
+				{null, null, null, null, null, new Tour(false), null, null}
+		};
+
+		assertArrayEquals(echiquierAttendu, p.getEchiquier());
+		assertEquals("tests/test15.csv", gp.getNomFichier());
+
+		try {
+			gp.chargerAnciennePartie("tests/test20.csv");
+		} catch (Exception e) {
+			// Si une exception est générée, le test échoue
+			fail();
+		}
+
+		echiquierAttendu = new Piece[][] {
+				{null, null, null, null, null, new Fou(true), null, null},
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, new Pion(false), new Roi(false)},
+				{null, null, null, null, null, null, null, new Tour(true)},
+				{null, null, null, null, null, null, new Fou(false), null},
+				{null, null, null, null, null, null, new Pion(true), null},
+				{null, null, null, null, null, new Roi(true), null, null},
+				{null, new Tour(false), null, null, null, null, null, null}
+		};
+
+		assertArrayEquals(echiquierAttendu, p.getEchiquier());
+		assertEquals("tests/test20.csv", gp.getNomFichier());
+
+		try {
+			gp.chargerAnciennePartie("tests/test35.csv");
+		} catch (Exception e) {
+			// Si une exception est générée, le test échoue
+			fail();
+		}
+
+		echiquierAttendu = new Piece[][] {
+				{null, null, null, null, new Roi(true), new Tour(true), null, null},
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, new Cavalier(true)},
+				{null, null, null, null, null, null, null, new Pion(false)},
+				{null, null, null, new Reine(true), null, null, null, null},
+				{null, null, null, null, null, null, null, null},
+				{null, null, null, null, new Roi(false), null, null, null}
+		};
+
+		assertArrayEquals(echiquierAttendu, p.getEchiquier());
+		assertEquals("tests/test35.csv", gp.getNomFichier());
 	}
 	
 	@Test
