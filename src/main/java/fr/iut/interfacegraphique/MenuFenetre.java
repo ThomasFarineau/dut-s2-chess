@@ -68,27 +68,13 @@ public class MenuFenetre extends JMenuBar {
         this.gp = gp;
     }
 
-    public void chargerPartie() {
-        JPanel panel = new JPanel();
-        panel.setSize(new Dimension(500, 500));
-        panel.setLayout(null);
+    public void activerEnregistrer() {
+        enregistrerPartie.setEnabled(true);
+        enregistrerPartieSous.setEnabled(true);
+    }
 
-        JFileChooser chooser = new JFileChooser();
-        chooser.setCurrentDirectory(new File("./parties"));
-        chooser.setDialogTitle("Ouvrir un fichier");
-        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        chooser.addChoosableFileFilter(new FileNameExtensionFilter("Tableau", "csv"));
-        chooser.setAcceptAllFileFilterUsed(false);
-
-        if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            String file = Fonctions.convertCheminRelatif(chooser.getSelectedFile().getAbsolutePath());
-            try {
-                gp.chargerAnciennePartie(file);
-                pj.repaint();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(pj, "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
-            }
-        }
+    public boolean partieCommencer() {
+        return enregistrerPartie.isEnabled() && enregistrerPartieSous.isEnabled();
     }
 
     public void enregistrerPartie() {
@@ -114,6 +100,7 @@ public class MenuFenetre extends JMenuBar {
         if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             String file = Fonctions.convertCheminRelatif(chooser.getSelectedFile().getAbsolutePath());
             try {
+
                 gp.sauvegarderPartie(file);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(pj, "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
@@ -121,31 +108,87 @@ public class MenuFenetre extends JMenuBar {
         }
     }
 
-    public void nouvellePartie() {
-        // Creation du panel pour l'affichage du dialogue
+    public void chargerPartie() {
         JPanel panel = new JPanel();
-        panel.setSize(new Dimension(430, 100));
+        panel.setSize(new Dimension(500, 500));
         panel.setLayout(null);
 
-        // Ajout du message
-        JLabel label = new JLabel("Êtes-vous sûr de vouloir démarrer une nouvelle partie ?");
-        label.setBounds(23, 15, 430, 30);
-        label.setFont(new Font("Calibri", Font.PLAIN, 16));
-        panel.add(label);
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new File("./parties"));
+        chooser.setDialogTitle("Ouvrir un fichier");
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("Tableau", "csv"));
+        chooser.setAcceptAllFileFilterUsed(false);
 
-        // Changement de la taille du dialogue
-        UIManager.put("OptionPane.minimumSize", new Dimension(430, 100));
+        if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            String file = Fonctions.convertCheminRelatif(chooser.getSelectedFile().getAbsolutePath());
 
-        // Ajout des options oui et non
-        String[] options = {"Oui", "Non"};
+            int resp = 0;
+            if(partieCommencer()) {
+                JPanel panel2 = new JPanel();
+                panel2.setSize(new Dimension(430, 100));
+                panel2.setLayout(null);
 
-        // Affichage du dialogue et recuperation de la réponse sous resp
-        int resp = JOptionPane.showOptionDialog(null, panel, "Nouvelle partie", 0, JOptionPane.PLAIN_MESSAGE, null, options, null);
+                // Ajout du message
+                JLabel label = new JLabel("Êtes-vous sûr de vouloir charger une partie ?");
+                label.setBounds(0, 15, 430, 30);
+                label.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+                label.setFont(new Font("Calibri", Font.PLAIN, 16));
+                panel2.add(label);
 
+                // Changement de la taille du dialogue
+                UIManager.put("OptionPane.minimumSize", new Dimension(430, 100));
+
+                // Ajout des options oui et non
+                String[] options = {"Oui", "Non"};
+
+                // Affichage du dialogue et recuperation de la réponse sous resp
+                resp = JOptionPane.showOptionDialog(null, panel2, "Charger une partie", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
+            }
+
+            // Utilisation de la réponse
+            if (resp == 0) {
+                try {
+                    gp.chargerAnciennePartie(file);
+                    activerEnregistrer();
+                    pj.repaint();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(pj, "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
+
+    public void nouvellePartie() {
+
+        int resp = 0;
+        if(partieCommencer()) {
+            // Creation du panel pour l'affichage du dialogue
+            JPanel panel = new JPanel();
+            panel.setSize(new Dimension(430, 100));
+            panel.setLayout(null);
+
+            // Ajout du message
+            JLabel label = new JLabel("Êtes-vous sûr de vouloir démarrer une nouvelle partie ?");
+            label.setBounds(0, 15, 430, 30);
+            label.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+            label.setFont(new Font("Calibri", Font.PLAIN, 16));
+            panel.add(label);
+
+            // Changement de la taille du dialogue
+            UIManager.put("OptionPane.minimumSize", new Dimension(430, 100));
+
+            // Ajout des options oui et non
+            String[] options = {"Oui", "Non"};
+
+            // Affichage du dialogue et recuperation de la réponse sous resp
+            resp = JOptionPane.showOptionDialog(null, panel, "Nouvelle partie", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
+        }
         // Utilisation de la réponse
         if (resp == 0) {
             try {
                 gp.nouvellePartie();
+                activerEnregistrer();
                 pj.repaint();
                 ((EchiquierListener)pj.getListeners(MouseListener.class)[0]).setInteractable(true);
             } catch (IOException e) {
