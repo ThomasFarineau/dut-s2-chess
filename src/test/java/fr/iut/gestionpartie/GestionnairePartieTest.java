@@ -254,7 +254,7 @@ public class GestionnairePartieTest {
 			fail();
 		}
 		
-		f.delete( );
+		f.delete();
 		
 		try {
 			f = new File("parties/tests/test36_copie.csv");
