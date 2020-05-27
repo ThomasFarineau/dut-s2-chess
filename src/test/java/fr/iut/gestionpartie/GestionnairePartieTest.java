@@ -258,7 +258,9 @@ public class GestionnairePartieTest {
 		
 		try {
 			f = new File("parties/tests/test36_copie.csv");
-			Files.copy(new File("parties/tests/test36.csv").toPath(), new FileOutputStream(f));
+			FileOutputStream fos = new FileOutputStream(f);
+			Files.copy(new File("parties/tests/test36.csv").toPath(),fos);
+			fos.close();
 			
 			gp.chargerAnciennePartie("tests/test36_copie");
 		} catch (Exception e) {
