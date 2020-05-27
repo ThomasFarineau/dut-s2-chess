@@ -6,8 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
@@ -165,27 +169,137 @@ public class GestionnairePartieTest {
 	
 	@Test
 	public void sauvegarderPartieSansParamTest() {
-		Piece[][] echiquierASave = {
-				{new Roi(false), null, new Reine(true), null, null, null, null, null},
-				{new Pion(false), new Tour(false), null, null, null, new Reine(true), null, null},
-				{null, null, null, null, new Pion(false), null, null, null},
-				{null, null, null, null, null, null, null, new Roi(true)},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null}
+		try {
+			gp.nouvellePartie();
+		} catch (IOException e) {
+			fail();
+		}
+		File f = null ;
+		
+		try {
+			f = new File("parties/partieActuelle.csv");
+		} catch (Exception e) {
+			fail();
+		}
+		
+		if (f.exists()) {
+			f.delete();
+		}
+		
+		try {
+			p.deplacer(new int[] {6, 0, 5, 0});
+			
+			assertEquals("Le fichier \"partieActuelle.csv\" vient d'être créé. "+
+						"La sauvegarde vers \"partieActuelle.csv\" a été effectuée avec succès !", gp.sauvegarderPartie());
+		} catch (Exception e) {
+			fail();
+		}
+		
+		String[] echiquierAttendu = {
+				"Tn,Cn,Fn,ReN,RoN,Fn,Cn,Tn",
+				"Pn,Pn,Pn,Pn,Pn,Pn,Pn,Pn",
+				"V,V,V,V,V,V,V,V",
+				"V,V,V,V,V,V,V,V",
+				"V,V,V,V,V,V,V,V",
+				"Pb,V,V,V,V,V,V,V",
+				"V,Pb,Pb,Pb,Pb,Pb,Pb,Pb",
+				"Tb,Cb,Fb,ReB,RoB,Fb,Cb,Tb"
 		};
+		
+		Scanner scan;
+		try {
+			scan = new Scanner(f); 
 
-		String[] echiquierAttendu= {
-				"RoB,V,ReN,V,V,V,V,V",
-				"Pb,Tb,V,V,V,ReN,V,V",
+			for(String s : echiquierAttendu) {
+				assertEquals(s, scan.nextLine());
+			}
+
+			assertFalse(scan.hasNextLine());
+			scan.close();
+			assertEquals("partieActuelle.csv", gp.getNomFichier());
+		} catch (Exception e) {
+			fail();
+		}
+		
+		try {
+			p.deplacer(new int[] {1, 0, 2, 0});
+			
+			assertEquals("La sauvegarde vers \"partieActuelle.csv\" a été effectuée avec succès !", gp.sauvegarderPartie());
+		} catch (Exception e) {
+			fail();
+		}
+		
+		echiquierAttendu = new String[] {
+				"Tn,Cn,Fn,ReN,RoN,Fn,Cn,Tn",
+				"V,Pn,Pn,Pn,Pn,Pn,Pn,Pn",
+				"Pn,V,V,V,V,V,V,V",
+				"V,V,V,V,V,V,V,V",
+				"V,V,V,V,V,V,V,V",
+				"Pb,V,V,V,V,V,V,V",
+				"V,Pb,Pb,Pb,Pb,Pb,Pb,Pb",
+				"Tb,Cb,Fb,ReB,RoB,Fb,Cb,Tb"
+		};
+		
+		try {
+			scan = new Scanner(f); 
+
+			for(String s : echiquierAttendu) {
+				assertEquals(s, scan.nextLine());
+			}
+			
+			assertFalse(scan.hasNextLine());
+			scan.close();
+			assertEquals("partieActuelle.csv", gp.getNomFichier());
+		} catch (Exception e) {
+			fail();
+		}
+		
+		f.delete();
+		
+		try {
+			f = new File("parties/tests/test36_copie.csv");
+			FileOutputStream fos = new FileOutputStream(f);
+			Files.copy(new File("parties/tests/test36.csv").toPath(),fos);
+			fos.close();
+			
+			gp.chargerAnciennePartie("tests/test36_copie");
+		} catch (Exception e) {
+			fail();
+		}
+
+		try {
+			p.deplacer(new int[] {1, 1, 0, 1});
+			assertEquals("La sauvegarde vers \"tests/test36_copie.csv\" a été effectuée avec succès !", gp.sauvegarderPartie());
+		} catch (Exception e) {
+			fail();
+		}
+		
+		echiquierAttendu = new String[] {
+				"RoB,Tb,ReN,V,V,V,V,V",
+				"Pb,V,V,V,V,ReN,V,V",
 				"V,V,V,V,Pb,V,V,V",
 				"V,V,V,V,V,V,V,RoN",
 				"V,V,V,V,V,V,V,V",
 				"V,V,V,V,V,V,V,V",
 				"V,V,V,V,V,V,V,V",
-		"V,V,V,V,V,V,V,V"};
+				"V,V,V,V,V,V,V,V"
+		};
+		
+		try {
+			scan = new Scanner(f); 
 
+			for(String s : echiquierAttendu) {
+				assertEquals(s, scan.nextLine());
+			}
+
+			assertFalse(scan.hasNextLine());
+			scan.close();
+			assertEquals("tests/test36_copie.csv", gp.getNomFichier());
+		} catch (Exception e) {
+			fail();
+		}
+		
+		f.delete();
 	}
 	
 	@Test
@@ -227,7 +341,14 @@ public class GestionnairePartieTest {
 			assertEquals("Vous n'avez pas le droit de sauvegarder une partie de nom \"nouvellePartie.csv\".", e.getMessage());
 		}
 		
-		File f = new File("parties/tests/sauvegarde1.csv");
+		File f = null;
+		
+		try {
+			f = new File("parties/tests/sauvegarde1.csv");
+		} catch (Exception e) {
+			fail();
+		}
+		
 		if(f.exists())
 			f.delete();
 		
@@ -247,11 +368,9 @@ public class GestionnairePartieTest {
 				"V,V,V,V,V,V,V,V",
 				"V,Pb,V,V,V,V,V,V",
 				"Pb,V,Pb,Pb,Pb,Pb,Pb,Pb",
-		"Tb,Cb,Fb,ReB,RoB,Fb,Cb,Tb"};
+				"Tb,Cb,Fb,ReB,RoB,Fb,Cb,Tb"};
 
 		Scanner scan;
-
-
 		try {
 			scan = new Scanner(f); 
 
@@ -305,23 +424,31 @@ public class GestionnairePartieTest {
 	public void getNomFichierTest() {
 		try {
 			gp.nouvellePartie();			
-		} catch (IOException e) {}
+		} catch (IOException e) {
+			fail();
+		}
 		assertEquals("partieActuelle.csv", gp.getNomFichier()); 
 		
 		try {
 			gp.chargerAnciennePartie("tests/test1.csv");		
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			fail();
+		}
 		assertEquals("tests/test1.csv", gp.getNomFichier()); 
 		
 		try {
 			gp.sauvegarderPartie("savGetNomTest");
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			fail();
+		}
 		assertEquals("savGetNomTest.csv", gp.getNomFichier());
 		
 		try {
 			new File("parties/partieActuelle.csv").delete();
 			new File("parties/savGetNomTest.csv").delete();
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			fail();
+		}
 	}
 	
 	@Test 
