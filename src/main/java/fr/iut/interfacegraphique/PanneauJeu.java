@@ -135,7 +135,7 @@ public class PanneauJeu extends JPanel {
 
 		if (plat.verifMat()) {
 			System.out.println("Echec et mat");
-		} 
+		}
 	}
 
 	public void setCasesEchec(int[] casesEchec) {
