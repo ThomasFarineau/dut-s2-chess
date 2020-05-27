@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -259,4 +260,27 @@ public class GestionnairePartieTest {
 			fail();
 		}
 	}	
+	
+	@Test 
+	public void getNomFichierTest() {
+		try {
+			gp.nouvellePartie();			
+		} catch (IOException e) {}
+		assertEquals("partieActuelle.csv", gp.getNomFichier()); 
+		
+		try {
+			gp.chargerAnciennePartie("tests/test1.csv");		
+		} catch (Exception e) {}
+		assertEquals("tests/test1.csv", gp.getNomFichier()); 
+		
+		try {
+			gp.sauvegarderPartie("savGetNomTest");
+		} catch (Exception e) {}
+		assertEquals("savGetNomTest.csv", gp.getNomFichier());
+		
+		try {
+			new File("parties/partieActuelle.csv").delete();
+			new File("parties/savGetNomTest.csv").delete();
+		} catch (Exception e) {}
+	}
 }
