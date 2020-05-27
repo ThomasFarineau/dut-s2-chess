@@ -138,7 +138,7 @@ public class GestionnairePartieTest {
 
 		assertArrayEquals(echiquierAttendu, p.getEchiquier());
 		assertEquals("tests/test28.csv", gp.getNomFichier());
-
+		
 	}
 	
 	@Test
