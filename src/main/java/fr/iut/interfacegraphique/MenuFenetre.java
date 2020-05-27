@@ -152,6 +152,7 @@ public class MenuFenetre extends JMenuBar {
                     gp.chargerAnciennePartie(file);
                     activerEnregistrer();
                     pj.repaint();
+                    ((EchiquierListener)pj.getListeners(MouseListener.class)[0]).setInteractable(true);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(pj, "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
                 }
