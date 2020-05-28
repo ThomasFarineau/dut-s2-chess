@@ -1,5 +1,9 @@
 package fr.iut.fonctions;
 
-public class FonctionsTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class FonctionsTest {
 
 }
