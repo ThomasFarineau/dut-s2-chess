@@ -94,5 +94,11 @@ class FonctionsTest {
 		
 		cheminAbsolu = System.getProperty("user.dir") + "/tests_input_output";
 		assertEquals("../tests_input_output", Fonctions.convertCheminRelatif(cheminAbsolu));
+		
+		cheminAbsolu = System.getProperty("user.dir") + "/src/main/java/fr/iut/plateau";
+		assertEquals("../src/main/java/fr/iut/plateau", Fonctions.convertCheminRelatif(cheminAbsolu));
+		
+		cheminAbsolu = System.getProperty("user.dir") + "/src/test/java";
+		assertEquals("../src/test/java", Fonctions.convertCheminRelatif(cheminAbsolu));
 	}
 }
