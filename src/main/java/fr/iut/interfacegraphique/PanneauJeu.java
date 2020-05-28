@@ -2,6 +2,8 @@ package fr.iut.interfacegraphique;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -12,6 +14,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import fr.iut.fonctions.Fonctions;
 import fr.iut.gestionpartie.GestionnairePartie;
 import fr.iut.listener.EchiquierListener;
 import fr.iut.pieces.Piece;
@@ -25,6 +28,7 @@ public class PanneauJeu extends JPanel {
 	private boolean[][] selectionDeplacementsPoss; // déplacements possibles de la sélection
 
 	private int[] casesEchec = null; // coordonnées des cases de l'échec (case du roi + case de la pièce qui le met en échec)
+	private String dernierMouvement = "-";
 
 	public PanneauJeu(Plateau plat) {
 		this.plat = plat;
@@ -40,7 +44,7 @@ public class PanneauJeu extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		g.setColor(Color.DARK_GRAY);
-		g.fillRect(0, 600, 600, 40);
+		g.fillRect(0, 600, 600, 60);
 
 		int xOffset = 40;
 		g.drawImage(fondEchiquier, 0, 0, null);
@@ -87,12 +91,40 @@ public class PanneauJeu extends JPanel {
 					}
 				}
 			}
+			
+			int horizontalCenter = this.getPreferredSize().width/2;
+			// Dessin de la partie du bas
+			g.setColor(new Color(30,30,30));
+			g.drawLine(horizontalCenter, 600, horizontalCenter, 660);
+			
+			Font bold = new Font("Calibri", Font.BOLD, 16);
+			Font other = new Font("Calibri", Font.PLAIN, 24);
+			FontMetrics fmBold = g.getFontMetrics(bold);
+			FontMetrics fmOther = g.getFontMetrics(other);
+			
+			g.setColor(Color.white);
+			g.setFont(bold);
+			g.drawString("Tour du joueur", (horizontalCenter - fmBold.stringWidth("Tour du joueur"))/2, 600 + fmBold.getHeight());
+			g.drawString("Dernier mouvement effectué", horizontalCenter + (horizontalCenter - fmBold.stringWidth("Dernier mouvement effectué"))/2, 600 + fmBold.getHeight());
+			
+			g.setFont(other);
+			if (plat.getTourJoueur()) {
+				g.setColor(Color.black);
+				g.drawString("Noir", (horizontalCenter - fmOther.stringWidth("Noir"))/2, 600 + fmBold.getHeight() + fmOther.getHeight());
+				g.setColor(Color.white);
+			} else {
+				g.setColor(Color.white);
+				g.drawString("Blanc", (horizontalCenter - fmOther.stringWidth("Blanc"))/2, 600 + fmBold.getHeight() + fmOther.getHeight());
+				g.setColor(Color.black);
+			}
+			
+			g.drawString(dernierMouvement, horizontalCenter + (horizontalCenter - fmOther.stringWidth(dernierMouvement))/2, 600 + fmBold.getHeight() + fmOther.getHeight());
 		}
 	}
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(600,640);
+		return new Dimension(600,660);
 	}
 
 	public void selectionner(int i, int j) {
@@ -127,6 +159,10 @@ public class PanneauJeu extends JPanel {
 		try {
 			plat.deplacer(new int[] {selection[0], selection[1], i, j});
 			this.casesEchec = plat.verifEchec();
+			
+			String pieceDeplacee = plat.getEchiquier()[i][j].toString();
+			char[] depChars = Fonctions.convertEnCaracteres(new int[] {selection[0], selection[1], i, j});
+			dernierMouvement = pieceDeplacee + " (" + depChars[0] + depChars[1] + " -> " + depChars[2] + depChars[3] + ")";
 		} catch (Exception e) {
 			this.casesEchec = plat.getDernierEchec();
 		}
@@ -140,5 +176,11 @@ public class PanneauJeu extends JPanel {
 
 	public void setCasesEchec(int[] casesEchec) {
 		this.casesEchec = casesEchec;
+	}
+	
+	public void reInitValues() {
+		dernierMouvement = "-";
+		selection = null;
+		casesEchec = null;
 	}
 }
