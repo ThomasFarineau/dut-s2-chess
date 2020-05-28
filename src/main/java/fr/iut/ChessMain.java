@@ -233,8 +233,6 @@ public class ChessMain {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(demanderRecommencer());
-		
-		//initialisationModeDeJeu();
+		initialisationModeDeJeu();
 	}
 }
