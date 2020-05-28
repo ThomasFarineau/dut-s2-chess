@@ -36,7 +36,7 @@ class FonctionsTest {
 		
 		entree="A1 G1";
 		assertTrue(Fonctions.verifSyntaxe(entree));
-		
+	
 		entree="a1 a2";
 		assertTrue(Fonctions.verifSyntaxe(entree));
 	}
