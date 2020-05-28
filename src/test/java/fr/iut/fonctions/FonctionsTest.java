@@ -42,16 +42,6 @@ class FonctionsTest {
 	}
 	
 	@Test
-	public void convertCheminRelatif() {
-		String cheminAbsolu = System.getProperty("user.dir") + "/parties";
-		assertEquals("", Fonctions.convertCheminRelatif(cheminAbsolu));
-		
-		cheminAbsolu = System.getProperty("user.dir") + "/tests_input_output";
-		assertEquals("../tests_input_output", Fonctions.convertCheminRelatif(cheminAbsolu));
-	}
-	
-	
-	@Test
     public void convertEnIndicesTest() {
       String entree = "a7 a6";
       int[] sortie = {1,0,2,0};
@@ -96,4 +86,13 @@ class FonctionsTest {
       int[] entree5 = {7, 0, 0, 7};
       assertArrayEquals(sortie5, Fonctions.convertEnCaracteres(entree5));
     }
+	
+	@Test
+	public void convertCheminRelatif() {
+		String cheminAbsolu = System.getProperty("user.dir") + "/parties";
+		assertEquals("", Fonctions.convertCheminRelatif(cheminAbsolu));
+		
+		cheminAbsolu = System.getProperty("user.dir") + "/tests_input_output";
+		assertEquals("../tests_input_output", Fonctions.convertCheminRelatif(cheminAbsolu));
+	}
 }
