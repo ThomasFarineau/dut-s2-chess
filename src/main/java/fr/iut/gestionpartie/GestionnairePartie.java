@@ -125,6 +125,7 @@ public class GestionnairePartie {
 	}
 
 	public void nouvellePartie() throws IOException {
+		nomFichier = "partieActuelle.csv";
 		chargerPartie("nouvellePartie.csv");
 	}
 
