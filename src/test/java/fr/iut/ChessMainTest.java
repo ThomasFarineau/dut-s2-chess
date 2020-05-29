@@ -109,7 +109,20 @@ public class ChessMainTest {
 		assertRightInputOutput("demanderTour_1", 
 				() -> assertFalse(ChessMain.demanderTourJoueur()));
 		
-		// A FINIR
+		assertRightInputOutput("demanderTour_2", 
+				() -> assertFalse(ChessMain.demanderTourJoueur()));
+		
+		assertRightInputOutput("demanderTour_3", 
+				() -> assertFalse(ChessMain.demanderTourJoueur()));
+		
+		assertRightInputOutput("demanderTour_4", 
+				() -> assertTrue(ChessMain.demanderTourJoueur()));
+		
+		assertRightInputOutput("demanderTour_5", 
+				() -> assertTrue(ChessMain.demanderTourJoueur()));
+		
+		assertRightInputOutput("demanderTour_6", 
+				() -> assertTrue(ChessMain.demanderTourJoueur()));
 	}
 	
 	@Test

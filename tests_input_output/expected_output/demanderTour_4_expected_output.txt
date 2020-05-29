@@ -1,0 +1,2 @@
+Qui va commencer à jouer, à la reprise de la partie chargée ? (Blanc/Noir) : Réponse invalide, veuillez recommencer.
+Qui va commencer à jouer, à la reprise de la partie chargée ? (Blanc/Noir) : 
