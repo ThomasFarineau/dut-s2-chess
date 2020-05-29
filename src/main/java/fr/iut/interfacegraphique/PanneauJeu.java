@@ -154,7 +154,7 @@ public class PanneauJeu extends JPanel {
 		String[] options = {"Nouvelle partie", "Charger une partie", "Quitter"};
 
 		// Affichage du dialogue et recuperation de la réponse sous resp
-		int resp = JOptionPane.showOptionDialog(null, panel, "Échecs et mat", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+		int resp = JOptionPane.showOptionDialog(null, panel, "Échec et mat", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
 		if(resp == 0) {
 			parent.getMf().nouvellePartie();

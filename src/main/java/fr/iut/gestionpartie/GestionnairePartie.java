@@ -182,4 +182,8 @@ public class GestionnairePartie {
 	public static Path getPartiesPath() {
 		return partiesPath;
 	}
+
+	public Plateau getPlat() {
+		return plat;
+	}
 }

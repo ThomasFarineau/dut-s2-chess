@@ -147,8 +147,34 @@ public class MenuFenetre extends JMenuBar {
             if (resp == 0) {
                 try {
                     gp.chargerAnciennePartie(file);
-                    activerEnregistrer();
+
+                    JPanel panel3 = new JPanel();
+                    panel3.setSize(new Dimension(430, 100));
+                    panel3.setLayout(null);
+
+                    // Ajout du message
+                    JLabel label = new JLabel("Qui va commencer à jouer, à la reprise de la partie ?");
+                    label.setBounds(0, 15, 430, 30);
+                    label.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+                    label.setFont(new Font("Calibri", Font.PLAIN, 16));
+                    panel3.add(label);
+
+                    // Changement de la taille du dialogue
+                    UIManager.put("OptionPane.minimumSize", new Dimension(430, 100));
+
+                    String[] options = {"Blanc", "Noir"};
+
+                    // Affichage du dialogue et recuperation de la réponse sous resp
+                    resp = JOptionPane.showOptionDialog(null, panel3, "Charger une partie", 0, JOptionPane.PLAIN_MESSAGE, null, options, null);
+
+                    if(resp == 0) {
+                        gp.getPlat().setTourJoueur(false);
+                    } else if(resp == 1) {
+                        gp.getPlat().setTourJoueur(true);
+                    }
+
                     pj.repaint();
+                    activerEnregistrer();
                     ((EchiquierListener)pj.getListeners(MouseListener.class)[0]).setInteractable(true);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(pj, "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
