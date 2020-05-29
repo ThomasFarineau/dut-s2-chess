@@ -7,15 +7,7 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.KeyStroke;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import fr.iut.fonctions.Fonctions;
@@ -71,6 +63,11 @@ public class MenuFenetre extends JMenuBar {
     public void activerEnregistrer() {
         enregistrerPartie.setEnabled(true);
         enregistrerPartieSous.setEnabled(true);
+    }
+
+    public void desactiverEnregistrer() {
+        enregistrerPartie.setEnabled(false);
+        enregistrerPartieSous.setEnabled(false);
     }
 
     public boolean partieCommencer() {

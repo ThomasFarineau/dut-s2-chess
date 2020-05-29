@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import fr.iut.fonctions.Fonctions;
 import fr.iut.gestionpartie.GestionnairePartie;
@@ -21,6 +21,7 @@ import fr.iut.pieces.Piece;
 import fr.iut.plateau.Plateau;
 
 public class PanneauJeu extends JPanel {
+	private Fenetre parent;
 	private final static String imgPath = "./img/";
 	private Image fondEchiquier = null;
 	private Plateau plat;
@@ -30,7 +31,8 @@ public class PanneauJeu extends JPanel {
 	private int[] casesEchec = null; // coordonnées des cases de l'échec (case du roi + case de la pièce qui le met en échec)
 	private String dernierMouvement = "-";
 
-	public PanneauJeu(Plateau plat) {
+	public PanneauJeu(Plateau plat, Fenetre parent) {
+		this.parent = parent;
 		this.plat = plat;
 		this.addMouseListener(new EchiquierListener(this));
 
@@ -127,6 +129,44 @@ public class PanneauJeu extends JPanel {
 		return new Dimension(600,660);
 	}
 
+	public void mat() {
+		JPanel panel = new JPanel();
+		panel.setSize(new Dimension(430, 130));
+		panel.setLayout(null);
+		parent.getMf().desactiverEnregistrer();
+		// Ajout du message
+		JLabel label = new JLabel("Félicitations, les " + (plat.getTourJoueur()?"blancs":"noirs") + " ont gagné !");
+		label.setBounds(0, 15, 430, 30);
+		label.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+		label.setFont(new Font("Calibri", Font.PLAIN, 16));
+		panel.add(label);
+
+		JLabel label2 = new JLabel("Que voulez vous faire ?");
+		label2.setBounds(0, 45, 430, 30);
+		label2.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+		label2.setFont(new Font("Calibri", Font.PLAIN, 16));
+		panel.add(label2);
+
+		// Changement de la taille du dialogue
+		UIManager.put("OptionPane.minimumSize", new Dimension(430, 130));
+
+		// Ajout des options
+		String[] options = {"Nouvelle partie", "Charger une partie", "Quitter"};
+
+		// Affichage du dialogue et recuperation de la réponse sous resp
+		int resp = JOptionPane.showOptionDialog(null, panel, "Échecs et mat", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+		if(resp == 0) {
+			parent.getMf().nouvellePartie();
+		} else if(resp == 1) {
+			parent.getMf().chargerPartie();
+		} else if(resp == 2) {
+			System.exit(0);
+		}
+
+		System.out.println(resp);
+	}
+
 	public void selectionner(int i, int j) {
 		// La sélection ne fonctionne que si elle est sur une pièce de la bonne couleur
 		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
@@ -163,14 +203,15 @@ public class PanneauJeu extends JPanel {
 			String pieceDeplacee = plat.getEchiquier()[i][j].toString();
 			char[] depChars = Fonctions.convertEnCaracteres(new int[] {selection[0], selection[1], i, j});
 			dernierMouvement = pieceDeplacee + " (" + depChars[0] + depChars[1] + " -> " + depChars[2] + depChars[3] + ")";
+
 		} catch (Exception e) {
 			this.casesEchec = plat.getDernierEchec();
 		}
 
 		resetSelection();
 
-		if (plat.verifMat()) {
-			System.out.println("Echec et mat");
+		if(plat.verifMat()) {
+			mat();
 		}
 	}
 
@@ -182,5 +223,9 @@ public class PanneauJeu extends JPanel {
 		dernierMouvement = "-";
 		selection = null;
 		casesEchec = null;
+	}
+
+	public Plateau getPlat() {
+		return plat;
 	}
 }
