@@ -19,6 +19,8 @@ public class ChessMainTest {
 	private final static PrintStream sysout = new PrintStream(System.out);
 	
 	private final static String inputOutputPath = "tests_input_output/";
+	
+	private static boolean premierRun = true;
 
 	// Méthode permettant de vérifier que deux fichiers sont identiques, au niveau contenu
 	private static void assertMemesFichiers(String cheminFichierAttendu, String cheminFichierResultat) throws Exception {
@@ -52,11 +54,12 @@ public class ChessMainTest {
 		return inputOutputPath + "expected_output/" + fileName + "_expected_output.txt";
 	}
 	
-	private static void assertRightInputOutput(String fileName, Runnable r, boolean veryFirstAssert) {
+	private static void assertRightInputOutput(String fileName, Runnable r) {
 		try {
 			InputStream is = new FileInputStream(new File(getInputFileName(fileName)));
-			if (veryFirstAssert) { // S'il s'agit du tout premier assert, il suffit de changer la valeur de System.in
+			if (premierRun) { // S'il s'agit du tout premier assert, il suffit de changer la valeur de System.in
 				System.setIn(is);
+				premierRun = false;
 			} else {
 				switchSysIn(is); // S'il s'agit d'un autre assert, il faut également rafraichir les variables du main
 			}
@@ -89,30 +92,34 @@ public class ChessMainTest {
 	@Test
 	public void demanderRecommencerTest() {
 		assertRightInputOutput("recommencer_1", 
-				() -> assertTrue(ChessMain.demanderRecommencer()),
-				true);
+				() -> assertTrue(ChessMain.demanderRecommencer()));
 		
 		assertRightInputOutput("recommencer_2", 
-				() -> assertFalse(ChessMain.demanderRecommencer()),
-				false);
+				() -> assertFalse(ChessMain.demanderRecommencer()));
 		
 		assertRightInputOutput("recommencer_3", 
-				() -> assertFalse(ChessMain.demanderRecommencer()),
-				false);
+				() -> assertFalse(ChessMain.demanderRecommencer()));
 		
 		assertRightInputOutput("recommencer_4", 
-				() -> assertTrue(ChessMain.demanderRecommencer()),
-				false);
+				() -> assertTrue(ChessMain.demanderRecommencer()));
 	}
 
 	@Test
 	public void demanderTourJoueurTest() {
 		assertRightInputOutput("demanderTour_1", 
-				() -> assertFalse(ChessMain.demanderTourJoueur()),
-				false);
+				() -> assertFalse(ChessMain.demanderTourJoueur()));
 		
 		// A FINIR
 	}
+	
+	@Test
+	public void initialisationConsoleTest() {
+		assertRightInputOutput("initConsole_1",
+				() -> ChessMain.initialisationConsole());
+		
+		// A FINIR
+	}
+	
 
 	@AfterAll
 	public static void finalisation() {
