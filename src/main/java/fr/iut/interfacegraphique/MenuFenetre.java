@@ -33,7 +33,7 @@ public class MenuFenetre extends JMenuBar {
         nouvellePartie.addActionListener(e -> nouvellePartie());
         partie.add(nouvellePartie);
 
-        chargerPartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK));
+        chargerPartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK));
         chargerPartie.addActionListener(e -> chargerPartie());
         partie.add(chargerPartie);
 
