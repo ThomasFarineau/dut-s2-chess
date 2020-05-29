@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Test;
 public class ChessMainTest {
 	private final static InputStream sysin = System.in;
 	private final static PrintStream sysout = new PrintStream(System.out);
+	
+	private final static String inputOutputPath = "tests_input_output/";
 
 	// Méthode permettant de vérifier que deux fichiers sont identiques, au niveau contenu
 	private static void assertMemesFichiers(String cheminFichierAttendu, String cheminFichierResultat) throws Exception {
@@ -37,130 +39,76 @@ public class ChessMainTest {
 		System.setIn(is);
 		ChessMain.reInitVars();
 	}
-
-	@Test
-	public void demanderRecommencerTest() {
-		// Test 1
+	
+	private static String getInputFileName(String fileName) {
+		return inputOutputPath + "input/" + fileName + "_input.txt";
+	}
+	
+	private static String getOutputFileName(String fileName) {
+		return inputOutputPath + "output/" + fileName + "_output.txt";
+	}
+	
+	private static String getExpectedOutputFileName(String fileName) {
+		return inputOutputPath + "expected_output/" + fileName + "_expected_output.txt";
+	}
+	
+	private static void assertRightInputOutput(String fileName, Runnable r, boolean veryFirstAssert) {
 		try {
-			// Execution de la méthode
-			InputStream is1 = new FileInputStream(new File("tests_input_output/input/recommencer_1.txt"));
-			System.setIn(is1); // On change le flux de System.in
+			InputStream is = new FileInputStream(new File(getInputFileName(fileName)));
+			if (veryFirstAssert) { // S'il s'agit du tout premier assert, il suffit de changer la valeur de System.in
+				System.setIn(is);
+			} else {
+				switchSysIn(is); // S'il s'agit d'un autre assert, il faut également rafraichir les variables du main
+			}
+			
+			File ps_file = new File(getOutputFileName(fileName));
+			ps_file.createNewFile();
+			PrintStream ps = new PrintStream(ps_file);
+			System.setOut(ps);
 
-			File ps1_file = new File("tests_input_output/output/recommencer_1_output.txt");
-			ps1_file.createNewFile();
-			PrintStream ps1 = new PrintStream(ps1_file);
-			System.setOut(ps1);
+			r.run();
 
-			assertTrue(ChessMain.demanderRecommencer());
-
-			ps1.close();
-			is1.close();
+			ps.close();
+			is.close();
 
 			// Verification de la sortie du lancement de la méthode
 			assertMemesFichiers(
-					"tests_input_output/expected_output/recommencer_1_expected_output.txt", 
-					"tests_input_output/output/recommencer_1_output.txt"
+					getExpectedOutputFileName(fileName), 
+					getOutputFileName(fileName)
 					);
 
 			// Suppression du fichier créé par l'output
-			ps1_file.delete();
+			ps_file.delete();
 		} catch (Exception e) {
 			// Si une Exception est levée à n'importe quel moment du test, le test échoue.
-			fail();
-		}
-
-		// Test 2
-		try {
-			// Execution de la méthode
-			InputStream is2 = new FileInputStream(new File("tests_input_output/input/recommencer_2.txt"));
-			switchSysIn(is2); // Pour les tests suivant le 1er, il faut réinitialiser le scanner en plus de changer System.in
-
-			File ps2_file = new File("tests_input_output/output/recommencer_2_output.txt");
-			ps2_file.createNewFile();
-			PrintStream ps2 = new PrintStream(ps2_file);
-			System.setOut(ps2);
-
-			assertFalse(ChessMain.demanderRecommencer());
-
-			ps2.close();
-			is2.close();
-
-			// Verification de la sortie du lancement de la méthode
-			assertMemesFichiers(
-					"tests_input_output/expected_output/recommencer_2_expected_output.txt", 
-					"tests_input_output/output/recommencer_2_output.txt"
-					);
-
-			// Suppression du fichier créé par l'output
-			ps2_file.delete();
-		} catch (Exception e) {
 			e.printStackTrace();
-			// Si une Exception est levée à n'importe quel moment du test, le test échoue.
-			fail();
-		}
-
-
-		// Test 3
-		try {
-			// Execution de la méthode
-			InputStream is3 = new FileInputStream(new File("tests_input_output/input/recommencer_3.txt"));
-			switchSysIn(is3); // Pour les tests suivant le 1er, il faut réinitialiser le scanner en plus de changer System.in
-
-			File ps3_file = new File("tests_input_output/output/recommencer_3_output.txt");
-			ps3_file.createNewFile();
-			PrintStream ps3 = new PrintStream(ps3_file);
-			System.setOut(ps3);
-
-			assertFalse(ChessMain.demanderRecommencer());
-
-			ps3.close();
-			is3.close();
-
-			// Verification de la sortie du lancement de la méthode
-			assertMemesFichiers(
-					"tests_input_output/expected_output/recommencer_3_expected_output.txt", 
-					"tests_input_output/output/recommencer_3_output.txt"
-					);
-
-			// Suppression du fichier créé par l'output
-			ps3_file.delete();
-		} catch (Exception e) {
-			e.printStackTrace();
-			// Si une Exception est levée à n'importe quel moment du test, le test échoue.
-			fail();
-		}
-
-		// Test 4
-		try {
-			// Execution de la méthode
-			InputStream is4 = new FileInputStream(new File("tests_input_output/input/recommencer_4.txt"));
-			switchSysIn(is4); // Pour les tests suivant le 1er, il faut réinitialiser le scanner en plus de changer System.in
-
-			File ps4_file = new File("tests_input_output/output/recommencer_4_output.txt");
-			ps4_file.createNewFile();
-			PrintStream ps4 = new PrintStream(ps4_file);
-			System.setOut(ps4);
-
-			assertTrue(ChessMain.demanderRecommencer());
-
-			ps4.close();
-			is4.close();
-
-			// Verification de la sortie du lancement de la méthode
-			assertMemesFichiers(
-					"tests_input_output/expected_output/recommencer_4_expected_output.txt", 
-					"tests_input_output/output/recommencer_4_output.txt"
-					);
-
-			// Suppression du fichier créé par l'output
-			ps4_file.delete();
-		} catch (Exception e) {
-			e.printStackTrace();
-			// Si une Exception est levée à n'importe quel moment du test, le test échoue.
 			fail();
 		}
 	}
 
+	@Test
+	public void demanderRecommencerTest() {
+		assertRightInputOutput("recommencer_1", 
+				() -> assertTrue(ChessMain.demanderRecommencer()),
+				true);
+		
+		assertRightInputOutput("recommencer_2", 
+				() -> assertFalse(ChessMain.demanderRecommencer()),
+				false);
+		
+		assertRightInputOutput("recommencer_3", 
+				() -> assertFalse(ChessMain.demanderRecommencer()),
+				false);
+		
+		assertRightInputOutput("recommencer_4", 
+				() -> assertTrue(ChessMain.demanderRecommencer()),
+				false);
+	}
+
+	@Test
+	public void demanderTourJoueurTest() {
+		// A FAIRE
+	}
 
 	@AfterAll
 	public static void finalisation() {
