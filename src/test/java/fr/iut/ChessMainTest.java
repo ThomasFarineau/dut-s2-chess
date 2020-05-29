@@ -107,7 +107,11 @@ public class ChessMainTest {
 
 	@Test
 	public void demanderTourJoueurTest() {
-		// A FAIRE
+		assertRightInputOutput("demanderTour_1", 
+				() -> assertFalse(ChessMain.demanderTourJoueur()),
+				false);
+		
+		// A FINIR
 	}
 
 	@AfterAll

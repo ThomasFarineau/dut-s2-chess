@@ -1,0 +1,4 @@
+oui
+blqnc
+Blancs
+ligne qui ne sera pas lue normalement
