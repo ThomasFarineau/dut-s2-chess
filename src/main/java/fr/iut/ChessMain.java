@@ -14,7 +14,6 @@ public class ChessMain {
 	private static Plateau p = new Plateau(); // On charge le plateau
 	private static GestionnairePartie gp = new GestionnairePartie(p); // On initialise un fichier avec le plateau
 	private static String alerte = "";
-	private static boolean recommencer = true;
 
 	// Pour l'interface graphique
 	private static Fenetre f = null;
@@ -27,7 +26,6 @@ public class ChessMain {
 		p = new Plateau();
 		gp = new GestionnairePartie(p);
 		alerte = "";
-		recommencer = true;
 		f = null;
 	}
 	
@@ -200,11 +198,10 @@ public class ChessMain {
 	public static void mainConsole() {
 		System.out.println("Bienvenue dans le jeu d'échec.");
 		
-		while (recommencer) {
+		do {
 			partieConsole();
 			alerte = "";
-			recommencer = demanderRecommencer();
-		}
+		} while (demanderRecommencer());
 		
 		System.out.println("Au revoir !");
 		sc.close();
