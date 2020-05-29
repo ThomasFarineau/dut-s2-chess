@@ -7,7 +7,15 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.*;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
+import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import fr.iut.fonctions.Fonctions;
@@ -105,7 +113,7 @@ public class MenuFenetre extends JMenuBar {
         }
     }
 
-    public void chargerPartie() {
+    public boolean chargerPartie() {
         JPanel panel = new JPanel();
         panel.setSize(new Dimension(500, 500));
         panel.setLayout(null);
@@ -168,23 +176,27 @@ public class MenuFenetre extends JMenuBar {
                     resp = JOptionPane.showOptionDialog(null, panel3, "Charger une partie", 0, JOptionPane.PLAIN_MESSAGE, null, options, null);
 
                     if(resp == 0) {
-                        gp.getPlat().setTourJoueur(false);
-                    } else if(resp == 1) {
-                        gp.getPlat().setTourJoueur(true);
+                        gp.setTourJoueur(false);
+                    } else {
+                    	gp.setTourJoueur(true);
                     }
 
-                    pj.repaint();
                     activerEnregistrer();
                     ((EchiquierListener)pj.getListeners(MouseListener.class)[0]).setInteractable(true);
+                    pj.reInitValues();
+                    
+                    pj.repaint();
+                    return true;
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(pj, "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
+        
+        return false;
     }
 
     public void nouvellePartie() {
-
         int resp = 0;
         if(partieCommencer()) {
             // Creation du panel pour l'affichage du dialogue
@@ -213,8 +225,11 @@ public class MenuFenetre extends JMenuBar {
             try {
                 gp.nouvellePartie();
                 activerEnregistrer();
-                pj.repaint();
+                gp.setTourJoueur(false);
                 ((EchiquierListener)pj.getListeners(MouseListener.class)[0]).setInteractable(true);
+                pj.reInitValues();
+                
+                pj.repaint();
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(pj, "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
             }
