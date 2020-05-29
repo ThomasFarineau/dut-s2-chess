@@ -14,6 +14,7 @@ public class ChessMain {
 	private static Plateau p = new Plateau(); // On charge le plateau
 	private static GestionnairePartie gp = new GestionnairePartie(p); // On initialise un fichier avec le plateau
 	private static String alerte = "";
+	private static boolean quitter = false;
 
 	// Pour l'interface graphique
 	private static Fenetre f = null;
@@ -145,9 +146,8 @@ public class ChessMain {
 					alerte = "Erreur : " + e.getMessage();
 				}	
 			} else if(entree.toLowerCase().equals("quitter")) {
-				sc.close();
-				System.out.println("Au revoir !");
-				System.exit(0);
+				quitter = true;
+				entreeValide = true;
 			} else {
 				if(Fonctions.verifSyntaxe(entree)) {
 					try {
@@ -169,16 +169,18 @@ public class ChessMain {
 
 		alerte = "La partie vient de commencer !";
 
-		while(!p.verifMat()) {
+		while(!(p.verifMat() || quitter)) {
 			jouerTour();
 		}
 		
-		System.out.println("\n" + p);
-		System.out.println("\nFélicitations, les " + (p.getTourJoueur()?"blancs":"noirs") + " ont gagné !\n");
+		if (!quitter) {
+			System.out.println("\n" + p);
+			System.out.println("\nFélicitations, les " + (p.getTourJoueur()?"blancs":"noirs") + " ont gagné !\n");
+		}
 	}
 
 	public static boolean demanderRecommencer() {
-		while (true) {
+		while (true && !quitter) {
 			System.out.print("Voulez vous jouer une autre partie ? (Oui/Non) : ");
 
 			String reponse = sc.nextLine().toUpperCase();
@@ -193,6 +195,8 @@ public class ChessMain {
 				System.out.println("Réponse invalide, veuillez recommencer.");
 			}
 		}
+		
+		return false;
 	}
 
 	public static void mainConsole() {
