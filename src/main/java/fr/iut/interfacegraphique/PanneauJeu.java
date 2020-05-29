@@ -6,17 +6,16 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 import fr.iut.fonctions.Fonctions;
-import fr.iut.gestionpartie.GestionnairePartie;
 import fr.iut.listener.EchiquierListener;
 import fr.iut.pieces.Piece;
 import fr.iut.plateau.Plateau;
@@ -168,7 +167,7 @@ public class PanneauJeu extends JPanel {
 				System.exit(0);
 			}
 		}
-		
+
 		repaint();
 	}
 
