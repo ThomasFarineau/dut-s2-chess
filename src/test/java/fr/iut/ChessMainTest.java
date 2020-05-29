@@ -133,6 +133,31 @@ public class ChessMainTest {
 		// A FINIR
 	}
 	
+	@Test
+	public void mainTest() {
+		// Scenario nouvelle partie (avec mat du berger blanc, enregistrer sous avant le mat du berger, et ne pas rejouer)
+		
+		
+		// Scenario avec chargement de mat_du_berger.csv, mat par les blancs et recommencement avec autre mat blanc puis ne pas rejouer
+		
+		
+		// Scenario avec mat des noirs (pas du berger), recommencer avec chargement, puis cancel, puis chargements invalides,
+		// Puis chargement berger, puis mat et ne pas rejouer
+		
+		
+		// Scenario avec début de jeu puis enregistrer puis enregistrer sous, puis enregistrer, puis quitter
+		
+		
+		// Scenario avec mat noir puis rejouer une nouvelle partie et plusieurs entrées invalides puis quitter en pleine partie
+		
+		
+		// Scenario avec de nombreuses entrées invalides puis enregistrer sous et quitter
+		
+		
+		
+		// Suppression des fichiers créés par la méthode
+		
+	}
 
 	@AfterAll
 	public static void finalisation() {
