@@ -50,6 +50,26 @@ public class ChessMain {
 
 		return retour.toString();
 	}
+	
+	public static boolean demanderTourJoueur() {
+		while (true) {
+			System.out.print("Qui va commencer à jouer, à la reprise de la partie chargée ? (Blanc/Noir) : ");
+
+			String reponse = sc.nextLine().toUpperCase();
+			switch (reponse) {
+			case "B":
+			case "BLANC":
+			case "BLANCS":
+				return false;
+			case "N":
+			case "NOIR":
+			case "NOIRS":
+				return true;
+			default:
+				System.out.println("Réponse invalide, veuillez recommencer.");
+			}
+		}
+	}
 
 	public static void initialisationConsole() {
 		boolean entree1Valide = false; // Sert à vérifier la validité du message saisi
@@ -70,6 +90,7 @@ public class ChessMain {
 			case "demarrer":
 				try {
 					gp.nouvellePartie(); // On charge un fichier qui se nomme : "nouvellePartie.csv"
+					p.setTourJoueur(false);
 				} catch(Exception e) {
 					System.out.println("Erreur : " + e.getMessage());
 					entree1Valide=false; // Si on a une erreur IOException, on initialise le boolean a false.
@@ -89,6 +110,7 @@ public class ChessMain {
 					} else {
 						try {
 							gp.chargerAnciennePartie(entree2); // On charge le nom du fichier en entrée
+							p.setTourJoueur(demanderTourJoueur());
 						} catch(Exception e) {
 							System.out.println("Erreur : " + e.getMessage());
 							entree2Valide = false; // Si on a une Exception, l'entrée n'est pas validée
@@ -177,9 +199,10 @@ public class ChessMain {
 
 	public static void mainConsole() {
 		System.out.println("Bienvenue dans le jeu d'échec.");
-
+		
 		while (recommencer) {
 			partieConsole();
+			alerte = "";
 			recommencer = demanderRecommencer();
 		}
 		
