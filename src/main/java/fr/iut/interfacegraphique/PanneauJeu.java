@@ -230,8 +230,4 @@ public class PanneauJeu extends JPanel {
 		plat.verifMat();
 		casesEchec = plat.getDernierEchec();
 	}
-
-	public Plateau getPlat() {
-		return plat;
-	}
 }
