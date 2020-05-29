@@ -211,6 +211,7 @@ public class PanneauJeu extends JPanel {
 		resetSelection();
 
 		if(plat.verifMat()) {
+			repaint();
 			mat();
 		}
 	}
