@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -93,22 +94,22 @@ public class PanneauJeu extends JPanel {
 					}
 				}
 			}
-			
+
 			int horizontalCenter = this.getPreferredSize().width/2;
 			// Dessin de la partie du bas
 			g.setColor(new Color(30,30,30));
 			g.drawLine(horizontalCenter, 600, horizontalCenter, 660);
-			
+
 			Font bold = new Font("Calibri", Font.BOLD, 16);
 			Font other = new Font("Calibri", Font.PLAIN, 24);
 			FontMetrics fmBold = g.getFontMetrics(bold);
 			FontMetrics fmOther = g.getFontMetrics(other);
-			
+
 			g.setColor(Color.white);
 			g.setFont(bold);
 			g.drawString("Tour du joueur", (horizontalCenter - fmBold.stringWidth("Tour du joueur"))/2, 600 + fmBold.getHeight());
 			g.drawString("Dernier mouvement effectué", horizontalCenter + (horizontalCenter - fmBold.stringWidth("Dernier mouvement effectué"))/2, 600 + fmBold.getHeight());
-			
+
 			g.setFont(other);
 			if (plat.getTourJoueur()) {
 				g.setColor(Color.black);
@@ -119,7 +120,7 @@ public class PanneauJeu extends JPanel {
 				g.drawString("Blanc", (horizontalCenter - fmOther.stringWidth("Blanc"))/2, 600 + fmBold.getHeight() + fmOther.getHeight());
 				g.setColor(Color.black);
 			}
-			
+
 			g.drawString(dernierMouvement, horizontalCenter + (horizontalCenter - fmOther.stringWidth(dernierMouvement))/2, 600 + fmBold.getHeight() + fmOther.getHeight());
 		}
 	}
@@ -129,7 +130,7 @@ public class PanneauJeu extends JPanel {
 		return new Dimension(600,660);
 	}
 
-	public void mat() {
+	public void recommencer() {
 		JPanel panel = new JPanel();
 		panel.setSize(new Dimension(430, 130));
 		panel.setLayout(null);
@@ -154,17 +155,21 @@ public class PanneauJeu extends JPanel {
 		String[] options = {"Nouvelle partie", "Charger une partie", "Quitter"};
 
 		// Affichage du dialogue et recuperation de la réponse sous resp
-		int resp = JOptionPane.showOptionDialog(null, panel, "Échec et mat", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+		int resp = -1;
+		while (resp == -1) {
+			resp = JOptionPane.showOptionDialog(null, panel, "Échec et mat", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
-		if(resp == 0) {
-			parent.getMf().nouvellePartie();
-		} else if(resp == 1) {
-			parent.getMf().chargerPartie();
-		} else if(resp == 2) {
-			System.exit(0);
+			if(resp == 0) {
+				parent.getMf().nouvellePartie();
+			} else if(resp == 1) {
+				if (!parent.getMf().chargerPartie())
+					resp = -1;
+			} else if(resp == 2) {
+				System.exit(0);
+			}
 		}
-
-		System.out.println(resp);
+		
+		repaint();
 	}
 
 	public void selectionner(int i, int j) {
@@ -199,7 +204,7 @@ public class PanneauJeu extends JPanel {
 		try {
 			plat.deplacer(new int[] {selection[0], selection[1], i, j});
 			this.casesEchec = plat.verifEchec();
-			
+
 			String pieceDeplacee = plat.getEchiquier()[i][j].toString();
 			char[] depChars = Fonctions.convertEnCaracteres(new int[] {selection[0], selection[1], i, j});
 			dernierMouvement = pieceDeplacee + " (" + depChars[0] + depChars[1] + " -> " + depChars[2] + depChars[3] + ")";
@@ -212,18 +217,19 @@ public class PanneauJeu extends JPanel {
 
 		if(plat.verifMat()) {
 			repaint();
-			mat();
+			recommencer();
 		}
 	}
 
 	public void setCasesEchec(int[] casesEchec) {
 		this.casesEchec = casesEchec;
 	}
-	
+
 	public void reInitValues() {
 		dernierMouvement = "-";
 		selection = null;
-		casesEchec = null;
+		plat.verifMat();
+		casesEchec = plat.getDernierEchec();
 	}
 
 	public Plateau getPlat() {
