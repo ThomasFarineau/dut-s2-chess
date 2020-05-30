@@ -48,8 +48,8 @@ public class PionTest {
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}
 		};
 
-		boolean[][] deplacementsCalculés = pionBlanc.getDeplacementsPoss();
-		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
+		boolean[][] deplacementsCalcules = pionBlanc.getDeplacementsPoss();
+		assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
 	}
 
 
@@ -74,8 +74,8 @@ public class PionTest {
 			};
 
 
-			boolean[][] deplacementsCalculés = pionNoir.getDeplacementsPoss();
-			assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
+			boolean[][] deplacementsCalcules = pionNoir.getDeplacementsPoss();
+			assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
 		}
 		
 		@Test

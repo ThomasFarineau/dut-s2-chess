@@ -41,11 +41,11 @@ public class CavalierTest {
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}
 				};
 		
-		boolean[][] deplacementsCalculés = cavalierBlanc.getDeplacementsPoss();
-		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
+		boolean[][] deplacementsCalcules = cavalierBlanc.getDeplacementsPoss();
+		assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
 		
-		deplacementsCalculés = cavalierNoir.getDeplacementsPoss();
-		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
+		deplacementsCalcules = cavalierNoir.getDeplacementsPoss();
+		assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
 	}
 	
 	@Test

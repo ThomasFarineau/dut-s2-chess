@@ -40,11 +40,11 @@ class ReineTest {
 				{true, false, false, false, false, false, false, true, false, false, false, false, false, false, true}
 				};
 		
-		boolean[][] deplacementsCalculés = reineBlanche.getDeplacementsPoss();
-		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
+		boolean[][] deplacementsCalcules = reineBlanche.getDeplacementsPoss();
+		assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
 		
-		deplacementsCalculés = reineNoir.getDeplacementsPoss();
-		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
+		deplacementsCalcules = reineNoir.getDeplacementsPoss();
+		assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
 	}
     
     @Test

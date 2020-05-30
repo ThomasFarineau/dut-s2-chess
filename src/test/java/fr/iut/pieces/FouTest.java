@@ -47,11 +47,11 @@ public class FouTest {
 				{true, false, false, false, false, false, false, false, false, false, false, false, false, false, true}
 				};
 		
-		boolean[][] deplacementsCalculés = fouBlanc.getDeplacementsPoss();
-		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
+		boolean[][] deplacementsCalcules = fouBlanc.getDeplacementsPoss();
+		assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
 		
-		deplacementsCalculés = fouNoir.getDeplacementsPoss();
-		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
+		deplacementsCalcules = fouNoir.getDeplacementsPoss();
+		assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
 	}
 	
 	@Test

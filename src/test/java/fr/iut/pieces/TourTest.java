@@ -45,11 +45,11 @@ class TourTest {
 				{false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false}
 				};
 		
-		boolean[][] deplacementsCalculés = tourBlanche.getDeplacementsPoss();
-		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
+		boolean[][] deplacementsCalcules = tourBlanche.getDeplacementsPoss();
+		assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
 		
-		deplacementsCalculés = tourNoir.getDeplacementsPoss();
-		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
+		deplacementsCalcules = tourNoir.getDeplacementsPoss();
+		assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
 	}
     
     @Test
