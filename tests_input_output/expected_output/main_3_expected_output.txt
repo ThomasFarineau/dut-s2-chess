@@ -1,0 +1,176 @@
+Voulez-vous jouer en mode console ou bien en mode graphique ?
+	 1 - Mode Console
+	 2 - Mode Graphique
+
+Veuillez saisir votre choix : Vous avez décidé de jouer en mode Console.
+
+
+Bienvenue dans le jeu d'échec en mode Console.
+
+Voulez-vous démarrer une nouvelle partie ou bien charger une ancienne partie ?
+	 1 - Démarrer une nouvelle partie
+	 2 - Charger une ancienne partie
+
+Veuillez saisir votre choix : 
+
+
+
+
+
+
+
+8 Tn  Cn  Fn  ReN RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn  Pn  Pn  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -   -   -   -   -  
+4  -   -   -   -   -   -   -   -  
+3  -   -   -   -   -   -   -   -  
+2 Pb  Pb  Pb  Pb  Pb  Pb  Pb  Pb  
+1 Tb  Cb  Fb  ReB RoB Fb  Cb  Tb  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+La partie vient de commencer !
+
+C'est au tour du joueur blanc.
+
+Veuillez entrer votre déplacement : 
+
+
+
+
+
+
+
+8 Tn  Cn  Fn  ReN RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn  Pn  Pn  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -   -   -   -   -  
+4  -   -   -   -   -   -   -   -  
+3  -   -   -   -   -  Pb   -   -  
+2 Pb  Pb  Pb  Pb  Pb   -  Pb  Pb  
+1 Tb  Cb  Fb  ReB RoB Fb  Cb  Tb  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+
+
+C'est au tour du joueur noir.
+
+Veuillez entrer votre déplacement : 
+
+
+
+
+
+
+
+8 Tn  Cn  Fn  ReN RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Pn  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -  Pn   -   -   -  
+4  -   -   -   -   -   -   -   -  
+3  -   -   -   -   -  Pb   -   -  
+2 Pb  Pb  Pb  Pb  Pb   -  Pb  Pb  
+1 Tb  Cb  Fb  ReB RoB Fb  Cb  Tb  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+
+
+C'est au tour du joueur blanc.
+
+Veuillez entrer votre déplacement : 
+
+
+
+
+
+
+
+8 Tn  Cn  Fn  ReN RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Pn  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -  Pn   -   -   -  
+4  -   -   -   -   -   -  Pb   -  
+3  -   -   -   -   -  Pb   -   -  
+2 Pb  Pb  Pb  Pb  Pb   -   -  Pb  
+1 Tb  Cb  Fb  ReB RoB Fb  Cb  Tb  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+
+
+C'est au tour du joueur noir.
+
+Veuillez entrer votre déplacement : 
+8 Tn  Cn  Fn   -  RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Pn  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -  Pn   -   -   -  
+4  -   -   -   -   -   -  Pb  ReN 
+3  -   -   -   -   -  Pb   -   -  
+2 Pb  Pb  Pb  Pb  Pb   -   -  Pb  
+1 Tb  Cb  Fb  ReB RoB Fb  Cb  Tb  
+   A   B   C   D   E   F   G   H
+
+Félicitations, les noirs ont gagné !
+
+Voulez-vous jouer une autre partie ? (Oui/Non) : 
+Voulez-vous démarrer une nouvelle partie ou bien charger une ancienne partie ?
+	 1 - Démarrer une nouvelle partie
+	 2 - Charger une ancienne partie
+
+Veuillez saisir votre choix : 
+Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "cancel" pour revenir en arrière : 
+Voulez-vous démarrer une nouvelle partie ou bien charger une ancienne partie ?
+	 1 - Démarrer une nouvelle partie
+	 2 - Charger une ancienne partie
+
+Veuillez saisir votre choix : 
+Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "cancel" pour revenir en arrière : Erreur : Fichier introuvable : "mat de la mort qui tue.csv"
+
+Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "cancel" pour revenir en arrière : Erreur : Fichier introuvable : "echiquierIntrouvable.pdf.csv"
+
+Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "cancel" pour revenir en arrière : Qui va commencer à jouer, à la reprise de la partie chargée ? (Blanc/Noir) : 
+
+
+
+
+
+
+
+8 Tn   -  Fn  ReN RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Pn  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -  Pn   -   -  ReB 
+4  -  Cn  Fb   -  Pb   -   -   -  
+3  -   -   -   -   -   -   -   -  
+2 Pb  Pb  Pb  Pb   -  Pb  Pb  Pb  
+1 Tb  Cb  Fb   -  RoB  -  Cb  Tb  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+La partie a été chargée !
+
+C'est au tour du joueur blanc.
+
+Veuillez entrer votre déplacement : 
+8 Tn   -  Fn  ReN RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  ReB Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -  Pn   -   -   -  
+4  -  Cn  Fb   -  Pb   -   -   -  
+3  -   -   -   -   -   -   -   -  
+2 Pb  Pb  Pb  Pb   -  Pb  Pb  Pb  
+1 Tb  Cb  Fb   -  RoB  -  Cb  Tb  
+   A   B   C   D   E   F   G   H
+
+Félicitations, les blancs ont gagné !
+
+Voulez-vous jouer une autre partie ? (Oui/Non) : Au revoir !

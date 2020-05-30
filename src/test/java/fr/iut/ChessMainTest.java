@@ -146,9 +146,10 @@ public class ChessMainTest {
 		assertRightInputOutput("main_2",
 				() -> ChessMain.main(null));
 		
-		// Scenario avec mat des noirs (pas du berger), recommencer avec chargement, puis cancel, puis chargements invalides,
+		// Scenario avec mat des noirs, recommencer avec chargement, puis cancel, puis chargements invalides,
 		// Puis chargement berger, puis mat et ne pas rejouer
-		
+		assertRightInputOutput("main_3",
+				() -> ChessMain.main(null));
 		
 		// Scenario avec début de jeu puis enregistrer puis enregistrer sous, puis enregistrer, puis quitter
 		
