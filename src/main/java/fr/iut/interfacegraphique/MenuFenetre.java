@@ -88,7 +88,7 @@ public class MenuFenetre extends JMenuBar {
             String file = Fonctions.convertCheminRelatif(choixFichier.getSelectedFile().getAbsolutePath());
             try {
                 if (choixFichier.getSelectedFile().exists()) {
-                    JPanel panelEcraser = creerPopup(430, 100, "Le fichier " + choixFichier.getSelectedFile().getName() + " existe d\u00E9j\u00E0, voulez-vous l'\u00E9craser ?");
+                    JPanel panelEcraser = creerPopup(430, 100, "Le fichier " + choixFichier.getSelectedFile().getName() + " existe déjà, voulez-vous l'écraser ?");
                     int resp = ajoutChoix(panelEcraser, "Enregistrer une partie", new String[]{"Oui", "Non", "Annuler"}, "Non");
 
                     if (resp == 0) {
@@ -115,14 +115,14 @@ public class MenuFenetre extends JMenuBar {
 
             int resp = 0;
             if (partieCommencer()) {
-                JPanel panelValider = creerPopup(430, 100, "\u00CAtes-vous s\u00FBr de vouloir charger une partie ?");
+                JPanel panelValider = creerPopup(430, 100, "Êtes-vous sûr de vouloir charger une partie ?");
                 resp = ajoutChoix(panelValider, "Charger une partie", new String[]{"Oui", "Non"}, "Non");
             }
-            // Utilisation de la rÃ©ponse
+            // Utilisation de la réponse
             if (resp == 0) {
                 try {
                     gp.chargerAnciennePartie(file);
-                    JPanel panelChoixTour = creerPopup(430, 100, "Qui va commencer \u00E0 jouer, \u00E0 la reprise de la partie ?");
+                    JPanel panelChoixTour = creerPopup(430, 100, "Qui va commencer à jouer, à la reprise de la partie ?");
                     resp = ajoutChoix(panelChoixTour, "Charger une partie", new String[]{"Blanc", "Noir"}, null);
 
                     if (resp == 0) {
@@ -146,7 +146,7 @@ public class MenuFenetre extends JMenuBar {
     public void nouvellePartie() {
         int resp = 0;
         if (partieCommencer()) {
-            JPanel panelValider = creerPopup(430, 100, "\u00CAtes-vous s\u00FBr de vouloir d\u00E9marrer une nouvelle partie ?");
+            JPanel panelValider = creerPopup(430, 100, "Êtes-vous sûr de vouloir démarrer une nouvelle partie ?");
             resp = ajoutChoix(panelValider, "Nouvelle partie", new String[]{"Oui", "Non"}, "Non");
         }
         if (resp == 0) {
