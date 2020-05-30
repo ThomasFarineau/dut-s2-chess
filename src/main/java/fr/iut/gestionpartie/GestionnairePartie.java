@@ -47,7 +47,7 @@ public class GestionnairePartie {
 		for (int i = 0; i < echiquier.length; i++) {
 			String line = br.readLine();
 			
-			String[] values = null;
+			String[] values;
 			
 			try {
 				values = line.split(",");
@@ -113,7 +113,7 @@ public class GestionnairePartie {
 		plat.setEchiquier(echiquier);
 	}
 
-	public void chargerAnciennePartie(String nomFichier) throws IOException, Exception {
+	public void chargerAnciennePartie(String nomFichier) throws Exception {
 		if (!nomFichier.endsWith(".csv"))
 			nomFichier += ".csv";
 		
@@ -143,12 +143,12 @@ public class GestionnairePartie {
 			
 			Piece[][] echiquierAEcrire = plat.getEchiquier();
 
-			for (int i = 0; i < echiquierAEcrire.length; i++) {
-				for (int j = 0; j < echiquierAEcrire[i].length; j++) {
+			for (Piece[] pieces : echiquierAEcrire) {
+				for (int j = 0; j < pieces.length; j++) {
 					bw.write(
-							((echiquierAEcrire[i][j] == null) ? "V" : echiquierAEcrire[i][j].toString()) + 
-							((j == echiquierAEcrire[i].length - 1 )? "" : ",")
-							);
+							((pieces[j] == null) ? "V" : pieces[j].toString()) +
+									((j == pieces.length - 1) ? "" : ",")
+					);
 				}
 
 				bw.write("\n");
@@ -164,7 +164,7 @@ public class GestionnairePartie {
 		return retour;
 	}
 
-	public String sauvegarderPartie(String nomFichier) throws IOException, Exception {
+	public String sauvegarderPartie(String nomFichier) throws Exception {
 		if (!nomFichier.endsWith(".csv"))
 			nomFichier += ".csv";
 		

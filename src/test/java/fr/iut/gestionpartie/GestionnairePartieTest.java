@@ -3,14 +3,12 @@ package fr.iut.gestionpartie;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -266,7 +264,7 @@ public class GestionnairePartieTest {
 		}
 		
 		if (f.exists()) {
-			f.delete();
+			assertTrue(f.delete());
 		}
 		
 		try {
@@ -337,7 +335,7 @@ public class GestionnairePartieTest {
 			fail();
 		}
 		
-		f.delete();
+		assertTrue(f.delete());
 		
 		try {
 			f = new File("parties/tests/test36_copie.csv");
@@ -382,7 +380,7 @@ public class GestionnairePartieTest {
 			fail();
 		}
 		
-		f.delete();
+		assertTrue(f.delete());
 	}
 	
 	@Test
@@ -433,7 +431,7 @@ public class GestionnairePartieTest {
 		}
 		
 		if(f.exists())
-			f.delete();
+			assertTrue(f.delete());
 		
 		try {
 			String retourAttendu ="Le fichier \"tests/sauvegarde1.csv\" vient d'être créé. "+
@@ -497,7 +495,7 @@ public class GestionnairePartieTest {
 			assertFalse(scan.hasNextLine());
 			scan.close();
 			assertEquals("tests/sauvegarde1.csv", gp.getNomFichier());
-			f.delete();
+			assertTrue(f.delete());
 		} catch (Exception e) {
 			fail();
 		}
@@ -527,8 +525,7 @@ public class GestionnairePartieTest {
 		assertEquals("savGetNomTest.csv", gp.getNomFichier());
 		
 		try {
-			new File("parties/partieActuelle.csv").delete();
-			new File("parties/savGetNomTest.csv").delete();
+			assertTrue(new File("parties/savGetNomTest.csv").delete());
 		} catch (Exception e) {
 			fail();
 		}

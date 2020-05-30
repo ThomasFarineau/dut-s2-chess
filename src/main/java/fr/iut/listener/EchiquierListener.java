@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class EchiquierListener implements MouseListener {
-    private PanneauJeu listenedPanel = null;
+    private PanneauJeu listenedPanel;
     private boolean interactable;
 
     public EchiquierListener(PanneauJeu listenedPanel) {
