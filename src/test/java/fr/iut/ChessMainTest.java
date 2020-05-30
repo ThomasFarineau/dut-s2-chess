@@ -129,7 +129,7 @@ public class ChessMainTest {
 	@Test
 	public void initialisationConsoleTest() {
 		assertRightInputOutput("initConsole_1",
-				() -> ChessMain.initialisationConsole());
+				ChessMain::initialisationConsole);
 		
 		// A FINIR
 	}
@@ -159,7 +159,7 @@ public class ChessMainTest {
 		
 		
 		// Suppression des fichiers créés par la méthode
-		new File("parties/mat du berger.csv").delete();
+		assertTrue(new File("parties/mat du berger.csv").delete());
 	}
 
 	@AfterAll
