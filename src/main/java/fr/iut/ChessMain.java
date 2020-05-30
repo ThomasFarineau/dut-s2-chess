@@ -36,7 +36,7 @@ public class ChessMain {
 
 		retour.append("\n\n").append(p.toString()).append("\n\n");
 		
-		retour.append("Pour sauvegarder votre partie, entrez \"sauvegarder (ficherSauvegarde)\".\n");
+		retour.append("Pour sauvegarder votre partie, entrez \"sauvegarder (fichierSauvegarde)\".\n");
 		retour.append("Pour quitter le jeu, entrez \"quitter\".\n");
 		retour.append(alerte).append("\n");
 
