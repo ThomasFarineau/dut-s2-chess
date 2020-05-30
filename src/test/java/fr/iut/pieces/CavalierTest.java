@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import fr.iut.pieces.Cavalier;
-
 public class CavalierTest {
 	private Cavalier cavalierBlanc;
 	private Cavalier cavalierNoir;
