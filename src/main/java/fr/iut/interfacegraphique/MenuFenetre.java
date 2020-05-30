@@ -1,26 +1,16 @@
 package fr.iut.interfacegraphique;
 
-import java.awt.Dimension;
-import java.awt.Font;
+import fr.iut.fonctions.Fonctions;
+import fr.iut.gestionpartie.GestionnairePartie;
+import fr.iut.listener.EchiquierListener;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
-
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.KeyStroke;
-import javax.swing.UIManager;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-import fr.iut.fonctions.Fonctions;
-import fr.iut.gestionpartie.GestionnairePartie;
-import fr.iut.listener.EchiquierListener;
 
 public class MenuFenetre extends JMenuBar {
     private JMenu partie = new JMenu("Partie");
@@ -32,7 +22,7 @@ public class MenuFenetre extends JMenuBar {
     private JMenu informations = new JMenu("Informations");
     private JMenuItem credits = new JMenuItem("Crdits");
     private JMenuItem version = new JMenuItem("Version du Jeu");
-    
+
     private PanneauJeu pj = null;
     private GestionnairePartie gp = null;
 
@@ -57,13 +47,13 @@ public class MenuFenetre extends JMenuBar {
 
         credits.addActionListener(null);
         informations.add(credits);
-        
+
         version.addActionListener(null);
         informations.add(version);
 
         this.add(partie);
         this.add(informations);
-        
+
         this.pj = pj;
         this.gp = gp;
     }
@@ -105,7 +95,7 @@ public class MenuFenetre extends JMenuBar {
         if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             String file = Fonctions.convertCheminRelatif(chooser.getSelectedFile().getAbsolutePath());
             try {
-if (chooser.getSelectedFile().exists()) {
+                if (chooser.getSelectedFile().exists()) {
                     JPanel panel2 = new JPanel();
                     panel2.setSize(new Dimension(430, 100));
                     panel2.setLayout(null);
@@ -157,7 +147,7 @@ if (chooser.getSelectedFile().exists()) {
             String file = Fonctions.convertCheminRelatif(chooser.getSelectedFile().getAbsolutePath());
 
             int resp = 0;
-            if(partieCommencer()) {
+            if (partieCommencer()) {
                 JPanel panel2 = new JPanel();
                 panel2.setSize(new Dimension(430, 100));
                 panel2.setLayout(null);
@@ -203,16 +193,16 @@ if (chooser.getSelectedFile().exists()) {
                     // Affichage du dialogue et recuperation de la rponse sous resp
                     resp = JOptionPane.showOptionDialog(null, panel3, "Charger une partie", 0, JOptionPane.PLAIN_MESSAGE, null, options, null);
 
-                    if(resp == 0) {
+                    if (resp == 0) {
                         gp.setTourJoueur(false);
                     } else {
-                    	gp.setTourJoueur(true);
+                        gp.setTourJoueur(true);
                     }
 
                     activerEnregistrer();
-                    ((EchiquierListener)pj.getListeners(MouseListener.class)[0]).setInteractable(true);
+                    ((EchiquierListener) pj.getListeners(MouseListener.class)[0]).setInteractable(true);
                     pj.reInitValues();
-                    
+
                     pj.repaint();
                     return true;
                 } catch (Exception e) {
@@ -220,13 +210,13 @@ if (chooser.getSelectedFile().exists()) {
                 }
             }
         }
-        
+
         return false;
     }
 
     public void nouvellePartie() {
         int resp = 0;
-        if(partieCommencer()) {
+        if (partieCommencer()) {
             // Creation du panel pour l'affichage du dialogue
             JPanel panel = new JPanel();
             panel.setSize(new Dimension(430, 100));
@@ -254,9 +244,9 @@ if (chooser.getSelectedFile().exists()) {
                 gp.nouvellePartie();
                 activerEnregistrer();
                 gp.setTourJoueur(false);
-                ((EchiquierListener)pj.getListeners(MouseListener.class)[0]).setInteractable(true);
+                ((EchiquierListener) pj.getListeners(MouseListener.class)[0]).setInteractable(true);
                 pj.reInitValues();
-                
+
                 pj.repaint();
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(pj, "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
