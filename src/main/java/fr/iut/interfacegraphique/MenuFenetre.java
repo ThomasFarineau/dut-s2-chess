@@ -30,7 +30,7 @@ public class MenuFenetre extends JMenuBar {
     private JMenuItem enregistrerPartieSous = new JMenuItem("Enregistrer sous...");
 
     private JMenu informations = new JMenu("Informations");
-    private JMenuItem credits = new JMenuItem("Crédits");
+    private JMenuItem credits = new JMenuItem("Crdits");
     private JMenuItem version = new JMenuItem("Version du Jeu");
     
     private PanneauJeu pj = null;
@@ -105,8 +105,36 @@ public class MenuFenetre extends JMenuBar {
         if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             String file = Fonctions.convertCheminRelatif(chooser.getSelectedFile().getAbsolutePath());
             try {
+if (chooser.getSelectedFile().exists()) {
+                    JPanel panel2 = new JPanel();
+                    panel2.setSize(new Dimension(430, 100));
+                    panel2.setLayout(null);
 
-                gp.sauvegarderPartie(file);
+                    // Ajout du message
+                    JLabel label = new JLabel("Le fichier " + chooser.getSelectedFile().getName() + " existe dÃ©jÃ , voulez-vous l'Ã©craser ?");
+                    label.setBounds(0, 15, 430, 30);
+                    label.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+                    label.setFont(new Font("Calibri", Font.PLAIN, 16));
+                    panel2.add(label);
+
+                    // Changement de la taille du dialogue
+                    UIManager.put("OptionPane.minimumSize", new Dimension(430, 100));
+
+                    // Ajout des options oui et non
+                    String[] options = {"Oui", "Non", "Annuler"};
+
+                    // Affichage du dialogue et recuperation de la rÃ©ponse sous resp
+                    int resp = JOptionPane.showOptionDialog(null, panel2, "Enregistrer un fichier", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
+                    if (resp == 0) {
+                        gp.sauvegarderPartie(file);
+                    } else if (resp == 1) {
+                        enregistrerPartieSous();
+                    } else {
+                        panel2.setVisible(false);
+                    }
+                } else {
+                    gp.sauvegarderPartie(file);
+                }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(pj, "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
             }
@@ -135,7 +163,7 @@ public class MenuFenetre extends JMenuBar {
                 panel2.setLayout(null);
 
                 // Ajout du message
-                JLabel label = new JLabel("Êtes-vous sûr de vouloir charger une partie ?");
+                JLabel label = new JLabel("tes-vous sr de vouloir charger une partie ?");
                 label.setBounds(0, 15, 430, 30);
                 label.setHorizontalAlignment((int) CENTER_ALIGNMENT);
                 label.setFont(new Font("Calibri", Font.PLAIN, 16));
@@ -147,11 +175,11 @@ public class MenuFenetre extends JMenuBar {
                 // Ajout des options oui et non
                 String[] options = {"Oui", "Non"};
 
-                // Affichage du dialogue et recuperation de la réponse sous resp
+                // Affichage du dialogue et recuperation de la rponse sous resp
                 resp = JOptionPane.showOptionDialog(null, panel2, "Charger une partie", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
             }
 
-            // Utilisation de la réponse
+            // Utilisation de la rponse
             if (resp == 0) {
                 try {
                     gp.chargerAnciennePartie(file);
@@ -161,7 +189,7 @@ public class MenuFenetre extends JMenuBar {
                     panel3.setLayout(null);
 
                     // Ajout du message
-                    JLabel label = new JLabel("Qui va commencer à jouer, à la reprise de la partie ?");
+                    JLabel label = new JLabel("Qui va commencer  jouer,  la reprise de la partie ?");
                     label.setBounds(0, 15, 430, 30);
                     label.setHorizontalAlignment((int) CENTER_ALIGNMENT);
                     label.setFont(new Font("Calibri", Font.PLAIN, 16));
@@ -172,7 +200,7 @@ public class MenuFenetre extends JMenuBar {
 
                     String[] options = {"Blanc", "Noir"};
 
-                    // Affichage du dialogue et recuperation de la réponse sous resp
+                    // Affichage du dialogue et recuperation de la rponse sous resp
                     resp = JOptionPane.showOptionDialog(null, panel3, "Charger une partie", 0, JOptionPane.PLAIN_MESSAGE, null, options, null);
 
                     if(resp == 0) {
@@ -205,7 +233,7 @@ public class MenuFenetre extends JMenuBar {
             panel.setLayout(null);
 
             // Ajout du message
-            JLabel label = new JLabel("Êtes-vous sûr de vouloir démarrer une nouvelle partie ?");
+            JLabel label = new JLabel("tes-vous sr de vouloir dmarrer une nouvelle partie ?");
             label.setBounds(0, 15, 430, 30);
             label.setHorizontalAlignment((int) CENTER_ALIGNMENT);
             label.setFont(new Font("Calibri", Font.PLAIN, 16));
@@ -217,10 +245,10 @@ public class MenuFenetre extends JMenuBar {
             // Ajout des options oui et non
             String[] options = {"Oui", "Non"};
 
-            // Affichage du dialogue et recuperation de la réponse sous resp
+            // Affichage du dialogue et recuperation de la rponse sous resp
             resp = JOptionPane.showOptionDialog(null, panel, "Nouvelle partie", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
         }
-        // Utilisation de la réponse
+        // Utilisation de la rponse
         if (resp == 0) {
             try {
                 gp.nouvellePartie();
