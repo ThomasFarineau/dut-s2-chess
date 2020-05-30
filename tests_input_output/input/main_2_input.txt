@@ -1,6 +1,6 @@
 mOde cOnsOle
 2
-mat_DU_berger
+mat DU berger
 BlAnC
 h5 f7
 oui
