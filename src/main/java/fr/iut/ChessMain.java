@@ -76,7 +76,7 @@ public class ChessMain {
 		while(!entree1Valide) {
 			entree1Valide = true;
 
-			System.out.println("\nVoulez vous démarrer une nouvelle partie ou bien charger une ancienne partie ?"); 
+			System.out.println("\nVoulez-vous démarrer une nouvelle partie ou bien charger une ancienne partie ?"); 
 			System.out.println("\t 1 - Démarrer une nouvelle partie");
 			System.out.println("\t 2 - Charger une ancienne partie");
 
@@ -181,7 +181,7 @@ public class ChessMain {
 
 	public static boolean demanderRecommencer() {
 		while (true && !quitter) {
-			System.out.print("Voulez vous jouer une autre partie ? (Oui/Non) : ");
+			System.out.print("Voulez-vous jouer une autre partie ? (Oui/Non) : ");
 
 			String reponse = sc.nextLine().toUpperCase();
 			switch (reponse) {
@@ -200,7 +200,7 @@ public class ChessMain {
 	}
 
 	public static void mainConsole() {
-		System.out.println("Bienvenue dans le jeu d'échec.");
+		System.out.println("Bienvenue dans le jeu d'échec en mode Console.");
 		
 		do {
 			partieConsole();
@@ -225,7 +225,7 @@ public class ChessMain {
 		boolean entreeValide = false;
 		
 		while(!entreeValide) {
-			System.out.println("Voulez vous jouer en mode console ou bien en mode graphique ?"); 
+			System.out.println("Voulez-vous jouer en mode console ou bien en mode graphique ?"); 
 			System.out.println("\t 1 - Mode Console");
 			System.out.println("\t 2 - Mode Graphique");
 
