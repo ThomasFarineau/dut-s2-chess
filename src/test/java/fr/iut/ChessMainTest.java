@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -24,14 +26,14 @@ public class ChessMainTest {
 
 	// Méthode permettant de vérifier que deux fichiers sont identiques, au niveau contenu
 	private static void assertMemesFichiers(String cheminFichierAttendu, String cheminFichierResultat) throws Exception {
-		Scanner scannerExpectedOutput = new Scanner(new File(cheminFichierAttendu));
-		Scanner scannerOutput = new Scanner(new File(cheminFichierResultat));
+		BufferedReader scannerExpectedOutput = new BufferedReader(new FileReader(cheminFichierAttendu));
+		BufferedReader scannerOutput = new BufferedReader(new FileReader(cheminFichierResultat));
 
 		int i = 0;
-		while (scannerExpectedOutput.hasNextLine()) {
-			assertEquals(scannerExpectedOutput.nextLine(), scannerOutput.nextLine(), "Différence à la ligne " + ++i);
+		while (scannerExpectedOutput.ready()) {
+			assertEquals(scannerExpectedOutput.readLine(), scannerOutput.readLine(), "Différence à la ligne " + ++i);
 		}
-		assertFalse(scannerOutput.hasNextLine());
+		assertFalse(scannerOutput.ready());
 
 		scannerOutput.close();
 		scannerExpectedOutput.close();
