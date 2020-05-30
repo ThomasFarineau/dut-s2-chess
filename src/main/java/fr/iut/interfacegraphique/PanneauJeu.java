@@ -11,6 +11,9 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+import static fr.iut.fonctions.Fonctions.ajoutChoix;
+import static fr.iut.fonctions.Fonctions.creerPopup;
+
 public class PanneauJeu extends JPanel {
     private final static String imgPath = "./img/";
     private Fenetre parent;
@@ -121,33 +124,11 @@ public class PanneauJeu extends JPanel {
     }
 
     public void recommencer() {
-        JPanel panel = new JPanel();
-        panel.setSize(new Dimension(430, 130));
-        panel.setLayout(null);
-        parent.getMf().desactiverEnregistrer();
-        // Ajout du message
-        JLabel label = new JLabel("Félicitations, les " + (plat.getTourJoueur() ? "blancs" : "noirs") + " ont gagné !");
-        label.setBounds(0, 15, 430, 30);
-        label.setHorizontalAlignment((int) CENTER_ALIGNMENT);
-        label.setFont(new Font("Calibri", Font.PLAIN, 16));
-        panel.add(label);
 
-        JLabel label2 = new JLabel("Que voulez vous faire ?");
-        label2.setBounds(0, 45, 430, 30);
-        label2.setHorizontalAlignment((int) CENTER_ALIGNMENT);
-        label2.setFont(new Font("Calibri", Font.PLAIN, 16));
-        panel.add(label2);
-
-        // Changement de la taille du dialogue
-        UIManager.put("OptionPane.minimumSize", new Dimension(430, 130));
-
-        // Ajout des options
-        String[] options = {"Nouvelle partie", "Charger une partie", "Quitter"};
-
-        // Affichage du dialogue et recuperation de la réponse sous resp
         int resp = -1;
         while (resp == -1) {
-            resp = JOptionPane.showOptionDialog(null, panel, "Échec et mat", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+            JPanel panelRecommencer = creerPopup(430, 120, "Félicitations, les " + (plat.getTourJoueur() ? "blancs" : "noirs") + " ont gagné !<BR>Que voulez vous faire ?");
+            resp = ajoutChoix(panelRecommencer, "Enregistrer une partie", new String[]{"Nouvelle partie", "Charger une partie", "Quitter"}, "Nouvelle partie");
 
             if (resp == 0) {
                 parent.getMf().nouvellePartie();
@@ -184,11 +165,6 @@ public class PanneauJeu extends JPanel {
         this.selectionDeplacementsPoss = null;
     }
 
-    public boolean hasSelection() {
-        // Retourne si une case a été sélectionnée
-        return (selection != null);
-    }
-
     public void deplacer(int i, int j) {
         try {
             plat.deplacer(new int[]{selection[0], selection[1], i, j});
@@ -208,10 +184,6 @@ public class PanneauJeu extends JPanel {
             repaint();
             recommencer();
         }
-    }
-
-    public void setCasesEchec(int[] casesEchec) {
-        this.casesEchec = casesEchec;
     }
 
     public void reInitValues() {
