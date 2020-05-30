@@ -64,11 +64,6 @@ public class MenuFenetre extends JMenuBar {
         enregistrerPartieSous.setEnabled(true);
     }
 
-    public void desactiverEnregistrer() {
-        enregistrerPartie.setEnabled(false);
-        enregistrerPartieSous.setEnabled(false);
-    }
-
     public boolean partieCommencer() {
         return enregistrerPartie.isEnabled() && enregistrerPartieSous.isEnabled();
     }

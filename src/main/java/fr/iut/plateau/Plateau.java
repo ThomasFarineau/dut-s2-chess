@@ -58,9 +58,7 @@ public class Plateau {
 
 		boolean[][] deplementsACopier = echiquier[xP][yP].getDeplacementsPoss();
 		for (int i = 0; i < 15; i++) {
-			for (int j = 0; j < 15; j++) {
-				deplacementsPiece[i][j] = deplementsACopier[i][j];
-			}
+			System.arraycopy(deplementsACopier[i], 0, deplacementsPiece[i], 0, 15);
 		}
 
 		if (echiquier[xP][yP] instanceof Pion) {

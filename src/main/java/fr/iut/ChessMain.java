@@ -17,7 +17,7 @@ public class ChessMain {
 	private static boolean quitter = false;
 
 	// Pour l'interface graphique
-	private static Fenetre f = null;
+	private static Fenetre f;
 
 	// Méthode utilisée pour les tests JUnit
 	public static void reInitVars() {
@@ -180,7 +180,7 @@ public class ChessMain {
 	}
 
 	public static boolean demanderRecommencer() {
-		while (true && !quitter) {
+		while (!quitter) {
 			System.out.print("Voulez-vous jouer une autre partie ? (Oui/Non) : ");
 
 			String reponse = sc.nextLine().toUpperCase();
