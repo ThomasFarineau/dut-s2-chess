@@ -90,6 +90,7 @@ public class ChessMain {
 				try {
 					gp.nouvellePartie(); // On charge un fichier qui se nomme : "nouvellePartie.csv"
 					p.setTourJoueur(false);
+					alerte = "La partie vient de commencer !";
 				} catch(Exception e) {
 					System.out.println("Erreur : " + e.getMessage());
 					entree1Valide=false; // Si on a une erreur IOException, on initialise le boolean a false.
@@ -110,6 +111,7 @@ public class ChessMain {
 						try {
 							gp.chargerAnciennePartie(entree2); // On charge le nom du fichier en entrée
 							p.setTourJoueur(demanderTourJoueur());
+							alerte = "La partie a été chargée !";
 						} catch(Exception e) {
 							System.out.println("Erreur : " + e.getMessage());
 							entree2Valide = false; // Si on a une Exception, l'entrée n'est pas validée
@@ -166,8 +168,6 @@ public class ChessMain {
 
 	public static void partieConsole() {
 		initialisationConsole();
-
-		alerte = "La partie vient de commencer !";
 
 		while(!(p.verifMat() || quitter)) {
 			jouerTour();
