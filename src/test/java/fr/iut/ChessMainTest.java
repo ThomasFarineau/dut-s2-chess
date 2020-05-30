@@ -27,8 +27,9 @@ public class ChessMainTest {
 		Scanner scannerExpectedOutput = new Scanner(new File(cheminFichierAttendu));
 		Scanner scannerOutput = new Scanner(new File(cheminFichierResultat));
 
+		int i = 0;
 		while (scannerExpectedOutput.hasNextLine()) {
-			assertEquals(scannerExpectedOutput.nextLine(), scannerOutput.nextLine());
+			assertEquals(scannerExpectedOutput.nextLine(), scannerOutput.nextLine(), "Différence à la ligne " + ++i);
 		}
 		assertFalse(scannerOutput.hasNextLine());
 
@@ -133,10 +134,12 @@ public class ChessMainTest {
 		// A FINIR
 	}
 	
+	// UNIQUEMENT DES SCENARIOS CONSOLE (car les scénarios Graphiques sont difficilement testables et n'affichent rien dans la console)
 	@Test
 	public void mainTest() {
 		// Scenario nouvelle partie (avec mat du berger blanc, enregistrer sous avant le mat du berger, et ne pas rejouer)
-		
+		assertRightInputOutput("main_1",
+				() -> ChessMain.main(null));
 		
 		// Scenario avec chargement de mat_du_berger.csv, mat par les blancs et recommencement avec autre mat blanc puis ne pas rejouer
 		
@@ -156,7 +159,7 @@ public class ChessMainTest {
 		
 		
 		// Suppression des fichiers créés par la méthode
-		
+		new File("parties/mat du berger.csv").delete();
 	}
 
 	@AfterAll

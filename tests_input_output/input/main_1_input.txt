@@ -1,0 +1,12 @@
+console
+nouvelle
+e2 e4
+E7 e5
+D1 H5
+b8 A6
+f1 c4
+a6 b4
+sauvegarder mat du berger
+h5 f7
+non
+fichier terminé, ligne non lue
