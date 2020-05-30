@@ -153,7 +153,7 @@ public class MenuFenetre extends JMenuBar {
                 panel2.setLayout(null);
 
                 // Ajout du message
-                JLabel label = new JLabel("tes-vous sr de vouloir charger une partie ?");
+                JLabel label = new JLabel("Êtes-vous sûr de vouloir charger une partie ?");
                 label.setBounds(0, 15, 430, 30);
                 label.setHorizontalAlignment((int) CENTER_ALIGNMENT);
                 label.setFont(new Font("Calibri", Font.PLAIN, 16));
@@ -179,7 +179,7 @@ public class MenuFenetre extends JMenuBar {
                     panel3.setLayout(null);
 
                     // Ajout du message
-                    JLabel label = new JLabel("Qui va commencer  jouer,  la reprise de la partie ?");
+                    JLabel label = new JLabel("Qui va commencer à jouer, à la reprise de la partie ?");
                     label.setBounds(0, 15, 430, 30);
                     label.setHorizontalAlignment((int) CENTER_ALIGNMENT);
                     label.setFont(new Font("Calibri", Font.PLAIN, 16));
@@ -223,7 +223,7 @@ public class MenuFenetre extends JMenuBar {
             panel.setLayout(null);
 
             // Ajout du message
-            JLabel label = new JLabel("tes-vous sr de vouloir dmarrer une nouvelle partie ?");
+            JLabel label = new JLabel("Êtes-vous sûr de vouloir démarrer une nouvelle partie ?");
             label.setBounds(0, 15, 430, 30);
             label.setHorizontalAlignment((int) CENTER_ALIGNMENT);
             label.setFont(new Font("Calibri", Font.PLAIN, 16));
@@ -238,7 +238,7 @@ public class MenuFenetre extends JMenuBar {
             // Affichage du dialogue et recuperation de la rponse sous resp
             resp = JOptionPane.showOptionDialog(null, panel, "Nouvelle partie", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
         }
-        // Utilisation de la rponse
+        // Utilisation de la réponse
         if (resp == 0) {
             try {
                 gp.nouvellePartie();
