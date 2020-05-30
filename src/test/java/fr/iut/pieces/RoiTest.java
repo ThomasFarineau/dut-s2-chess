@@ -47,11 +47,11 @@ public class RoiTest {
 				{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}
 				};
 		
-		boolean[][] deplacementsCalculés = roiBlanc.getDeplacementsPoss();
-		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
+		boolean[][] deplacementsCalcules = roiBlanc.getDeplacementsPoss();
+		assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
 		
-		deplacementsCalculés = roiNoir.getDeplacementsPoss();
-		assertArrayEquals(deplacementsAttendus, deplacementsCalculés);
+		deplacementsCalcules = roiNoir.getDeplacementsPoss();
+		assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
 	}
 	
 	 @Test
