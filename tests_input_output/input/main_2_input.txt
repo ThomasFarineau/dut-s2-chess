@@ -1,0 +1,23 @@
+mOde cOnsOle
+2
+mat_DU_berger
+BlAnC
+h5 f7
+oui
+DemArrER
+e2 e4
+E7 E5
+G1 f3
+D7 D6
+f1 C4
+C8 G4
+B1 c3
+h7 H6
+f3 e5
+g4 d1
+c4 f7
+e8 e7
+c3 d5
+nope
+nON
+fin du fichier, ligne non lue (normalement)

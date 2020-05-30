@@ -141,8 +141,10 @@ public class ChessMainTest {
 		assertRightInputOutput("main_1",
 				() -> ChessMain.main(null));
 		
-		// Scenario avec chargement de mat_du_berger.csv, mat par les blancs et recommencement avec autre mat blanc puis ne pas rejouer
-		
+		// Scenario avec chargement de mat_du_berger.csv, mat par les blancs et recommencement avec nouvelle partie
+		// et autre mat blanc puis ne pas rejouer
+		assertRightInputOutput("main_2",
+				() -> ChessMain.main(null));
 		
 		// Scenario avec mat des noirs (pas du berger), recommencer avec chargement, puis cancel, puis chargements invalides,
 		// Puis chargement berger, puis mat et ne pas rejouer
