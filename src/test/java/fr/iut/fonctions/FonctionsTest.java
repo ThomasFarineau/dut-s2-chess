@@ -79,25 +79,37 @@ class FonctionsTest {
 
     @Test
     public void convertEnCaracteresTest() {
-        char[] sortie = {'A', '7', 'A', '6'};
-        int[] entree = {1, 0, 2, 0};
+        char[] sortie = {'A', '1', 'B', '2'};
+        int[] entree = {7, 0, 6, 1};
         assertArrayEquals(sortie, Fonctions.convertEnCaracteres(entree));
 
-        char[] sortie2 = {'C', '1', 'H', '6'};
-        int[] entree2 = {7, 2, 2, 7};
+        char[] sortie2 = {'C', '3', 'D', '4'};
+        int[] entree2 = {5, 2, 4, 3};
         assertArrayEquals(sortie2, Fonctions.convertEnCaracteres(entree2));
 
-        char[] sortie3 = {'B', '1', 'C', '3'};
-        int[] entree3 = {7, 1, 5, 2};
+        char[] sortie3 = {'E', '5', 'F', '6'};
+        int[] entree3 = {3, 4, 2, 5};
         assertArrayEquals(sortie3, Fonctions.convertEnCaracteres(entree3));
 
-        char[] sortie4 = {'D', '8', 'H', '4'};
-        int[] entree4 = {0, 3, 4, 7};
+        char[] sortie4 = {'G', '7', 'H', '8'};
+        int[] entree4 = {1, 6, 0, 7};
         assertArrayEquals(sortie4, Fonctions.convertEnCaracteres(entree4));
 
-        char[] sortie5 = {'A', '1', 'H', '8'};
-        int[] entree5 = {7, 0, 0, 7};
+        char[] sortie5 = {'B', '2', 'A', '1'};
+        int[] entree5 = {6, 1, 7, 0};
         assertArrayEquals(sortie5, Fonctions.convertEnCaracteres(entree5));
+
+        char[] sortie6 = {'D', '4', 'C', '3'};
+        int[] entree6 = {4, 3, 5, 2};
+        assertArrayEquals(sortie6, Fonctions.convertEnCaracteres(entree6));
+        
+        char[] sortie7 = {'F', '6', 'E', '5'};
+        int[] entree7 = {2, 5, 3, 4};
+        assertArrayEquals(sortie7, Fonctions.convertEnCaracteres(entree7));
+        
+        char[] sortie8 = {'H', '8', 'G', '7'};
+        int[] entree8 = {0, 7, 1, 6};
+        assertArrayEquals(sortie8, Fonctions.convertEnCaracteres(entree8));
     }
 
     @Test
