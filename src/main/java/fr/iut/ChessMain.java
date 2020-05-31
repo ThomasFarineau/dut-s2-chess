@@ -23,6 +23,7 @@ public class ChessMain {
         p = new Plateau();
         gp = new GestionnairePartie(p);
         alerte = "";
+        quitter = false;
     }
 
     public static String getMessageDebutTour() {
