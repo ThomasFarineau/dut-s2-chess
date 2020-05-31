@@ -29,12 +29,28 @@ public class GestionnairePartieTest {
     private Plateau p;
     private GestionnairePartie gp;
 
+    private void comparerSauvegardes(File f, String[] echiquierAttendu, String nomFichierAttendu) {
+        Scanner scan;
+        try {
+            scan = new Scanner(f);
+
+            for (String s : echiquierAttendu) {
+                assertEquals(s, scan.nextLine());
+            }
+
+            assertFalse(scan.hasNextLine());
+            scan.close();
+            assertEquals(nomFichierAttendu, gp.getNomFichier());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+    
     @BeforeEach
     public void init() {
         p = new Plateau();
         gp = new GestionnairePartie(p);
     }
-
 
     @Test
     public void chargerAnciennePartieExceptionsTest() {
@@ -247,7 +263,7 @@ public class GestionnairePartieTest {
         assertArrayEquals(echiquierACharger, p.getEchiquier());
         assertEquals(gp.getNomFichier(), "partieActuelle.csv");
     }
-
+    
     @Test
     public void sauvegarderPartieSansParamTest() {
         try {
@@ -287,8 +303,7 @@ public class GestionnairePartieTest {
                 "Tb,Cb,Fb,ReB,RoB,Fb,Cb,Tb"
         };
 
-        Scanner scan;
-        scanningTest(f, echiquierAttendu);
+        comparerSauvegardes(f, echiquierAttendu, "partieActuelle.csv");
 
         try {
             p.deplacer(new int[]{1, 0, 2, 0});
@@ -309,7 +324,7 @@ public class GestionnairePartieTest {
                 "Tb,Cb,Fb,ReB,RoB,Fb,Cb,Tb"
         };
 
-        scanningTest(f, echiquierAttendu);
+        comparerSauvegardes(f, echiquierAttendu, "partieActuelle.csv");
 
         assertTrue(f.delete());
 
@@ -342,38 +357,8 @@ public class GestionnairePartieTest {
                 "V,V,V,V,V,V,V,V"
         };
 
-        try {
-            scan = new Scanner(f);
-
-            for (String s : echiquierAttendu) {
-                assertEquals(s, scan.nextLine());
-            }
-
-            assertFalse(scan.hasNextLine());
-            scan.close();
-            assertEquals("tests/test36_copie.csv", gp.getNomFichier());
-        } catch (Exception e) {
-            fail();
-        }
-
+        comparerSauvegardes(f, echiquierAttendu, "tests/test36_copie.csv");
         assertTrue(f.delete());
-    }
-
-    private void scanningTest(File f, String[] echiquierAttendu) {
-        Scanner scan;
-        try {
-            scan = new Scanner(f);
-
-            for (String s : echiquierAttendu) {
-                assertEquals(s, scan.nextLine());
-            }
-
-            assertFalse(scan.hasNextLine());
-            scan.close();
-            assertEquals("partieActuelle.csv", gp.getNomFichier());
-        } catch (Exception e) {
-            fail();
-        }
     }
 
     @Test
@@ -444,20 +429,8 @@ public class GestionnairePartieTest {
                 "Pb,V,Pb,Pb,Pb,Pb,Pb,Pb",
                 "Tb,Cb,Fb,ReB,RoB,Fb,Cb,Tb"};
 
-        Scanner scan;
-        try {
-            scan = new Scanner(f);
-
-            for (String s : echiquierAttendu) {
-                assertEquals(s, scan.nextLine());
-            }
-
-            assertFalse(scan.hasNextLine());
-            scan.close();
-            assertEquals("tests/sauvegarde1.csv", gp.getNomFichier());
-        } catch (Exception e) {
-            fail();
-        }
+        
+        comparerSauvegardes(f, echiquierAttendu, "tests/sauvegarde1.csv");
 
         try {
             p.setTourJoueur(true);
@@ -478,22 +451,15 @@ public class GestionnairePartieTest {
                 "Pb,V,Pb,Pb,Pb,Pb,Pb,Pb",
                 "Tb,Cb,Fb,ReB,RoB,Fb,Cb,Tb"};
 
-        try {
-            scan = new Scanner(f);
-
-            for (String s : echiquierAttendu2) {
-                assertEquals(s, scan.nextLine());
-            }
-
-            assertFalse(scan.hasNextLine());
-            scan.close();
-            assertEquals("tests/sauvegarde1.csv", gp.getNomFichier());
-            assertTrue(f.delete());
-        } catch (Exception e) {
-            fail();
-        }
+        
+        comparerSauvegardes(f, echiquierAttendu2, "tests/sauvegarde1.csv");
     }
 
+    @Test
+    public void getPartiesPathTest() {
+        assertEquals(Paths.get(System.getProperty("user.dir") + "/parties"), GestionnairePartie.getPartiesPath());
+    }
+    
     @Test
     public void getNomFichierTest() {
         try {
@@ -522,10 +488,5 @@ public class GestionnairePartieTest {
         } catch (Exception e) {
             fail();
         }
-    }
-
-    @Test
-    public void getPartiesPathTest() {
-        assertEquals(Paths.get(System.getProperty("user.dir") + "/parties"), GestionnairePartie.getPartiesPath());
     }
 }
