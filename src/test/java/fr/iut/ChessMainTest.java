@@ -141,7 +141,15 @@ public class ChessMainTest {
 		
 		assertRightInputOutput("initConsole_2",
 				ChessMain::initialisationConsole);
-		// A FINIR
+		
+		assertRightInputOutput("initConsole_3",
+				ChessMain::initialisationConsole);
+		
+		assertRightInputOutput("initConsole_4",
+				ChessMain::initialisationConsole);
+		
+		assertRightInputOutput("initConsole_5",
+				ChessMain::initialisationConsole);
 	}
 	
 	// UNIQUEMENT DES SCENARIOS CONSOLE (car les scénarios Graphiques sont difficilement testables et n'affichent rien dans la console)
