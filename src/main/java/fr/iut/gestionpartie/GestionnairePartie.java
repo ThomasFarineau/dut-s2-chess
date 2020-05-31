@@ -23,7 +23,7 @@ public class GestionnairePartie {
     private final static Path partiesPath = Paths.get(System.getProperty("user.dir") + "/parties");
     private final static String nomNouvellePartie = "nouvellePartie.csv";
     private Plateau plat;
-    private String nomFichier = "partieActuelle.csv";
+    private String nomFichier;
 
     public GestionnairePartie(Plateau plat) {
         this.plat = plat;
