@@ -175,7 +175,9 @@ public class ChessMainTest {
 		assertRightInputOutput("main_6",
 				() -> ChessMain.main(null));
 		
-		// Scenario avec mat blanc puis rejouer une nouvelle partie et plusieurs entrées invalides puis quitter en pleine partie
+		// Scenario avec chargement avec mat blanc puis rejouer une nouvelle partie puis 
+		// sauvegardes invalides ("sauvegarder ") et sauvegarder vers "nouvellePartie.csv"
+		// Sauvegarde valide puis quitter en pleine partie
 		
 		
 		// Suppression des fichiers créés par la méthode
