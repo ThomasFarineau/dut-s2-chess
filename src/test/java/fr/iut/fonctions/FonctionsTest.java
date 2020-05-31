@@ -44,25 +44,37 @@ class FonctionsTest {
 
     @Test
     public void convertEnIndicesTest() {
-        String entree = "a7 a6";
-        int[] sortie = {1, 0, 2, 0};
+        String entree = "a1 b2";
+        int[] sortie = {7, 0, 6,1};
         assertArrayEquals(sortie, Fonctions.convertEnIndices(entree));
 
-        entree = "C1 H6";
-        int[] sortie2 = {7, 2, 2, 7};
+        entree = "C3 d4";
+        int[] sortie2 = {5, 2, 4, 3};
         assertArrayEquals(sortie2, Fonctions.convertEnIndices(entree));
 
-        entree = "b1 C3";
-        int[] sortie3 = {7, 1, 5, 2};
+        entree = "e5 F6";
+        int[] sortie3 = {3, 4, 2, 5};
         assertArrayEquals(sortie3, Fonctions.convertEnIndices(entree));
 
-        entree = "D8 H4";
-        int[] sortie4 = {0, 3, 4, 7};
+        entree = "G7 H8";
+        int[] sortie4 = {1, 6, 0, 7};
         assertArrayEquals(sortie4, Fonctions.convertEnIndices(entree));
-
-        entree = "a1 H8";
-        int[] sortie5 = {7, 0, 0, 7};
+        
+        entree = "B2 A1";
+        int[] sortie5 = {6, 1, 7, 0};
         assertArrayEquals(sortie5, Fonctions.convertEnIndices(entree));
+
+        entree = "D4 c3";
+        int[] sortie6 = {4, 3, 5, 2};
+        assertArrayEquals(sortie6, Fonctions.convertEnIndices(entree));
+
+        entree = "F6 e5";
+        int[] sortie7 = {2, 5, 3, 4};
+        assertArrayEquals(sortie7, Fonctions.convertEnIndices(entree));
+       
+        entree = "h8 g7";
+        int[] sortie8 = {0, 7, 1, 6};
+        assertArrayEquals(sortie8, Fonctions.convertEnIndices(entree));
     }
 
     @Test
