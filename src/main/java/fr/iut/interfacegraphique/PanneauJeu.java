@@ -194,7 +194,7 @@ public class PanneauJeu extends JPanel {
 
     public void reInitValues() {
         dernierMouvement = "-";
-        selection = null;
+        resetSelection();
         plat.verifMat();
         casesEchec = plat.getDernierEchec();
     }
