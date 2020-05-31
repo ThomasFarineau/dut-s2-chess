@@ -1,18 +1,24 @@
 package fr.iut.interfacegraphique;
 
+import static fr.iut.fonctions.Fonctions.ajoutChoix;
+import static fr.iut.fonctions.Fonctions.creerPopup;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+
 import fr.iut.fonctions.Fonctions;
 import fr.iut.listener.EchiquierListener;
 import fr.iut.pieces.Piece;
 import fr.iut.plateau.Plateau;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-
-import static fr.iut.fonctions.Fonctions.ajoutChoix;
-import static fr.iut.fonctions.Fonctions.creerPopup;
 
 public class PanneauJeu extends JPanel {
     private final static String imgPath = "./img/";

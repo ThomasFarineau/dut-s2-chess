@@ -1,10 +1,11 @@
 package fr.iut.pieces;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+
+import javax.imageio.ImageIO;
 
 public abstract class Piece {
     protected final static String imgPath = "./img/";

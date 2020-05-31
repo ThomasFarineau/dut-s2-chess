@@ -1,12 +1,12 @@
 package fr.iut.plateau;
 
+import java.util.Arrays;
+
 import fr.iut.fonctions.Fonctions;
 import fr.iut.pieces.Cavalier;
 import fr.iut.pieces.Piece;
 import fr.iut.pieces.Pion;
 import fr.iut.pieces.Roi;
-
-import java.util.Arrays;
 
 public class Plateau {
     private boolean tourJoueur = false;

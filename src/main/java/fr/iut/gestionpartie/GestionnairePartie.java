@@ -1,11 +1,23 @@
 package fr.iut.gestionpartie;
 
-import fr.iut.pieces.*;
-import fr.iut.plateau.Plateau;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import fr.iut.pieces.Cavalier;
+import fr.iut.pieces.Fou;
+import fr.iut.pieces.Piece;
+import fr.iut.pieces.Pion;
+import fr.iut.pieces.Reine;
+import fr.iut.pieces.Roi;
+import fr.iut.pieces.Tour;
+import fr.iut.plateau.Plateau;
 
 public class GestionnairePartie {
     private final static Path partiesPath = Paths.get(System.getProperty("user.dir") + "/parties");

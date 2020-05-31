@@ -1,6 +1,6 @@
 package fr.iut.pieces;
 
-import java.awt.*;
+import java.awt.Image;
 
 public class Pion extends Piece {
     private static Image imgB = loadImage("PionBlanc.png");

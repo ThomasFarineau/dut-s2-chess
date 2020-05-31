@@ -1,15 +1,21 @@
 package fr.iut.fonctions;
 
-import fr.iut.gestionpartie.GestionnairePartie;
+import static java.awt.Component.CENTER_ALIGNMENT;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static java.awt.Component.CENTER_ALIGNMENT;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import fr.iut.gestionpartie.GestionnairePartie;
 
 public class Fonctions {
     private Fonctions() {

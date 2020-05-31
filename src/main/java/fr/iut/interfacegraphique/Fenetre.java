@@ -1,9 +1,9 @@
 package fr.iut.interfacegraphique;
 
+import javax.swing.JFrame;
+
 import fr.iut.gestionpartie.GestionnairePartie;
 import fr.iut.plateau.Plateau;
-
-import javax.swing.*;
 
 public class Fenetre extends JFrame {
     private MenuFenetre mf;

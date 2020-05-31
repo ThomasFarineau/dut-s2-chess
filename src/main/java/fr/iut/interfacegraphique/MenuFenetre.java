@@ -1,17 +1,26 @@
 package fr.iut.interfacegraphique;
 
-import fr.iut.fonctions.Fonctions;
-import fr.iut.gestionpartie.GestionnairePartie;
-import fr.iut.listener.EchiquierListener;
+import static fr.iut.fonctions.Fonctions.ajoutChoix;
+import static fr.iut.fonctions.Fonctions.creerChoixFichier;
+import static fr.iut.fonctions.Fonctions.creerPopup;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
-import static fr.iut.fonctions.Fonctions.*;
+import javax.swing.JFileChooser;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import fr.iut.fonctions.Fonctions;
+import fr.iut.gestionpartie.GestionnairePartie;
+import fr.iut.listener.EchiquierListener;
 
 public class MenuFenetre extends JMenuBar {
     private JMenuItem enregistrerPartie = new JMenuItem("Enregistrer");

@@ -1,9 +1,9 @@
 package fr.iut.listener;
 
-import fr.iut.interfacegraphique.PanneauJeu;
-
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import fr.iut.interfacegraphique.PanneauJeu;
 
 public class EchiquierListener implements MouseListener {
     private PanneauJeu listenedPanel;

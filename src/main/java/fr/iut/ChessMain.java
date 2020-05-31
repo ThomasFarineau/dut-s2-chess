@@ -1,12 +1,13 @@
 package fr.iut;
 
+import java.util.Scanner;
+
+import javax.swing.UIManager;
+
 import fr.iut.fonctions.Fonctions;
 import fr.iut.gestionpartie.GestionnairePartie;
 import fr.iut.interfacegraphique.Fenetre;
 import fr.iut.plateau.Plateau;
-
-import javax.swing.*;
-import java.util.Scanner;
 
 public class ChessMain {
     private static Scanner sc = new Scanner(System.in); // On crée un scanner pour récupérer les entrées de l'utilisateur

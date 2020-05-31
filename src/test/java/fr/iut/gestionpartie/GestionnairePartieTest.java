@@ -1,9 +1,10 @@
 package fr.iut.gestionpartie;
 
-import fr.iut.pieces.*;
-import fr.iut.plateau.Plateau;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -12,7 +13,17 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import fr.iut.pieces.Cavalier;
+import fr.iut.pieces.Fou;
+import fr.iut.pieces.Piece;
+import fr.iut.pieces.Pion;
+import fr.iut.pieces.Reine;
+import fr.iut.pieces.Roi;
+import fr.iut.pieces.Tour;
+import fr.iut.plateau.Plateau;
 
 public class GestionnairePartieTest {
     private Plateau p;
