@@ -1,0 +1,373 @@
+Voulez-vous jouer en mode console ou bien en mode graphique ?
+	 1 - Mode Console
+	 2 - Mode Graphique
+
+Veuillez saisir votre choix : Vous avez décidé de jouer en mode Console.
+
+
+Bienvenue dans le jeu d'échec en mode Console.
+
+Voulez-vous démarrer une nouvelle partie ou bien charger une ancienne partie ?
+	 1 - Démarrer une nouvelle partie
+	 2 - Charger une ancienne partie
+
+Veuillez saisir votre choix : 
+Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "cancel" pour revenir en arrière : Qui va commencer à jouer, à la reprise de la partie chargée ? (Blanc/Noir) : 
+
+
+
+
+
+
+
+8 Tn   -  Fn   -  RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Pn  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -  Cb   -  ReN  -  
+4  -   -  Fb  Cn  Pb   -   -   -  
+3  -   -   -   -   -   -   -   -  
+2 Pb  Pb  Pb  Pb   -  Pb  Pb  Pb  
+1 Tb  Cb  Fb  ReB RoB  -   -  Tb  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+La partie a été chargée !
+
+C'est au tour du joueur blanc.
+
+Veuillez entrer votre déplacement : 
+
+
+
+
+
+
+
+8 Tn   -  Fn   -  RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Cb  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -   -   -  ReN  -  
+4  -   -  Fb  Cn  Pb   -   -   -  
+3  -   -   -   -   -   -   -   -  
+2 Pb  Pb  Pb  Pb   -  Pb  Pb  Pb  
+1 Tb  Cb  Fb  ReB RoB  -   -  Tb  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+
+
+C'est au tour du joueur noir.
+
+Veuillez entrer votre déplacement : 
+
+
+
+
+
+
+
+8 Tn   -  Fn   -  RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Cb  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -   -   -   -   -  
+4  -   -  Fb  Cn  Pb   -   -   -  
+3  -   -   -   -   -   -   -   -  
+2 Pb  Pb  Pb  Pb   -  Pb  ReN Pb  
+1 Tb  Cb  Fb  ReB RoB  -   -  Tb  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+
+
+C'est au tour du joueur blanc.
+
+Veuillez entrer votre déplacement : 
+
+
+
+
+
+
+
+8 Tn   -  Fn   -  RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Cb  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -   -   -   -   -  
+4  -   -  Fb  Cn  Pb   -   -   -  
+3  -   -   -   -   -   -   -   -  
+2 Pb  Pb  Pb  Pb   -  Pb  ReN Pb  
+1 Tb  Cb  Fb  ReB RoB Tb   -   -  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+
+
+C'est au tour du joueur noir.
+
+Veuillez entrer votre déplacement : 
+
+
+
+
+
+
+
+8 Tn   -  Fn   -  RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Cb  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -   -   -   -   -  
+4  -   -  Fb  Cn  ReN  -   -   -  
+3  -   -   -   -   -   -   -   -  
+2 Pb  Pb  Pb  Pb   -  Pb   -  Pb  
+1 Tb  Cb  Fb  ReB RoB Tb   -   -  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+
+
+C'est au tour du joueur blanc.
+Le roi blanc est en échec.
+
+Veuillez entrer votre déplacement : 
+
+
+
+
+
+
+
+8 Tn   -  Fn   -  RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Cb  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -   -   -   -   -  
+4  -   -  Fb  Cn  ReN  -   -   -  
+3  -   -   -   -   -   -   -   -  
+2 Pb  Pb  Pb  Pb   -  Pb   -  Pb  
+1 Tb  Cb  Fb  ReB RoB Tb   -   -  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+Erreur : Syntaxe de déplacement invalide.
+
+C'est au tour du joueur blanc.
+Le roi blanc est en échec.
+
+Veuillez entrer votre déplacement : 
+
+
+
+
+
+
+
+8 Tn   -  Fn   -  RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Cb  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -   -   -   -   -  
+4  -   -  Fb  Cn  ReN  -   -   -  
+3  -   -   -   -   -   -   -   -  
+2 Pb  Pb  Pb  Pb   -  Pb   -  Pb  
+1 Tb  Cb  Fb  ReB RoB Tb   -   -  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+Erreur : Syntaxe de déplacement invalide.
+
+C'est au tour du joueur blanc.
+Le roi blanc est en échec.
+
+Veuillez entrer votre déplacement : 
+
+
+
+
+
+
+
+8 Tn   -  Fn   -  RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Cb  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -   -   -   -   -  
+4  -   -  Fb  Cn  ReN  -   -   -  
+3  -   -   -   -   -   -   -   -  
+2 Pb  Pb  Pb  Pb   -  Pb   -  Pb  
+1 Tb  Cb  Fb  ReB RoB Tb   -   -  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+Erreur : Syntaxe de déplacement invalide.
+
+C'est au tour du joueur blanc.
+Le roi blanc est en échec.
+
+Veuillez entrer votre déplacement : 
+
+
+
+
+
+
+
+8 Tn   -  Fn   -  RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Cb  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -   -   -   -   -  
+4  -   -  Fb  Cn  ReN  -   -   -  
+3  -   -   -   -   -   -   -   -  
+2 Pb  Pb  Pb  Pb   -  Pb   -  Pb  
+1 Tb  Cb  Fb  ReB RoB Tb   -   -  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+Erreur : Syntaxe de déplacement invalide.
+
+C'est au tour du joueur blanc.
+Le roi blanc est en échec.
+
+Veuillez entrer votre déplacement : 
+
+
+
+
+
+
+
+8 Tn   -  Fn   -  RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Cb  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -   -   -   -   -  
+4  -   -  Fb  Cn  ReN  -   -   -  
+3  -   -   -   -   -   -   -   -  
+2 Pb  Pb  Pb  Pb   -  Pb   -  Pb  
+1 Tb  Cb  Fb  ReB RoB Tb   -   -  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+Erreur : Mouvement impossible, il vous met en échec : Cn(D4 -> E2)
+
+C'est au tour du joueur blanc.
+Le roi blanc est en échec.
+
+Veuillez entrer votre déplacement : 
+
+
+
+
+
+
+
+8 Tn   -  Fn   -  RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Cb  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -   -   -   -   -  
+4  -   -  Fb  Cn  ReN  -   -   -  
+3  -   -   -   -   -   -   -   -  
+2 Pb  Pb  Pb  Pb   -  Pb   -  Pb  
+1 Tb  Cb  Fb  ReB RoB Tb   -   -  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+Erreur : La pièce sélectionnée ne peut pas aller ici.
+
+C'est au tour du joueur blanc.
+Le roi blanc est en échec.
+
+Veuillez entrer votre déplacement : 
+
+
+
+
+
+
+
+8 Tn   -  Fn   -  RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Cb  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -   -   -   -   -  
+4  -   -  Fb  Cn  ReN  -   -   -  
+3  -   -   -   -   -   -   -   -  
+2 Pb  Pb  Pb  Pb   -  Pb   -  Pb  
+1 Tb  Cb  Fb  ReB RoB Tb   -   -  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+Erreur : La pièce selectionnée ne vous appartient pas.
+
+C'est au tour du joueur blanc.
+Le roi blanc est en échec.
+
+Veuillez entrer votre déplacement : 
+
+
+
+
+
+
+
+8 Tn   -  Fn   -  RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Cb  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -   -   -   -   -  
+4  -   -  Fb  Cn  ReN  -   -   -  
+3  -   -   -   -   -   -   -   -  
+2 Pb  Pb  Pb  Pb   -  Pb   -  Pb  
+1 Tb  Cb  Fb  ReB RoB Tb   -   -  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+Erreur : Il n'y a pas de piece sur la première case entrée.
+
+C'est au tour du joueur blanc.
+Le roi blanc est en échec.
+
+Veuillez entrer votre déplacement : 
+
+
+
+
+
+
+
+8 Tn   -  Fn   -  RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Cb  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -   -   -   -   -  
+4  -   -   -  Cn  ReN  -   -   -  
+3  -   -   -   -   -   -   -   -  
+2 Pb  Pb  Pb  Pb  Fb  Pb   -  Pb  
+1 Tb  Cb  Fb  ReB RoB Tb   -   -  
+   A   B   C   D   E   F   G   H
+
+Pour sauvegarder votre partie, entrez "sauvegarder (fichierSauvegarde)".
+Pour quitter le jeu, entrez "quitter".
+
+
+C'est au tour du joueur noir.
+
+Veuillez entrer votre déplacement : 
+8 Tn   -  Fn   -  RoN Fn  Cn  Tn  
+7 Pn  Pn  Pn  Pn   -  Cb  Pn  Pn  
+6  -   -   -   -   -   -   -   -  
+5  -   -   -   -   -   -   -   -  
+4  -   -   -   -  ReN  -   -   -  
+3  -   -   -   -   -  Cn   -   -  
+2 Pb  Pb  Pb  Pb  Fb  Pb   -  Pb  
+1 Tb  Cb  Fb  ReB RoB Tb   -   -  
+   A   B   C   D   E   F   G   H
+
+Félicitations, les noirs ont gagné !
+
+Voulez-vous jouer une autre partie ? (Oui/Non) : Au revoir !

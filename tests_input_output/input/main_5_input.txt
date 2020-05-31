@@ -1,0 +1,6 @@
+console
+2
+partIeactuElle
+nOirs
+c6 d4
+quitter

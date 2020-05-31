@@ -11,7 +11,6 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Scanner;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
@@ -43,6 +42,13 @@ public class ChessMainTest {
 	private static void switchSysIn(InputStream is) {
 		System.setIn(is);
 		ChessMain.reInitVars();
+	}
+	
+	private static File instanciateFileAndDeleteIfExists(String cheminFichier) {
+		File f = new File(cheminFichier);
+		if (f.exists())
+			assertTrue(f.delete());
+		return f;
 	}
 	
 	private static String getInputFileName(String fileName) {
@@ -84,7 +90,7 @@ public class ChessMainTest {
 					);
 
 			// Suppression du fichier créé par l'output
-			ps_file.delete();
+			assertTrue(ps_file.delete());
 		} catch (Exception e) {
 			// Si une Exception est levée à n'importe quel moment du test, le test échoue.
 			e.printStackTrace();
@@ -139,6 +145,10 @@ public class ChessMainTest {
 	// UNIQUEMENT DES SCENARIOS CONSOLE (car les scénarios Graphiques sont difficilement testables et n'affichent rien dans la console)
 	@Test
 	public void mainTest() {
+		File matBerger = instanciateFileAndDeleteIfExists("parties/mat du berger.csv");
+		File partieActuelle = instanciateFileAndDeleteIfExists("parties/partieActuelle.csv");
+		File partieDeTest = instanciateFileAndDeleteIfExists("parties/maPartieDeTest.csv");
+		
 		// Scenario nouvelle partie (avec mat du berger blanc, enregistrer sous avant le mat du berger, et ne pas rejouer)
 		assertRightInputOutput("main_1",
 				() -> ChessMain.main(null));
@@ -153,18 +163,25 @@ public class ChessMainTest {
 		assertRightInputOutput("main_3",
 				() -> ChessMain.main(null));
 		
-		// Scenario avec début de jeu puis enregistrer puis enregistrer sous, puis enregistrer, puis quitter
+		// Scenario avec début de jeu puis enregistrer puis enregistrer sous vers "maPartieDeTest.csv", puis enregistrer, puis quitter
+		assertRightInputOutput("main_4",
+				() -> ChessMain.main(null));
 		
+		// Scenario avec chargement de "partieActuelle.csv", puis avancement puis quitter
+		assertRightInputOutput("main_5",
+				() -> ChessMain.main(null));
 		
-		// Scenario avec mat noir puis rejouer une nouvelle partie et plusieurs entrées invalides puis quitter en pleine partie
+		// Scenario avec chargement du "maPartieTest.csv" puis mouvements invalides avant mat et ne pas rejouer
+		assertRightInputOutput("main_6",
+				() -> ChessMain.main(null));
 		
-		
-		// Scenario avec de nombreuses entrées invalides puis enregistrer sous et quitter
-		
+		// Scenario avec mat blanc puis rejouer une nouvelle partie et plusieurs entrées invalides puis quitter en pleine partie
 		
 		
 		// Suppression des fichiers créés par la méthode
-		assertTrue(new File("parties/mat du berger.csv").delete());
+		assertTrue(matBerger.delete());
+		assertTrue(partieActuelle.delete());
+		assertTrue(partieDeTest.delete());
 	}
 
 	@AfterAll
