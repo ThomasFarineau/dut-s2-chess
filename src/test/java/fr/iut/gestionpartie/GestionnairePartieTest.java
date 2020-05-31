@@ -453,6 +453,8 @@ public class GestionnairePartieTest {
 
         
         comparerSauvegardes(f, echiquierAttendu2, "tests/sauvegarde1.csv");
+        
+        assertTrue(f.delete());
     }
 
     @Test
