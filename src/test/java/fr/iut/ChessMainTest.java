@@ -139,6 +139,8 @@ public class ChessMainTest {
 		assertRightInputOutput("initConsole_1",
 				ChessMain::initialisationConsole);
 		
+		assertRightInputOutput("initConsole_2",
+				ChessMain::initialisationConsole);
 		// A FINIR
 	}
 	
