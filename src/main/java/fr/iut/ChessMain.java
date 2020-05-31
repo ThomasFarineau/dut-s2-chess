@@ -99,10 +99,10 @@ public class ChessMain {
                     boolean entree2Valide = false;
 
                     while (!entree2Valide) {
-                        System.out.print("\nVeuillez saisir le nom du fichier de partie (ex : \"maPartie.csv\"), entrez \"cancel\" pour revenir en arrière : ");
+                        System.out.print("\nVeuillez saisir le nom du fichier de partie (ex : \"maPartie.csv\"), entrez \"retour\" pour revenir en arrière : ");
                         String entree2 = sc.nextLine(); // Un scan pour demander le nom du fichier
                         entree2Valide = true; // L'entrée est supposée valide
-                        if (entree2.toLowerCase().equals("cancel") || entree2.toLowerCase().equals("retour")) {
+                        if (entree2.toLowerCase().equals("retour")) {
                             entree1Valide = false;
                         } else {
                             try {
