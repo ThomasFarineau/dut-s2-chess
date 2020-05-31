@@ -27,26 +27,6 @@ public class ChessMain {
         quitter = false;
     }
 
-    public static String getMessageDebutTour() {
-        StringBuilder retour = new StringBuilder();
-        retour.append("\n\n\n\n\n\n");
-
-        retour.append("\n\n").append(p.toString()).append("\n\n");
-
-        retour.append("Pour sauvegarder votre partie, entrez \"sauvegarder (fichierSauvegarde)\".\n");
-        retour.append("Pour quitter le jeu, entrez \"quitter\".\n");
-        retour.append(alerte).append("\n");
-
-        retour.append("\nC'est au tour du joueur ").append(p.getTourJoueur() ? "noir." : "blanc.").append("\n");
-
-        if (p.verifEchec() != null)
-            retour.append("Le roi ").append(p.getTourJoueur() ? "noir" : "blanc").append(" est en échec.\n");
-
-        retour.append("\nVeuillez entrer votre déplacement : ");
-
-        return retour.toString();
-    }
-
     public static boolean demanderTourJoueur() {
         while (true) {
             System.out.print("Qui va commencer à jouer, à la reprise de la partie chargée ? (Blanc/Noir) : ");
@@ -125,6 +105,26 @@ public class ChessMain {
         }
     }
 
+    public static String getMessageDebutTour() {
+        StringBuilder retour = new StringBuilder();
+        retour.append("\n\n\n\n\n\n");
+
+        retour.append("\n\n").append(p.toString()).append("\n\n");
+
+        retour.append("Pour sauvegarder votre partie, entrez \"sauvegarder (fichierSauvegarde)\".\n");
+        retour.append("Pour quitter le jeu, entrez \"quitter\".\n");
+        retour.append(alerte).append("\n");
+
+        retour.append("\nC'est au tour du joueur ").append(p.getTourJoueur() ? "noir." : "blanc.").append("\n");
+
+        if (p.verifEchec() != null)
+            retour.append("Le roi ").append(p.getTourJoueur() ? "noir" : "blanc").append(" est en échec.\n");
+
+        retour.append("\nVeuillez entrer votre déplacement : ");
+
+        return retour.toString();
+    }
+    
     public static void jouerTour() {
         boolean entreeValide = false;
 
@@ -162,7 +162,7 @@ public class ChessMain {
             }
         }
     }
-
+    
     public static void partieConsole() {
         initialisationConsole();
 
@@ -175,7 +175,7 @@ public class ChessMain {
             System.out.println("\nFélicitations, les " + (p.getTourJoueur() ? "blancs" : "noirs") + " ont gagné !\n");
         }
     }
-
+    
     public static boolean demanderRecommencer() {
         while (!quitter) {
             System.out.print("Voulez-vous jouer une autre partie ? (Oui/Non) : ");
@@ -195,7 +195,7 @@ public class ChessMain {
 
         return false;
     }
-
+    
     public static void mainConsole() {
         System.out.println("Bienvenue dans le jeu d'échec en mode Console.");
 
