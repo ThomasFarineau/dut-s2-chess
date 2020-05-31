@@ -13,6 +13,8 @@ public class Plateau {
     private Piece[][] echiquier;
     private int[] dernierEchec = null;
 
+    public Plateau() { }
+    
     public void deplacer(int[] coord) throws Exception {
         int i = coord[0];
         int j = coord[1];
