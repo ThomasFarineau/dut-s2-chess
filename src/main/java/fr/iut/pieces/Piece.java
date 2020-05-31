@@ -30,8 +30,8 @@ public abstract class Piece {
         return img;
     }
 
-    protected void setDeplacementsPossIndex(int x, int y, boolean val) {
-        deplacementsPoss[x][y] = val;
+    protected void setDeplacementsPossIndex(int x, int y) {
+        deplacementsPoss[x][y] = true;
     }
 
     public boolean getCouleur() {

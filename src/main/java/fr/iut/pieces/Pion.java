@@ -9,13 +9,13 @@ public class Pion extends Piece {
     public Pion(boolean couleur) {
         super(couleur);
         if (couleur) {
-            this.setDeplacementsPossIndex(8, 7, true);
-            this.setDeplacementsPossIndex(8, 6, true);
-            this.setDeplacementsPossIndex(8, 8, true);
+            this.setDeplacementsPossIndex(8, 7);
+            this.setDeplacementsPossIndex(8, 6);
+            this.setDeplacementsPossIndex(8, 8);
         } else {
-            this.setDeplacementsPossIndex(6, 7, true);
-            this.setDeplacementsPossIndex(6, 6, true);
-            this.setDeplacementsPossIndex(6, 8, true);
+            this.setDeplacementsPossIndex(6, 7);
+            this.setDeplacementsPossIndex(6, 6);
+            this.setDeplacementsPossIndex(6, 8);
         }
     }
 

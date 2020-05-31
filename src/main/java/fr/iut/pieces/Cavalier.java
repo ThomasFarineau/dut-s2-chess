@@ -8,14 +8,14 @@ public class Cavalier extends Piece {
 
     public Cavalier(boolean couleur) {
         super(couleur);
-        setDeplacementsPossIndex(5, 6, true);
-        setDeplacementsPossIndex(6, 5, true);
-        setDeplacementsPossIndex(5, 8, true);
-        setDeplacementsPossIndex(6, 9, true);
-        setDeplacementsPossIndex(8, 5, true);
-        setDeplacementsPossIndex(9, 6, true);
-        setDeplacementsPossIndex(9, 8, true);
-        setDeplacementsPossIndex(8, 9, true);
+        setDeplacementsPossIndex(5, 6);
+        setDeplacementsPossIndex(6, 5);
+        setDeplacementsPossIndex(5, 8);
+        setDeplacementsPossIndex(6, 9);
+        setDeplacementsPossIndex(8, 5);
+        setDeplacementsPossIndex(9, 6);
+        setDeplacementsPossIndex(9, 8);
+        setDeplacementsPossIndex(8, 9);
     }
 
     @Override

@@ -8,10 +8,10 @@ public class Tour extends Piece {
 
     public Tour(boolean couleur) {
         super(couleur);
-        setDeplacementsPossIndex(0, 7, true);
-        setDeplacementsPossIndex(7, 0, true);
-        setDeplacementsPossIndex(7, 14, true);
-        setDeplacementsPossIndex(14, 7, true);
+        setDeplacementsPossIndex(0, 7);
+        setDeplacementsPossIndex(7, 0);
+        setDeplacementsPossIndex(7, 14);
+        setDeplacementsPossIndex(14, 7);
     }
 
     @Override
