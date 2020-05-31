@@ -29,10 +29,6 @@ public class GestionnairePartie {
         this.plat = plat;
     }
 
-    public static Path getPartiesPath() {
-        return partiesPath;
-    }
-
     private void chargerPartie(String nomFichier) throws IOException {
         Piece[][] echiquier = new Piece[8][8];
         BufferedReader br;
@@ -179,6 +175,10 @@ public class GestionnairePartie {
         return sauvegarderPartie();
     }
 
+    public static Path getPartiesPath() {
+        return partiesPath;
+    }
+    
     public String getNomFichier() {
         return nomFichier;
     }
