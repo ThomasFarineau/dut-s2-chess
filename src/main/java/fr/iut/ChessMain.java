@@ -15,6 +15,8 @@ public class ChessMain {
     private static GestionnairePartie gp = new GestionnairePartie(p); // On initialise un fichier avec le plateau
     private static String alerte = "";
     private static boolean quitter = false;
+    
+    private ChessMain() { }
 
     // Méthode utilisée pour les tests JUnit
     public static void reInitVars() {
