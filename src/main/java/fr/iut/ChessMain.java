@@ -16,9 +16,6 @@ public class ChessMain {
 	private static String alerte = "";
 	private static boolean quitter = false;
 
-	// Pour l'interface graphique
-	private static Fenetre f;
-
 	// Méthode utilisée pour les tests JUnit
 	public static void reInitVars() {
 		sc.close();
@@ -27,7 +24,6 @@ public class ChessMain {
 		p = new Plateau();
 		gp = new GestionnairePartie(p);
 		alerte = "";
-		f = null;
 	}
 	
 	public static String getMessageDebutTour() {
@@ -218,7 +214,7 @@ public class ChessMain {
 			System.out.println("Erreur lors du chargement de l'UI du système.");
 		}
 
-		f = new Fenetre(gp, p);
+		new Fenetre(gp, p);
 	}
 	
 	public static void initialisationModeDeJeu() {
