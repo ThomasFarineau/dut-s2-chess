@@ -177,10 +177,12 @@ public class ChessMainTest {
 		assertRightInputOutput("main_6",
 				() -> ChessMain.main(null));
 		
-		// Scenario avec chargement avec mat blanc puis rejouer une nouvelle partie puis 
+		// Scenario avec entrées invalides à l'intialisation du mode de jeu, puis
+		// chargement mat berger (et faire le mat) puis rejouer une nouvelle partie puis 
 		// sauvegardes invalides ("sauvegarder ") et sauvegarder vers "nouvellePartie.csv"
-		// Sauvegarde valide puis quitter en pleine partie
-		
+		// puis sauvegarde valide vers le fichier par defaut puis quitter en pleine partie
+		assertRightInputOutput("main_7",
+				() -> ChessMain.main(null));
 		
 		// Suppression des fichiers créés par la méthode
 		assertTrue(matBerger.delete());
