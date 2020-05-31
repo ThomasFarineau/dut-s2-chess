@@ -288,20 +288,8 @@ public class GestionnairePartieTest {
 		};
 		
 		Scanner scan;
-		try {
-			scan = new Scanner(f); 
+		scanningTest(f, echiquierAttendu);
 
-			for(String s : echiquierAttendu) {
-				assertEquals(s, scan.nextLine());
-			}
-
-			assertFalse(scan.hasNextLine());
-			scan.close();
-			assertEquals("partieActuelle.csv", gp.getNomFichier());
-		} catch (Exception e) {
-			fail();
-		}
-		
 		try {
 			p.deplacer(new int[] {1, 0, 2, 0});
 			
@@ -320,21 +308,9 @@ public class GestionnairePartieTest {
 				"V,Pb,Pb,Pb,Pb,Pb,Pb,Pb",
 				"Tb,Cb,Fb,ReB,RoB,Fb,Cb,Tb"
 		};
-		
-		try {
-			scan = new Scanner(f); 
 
-			for(String s : echiquierAttendu) {
-				assertEquals(s, scan.nextLine());
-			}
-			
-			assertFalse(scan.hasNextLine());
-			scan.close();
-			assertEquals("partieActuelle.csv", gp.getNomFichier());
-		} catch (Exception e) {
-			fail();
-		}
-		
+		scanningTest(f, echiquierAttendu);
+
 		assertTrue(f.delete());
 		
 		try {
@@ -382,7 +358,24 @@ public class GestionnairePartieTest {
 		
 		assertTrue(f.delete());
 	}
-	
+
+	private void scanningTest(File f, String[] echiquierAttendu) {
+		Scanner scan;
+		try {
+			scan = new Scanner(f);
+
+			for(String s : echiquierAttendu) {
+				assertEquals(s, scan.nextLine());
+			}
+
+			assertFalse(scan.hasNextLine());
+			scan.close();
+			assertEquals("partieActuelle.csv", gp.getNomFichier());
+		} catch (Exception e) {
+			fail();
+		}
+	}
+
 	@Test
 	public void sauvegarderPartieAvecParamTest() {
 		Piece[][] echiquierASave ={
