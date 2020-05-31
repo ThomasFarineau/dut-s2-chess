@@ -126,17 +126,17 @@ Voulez-vous démarrer une nouvelle partie ou bien charger une ancienne partie ?
 	 2 - Charger une ancienne partie
 
 Veuillez saisir votre choix : 
-Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "cancel" pour revenir en arrière : 
+Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "retour" pour revenir en arrière : 
 Voulez-vous démarrer une nouvelle partie ou bien charger une ancienne partie ?
 	 1 - Démarrer une nouvelle partie
 	 2 - Charger une ancienne partie
 
 Veuillez saisir votre choix : 
-Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "cancel" pour revenir en arrière : Erreur : Fichier introuvable : "mat de la mort qui tue.csv"
+Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "retour" pour revenir en arrière : Erreur : Fichier introuvable : "mat de la mort qui tue.csv"
 
-Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "cancel" pour revenir en arrière : Erreur : Fichier introuvable : "echiquierIntrouvable.pdf.csv"
+Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "retour" pour revenir en arrière : Erreur : Fichier introuvable : "echiquierIntrouvable.pdf.csv"
 
-Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "cancel" pour revenir en arrière : Qui va commencer à jouer, à la reprise de la partie chargée ? (Blanc/Noir) : 
+Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "retour" pour revenir en arrière : Qui va commencer à jouer, à la reprise de la partie chargée ? (Blanc/Noir) : 
 
 
 

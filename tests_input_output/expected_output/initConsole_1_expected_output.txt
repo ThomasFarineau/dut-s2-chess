@@ -4,13 +4,13 @@ Voulez-vous démarrer une nouvelle partie ou bien charger une ancienne partie ?
 	 2 - Charger une ancienne partie
 
 Veuillez saisir votre choix : 
-Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "cancel" pour revenir en arrière : Erreur : Fichier introuvable : "anticonstitutionnellement.csv"
+Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "retour" pour revenir en arrière : Erreur : Fichier introuvable : "anticonstitutionnellement.csv"
 
-Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "cancel" pour revenir en arrière : Erreur : Fichier introuvable : "je sais pas.csv"
+Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "retour" pour revenir en arrière : Erreur : Fichier introuvable : "je sais pas.csv"
 
-Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "cancel" pour revenir en arrière : Erreur : Ligne 1 invalide dans le fichier "tests/tropDeColonnes.csv"
+Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "retour" pour revenir en arrière : Erreur : Ligne 1 invalide dans le fichier "tests/tropDeColonnes.csv"
 
-Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "cancel" pour revenir en arrière : Erreur : Vous n'avez pas le droit de charger le fichier "nouvellePartie.csv".
+Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "retour" pour revenir en arrière : Erreur : Vous n'avez pas le droit de charger le fichier "nouvellePartie.csv".
 
-Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "cancel" pour revenir en arrière : Qui va commencer à jouer, à la reprise de la partie chargée ? (Blanc/Noir) : Réponse invalide, veuillez recommencer.
+Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "retour" pour revenir en arrière : Qui va commencer à jouer, à la reprise de la partie chargée ? (Blanc/Noir) : Réponse invalide, veuillez recommencer.
 Qui va commencer à jouer, à la reprise de la partie chargée ? (Blanc/Noir) : 
