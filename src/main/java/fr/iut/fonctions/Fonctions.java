@@ -62,7 +62,7 @@ public final class Fonctions {
         return (pathRelative.toString()).replace('\\', '/');
     }
 
-    public static JPanel creerPopup(int x, int y, String message) {
+    public static JPanel creerPanelPopup(int x, int y, String message) {
         JPanel panel = new JPanel();
         panel.setSize(new Dimension(x, y));
         panel.setLayout(null);
@@ -76,12 +76,12 @@ public final class Fonctions {
         return panel;
     }
 
-    public static int ajoutChoix(JPanel panel, String titre, String[] options, String choixParDefaut) {
+    public static int afficherPopupAvecChoix(JPanel panel, String titre, String[] options, String choixParDefaut) {
         UIManager.put("OptionPane.minimumSize", new Dimension(panel.getWidth(), panel.getHeight()));
         return JOptionPane.showOptionDialog(null, panel, titre, JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, choixParDefaut);
     }
 
-    public static JFileChooser creerChoixFichier(File chemin, String titre, FileNameExtensionFilter extension) {
+    public static JFileChooser creerPopupFichier(File chemin, String titre, FileNameExtensionFilter extension) {
         JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory(chemin);
         chooser.setDialogTitle(titre);

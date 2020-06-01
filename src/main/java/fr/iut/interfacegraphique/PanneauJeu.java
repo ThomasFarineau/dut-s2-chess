@@ -1,7 +1,7 @@
 package fr.iut.interfacegraphique;
 
-import static fr.iut.fonctions.Fonctions.ajoutChoix;
-import static fr.iut.fonctions.Fonctions.creerPopup;
+import static fr.iut.fonctions.Fonctions.afficherPopupAvecChoix;
+import static fr.iut.fonctions.Fonctions.creerPanelPopup;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,10 +9,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import fr.iut.fonctions.Fonctions;
@@ -123,11 +120,11 @@ public class PanneauJeu extends JPanel {
     }
 
     public void recommencer() {
-
+        parent.getMf().desactiverEnregistrement();
         int resp = -1;
         while (resp == -1) {
-            JPanel panelRecommencer = creerPopup(430, 120, "Félicitations, les " + (plat.getTourJoueur() ? "blancs" : "noirs") + " ont gagné !<BR>Que voulez vous faire ?");
-            resp = ajoutChoix(panelRecommencer, "Enregistrer une partie", new String[]{"Nouvelle partie", "Charger une partie", "Quitter"}, "Nouvelle partie");
+            JPanel panelRecommencer = creerPanelPopup(430, 120, "Félicitations, les " + (plat.getTourJoueur() ? "blancs" : "noirs") + " ont gagné !<BR>Que voulez vous faire ?");
+            resp = afficherPopupAvecChoix(panelRecommencer, "Enregistrer une partie", new String[]{"Nouvelle partie", "Charger une partie", "Quitter"}, "Nouvelle partie");
 
             if (resp == 0) {
                 parent.getMf().nouvellePartie();
