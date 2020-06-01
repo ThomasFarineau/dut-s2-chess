@@ -54,12 +54,12 @@ Si vous souhaitez donner un nom particulier au fichier de sauvegarde, il faut aj
 ```
 sauvegarder <nom du fichier>
 ```
-Chaque fichier sauvegardé sera alors dans le répertoire "parties" du répertoire du projet.
+Chaque fichier sauvegardé sera alors dans le répertoire "parties" à la racine du projet.
 
 ##### Charger une ancienne partie
 Apres avoir écrit "2" pour charger une ancienne partie, la console vous demandera le nom du fichier à charger, il vous suffit de rentrer le nom de votre sauvegarde.
 ![Image montrant la console](https://nsa40.casimages.com/img/2020/05/26/200526073557307707.png "Image montrant la console")
-Votre ancienne partie sera automatiquement rechargé et vous reprendrez la ou vous vous êtiez laissez!
+Votre ancienne partie sera automatiquement rechargée et vous reprendrez là où vous vous étiez laissé!
 
 ##### Quitter le jeu
 Pour quitter le jeu, il vous suffit d'écrire "quitter" à la place de votre saisi pour le déplacement.
