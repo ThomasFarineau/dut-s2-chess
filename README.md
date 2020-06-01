@@ -17,7 +17,7 @@ https://fr.wikipedia.org/wiki/R%C3%A8gles_du_jeu_d%27%C3%A9checs
 
 ## 🕹 Comment jouer ?
 
-### Pour windows :
+### Pour Windows :
 Pour lancer le jeu, il faut se rendre dans le répertoire du projet, lancer une invite de commande (shift + clic droit dans le répertoire puis powershell) et exécuter la commande suivante :
 ```bash
 .\maven\bin\mvn exec:java
