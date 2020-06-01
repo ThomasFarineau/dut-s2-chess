@@ -58,7 +58,7 @@ Chaque fichier sauvegardé sera alors dans le répertoire "parties" à la racine
 
 ##### Charger une ancienne partie
 Apres avoir écrit "2" pour charger une ancienne partie, la console vous demandera le nom du fichier à charger, il vous suffit de rentrer le nom de votre sauvegarde.  
-![Image montrant la console](https://media.discordapp.net/attachments/685203840282394720/716940136096727040/unknown.png "Image montrant la console")
+![Image montrant la console](https://media.discordapp.net/attachments/685203840282394720/716940136096727040/unknown.png "Image montrant la console")  
 Votre ancienne partie sera automatiquement rechargée et vous reprendrez là où vous vous étiez laissé!
 
 ##### Quitter le jeu
