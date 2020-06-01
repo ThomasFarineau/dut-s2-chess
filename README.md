@@ -33,7 +33,7 @@ Une fois le mode console lancer, l'interprète de commande vous demandera de sai
 ##### Lancer une nouvelle partie
 Apres avoir écrit "1" pour lancer une nouvelle partie, le tableau d'échecs apparaitra et vous pourrez jouer.  
 Pour se déplacer, il suffit d'écrire la position initiale et la position finale.
-![Image montrant la console](https://nsa40.casimages.com/img/2020/05/26/200526073242652431.png "Image montrant la console")
+![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716938571574935562/unknown.png "Image montrant la console")
 ```bash
 A2 A4 #Déplacer une pièce de la case a2 à la case a4 par exemple
 ```
