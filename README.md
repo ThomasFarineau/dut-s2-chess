@@ -2,19 +2,22 @@
 
 ## ♟ Introduction
 
-Découvrez notre jeu d'échecs tout fraîchement créé par une équipe de développeurs motivés ! Chaque partie du code a été testée pour éviter tous les bugs possibles ou imaginables.
+Découvrez notre jeu d'échecs tout fraîchement créé par une équipe de développeurs motivés!  
+Chaque partie du code a été testée pour éviter tous les bugs possibles ou imaginables.
 
-Chaque joueur possède au départ seize pièces : un roi, une dame, deux tours, deux fous, deux cavaliers et huit pions. Le but du jeu est d'infliger un échec et mat où le roi adverse est en prise sans qu'il soit possible d'y remédier.
+Chaque joueur possède au départ seize pièces : un roi, une reine, deux tours, deux fous, deux cavaliers et huit pions.  
+Le but du jeu est d'infliger un échec et mat où le roi adverse.
+https://fr.wikipedia.org/wiki/R%C3%A8gles_du_jeu_d%27%C3%A9checs
 
 ## 🔨 Caractéristiques
 
 - INTERFACE GRAPHIQUE ✔
 - INTELLIGENCE ARTIFICIELLE ❌
-- REGLES SUPPLÉMENTAIRE ❌
+- RÈGLES SUPPLÉMENTAIRES ❌
 
-## 🕹 Comment jouer?
+## 🕹 Comment jouer ?
 
-Pour lancer le jeu, il faut se rendre dans le répertoire du projet, de lancer une interface de commande (shift + clic droit) et d'exécuter la commande suivante:
+Pour lancer le jeu, il faut se rendre dans le répertoire du projet, lancer une interface de commande (shift + clic droit dans le répertoire puis powershell) et exécuter la commande suivante :
 ```bash
 .\maven\bin\mvn exec:java
 ```
