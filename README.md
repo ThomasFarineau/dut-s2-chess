@@ -1,4 +1,4 @@
-# ChessGame
+# Chess Game
 > Tous droits réservés à En Panne Corp.
 
 ## ♟ Introduction
