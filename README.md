@@ -17,10 +17,18 @@ https://fr.wikipedia.org/wiki/R%C3%A8gles_du_jeu_d%27%C3%A9checs
 
 ## 🕹 Comment jouer ?
 
-Pour lancer le jeu, il faut se rendre dans le répertoire du projet, lancer une interface de commande (shift + clic droit dans le répertoire puis powershell) et exécuter la commande suivante :
+### Pour windows :
+Pour lancer le jeu, il faut se rendre dans le répertoire du projet, lancer une invite de commande (shift + clic droit dans le répertoire puis powershell) et exécuter la commande suivante :
 ```bash
 .\maven\bin\mvn exec:java
 ```
+
+### Autre :
+Pour lancer le jeu, il faut se rendre dans le répertoire du projet avec une invite de commande et exécuter la commande suivante :
+```bash
+./maven/bin/mvn exec:java
+```
+
 Vous allez avoir le choix entre le mode console et le mode graphique:
 
 * [Utilisation avec le mode "Console"](#console)
