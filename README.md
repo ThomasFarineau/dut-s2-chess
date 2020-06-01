@@ -34,7 +34,7 @@ Vous allez avoir le choix entre le mode console et le mode graphique:
 * [Utilisation avec le mode "Console"](#console)
 * [Utilisation avec le mode "Graphique"](#graphique)
 
-##### Console
+### Console
 
 Une fois la commande d'[exécution](#-comment-jouer) lancée, écrire "1" pour lancer le mode Console.  
 Une fois le mode console lancer, l'interprète de commande vous demandera de saisir soit 1 pour démarrer une nouvelle partie, soit 2 pour charger une partie existante.  
