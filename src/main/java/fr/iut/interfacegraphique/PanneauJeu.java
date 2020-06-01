@@ -22,7 +22,7 @@ import fr.iut.plateau.Plateau;
 
 public class PanneauJeu extends JPanel {
     private Fenetre parent;
-    private Image fondEchiquier = Fonctions.loadImage("tempEchiquier.png");
+    private Image fondEchiquier = Fonctions.loadImage("fondEchiquier.png");
     private Plateau plat;
     private int[] selection = null; // coordonnées de la 1re sélection, si elle est valide
     private boolean[][] selectionDeplacementsPoss; // déplacements possibles de la sélection
