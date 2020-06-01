@@ -44,17 +44,17 @@ Apres avoir écrit "1" pour lancer une nouvelle partie, l'échiquier apparaîtra
 Pour se déplacer, il suffit d'écrire la position initiale et la position finale.
 ![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716938571574935562/unknown.png "Image montrant la console")
 ```bash
-A2 A4 #Déplacer une pièce de la case a2 à la case a4 par exemple
+A2 A4 #Déplacer une pièce de la case A2 à la case A4 par exemple
 ```
 
 ##### Sauvegarder une partie
-Pour sauvegarder le jeu, il vous suffit d'écrire "sauvegarder" à la place de votre saisi pour le déplacement.  
-Le fichier sauvegardé prendra pour nom "partieActuelle.csv"
-Si vous souhaitez donner un nom particulier au fichier de sauvegarde, ajouter le nom du fichier après "sauvegarder":
-```bash
+Pour sauvegarder le jeu, il vous suffit d'écrire "sauvegarder" à la place de votre saisie pour le déplacement.  
+Par défaut fichier sauvegardé prendra pour nom "partieActuelle.csv".
+Si vous souhaitez donner un nom particulier au fichier de sauvegarde, il faut ajouter un nom après "sauvegarder" :
+```
 sauvegarder <nom du fichier>
 ```
-Chaque fichier sauvegardé sera alors dans le répertoire "parti" du répertoire du projet.
+Chaque fichier sauvegardé sera alors dans le répertoire "parties" du répertoire du projet.
 
 ##### Charger une ancienne partie
 Apres avoir écrit "2" pour charger une ancienne partie, la console vous demandera le nom du fichier à charger, il vous suffit de rentrer le nom de votre sauvegarde.
