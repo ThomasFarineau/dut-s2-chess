@@ -40,7 +40,7 @@ Une fois la commande d'[exécution](#-comment-jouer) lancée, écrire "1" pour l
 Une fois le mode console lancé, l'interprète de commande vous demandera de saisir soit 1 pour démarrer une nouvelle partie, soit 2 pour charger une partie existante.  
 
 ##### Lancer une nouvelle partie
-Apres avoir écrit "1" pour lancer une nouvelle partie, le tableau d'échecs apparaitra et vous pourrez jouer.  
+Apres avoir écrit "1" pour lancer une nouvelle partie, l'échiquier apparaîtra et vous pourrez jouer.  
 Pour se déplacer, il suffit d'écrire la position initiale et la position finale.
 ![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716938571574935562/unknown.png "Image montrant la console")
 ```bash
