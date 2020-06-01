@@ -61,6 +61,7 @@ Apres avoir écrit "2" pour charger une ancienne partie, la console vous demande
 ![Image montrant la console](https://media.discordapp.net/attachments/685203840282394720/716940136096727040/unknown.png "Image graphique")  
 Votre ancienne partie sera automatiquement rechargée, et l'invite de commande vous demandera qui commencera a la reprise de la partie.  
 Il suffit d'écrire "blanc" ou "noir" pour que celui-ci commence.
+Attention, seuls les fichiers CSV sont acceptés.
 
 ##### Quitter le jeu
 Pour quitter le jeu, il vous suffit d'écrire "quitter" à la place de votre saisi pour le déplacement.
@@ -80,12 +81,13 @@ Une fois le fichier sélectionné, un message vous demandera de choisir qui comm
 ![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716947184242786364/unknown.png "Image graphique")    
 
 ##### Enregistrer une partie
-Pour enregistrer une partie sur le fichier actuelle (partieActuelle.csv) faites CTRL + S ou allez dans le menu et sélectionnez "Enregistrer".  
+Pour enregistrer une partie sur le fichier actuel (partieActuelle.csv par défaut) faites CTRL + S ou allez dans le menu et sélectionnez "Enregistrer".  
 
 ##### Pour enregistrer sous
 Pour enregistrer une partie sous un nom spécifique faites CTRL + SHIFT + S ou allez dans le menu et sélectionnez "Enregistrer sous...".  
-![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716948895120359465/unknown.png "Image graphique")    
-
-
-
+![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716948895120359465/unknown.png "Image graphique")  
+Si vous choisissez un fichier déjà existant, une alerte vous demandera si vous êtes sûr de vous :  
+![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716949044194181172/unknown.png "Image graphique")  
+  
+  
 > Tous droits réservés à En Panne Corp.
