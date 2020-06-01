@@ -37,7 +37,7 @@ Vous allez avoir le choix entre le mode console et le mode graphique:
 ### Console
 
 Une fois la commande d'[exécution](#-comment-jouer) lancée, écrire "1" pour lancer le mode Console.  
-Une fois le mode console lancer, l'interprète de commande vous demandera de saisir soit 1 pour démarrer une nouvelle partie, soit 2 pour charger une partie existante.  
+Une fois le mode console lancé, l'interprète de commande vous demandera de saisir soit 1 pour démarrer une nouvelle partie, soit 2 pour charger une partie existante.  
 
 ##### Lancer une nouvelle partie
 Apres avoir écrit "1" pour lancer une nouvelle partie, le tableau d'échecs apparaitra et vous pourrez jouer.  
