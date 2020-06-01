@@ -433,7 +433,7 @@ public class GestionnairePartieTest {
         comparerSauvegardes(f, echiquierAttendu, "tests/sauvegarde1.csv");
 
         try {
-            p.setTourJoueur(true);
+            gp.setTourJoueur(true);
             p.deplacer(new int[]{0, 1, 2, 0});
             String retourAttendu = "La sauvegarde vers \"tests/sauvegarde1.csv\" a été effectuée avec succès !";
             assertEquals(retourAttendu, gp.sauvegarderPartie("tests/sauvegarde1.csv"));
@@ -490,5 +490,14 @@ public class GestionnairePartieTest {
         } catch (Exception e) {
             fail();
         }
+    }
+    
+    @Test
+    public void setTourJoueurTest() {
+    	assertFalse(p.getTourJoueur());
+    	gp.setTourJoueur(true);
+    	assertTrue(p.getTourJoueur());
+    	gp.setTourJoueur(false);
+    	assertFalse(p.getTourJoueur());
     }
 }

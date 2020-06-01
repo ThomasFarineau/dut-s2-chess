@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -23,20 +24,20 @@ import fr.iut.gestionpartie.GestionnairePartie;
 import fr.iut.listener.EchiquierListener;
 
 public class MenuFenetre extends JMenuBar {
-    private JMenuItem enregistrerPartie = new JMenuItem("Enregistrer");
+    private JMenuItem enregistrerPartie = new JMenuItem("Enregistrer", new ImageIcon(Fonctions.loadImage("icone_sauvegarder.png")));
     private JMenuItem enregistrerPartieSous = new JMenuItem("Enregistrer sous...");
 
     private PanneauJeu pj;
     private GestionnairePartie gp;
 
     public MenuFenetre(PanneauJeu pj, GestionnairePartie gp) {
-        JMenuItem nouvellePartie = new JMenuItem("Nouvelle Partie");
+        JMenuItem nouvellePartie = new JMenuItem("Nouvelle Partie", new ImageIcon(Fonctions.loadImage("icone_nouvelle_partie.png")));
         nouvellePartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK));
         nouvellePartie.addActionListener(e -> nouvellePartie());
         JMenu partie = new JMenu("Partie");
         partie.add(nouvellePartie);
 
-        JMenuItem chargerPartie = new JMenuItem("Charger une Partie...");
+        JMenuItem chargerPartie = new JMenuItem("Charger une Partie...", new ImageIcon(Fonctions.loadImage("icone_ouvrir.png")));
         chargerPartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK));
         chargerPartie.addActionListener(e -> chargerPartie());
         partie.add(chargerPartie);
@@ -53,13 +54,14 @@ public class MenuFenetre extends JMenuBar {
 
         JMenu informations = new JMenu("Informations");
 
-        JMenuItem credits = new JMenuItem("Cr\u00E9dits");
+        JMenuItem aPropos = new JMenuItem("À propos");
+        aPropos.addActionListener(null);
+        informations.add(aPropos);
+        
+        JMenuItem credits = new JMenuItem("Crédits images");
         credits.addActionListener(null);
         informations.add(credits);
-
-        JMenuItem version = new JMenuItem("Version du Jeu");
-        version.addActionListener(null);
-        informations.add(version);
+       
 
         this.add(partie);
         this.add(informations);
