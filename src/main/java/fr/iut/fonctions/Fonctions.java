@@ -54,6 +54,7 @@ public final class Fonctions {
         };
     }
 
+    // Convertit un chemin absolu en chemin relatif au Path des fichiers de partie
     public static String convertCheminRelatif(String cheminAbsolu) {
         Path cheminAbsoluFichier = Paths.get(cheminAbsolu);
         Path pathRelative = GestionnairePartie.getPartiesPath().relativize(cheminAbsoluFichier);
