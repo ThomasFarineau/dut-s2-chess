@@ -70,11 +70,11 @@ Une fois la commande d'[exécution](#-comment-jouer) lancée, écrire "2" pour l
 ![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716944254391418981/unknown.png "Image graphique")  
 
 ##### Lancer une nouvelle partie
-Pour lancer une nouvelle partie faites CTRL + N ou aller dans le menu et sélectionner "Nouvelle Partie".  
+Pour lancer une nouvelle partie faites CTRL + N ou allez dans le menu et sélectionnez "Nouvelle Partie".  
 ![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716944581106729020/unknown.png "Image graphique")    
 
 ##### Pour charger une partie
-Pour charger une partie faites CTRL + C ou aller dans le menu et sélectionner "Charger une Partie".  
+Pour charger une partie faites CTRL + C ou allez dans le menu et sélectionnez "Charger une Partie".  
 ![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716946833150050325/unknown.png "Image graphique")    
 Une fois le fichier sélectionné, un message vous demandera de sélectionner qui commence :  
 ![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716947184242786364/unknown.png "Image graphique")    
