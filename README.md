@@ -89,5 +89,9 @@ Pour enregistrer une partie sous un nom spécifique faites CTRL + SHIFT + S ou a
 Si vous choisissez un fichier déjà existant, une alerte vous demandera si vous êtes sûr de vous :  
 ![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716949044194181172/unknown.png "Image graphique")  
   
-  
+##### Comment jouer?
+
+Pour déplacer une pièce, cliquez dessus, puis cliquez sur la case où vous voulez que la pièce aille. Seuls les mouvements acceptés dans le jeu original sont acceptés.  
+ 
+ 
 > Tous droits réservés à En Panne Corp.
