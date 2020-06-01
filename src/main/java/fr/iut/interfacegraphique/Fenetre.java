@@ -2,6 +2,7 @@ package fr.iut.interfacegraphique;
 
 import javax.swing.JFrame;
 
+import fr.iut.fonctions.Fonctions;
 import fr.iut.gestionpartie.GestionnairePartie;
 import fr.iut.plateau.Plateau;
 
@@ -18,6 +19,7 @@ public class Fenetre extends JFrame {
 
         // Ajout de l'affichage
         this.setContentPane(pj);
+        this.setIconImage(Fonctions.loadImage("icone_appli_24x24.png"));
 
         this.pack();
         this.setLocationRelativeTo(null);
