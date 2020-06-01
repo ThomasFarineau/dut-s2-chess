@@ -1,5 +1,4 @@
 # Chess Game
-> Tous droits réservés à En Panne Corp.
 
 ## ♟ Introduction
 
@@ -70,7 +69,4 @@ Pour sauvegarder une partie sous un fichier spécifique faites CTRL + SHIFT + S
 ##### Pour charger une partie
 Pour charger une partie faites CTRL + C
 
-
-
-
-  
+> Tous droits réservés à En Panne Corp.
