@@ -76,15 +76,15 @@ Pour lancer une nouvelle partie faites CTRL + N ou allez dans le menu et sélect
 ##### Pour charger une partie
 Pour charger une partie faites CTRL + C ou allez dans le menu et sélectionnez "Charger une Partie".  
 ![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716946833150050325/unknown.png "Image graphique")    
-Une fois le fichier sélectionné, un message vous demandera de sélectionner qui commence :  
+Une fois le fichier sélectionné, un message vous demandera de choisir qui commence :  
 ![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716947184242786364/unknown.png "Image graphique")    
 
-
 ##### Enregistrer une partie
-Pour sauvegarder une partie faites CTRL + S
+Pour enregistrer une partie sur le fichier actuelle (partieActuelle.csv) faites CTRL + S ou allez dans le menu et sélectionnez "Enregistrer".  
 
 ##### Pour enregistrer sous
-Pour sauvegarder une partie sous un fichier spécifique faites CTRL + SHIFT + S
+Pour enregistrer une partie sous un nom spécifique faites CTRL + SHIFT + S ou allez dans le menu et sélectionnez "Enregistrer sous...".  
+![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716948895120359465/unknown.png "Image graphique")    
 
 
 
