@@ -58,25 +58,34 @@ Chaque fichier sauvegardé sera alors dans le répertoire "parties" à la racine
 
 ##### Charger une ancienne partie
 Apres avoir écrit "2" pour charger une ancienne partie, la console vous demandera le nom du fichier à charger, il vous suffit de rentrer le nom de votre sauvegarde.  
-![Image montrant la console](https://media.discordapp.net/attachments/685203840282394720/716940136096727040/unknown.png "Image montrant la console")  
-Votre ancienne partie sera automatiquement rechargée et vous reprendrez là où vous vous étiez laissé!
+![Image montrant la console](https://media.discordapp.net/attachments/685203840282394720/716940136096727040/unknown.png "Image graphique")  
+Votre ancienne partie sera automatiquement rechargée, et l'invite de commande vous demandera qui commencera a la reprise de la partie.  
+Il suffit d'écrire "blanc" ou "noir" pour que celui-ci commence.
 
 ##### Quitter le jeu
 Pour quitter le jeu, il vous suffit d'écrire "quitter" à la place de votre saisi pour le déplacement.
 
 ### Graphique
-Une fois la commande d'[exécution](#-comment-jouer) lancée, écrire "2" pour lancer le mode Graphique.
+Une fois la commande d'[exécution](#-comment-jouer) lancée, écrire "2" pour lancer le mode Graphique.  
+![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716944254391418981/unknown.png "Image graphique")  
 
 ##### Lancer une nouvelle partie
-Pour lancer une nouvelle partie faites CTRL + N
+Pour lancer une nouvelle partie faites CTRL + N ou aller dans le menu et sélectionner "Nouvelle Partie".  
+![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716944581106729020/unknown.png "Image graphique")    
+
+##### Pour charger une partie
+Pour charger une partie faites CTRL + C ou aller dans le menu et sélectionner "Charger une Partie".  
+![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716946833150050325/unknown.png "Image graphique")    
+Une fois le fichier sélectionné, un message vous demandera de sélectionner qui commence :  
+![Image montrant la console](https://cdn.discordapp.com/attachments/685203840282394720/716947184242786364/unknown.png "Image graphique")    
+
 
 ##### Enregistrer une partie
 Pour sauvegarder une partie faites CTRL + S
 
-###### Pour enregistrer sous
+##### Pour enregistrer sous
 Pour sauvegarder une partie sous un fichier spécifique faites CTRL + SHIFT + S
 
-##### Pour charger une partie
-Pour charger une partie faites CTRL + C
+
 
 > Tous droits réservés à En Panne Corp.
