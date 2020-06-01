@@ -2,9 +2,9 @@
 
 ## ♟ Introduction
 
-Découvrez notre jeu d'échecs tout fraîchement développé par une équipe de développeurs motivés ! Chaque partie du code a été testée pour éviter tous les bugs possibles ou imaginables.
+Découvrez notre jeu d'échecs tout fraîchement créé par une équipe de développeurs motivés ! Chaque partie du code a été testée pour éviter tous les bugs possibles ou imaginables.
 
-Chaque joueur possède au départ seize pièces: un roi, une dame, deux tours, deux fous, deux cavaliers et huit pions. Le but du jeu est d'infliger un échec et mat où le roi adverse est en prise sans qu'il soit possible d'y remédier.
+Chaque joueur possède au départ seize pièces : un roi, une dame, deux tours, deux fous, deux cavaliers et huit pions. Le but du jeu est d'infliger un échec et mat où le roi adverse est en prise sans qu'il soit possible d'y remédier.
 
 ## 🔨 Caractéristiques
 
@@ -23,7 +23,6 @@ Vous allez avoir le choix entre le mode console et le mode graphique:
 * [Utilisation avec le mode "Console"](#console)
 * [Utilisation avec le mode "Graphique"](#graphique)
 
-
 ##### Console
 
 Une fois la commande d'[exécution](#-comment-jouer) lancée, écrire "1" pour lancer le mode Console.  
@@ -39,12 +38,12 @@ A2 A4 #Déplacer une pièce de la case a2 à la case a4 par exemple
 
 ##### Sauvegarder une partie
 Pour sauvegarder le jeu, il vous suffit d'écrire "sauvegarder" à la place de votre saisi pour le déplacement.  
-Le fichier sauvegarder prendra pour nom "partieActuelle.csv"
+Le fichier sauvegardé prendra pour nom "partieActuelle.csv"
 Si vous souhaitez donner un nom particulier au fichier de sauvegarde, ajouter le nom du fichier après "sauvegarder":
 ```bash
 sauvegarder <nom du fichier>
 ```
-Chaque fichier sauvegardé sera alors dans le répertoire "parties" du répertoire du projet.
+Chaque fichier sauvegardé sera alors dans le répertoire "parti" du répertoire du projet.
 
 ##### Charger une ancienne partie
 Apres avoir écrit "2" pour charger une ancienne partie, la console vous demandera le nom du fichier à charger, il vous suffit de rentrer le nom de votre sauvegarde.
