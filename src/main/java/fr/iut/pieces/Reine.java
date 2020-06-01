@@ -2,9 +2,11 @@ package fr.iut.pieces;
 
 import java.awt.Image;
 
+import fr.iut.fonctions.Fonctions;
+
 public class Reine extends Piece {
-    private static Image imgB = loadImage("ReineBlanche.png");
-    private static Image imgN = loadImage("ReineNoire.png");
+    private static Image imgB = Fonctions.loadImage("ReineBlanche.png");
+    private static Image imgN = Fonctions.loadImage("ReineNoire.png");
 
 
     public Reine(boolean couleur) {

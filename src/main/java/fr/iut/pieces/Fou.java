@@ -2,9 +2,11 @@ package fr.iut.pieces;
 
 import java.awt.Image;
 
+import fr.iut.fonctions.Fonctions;
+
 public class Fou extends Piece {
-    private static Image imgB = loadImage("FouBlanc.png");
-    private static Image imgN = loadImage("FouNoir.png");
+    private static Image imgB = Fonctions.loadImage("FouBlanc.png");
+    private static Image imgN = Fonctions.loadImage("FouNoir.png");
 
     public Fou(boolean couleur) {
         super(couleur);

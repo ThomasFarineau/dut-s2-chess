@@ -2,9 +2,11 @@ package fr.iut.pieces;
 
 import java.awt.Image;
 
+import fr.iut.fonctions.Fonctions;
+
 public class Tour extends Piece {
-    private static Image imgB = loadImage("TourBlanche.png");
-    private static Image imgN = loadImage("TourNoire.png");
+    private static Image imgB = Fonctions.loadImage("TourBlanche.png");
+    private static Image imgN = Fonctions.loadImage("TourNoire.png");
 
     public Tour(boolean couleur) {
         super(couleur);

@@ -2,9 +2,11 @@ package fr.iut.pieces;
 
 import java.awt.Image;
 
+import fr.iut.fonctions.Fonctions;
+
 public class Pion extends Piece {
-    private static Image imgB = loadImage("PionBlanc.png");
-    private static Image imgN = loadImage("PionNoir.png");
+    private static Image imgB = Fonctions.loadImage("PionBlanc.png");
+    private static Image imgN = Fonctions.loadImage("PionNoir.png");
 
     public Pion(boolean couleur) {
         super(couleur);

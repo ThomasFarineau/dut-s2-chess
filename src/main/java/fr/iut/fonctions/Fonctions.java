@@ -4,10 +4,13 @@ import static java.awt.Component.CENTER_ALIGNMENT;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,7 +20,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import fr.iut.gestionpartie.GestionnairePartie;
 
-public class Fonctions {
+public final class Fonctions {
     private Fonctions() {
     }
 
@@ -85,5 +88,17 @@ public class Fonctions {
         chooser.addChoosableFileFilter(extension);
         chooser.setAcceptAllFileFilterUsed(false);
         return chooser;
+    }
+    
+    public static Image loadImage(String nomFichier) {
+        Image img = null;
+
+        try {
+            img = ImageIO.read(new File("./img/" + nomFichier));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return img;
     }
 }

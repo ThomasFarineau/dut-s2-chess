@@ -2,9 +2,11 @@ package fr.iut.pieces;
 
 import java.awt.Image;
 
+import fr.iut.fonctions.Fonctions;
+
 public class Cavalier extends Piece {
-    private static Image imgB = loadImage("CavalierBlanc.png");
-    private static Image imgN = loadImage("CavalierNoir.png");
+    private static Image imgB = Fonctions.loadImage("CavalierBlanc.png");
+    private static Image imgN = Fonctions.loadImage("CavalierNoir.png");
 
     public Cavalier(boolean couleur) {
         super(couleur);

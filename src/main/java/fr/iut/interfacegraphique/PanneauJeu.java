@@ -21,9 +21,8 @@ import fr.iut.pieces.Piece;
 import fr.iut.plateau.Plateau;
 
 public class PanneauJeu extends JPanel {
-    private final static String imgPath = "./img/";
     private Fenetre parent;
-    private Image fondEchiquier = null;
+    private Image fondEchiquier = Fonctions.loadImage("tempEchiquier.png");
     private Plateau plat;
     private int[] selection = null; // coordonnées de la 1re sélection, si elle est valide
     private boolean[][] selectionDeplacementsPoss; // déplacements possibles de la sélection
@@ -35,12 +34,6 @@ public class PanneauJeu extends JPanel {
         this.parent = parent;
         this.plat = plat;
         this.addMouseListener(new EchiquierListener(this));
-
-        try {
-            fondEchiquier = ImageIO.read(new File(imgPath + "tempEchiquier.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

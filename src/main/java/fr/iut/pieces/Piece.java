@@ -8,7 +8,6 @@ import java.util.Arrays;
 import javax.imageio.ImageIO;
 
 public abstract class Piece {
-    protected final static String imgPath = "./img/";
     private boolean couleur;
     private boolean[][] deplacementsPoss = new boolean[15][15];
 
@@ -16,18 +15,6 @@ public abstract class Piece {
         this.couleur = couleur;
         for (boolean[] ligne : deplacementsPoss)
             Arrays.fill(ligne, false);
-    }
-
-    protected static Image loadImage(String nomFichier) {
-        Image img = null;
-
-        try {
-            img = ImageIO.read(new File(imgPath + nomFichier));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return img;
     }
 
     protected void setDeplacementsPossIndex(int x, int y) {
