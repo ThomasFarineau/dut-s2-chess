@@ -1,0 +1,6 @@
+
+Voulez-vous démarrer une nouvelle partie ou bien charger une ancienne partie ?
+	 1 - Démarrer une nouvelle partie
+	 2 - Charger une ancienne partie
+
+Veuillez saisir votre choix : 

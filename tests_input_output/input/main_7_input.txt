@@ -1,0 +1,21 @@
+1 - mode console
+MODE_CONSOLE
+Console mode
+mode console
+charger
+berger
+les blancs
+blancs
+h5 f7
+O
+nouvelle
+e2 e4
+e7 e5
+sauvegarder 
+sauvegarder nouvellePartie.csv
+sauvegarder ../parties/nouvellePartie.csv
+sauvegarder nouvellePartie
+sauvegarder
+quitter
+
+

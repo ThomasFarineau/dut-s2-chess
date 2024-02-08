@@ -1,0 +1,19 @@
+
+Voulez-vous démarrer une nouvelle partie ou bien charger une ancienne partie ?
+	 1 - Démarrer une nouvelle partie
+	 2 - Charger une ancienne partie
+
+Veuillez saisir votre choix : Entrée invalide, veuillez recommencer.
+
+Voulez-vous démarrer une nouvelle partie ou bien charger une ancienne partie ?
+	 1 - Démarrer une nouvelle partie
+	 2 - Charger une ancienne partie
+
+Veuillez saisir votre choix : 
+Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "retour" pour revenir en arrière : 
+Voulez-vous démarrer une nouvelle partie ou bien charger une ancienne partie ?
+	 1 - Démarrer une nouvelle partie
+	 2 - Charger une ancienne partie
+
+Veuillez saisir votre choix : 
+Veuillez saisir le nom du fichier de partie (ex : "maPartie.csv"), entrez "retour" pour revenir en arrière : Qui va commencer à jouer, à la reprise de la partie chargée ? (Blanc/Noir) : 
