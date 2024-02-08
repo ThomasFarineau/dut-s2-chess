@@ -1,8 +1,8 @@
 package fr.iut.interfacegraphique;
 
-import static fr.iut.fonctions.Fonctions.afficherPopupAvecChoix;
-import static fr.iut.fonctions.Fonctions.creerPopupFichier;
-import static fr.iut.fonctions.Fonctions.creerPanelPopup;
+import static fr.iut.fonctions.Utils.showPopupWithChoice;
+import static fr.iut.fonctions.Utils.createPopupFile;
+import static fr.iut.fonctions.Utils.createGroupPanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
@@ -19,25 +19,25 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import fr.iut.fonctions.Fonctions;
-import fr.iut.gestionpartie.GestionnairePartie;
-import fr.iut.listener.EchiquierListener;
+import fr.iut.fonctions.Utils;
+import fr.iut.gestionpartie.GameManager;
+import fr.iut.listener.ChessboardListener;
 
-public class MenuFenetre extends JMenuBar {
-    private JMenuItem enregistrerPartie = new JMenuItem("Enregistrer", new ImageIcon(Fonctions.loadImage("icone_sauvegarder.png")));
+public class MenuWindow extends JMenuBar {
+    private JMenuItem enregistrerPartie = new JMenuItem("Enregistrer", new ImageIcon(Utils.loadImage("icone_sauvegarder.png")));
     private JMenuItem enregistrerPartieSous = new JMenuItem("Enregistrer sous...");
 
-    private PanneauJeu pj;
-    private GestionnairePartie gp;
+    private GamePanel pj;
+    private GameManager gp;
 
-    public MenuFenetre(PanneauJeu pj, GestionnairePartie gp) {
-        JMenuItem nouvellePartie = new JMenuItem("Nouvelle Partie", new ImageIcon(Fonctions.loadImage("icone_nouvelle_partie.png")));
+    public MenuWindow(GamePanel pj, GameManager gp) {
+        JMenuItem nouvellePartie = new JMenuItem("Nouvelle Partie", new ImageIcon(Utils.loadImage("icone_nouvelle_partie.png")));
         nouvellePartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK));
         nouvellePartie.addActionListener(e -> nouvellePartie());
         JMenu partie = new JMenu("Partie");
         partie.add(nouvellePartie);
 
-        JMenuItem chargerPartie = new JMenuItem("Charger une Partie...", new ImageIcon(Fonctions.loadImage("icone_ouvrir.png")));
+        JMenuItem chargerPartie = new JMenuItem("Charger une Partie...", new ImageIcon(Utils.loadImage("icone_ouvrir.png")));
         chargerPartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK));
         chargerPartie.addActionListener(e -> chargerPartie());
         partie.add(chargerPartie);
@@ -75,7 +75,7 @@ public class MenuFenetre extends JMenuBar {
         enregistrerPartieSous.setEnabled(true);
     }
 
-    public void desactiverEnregistrement() {
+    public void disableSaving() {
         enregistrerPartie.setEnabled(false);
         enregistrerPartieSous.setEnabled(false);
     }
@@ -86,31 +86,31 @@ public class MenuFenetre extends JMenuBar {
 
     public void enregistrerPartie() {
         try {
-            gp.sauvegarderPartie();
+            gp.saveGame();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(pj, "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     public void enregistrerPartieSous() {
-        JFileChooser choixFichier = creerPopupFichier(new File("./parties"), "Enregistrer un fichier", new FileNameExtensionFilter("Tableau", "csv"));
+        JFileChooser choixFichier = createPopupFile(new File("./parties"), "Enregistrer un fichier", new FileNameExtensionFilter("Tableau", "csv"));
 
         if (choixFichier.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-            String file = Fonctions.convertCheminRelatif(choixFichier.getSelectedFile().getAbsolutePath());
+            String file = Utils.convertRelativePath(choixFichier.getSelectedFile().getAbsolutePath());
             try {
                 if (choixFichier.getSelectedFile().exists()) {
-                    JPanel panelEcraser = creerPanelPopup(430, 100, "Le fichier " + choixFichier.getSelectedFile().getName() + " existe déjà, voulez-vous l'écraser ?");
-                    int resp = afficherPopupAvecChoix(panelEcraser, "Enregistrer une partie", new String[]{"Oui", "Non", "Annuler"}, "Non");
+                    JPanel panelEcraser = createGroupPanel(430, 100, "Le fichier " + choixFichier.getSelectedFile().getName() + " existe déjà, voulez-vous l'écraser ?");
+                    int resp = showPopupWithChoice(panelEcraser, "Enregistrer une partie", new String[]{"Oui", "Non", "Annuler"}, "Non");
 
                     if (resp == 0) {
-                        gp.sauvegarderPartie(file);
+                        gp.saveGame(file);
                     } else if (resp == 1) {
                         enregistrerPartieSous();
                     } else {
                         panelEcraser.setVisible(false);
                     }
                 } else {
-                    gp.sauvegarderPartie(file);
+                    gp.saveGame(file);
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(pj, "Erreur: " + e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
@@ -119,30 +119,30 @@ public class MenuFenetre extends JMenuBar {
     }
 
     public boolean chargerPartie() {
-        JFileChooser choixFichier = creerPopupFichier(new File("./parties"), "Ouvrir un fichier", new FileNameExtensionFilter("Tableau", "csv"));
+        JFileChooser choixFichier = createPopupFile(new File("./parties"), "Ouvrir un fichier", new FileNameExtensionFilter("Tableau", "csv"));
 
         if (choixFichier.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            String file = Fonctions.convertCheminRelatif(choixFichier.getSelectedFile().getAbsolutePath());
+            String file = Utils.convertRelativePath(choixFichier.getSelectedFile().getAbsolutePath());
 
             int resp = 0;
             if (partieCommencer()) {
-                JPanel panelValider = creerPanelPopup(430, 100, "Êtes-vous sûr de vouloir charger une partie ?");
-                resp = afficherPopupAvecChoix(panelValider, "Charger une partie", new String[]{"Oui", "Non"}, "Non");
+                JPanel panelValider = createGroupPanel(430, 100, "Êtes-vous sûr de vouloir charger une partie ?");
+                resp = showPopupWithChoice(panelValider, "Charger une partie", new String[]{"Oui", "Non"}, "Non");
             }
             // Utilisation de la réponse
             if (resp == 0) {
                 try {
-                    gp.chargerAnciennePartie(file);
-                    JPanel panelChoixTour = creerPanelPopup(430, 100, "Qui va commencer à jouer, à la reprise de la partie ?");
-                    resp = afficherPopupAvecChoix(panelChoixTour, "Charger une partie", new String[]{"Blanc", "Noir"}, null);
+                    gp.loadSavedGame(file);
+                    JPanel panelChoixTour = createGroupPanel(430, 100, "Qui va commencer à jouer, à la reprise de la partie ?");
+                    resp = showPopupWithChoice(panelChoixTour, "Charger une partie", new String[]{"Blanc", "Noir"}, null);
 
                     if (resp == 0) {
-                        gp.setTourJoueur(false);
+                        gp.setPlayerRound(false);
                     } else {
-                        gp.setTourJoueur(true);
+                        gp.setPlayerRound(true);
                     }
                     activerEnregistrement();
-                    ((EchiquierListener) pj.getListeners(MouseListener.class)[0]).setInteractable(true);
+                    ((ChessboardListener) pj.getListeners(MouseListener.class)[0]).setInteroperable(true);
                     pj.reInitValues();
                     pj.repaint();
                     return true;
@@ -157,15 +157,15 @@ public class MenuFenetre extends JMenuBar {
     public void nouvellePartie() {
         int resp = 0;
         if (partieCommencer()) {
-            JPanel panelValider = creerPanelPopup(430, 100, "Êtes-vous sûr de vouloir démarrer une nouvelle partie ?");
-            resp = afficherPopupAvecChoix(panelValider, "Nouvelle partie", new String[]{"Oui", "Non"}, "Non");
+            JPanel panelValider = createGroupPanel(430, 100, "Êtes-vous sûr de vouloir démarrer une nouvelle partie ?");
+            resp = showPopupWithChoice(panelValider, "Nouvelle partie", new String[]{"Oui", "Non"}, "Non");
         }
         if (resp == 0) {
             try {
-                gp.nouvellePartie();
+                gp.newGame();
                 activerEnregistrement();
-                gp.setTourJoueur(false);
-                ((EchiquierListener) pj.getListeners(MouseListener.class)[0]).setInteractable(true);
+                gp.setPlayerRound(false);
+                ((ChessboardListener) pj.getListeners(MouseListener.class)[0]).setInteroperable(true);
                 pj.reInitValues();
                 pj.repaint();
             } catch (IOException e) {

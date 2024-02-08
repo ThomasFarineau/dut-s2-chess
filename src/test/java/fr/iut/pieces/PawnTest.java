@@ -9,22 +9,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
-public class PionTest {
+public class PawnTest {
 
-    private Pion pionNoir;
-    private Pion pionBlanc;
+    private Pawn pawnNoir;
+    private Pawn pawnBlanc;
 
     @BeforeEach
     public void initialisation() {
-        pionNoir = new Pion(true);
-        pionBlanc = new Pion(false);
+        pawnNoir = new Pawn(true);
+        pawnBlanc = new Pawn(false);
     }
 
     @Test
     public void toStringTest() {
 
-        assertEquals("Pb", pionBlanc.toString());
-        assertEquals("Pn", pionNoir.toString());
+        assertEquals("Pb", pawnBlanc.toString());
+        assertEquals("Pn", pawnNoir.toString());
     }
 
     @Test
@@ -47,7 +47,7 @@ public class PionTest {
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}
         };
 
-        boolean[][] deplacementsCalcules = pionBlanc.getDeplacementsPoss();
+        boolean[][] deplacementsCalcules = pawnBlanc.getPossibleMoves();
         assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
     }
 
@@ -73,16 +73,16 @@ public class PionTest {
         };
 
 
-        boolean[][] deplacementsCalcules = pionNoir.getDeplacementsPoss();
+        boolean[][] deplacementsCalcules = pawnNoir.getPossibleMoves();
         assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
     }
 
     @Test
     public void equalsTest() {
-        Pion pb1 = new Pion(false);
-        Pion pb2 = new Pion(false);
-        Pion pn1 = new Pion(true);
-        Tour tb1 = new Tour(false);
+        Pawn pb1 = new Pawn(false);
+        Pawn pb2 = new Pawn(false);
+        Pawn pn1 = new Pawn(true);
+        Rook tb1 = new Rook(false);
 
         // Cas particulier
         assertFalse(pb1.equals(null));

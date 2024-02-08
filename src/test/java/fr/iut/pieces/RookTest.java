@@ -8,68 +8,65 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+class RookTest {
+    private Rook rookNoir;
+    private Rook rookBlanche;
 
-public class RoiTest {
-
-    private Roi roiNoir;
-    private Roi roiBlanc;
 
     @BeforeEach
     public void initialisation() {
-        roiNoir = new Roi(true);
-        roiBlanc = new Roi(false);
+        rookNoir = new Rook(true);
+        rookBlanche = new Rook(false);
     }
 
     @Test
-    public void testToStringRoi() {
-        assertEquals("RoB", roiBlanc.toString());
-        assertEquals("RoN", roiNoir.toString());
+    public void toStringTest() {
+        assertEquals("Tb", rookBlanche.toString());
+        assertEquals("Tn", rookNoir.toString());
     }
 
     @Test
     public void getDeplacementsPossTest() {
         boolean[][] deplacementsAttendus = { //                   centre
+                {false, false, false, false, false, false, false, true, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, true, true, true, false, false, false, false, false, false},
-                {false, false, false, false, false, false, true, false, true, false, false, false, false, false, false}, // centre
-                {false, false, false, false, false, false, true, true, true, false, false, false, false, false, false},
+                {true, false, false, false, false, false, false, false, false, false, false, false, false, false, true}, // centre
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}
+                {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, false, true, false, false, false, false, false, false, false}
         };
 
-        boolean[][] deplacementsCalcules = roiBlanc.getDeplacementsPoss();
+        boolean[][] deplacementsCalcules = rookBlanche.getPossibleMoves();
         assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
 
-        deplacementsCalcules = roiNoir.getDeplacementsPoss();
+        deplacementsCalcules = rookNoir.getPossibleMoves();
         assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
     }
 
     @Test
     public void equalsTest() {
-        Roi rb1 = new Roi(false);
-        Roi rb2 = new Roi(false);
-        Roi rn1 = new Roi(true);
-        Reine ren1 = new Reine(true);
+        Rook tb1 = new Rook(false);
+        Rook tb2 = new Rook(false);
+        Rook tn1 = new Rook(true);
+        Queen ren1 = new Queen(true);
 
-        assertFalse(rb1.equals(null));
-        assertFalse(rb1.equals(new Object()));
-        assertTrue(rb1.equals(rb1));
+        assertFalse(tb1.equals(new Object()));
+        assertFalse(tb1.equals(null));
+        assertTrue(tb1.equals(tb1));
 
-        assertFalse(rb1.equals(rn1));
-        assertTrue(rb1.equals(rb2));
-        assertFalse(rb1.equals(ren1));
-        assertFalse(rn1.equals(ren1));
-
+        assertTrue(tb1.equals(tb2));
+        assertFalse(tb1.equals(tn1));
+        assertFalse(tb1.equals(ren1));
+        assertFalse(tn1.equals(ren1));
     }
-
 
 }

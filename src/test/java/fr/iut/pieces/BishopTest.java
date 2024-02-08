@@ -8,65 +8,66 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class TourTest {
-    private Tour tourNoir;
-    private Tour tourBlanche;
 
+public class BishopTest {
+
+    private Bishop bishopNoir;
+    private Bishop bishopBlanc;
 
     @BeforeEach
     public void initialisation() {
-        tourNoir = new Tour(true);
-        tourBlanche = new Tour(false);
+        bishopNoir = new Bishop(true);
+        bishopBlanc = new Bishop(false);
     }
 
     @Test
     public void toStringTest() {
-        assertEquals("Tb", tourBlanche.toString());
-        assertEquals("Tn", tourNoir.toString());
+        assertEquals("Fb", bishopBlanc.toString());
+        assertEquals("Fn", bishopNoir.toString());
     }
 
     @Test
     public void getDeplacementsPossTest() {
         boolean[][] deplacementsAttendus = { //                   centre
-                {false, false, false, false, false, false, false, true, false, false, false, false, false, false, false},
+                {true, false, false, false, false, false, false, false, false, false, false, false, false, false, true},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-                {true, false, false, false, false, false, false, false, false, false, false, false, false, false, true}, // centre
+                {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, // centre
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, true, false, false, false, false, false, false, false}
+                {true, false, false, false, false, false, false, false, false, false, false, false, false, false, true}
         };
 
-        boolean[][] deplacementsCalcules = tourBlanche.getDeplacementsPoss();
+        boolean[][] deplacementsCalcules = bishopBlanc.getPossibleMoves();
         assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
 
-        deplacementsCalcules = tourNoir.getDeplacementsPoss();
+        deplacementsCalcules = bishopNoir.getPossibleMoves();
         assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
     }
 
     @Test
     public void equalsTest() {
-        Tour tb1 = new Tour(false);
-        Tour tb2 = new Tour(false);
-        Tour tn1 = new Tour(true);
-        Reine ren1 = new Reine(true);
+        Bishop fb1 = new Bishop(false);
+        Bishop fb2 = new Bishop(false);
+        Bishop fn3 = new Bishop(true);
+        Rook tb1 = new Rook(false);
 
-        assertFalse(tb1.equals(new Object()));
-        assertFalse(tb1.equals(null));
-        assertTrue(tb1.equals(tb1));
-
-        assertTrue(tb1.equals(tb2));
-        assertFalse(tb1.equals(tn1));
-        assertFalse(tb1.equals(ren1));
-        assertFalse(tn1.equals(ren1));
+        // Cas particulier
+        assertFalse(fb1.equals(null));
+        assertFalse(fb1.equals(new Object()));
+        assertTrue(fb1.equals(fb1));
+        // Autres cas particuliers
+        assertFalse(fb1.equals(tb1));
+        assertFalse(fn3.equals(tb1));
+        assertFalse(fb1.equals(fn3));
+        assertTrue(fb1.equals(fb2));
     }
-
 }

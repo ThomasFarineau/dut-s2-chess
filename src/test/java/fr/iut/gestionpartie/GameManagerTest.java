@@ -16,18 +16,18 @@ import java.util.Scanner;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import fr.iut.pieces.Cavalier;
-import fr.iut.pieces.Fou;
+import fr.iut.pieces.Knight;
+import fr.iut.pieces.Bishop;
 import fr.iut.pieces.Piece;
-import fr.iut.pieces.Pion;
-import fr.iut.pieces.Reine;
-import fr.iut.pieces.Roi;
-import fr.iut.pieces.Tour;
-import fr.iut.plateau.Plateau;
+import fr.iut.pieces.Pawn;
+import fr.iut.pieces.Queen;
+import fr.iut.pieces.King;
+import fr.iut.pieces.Rook;
+import fr.iut.plateau.Board;
 
-public class GestionnairePartieTest {
-    private Plateau p;
-    private GestionnairePartie gp;
+public class GameManagerTest {
+    private Board p;
+    private GameManager gp;
 
     private void comparerSauvegardes(File f, String[] echiquierAttendu, String nomFichierAttendu) {
         Scanner scan;
@@ -40,7 +40,7 @@ public class GestionnairePartieTest {
 
             assertFalse(scan.hasNextLine());
             scan.close();
-            assertEquals(nomFichierAttendu, gp.getNomFichier());
+            assertEquals(nomFichierAttendu, gp.getFileName());
         } catch (Exception e) {
             fail();
         }
@@ -48,14 +48,14 @@ public class GestionnairePartieTest {
     
     @BeforeEach
     public void init() {
-        p = new Plateau();
-        gp = new GestionnairePartie(p);
+        p = new Board();
+        gp = new GameManager(p);
     }
 
     @Test
     public void chargerAnciennePartieExceptionsTest() {
         try {
-            gp.chargerAnciennePartie("fichierInexistant.csv");
+            gp.loadSavedGame("fichierInexistant.csv");
             //Si aucune exception n'est générée, le test échoue
             fail();
         } catch (Exception e) {
@@ -63,7 +63,7 @@ public class GestionnairePartieTest {
         }
 
         try {
-            gp.chargerAnciennePartie("fichierInexistant2");
+            gp.loadSavedGame("fichierInexistant2");
             //Si aucune exception n'est générée, le test échoue
             fail();
         } catch (Exception e) {
@@ -71,7 +71,7 @@ public class GestionnairePartieTest {
         }
 
         try {
-            gp.chargerAnciennePartie("tests/tropDeColonnes2.csv");
+            gp.loadSavedGame("tests/tropDeColonnes2.csv");
             //Si aucune exception n'est générée, le test échoue
             fail();
         } catch (Exception e) {
@@ -79,7 +79,7 @@ public class GestionnairePartieTest {
         }
 
         try {
-            gp.chargerAnciennePartie("tests/pieceInconnue.csv");
+            gp.loadSavedGame("tests/pieceInconnue.csv");
             //Si aucune exception n'est générée, le test échoue
             fail();
         } catch (Exception e) {
@@ -87,7 +87,7 @@ public class GestionnairePartieTest {
         }
 
         try {
-            gp.chargerAnciennePartie("tests/formatInvalide.csv");
+            gp.loadSavedGame("tests/formatInvalide.csv");
             //Si aucune exception n'est générée, le test échoue
             fail();
         } catch (Exception e) {
@@ -95,19 +95,19 @@ public class GestionnairePartieTest {
         }
 
         try {
-            gp.chargerAnciennePartie("nouvellePartie.csv");
+            gp.loadSavedGame("newGame.csv");
             //Si aucune exception n'est générée, le test échoue
             fail();
         } catch (Exception e) {
-            assertEquals("Vous n'avez pas le droit de charger le fichier \"nouvellePartie.csv\".", e.getMessage());
+            assertEquals("Vous n'avez pas le droit de charger le fichier \"newGame.csv\".", e.getMessage());
         }
 
         try {
-            gp.chargerAnciennePartie("tests/../noUvEllEpartiE");
+            gp.loadSavedGame("tests/../noUvEllEpartiE");
             //Si aucune exception n'est générée, le test échoue
             fail();
         } catch (Exception e) {
-            assertEquals("Vous n'avez pas le droit de charger le fichier \"nouvellePartie.csv\".", e.getMessage());
+            assertEquals("Vous n'avez pas le droit de charger le fichier \"newGame.csv\".", e.getMessage());
         }
     }
 
@@ -115,29 +115,29 @@ public class GestionnairePartieTest {
     public void chargerAnciennePartieTest() {
         //exemple de chargement valide
         try {
-            gp.chargerAnciennePartie("tests/partieTest.csv");
+            gp.loadSavedGame("tests/partieTest.csv");
         } catch (Exception e) {
             // Si une exception est générée, le test échoue
             fail();
         }
 
         Piece[][] echiquierAttendu = {
-                {new Roi(false), null, new Reine(true), null, null, null, null, null},
-                {new Pion(false), new Tour(false), null, null, null, new Reine(true), null, null},
-                {null, null, null, null, new Pion(false), null, null, null},
-                {null, null, null, null, null, null, null, new Roi(true)},
+                {new King(false), null, new Queen(true), null, null, null, null, null},
+                {new Pawn(false), new Rook(false), null, null, null, new Queen(true), null, null},
+                {null, null, null, null, new Pawn(false), null, null, null},
+                {null, null, null, null, null, null, null, new King(true)},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null}
         };
 
-        assertArrayEquals(echiquierAttendu, p.getEchiquier());
-        assertEquals("tests/partieTest.csv", gp.getNomFichier());
+        assertArrayEquals(echiquierAttendu, p.getChessboard());
+        assertEquals("tests/partieTest.csv", gp.getFileName());
 
 
         try {
-            gp.chargerAnciennePartie("tests/test28.csv");
+            gp.loadSavedGame("tests/test28.csv");
         } catch (Exception e) {
             // Si une exception est générée, le test échoue
             fail();
@@ -145,20 +145,20 @@ public class GestionnairePartieTest {
 
         echiquierAttendu = new Piece[][]{
                 {null, null, null, null, null, null, null, null},
-                {null, null, null, new Tour(false), null, null, null, null},
-                {null, null, new Roi(true), null, new Pion(false), null, null, null},
-                {null, new Pion(false), null, null, null, null, null, null},
-                {null, null, null, new Fou(false), null, null, null, null},
-                {null, null, null, null, new Roi(false), null, null, null},
+                {null, null, null, new Rook(false), null, null, null, null},
+                {null, null, new King(true), null, new Pawn(false), null, null, null},
+                {null, new Pawn(false), null, null, null, null, null, null},
+                {null, null, null, new Bishop(false), null, null, null, null},
+                {null, null, null, null, new King(false), null, null, null},
                 {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, new Tour(true)}
+                {null, null, null, null, null, null, null, new Rook(true)}
         };
 
-        assertArrayEquals(echiquierAttendu, p.getEchiquier());
-        assertEquals("tests/test28.csv", gp.getNomFichier());
+        assertArrayEquals(echiquierAttendu, p.getChessboard());
+        assertEquals("tests/test28.csv", gp.getFileName());
 
         try {
-            gp.chargerAnciennePartie("tests/test10.csv");
+            gp.loadSavedGame("tests/test10.csv");
         } catch (Exception e) {
             // Si une exception est générée, le test échoue
             fail();
@@ -167,107 +167,107 @@ public class GestionnairePartieTest {
         echiquierAttendu = new Piece[][]{
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
-                {null, null, new Tour(true), null, null, new Roi(true), null, null},
+                {null, null, new Rook(true), null, null, new King(true), null, null},
                 {null, null, null, null, null, null, null, null},
-                {null, null, new Reine(true), new Roi(false), null, null, null, null},
+                {null, null, new Queen(true), new King(false), null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
-                {null, null, null, null, new Tour(true), null, null, null}
+                {null, null, null, null, new Rook(true), null, null, null}
         };
 
-        assertArrayEquals(echiquierAttendu, p.getEchiquier());
-        assertEquals("tests/test10.csv", gp.getNomFichier());
+        assertArrayEquals(echiquierAttendu, p.getChessboard());
+        assertEquals("tests/test10.csv", gp.getFileName());
 
         try {
-            gp.chargerAnciennePartie("tests/test15.csv");
+            gp.loadSavedGame("tests/test15.csv");
         } catch (Exception e) {
             // Si une exception est générée, le test échoue
             fail();
         }
 
         echiquierAttendu = new Piece[][]{
-                {null, null, null, null, null, null, null, new Tour(true)},
-                {null, new Pion(true), null, new Roi(true), null, null, null, null},
+                {null, null, null, null, null, null, null, new Rook(true)},
+                {null, new Pawn(true), null, new King(true), null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, new Cavalier(true), null},
+                {null, null, null, null, null, null, new Knight(true), null},
                 {null, null, null, null, null, null, null, null},
-                {null, null, null, new Pion(false), new Roi(false), null, null, new Tour(true)},
-                {null, null, null, null, null, new Tour(false), null, null}
+                {null, null, null, new Pawn(false), new King(false), null, null, new Rook(true)},
+                {null, null, null, null, null, new Rook(false), null, null}
         };
 
-        assertArrayEquals(echiquierAttendu, p.getEchiquier());
-        assertEquals("tests/test15.csv", gp.getNomFichier());
+        assertArrayEquals(echiquierAttendu, p.getChessboard());
+        assertEquals("tests/test15.csv", gp.getFileName());
 
         try {
-            gp.chargerAnciennePartie("tests/test20.csv");
+            gp.loadSavedGame("tests/test20.csv");
         } catch (Exception e) {
             // Si une exception est générée, le test échoue
             fail();
         }
 
         echiquierAttendu = new Piece[][]{
-                {null, null, null, null, null, new Fou(true), null, null},
+                {null, null, null, null, null, new Bishop(true), null, null},
                 {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, new Pion(false), new Roi(false)},
-                {null, null, null, null, null, null, null, new Tour(true)},
-                {null, null, null, null, null, null, new Fou(false), null},
-                {null, null, null, null, null, null, new Pion(true), null},
-                {null, null, null, null, null, new Roi(true), null, null},
-                {null, new Tour(false), null, null, null, null, null, null}
+                {null, null, null, null, null, null, new Pawn(false), new King(false)},
+                {null, null, null, null, null, null, null, new Rook(true)},
+                {null, null, null, null, null, null, new Bishop(false), null},
+                {null, null, null, null, null, null, new Pawn(true), null},
+                {null, null, null, null, null, new King(true), null, null},
+                {null, new Rook(false), null, null, null, null, null, null}
         };
 
-        assertArrayEquals(echiquierAttendu, p.getEchiquier());
-        assertEquals("tests/test20.csv", gp.getNomFichier());
+        assertArrayEquals(echiquierAttendu, p.getChessboard());
+        assertEquals("tests/test20.csv", gp.getFileName());
 
         try {
-            gp.chargerAnciennePartie("tests/test35.csv");
+            gp.loadSavedGame("tests/test35.csv");
         } catch (Exception e) {
             // Si une exception est générée, le test échoue
             fail();
         }
 
         echiquierAttendu = new Piece[][]{
-                {null, null, null, null, new Roi(true), new Tour(true), null, null},
+                {null, null, null, null, new King(true), new Rook(true), null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, new Cavalier(true)},
-                {null, null, null, null, null, null, null, new Pion(false)},
-                {null, null, null, new Reine(true), null, null, null, null},
+                {null, null, null, null, null, null, null, new Knight(true)},
+                {null, null, null, null, null, null, null, new Pawn(false)},
+                {null, null, null, new Queen(true), null, null, null, null},
                 {null, null, null, null, null, null, null, null},
-                {null, null, null, null, new Roi(false), null, null, null}
+                {null, null, null, null, new King(false), null, null, null}
         };
 
-        assertArrayEquals(echiquierAttendu, p.getEchiquier());
-        assertEquals("tests/test35.csv", gp.getNomFichier());
+        assertArrayEquals(echiquierAttendu, p.getChessboard());
+        assertEquals("tests/test35.csv", gp.getFileName());
     }
 
     @Test
     public void nouvellePartieTest() {
         try {
-            gp.nouvellePartie();
+            gp.newGame();
         } catch (Exception e) {
             fail();
         }
         Piece[][] echiquierACharger = {
-                {new Tour(true), new Cavalier(true), new Fou(true), new Reine(true), new Roi(true), new Fou(true), new Cavalier(true), new Tour(true)},
-                {new Pion(true), new Pion(true), new Pion(true), new Pion(true), new Pion(true), new Pion(true), new Pion(true), new Pion(true)},
+                {new Rook(true), new Knight(true), new Bishop(true), new Queen(true), new King(true), new Bishop(true), new Knight(true), new Rook(true)},
+                {new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true)},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
-                {new Pion(false), new Pion(false), new Pion(false), new Pion(false), new Pion(false), new Pion(false), new Pion(false), new Pion(false)},
-                {new Tour(false), new Cavalier(false), new Fou(false), new Reine(false), new Roi(false), new Fou(false), new Cavalier(false), new Tour(false)}
+                {new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false)},
+                {new Rook(false), new Knight(false), new Bishop(false), new Queen(false), new King(false), new Bishop(false), new Knight(false), new Rook(false)}
         };
 
-        assertArrayEquals(echiquierACharger, p.getEchiquier());
-        assertEquals(gp.getNomFichier(), "partieActuelle.csv");
+        assertArrayEquals(echiquierACharger, p.getChessboard());
+        assertEquals(gp.getFileName(), "partieActuelle.csv");
     }
     
     @Test
     public void sauvegarderPartieSansParamTest() {
         try {
-            gp.nouvellePartie();
+            gp.newGame();
         } catch (IOException e) {
             fail();
         }
@@ -284,10 +284,10 @@ public class GestionnairePartieTest {
         }
 
         try {
-            p.deplacer(new int[]{6, 0, 5, 0});
+            p.move(new int[]{6, 0, 5, 0});
 
             assertEquals("Le fichier \"partieActuelle.csv\" vient d'être créé. " +
-                    "La sauvegarde vers \"partieActuelle.csv\" a été effectuée avec succès !", gp.sauvegarderPartie());
+                    "La sauvegarde vers \"partieActuelle.csv\" a été effectuée avec succès !", gp.saveGame());
         } catch (Exception e) {
             fail();
         }
@@ -306,9 +306,9 @@ public class GestionnairePartieTest {
         comparerSauvegardes(f, echiquierAttendu, "partieActuelle.csv");
 
         try {
-            p.deplacer(new int[]{1, 0, 2, 0});
+            p.move(new int[]{1, 0, 2, 0});
 
-            assertEquals("La sauvegarde vers \"partieActuelle.csv\" a été effectuée avec succès !", gp.sauvegarderPartie());
+            assertEquals("La sauvegarde vers \"partieActuelle.csv\" a été effectuée avec succès !", gp.saveGame());
         } catch (Exception e) {
             fail();
         }
@@ -334,14 +334,14 @@ public class GestionnairePartieTest {
             Files.copy(new File("parties/tests/test36.csv").toPath(), fos);
             fos.close();
 
-            gp.chargerAnciennePartie("tests/test36_copie");
+            gp.loadSavedGame("tests/test36_copie");
         } catch (Exception e) {
             fail();
         }
 
         try {
-            p.deplacer(new int[]{1, 1, 0, 1});
-            assertEquals("La sauvegarde vers \"tests/test36_copie.csv\" a été effectuée avec succès !", gp.sauvegarderPartie());
+            p.move(new int[]{1, 1, 0, 1});
+            assertEquals("La sauvegarde vers \"tests/test36_copie.csv\" a été effectuée avec succès !", gp.saveGame());
         } catch (Exception e) {
             fail();
         }
@@ -364,40 +364,40 @@ public class GestionnairePartieTest {
     @Test
     public void sauvegarderPartieAvecParamTest() {
         Piece[][] echiquierASave = {
-                {new Tour(true), new Cavalier(true), new Fou(true), new Reine(true), new Roi(true), new Fou(true), new Cavalier(true), new Tour(true)},
-                {new Pion(true), new Pion(true), new Pion(true), new Pion(true), new Pion(true), new Pion(true), new Pion(true), new Pion(true)},
+                {new Rook(true), new Knight(true), new Bishop(true), new Queen(true), new King(true), new Bishop(true), new Knight(true), new Rook(true)},
+                {new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true), new Pawn(true)},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
-                {null, new Pion(false), null, null, null, null, null, null},
-                {new Pion(false), null, new Pion(false), new Pion(false), new Pion(false), new Pion(false), new Pion(false), new Pion(false)},
-                {new Tour(false), new Cavalier(false), new Fou(false), new Reine(false), new Roi(false), new Fou(false), new Cavalier(false), new Tour(false)}
+                {null, new Pawn(false), null, null, null, null, null, null},
+                {new Pawn(false), null, new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false), new Pawn(false)},
+                {new Rook(false), new Knight(false), new Bishop(false), new Queen(false), new King(false), new Bishop(false), new Knight(false), new Rook(false)}
         };
 
-        p.setEchiquier(echiquierASave);
+        p.setChessboard(echiquierASave);
 
         try {
-            gp.sauvegarderPartie("tests/nouvellePartie.csv");
+            gp.saveGame("tests/newGame.csv");
             //Si aucune exception n'est générée, le test échoue
             fail();
         } catch (Exception e) {
-            assertEquals("Vous n'avez pas le droit de sauvegarder une partie de nom \"nouvellePartie.csv\".", e.getMessage());
+            assertEquals("Vous n'avez pas le droit de sauvegarder une partie de nom \"newGame.csv\".", e.getMessage());
         }
 
         try {
-            gp.sauvegarderPartie("nouvellepartie.csv");
+            gp.saveGame("nouvellepartie.csv");
             //Si aucune exception n'est générée, le test échoue
             fail();
         } catch (Exception e) {
-            assertEquals("Vous n'avez pas le droit de sauvegarder une partie de nom \"nouvellePartie.csv\".", e.getMessage());
+            assertEquals("Vous n'avez pas le droit de sauvegarder une partie de nom \"newGame.csv\".", e.getMessage());
         }
 
         try {
-            gp.sauvegarderPartie("../parties/nouvEllePartie");
+            gp.saveGame("../parties/nouvEllePartie");
             //Si aucune exception n'est générée, le test échoue
             fail();
         } catch (Exception e) {
-            assertEquals("Vous n'avez pas le droit de sauvegarder une partie de nom \"nouvellePartie.csv\".", e.getMessage());
+            assertEquals("Vous n'avez pas le droit de sauvegarder une partie de nom \"newGame.csv\".", e.getMessage());
         }
 
         File f = null;
@@ -414,7 +414,7 @@ public class GestionnairePartieTest {
         try {
             String retourAttendu = "Le fichier \"tests/sauvegarde1.csv\" vient d'être créé. " +
                     "La sauvegarde vers \"tests/sauvegarde1.csv\" a été effectuée avec succès !";
-            assertEquals(retourAttendu, gp.sauvegarderPartie("tests/sauvegarde1.csv"));
+            assertEquals(retourAttendu, gp.saveGame("tests/sauvegarde1.csv"));
         } catch (Exception e) {
             fail();
         }
@@ -433,10 +433,10 @@ public class GestionnairePartieTest {
         comparerSauvegardes(f, echiquierAttendu, "tests/sauvegarde1.csv");
 
         try {
-            gp.setTourJoueur(true);
-            p.deplacer(new int[]{0, 1, 2, 0});
+            gp.setPlayerRound(true);
+            p.move(new int[]{0, 1, 2, 0});
             String retourAttendu = "La sauvegarde vers \"tests/sauvegarde1.csv\" a été effectuée avec succès !";
-            assertEquals(retourAttendu, gp.sauvegarderPartie("tests/sauvegarde1.csv"));
+            assertEquals(retourAttendu, gp.saveGame("tests/sauvegarde1.csv"));
         } catch (Exception e) {
             fail();
         }
@@ -459,31 +459,31 @@ public class GestionnairePartieTest {
 
     @Test
     public void getPartiesPathTest() {
-        assertEquals(Paths.get(System.getProperty("user.dir") + "/parties"), GestionnairePartie.getPartiesPath());
+        assertEquals(Paths.get(System.getProperty("user.dir") + "/parties"), GameManager.getGamesPath());
     }
     
     @Test
     public void getNomFichierTest() {
         try {
-            gp.nouvellePartie();
+            gp.newGame();
         } catch (IOException e) {
             fail();
         }
-        assertEquals("partieActuelle.csv", gp.getNomFichier());
+        assertEquals("partieActuelle.csv", gp.getFileName());
 
         try {
-            gp.chargerAnciennePartie("tests/test1.csv");
+            gp.loadSavedGame("tests/test1.csv");
         } catch (Exception e) {
             fail();
         }
-        assertEquals("tests/test1.csv", gp.getNomFichier());
+        assertEquals("tests/test1.csv", gp.getFileName());
 
         try {
-            gp.sauvegarderPartie("savGetNomTest");
+            gp.saveGame("savGetNomTest");
         } catch (Exception e) {
             fail();
         }
-        assertEquals("savGetNomTest.csv", gp.getNomFichier());
+        assertEquals("savGetNomTest.csv", gp.getFileName());
 
         try {
             assertTrue(new File("parties/savGetNomTest.csv").delete());
@@ -494,10 +494,10 @@ public class GestionnairePartieTest {
     
     @Test
     public void setTourJoueurTest() {
-    	assertFalse(p.getTourJoueur());
-    	gp.setTourJoueur(true);
-    	assertTrue(p.getTourJoueur());
-    	gp.setTourJoueur(false);
-    	assertFalse(p.getTourJoueur());
+    	assertFalse(p.getPlayerRound());
+    	gp.setPlayerRound(true);
+    	assertTrue(p.getPlayerRound());
+    	gp.setPlayerRound(false);
+    	assertFalse(p.getPlayerRound());
     }
 }

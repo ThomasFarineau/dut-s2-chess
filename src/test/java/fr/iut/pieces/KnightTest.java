@@ -8,64 +8,65 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ReineTest {
-    private Reine reineNoir;
-    private Reine reineBlanche;
+public class KnightTest {
+    private Knight knightBlanc;
+    private Knight knightNoir;
 
     @BeforeEach
     public void initialisation() {
-        reineNoir = new Reine(true);
-        reineBlanche = new Reine(false);
+        knightBlanc = new Knight(false);
+        knightNoir = new Knight(true);
     }
 
     @Test
     public void toStringTest() {
-        assertEquals("ReB", reineBlanche.toString());
-        assertEquals("ReN", reineNoir.toString());
+        assertEquals("Cb", knightBlanc.toString());
+        assertEquals("Cn", knightNoir.toString());
     }
 
     @Test
     public void getDeplacementsPossTest() {
         boolean[][] deplacementsAttendus = { //                   centre
-                {true, false, false, false, false, false, false, true, false, false, false, false, false, false, true},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, true, false, true, false, false, false, false, false, false},
+                {false, false, false, false, false, true, false, false, false, true, false, false, false, false, false},
+                {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, // centre
+                {false, false, false, false, false, true, false, false, false, true, false, false, false, false, false},
+                {false, false, false, false, false, false, true, false, true, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-                {true, false, false, false, false, false, false, false, false, false, false, false, false, false, true}, // centre
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-                {true, false, false, false, false, false, false, true, false, false, false, false, false, false, true}
+                {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}
         };
 
-        boolean[][] deplacementsCalcules = reineBlanche.getDeplacementsPoss();
+        boolean[][] deplacementsCalcules = knightBlanc.getPossibleMoves();
         assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
 
-        deplacementsCalcules = reineNoir.getDeplacementsPoss();
+        deplacementsCalcules = knightNoir.getPossibleMoves();
         assertArrayEquals(deplacementsAttendus, deplacementsCalcules);
     }
 
     @Test
     public void equalsTest() {
-        Reine rb1 = new Reine(false);
-        Reine rb2 = new Reine(false);
-        Reine rn1 = new Reine(true);
-        Tour tb1 = new Tour(false);
+        Knight cb1 = new Knight(false);
+        Knight cb2 = new Knight(false);
+        Knight cn3 = new Knight(true);
+        Rook tb1 = new Rook(false);
 
         // Cas particulier
-        assertFalse(rb1.equals(null));
-        assertFalse(rb1.equals(new Object()));
-        assertTrue(rb1.equals(rb1));
-        // Autres cas
-        assertTrue(rb1.equals(rb2));
-        assertFalse(rb1.equals(tb1));
-        assertFalse(rn1.equals(tb1));
-        assertFalse(rb1.equals(rn1));
+        assertFalse(cb1.equals(new Object()));
+        assertFalse(cb1.equals(null));
+        assertTrue(cb1.equals(cb1));
+        // Autres cas particuliers
+        assertFalse(cb1.equals(tb1));
+        assertFalse(cn3.equals(tb1));
+        assertFalse(cb1.equals(cn3));
+        assertTrue(cb1.equals(cb2));
+
     }
 }

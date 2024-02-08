@@ -1,6 +1,6 @@
-/parties/*
+/games/*
 /target
-!/parties/nouvellePartie.csv
-!/parties/berger.csv
-!/parties/tests
+!/games/newGame.csv
+!/games/berger.csv
+!/games/tests
 .idea

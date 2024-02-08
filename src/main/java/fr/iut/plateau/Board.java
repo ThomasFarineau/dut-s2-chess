@@ -2,20 +2,20 @@ package fr.iut.plateau;
 
 import java.util.Arrays;
 
-import fr.iut.fonctions.Fonctions;
-import fr.iut.pieces.Cavalier;
+import fr.iut.fonctions.Utils;
+import fr.iut.pieces.Knight;
 import fr.iut.pieces.Piece;
-import fr.iut.pieces.Pion;
-import fr.iut.pieces.Roi;
+import fr.iut.pieces.Pawn;
+import fr.iut.pieces.King;
 
-public class Plateau {
+public class Board {
     private boolean tourJoueur = false;
     private Piece[][] echiquier;
     private int[] dernierEchec = null;
 
-    public Plateau() { }
+    public Board() { }
     
-    public void deplacer(int[] coord) throws Exception {
+    public void move(int[] coord) throws Exception {
         int i = coord[0];
         int j = coord[1];
         int k = coord[2];
@@ -25,7 +25,7 @@ public class Plateau {
             throw new Exception("Il n'y a pas de piece sur la première case entrée.");
         }
 
-        if (echiquier[i][j].getCouleur() != tourJoueur) {
+        if (echiquier[i][j].getColor() != tourJoueur) {
             throw new Exception("La pièce selectionnée ne vous appartient pas.");
         }
 
@@ -39,8 +39,8 @@ public class Plateau {
         echiquier[k][l] = echiquier[i][j];
         echiquier[i][j] = null;
 
-        if ((dernierEchec = verifEchec()) != null) {
-            char[] charsEchec = Fonctions.convertEnCaracteres(dernierEchec);
+        if ((dernierEchec = checkCheck()) != null) {
+            char[] charsEchec = Utils.convertToChar(dernierEchec);
             String etatEchec = echiquier[dernierEchec[0]][dernierEchec[1]].toString() + "(" + charsEchec[0] + charsEchec[1] + " -> " + charsEchec[2] + charsEchec[3] + ")";
             echiquier[i][j] = echiquier[k][l];
             echiquier[k][l] = copiePiece;
@@ -58,22 +58,22 @@ public class Plateau {
         // On récupère les différents déplacements possible de la pièce dont les "coordonnées" sont rentrées en paramètre
         boolean[][] deplacementsPiece = new boolean[15][15];
 
-        boolean[][] deplementsACopier = echiquier[xP][yP].getDeplacementsPoss();
+        boolean[][] deplementsACopier = echiquier[xP][yP].getPossibleMoves();
         for (int i = 0; i < 15; i++) {
             System.arraycopy(deplementsACopier[i], 0, deplacementsPiece[i], 0, 15);
         }
 
-        if (echiquier[xP][yP] instanceof Pion) {
-            if (echiquier[xP][yP].getCouleur() && xP == 1) {
+        if (echiquier[xP][yP] instanceof Pawn) {
+            if (echiquier[xP][yP].getColor() && xP == 1) {
                 deplacementsPiece[9][7] = true;
                 deplacementsPiece[8][7] = false;
-            } else if (!echiquier[xP][yP].getCouleur() && xP == 6) {
+            } else if (!echiquier[xP][yP].getColor() && xP == 6) {
                 deplacementsPiece[5][7] = true;
                 deplacementsPiece[6][7] = false;
             }
         }
 
-        if (echiquier[xP][yP] instanceof Cavalier) { // Algorithme pour le cavalier : pas de chemin à tracer
+        if (echiquier[xP][yP] instanceof Knight) { // Algorithme pour le cavalier : pas de chemin à tracer
             for (int i = 0; i < deplacementsPiece.length; i++) {
                 for (int j = 0; j < deplacementsPiece[0].length; j++) {
                     if (deplacementsPiece[i][j]) { //Pour chaque déplacement
@@ -83,7 +83,7 @@ public class Plateau {
                         if (xDeplacementPiece >= 0 && xDeplacementPiece <= 7 && yDeplacementPiece >= 0 && yDeplacementPiece <= 7) {
                             if (echiquier[xDeplacementPiece][yDeplacementPiece] == null) {
                                 deplacementsPlateau[xDeplacementPiece][yDeplacementPiece] = true;
-                            } else if (echiquier[xDeplacementPiece][yDeplacementPiece].getCouleur() != echiquier[xP][yP].getCouleur()) {
+                            } else if (echiquier[xDeplacementPiece][yDeplacementPiece].getColor() != echiquier[xP][yP].getColor()) {
                                 deplacementsPlateau[xDeplacementPiece][yDeplacementPiece] = true;
                             }
                         }
@@ -112,7 +112,7 @@ public class Plateau {
                                         // On ne dépasse pas le déplacement maximal
                                         (Math.abs(x - xP) <= Math.abs(xDeplacementPiece) && (Math.abs(y - yP) <= Math.abs(yDeplacementPiece)))
                         ) {
-                            if (echiquier[xP][yP] instanceof Pion) {
+                            if (echiquier[xP][yP] instanceof Pawn) {
                                 if (echiquier[x][y] == null) {
                                     if (y == yP) {
                                         deplacementsPlateau[x][y] = true;
@@ -123,7 +123,7 @@ public class Plateau {
                                     }
                                 } else {
                                     if (y != yP)
-                                        if (echiquier[x][y].getCouleur() != echiquier[xP][yP].getCouleur())
+                                        if (echiquier[x][y].getColor() != echiquier[xP][yP].getColor())
                                             deplacementsPlateau[x][y] = true;
                                     x = 8;
                                     y = 8;
@@ -137,7 +137,7 @@ public class Plateau {
                                     y += yShift;
                                 } else { // Sinon
                                     // S'il y a une pièce de la couleur adverse, alors on peut tout de même y aller
-                                    if (echiquier[x][y].getCouleur() != echiquier[xP][yP].getCouleur()) {
+                                    if (echiquier[x][y].getColor() != echiquier[xP][yP].getColor()) {
                                         deplacementsPlateau[x][y] = true;
                                     }
 
@@ -156,17 +156,17 @@ public class Plateau {
         return deplacementsPlateau;
     } //Fin méthode
 
-    public int[] verifEchec() {
+    public int[] checkCheck() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (echiquier[i][j] != null) {
-                    if (echiquier[i][j] instanceof Roi && echiquier[i][j].getCouleur() == tourJoueur) {
+                    if (echiquier[i][j] instanceof King && echiquier[i][j].getColor() == tourJoueur) {
 
                         for (int k = 0; k < 8; k++) {
                             for (int l = 0; l < 8; l++) {
 
                                 if (echiquier[k][l] != null) {
-                                    if (echiquier[k][l].getCouleur() != tourJoueur) {
+                                    if (echiquier[k][l].getColor() != tourJoueur) {
 
                                         if (calculerDeplacementsPiece(k, l)[i][j]) {
                                             return new int[]{k, l, i, j};
@@ -189,14 +189,14 @@ public class Plateau {
         return null;
     }
 
-    public boolean verifMat() {
-        if ((dernierEchec = verifEchec()) == null)
+    public boolean checkMat() {
+        if ((dernierEchec = checkCheck()) == null)
             return false;
 
         for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++) {
                 if (echiquier[i][j] != null) {
-                    if (echiquier[i][j].getCouleur() == tourJoueur) {
+                    if (echiquier[i][j].getColor() == tourJoueur) {
                         boolean[][] deplacementsPossPiece = calculerDeplacementsPiece(i, j);
 
                         for (int k = 0; k < 8; k++) {
@@ -206,7 +206,7 @@ public class Plateau {
                                     echiquier[k][l] = echiquier[i][j];
                                     echiquier[i][j] = null;
 
-                                    if ((verifEchec() == null)) {
+                                    if ((checkCheck() == null)) {
                                         echiquier[i][j] = echiquier[k][l];
                                         echiquier[k][l] = copiePiece;
                                         return false;
@@ -247,23 +247,23 @@ public class Plateau {
         return retour.toString();
     }
 
-    public Piece[][] getEchiquier() {
+    public Piece[][] getChessboard() {
         return echiquier;
     }
 
-    public void setEchiquier(Piece[][] echiquier) {
+    public void setChessboard(Piece[][] echiquier) {
         this.echiquier = echiquier;
     }
 
-    public boolean getTourJoueur() {
+    public boolean getPlayerRound() {
         return tourJoueur;
     }
 
-    public void setTourJoueur(boolean tourJoueur) {
+    public void setPlayerRound(boolean tourJoueur) {
         this.tourJoueur = tourJoueur;
     }
 
-    public int[] getDernierEchec() {
+    public int[] getLastCheck() {
         return dernierEchec;
     }
 }

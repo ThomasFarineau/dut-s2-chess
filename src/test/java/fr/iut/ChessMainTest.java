@@ -116,40 +116,40 @@ public class ChessMainTest {
 	@Test
 	public void demanderTourJoueurTest() {
 		assertRightInputOutput("demanderTour_1", 
-				() -> assertFalse(ChessMain.demanderTourJoueur()));
+				() -> assertFalse(ChessMain.askPlayerRound()));
 		
 		assertRightInputOutput("demanderTour_2", 
-				() -> assertFalse(ChessMain.demanderTourJoueur()));
+				() -> assertFalse(ChessMain.askPlayerRound()));
 		
 		assertRightInputOutput("demanderTour_3", 
-				() -> assertFalse(ChessMain.demanderTourJoueur()));
+				() -> assertFalse(ChessMain.askPlayerRound()));
 		
 		assertRightInputOutput("demanderTour_4", 
-				() -> assertTrue(ChessMain.demanderTourJoueur()));
+				() -> assertTrue(ChessMain.askPlayerRound()));
 		
 		assertRightInputOutput("demanderTour_5", 
-				() -> assertTrue(ChessMain.demanderTourJoueur()));
+				() -> assertTrue(ChessMain.askPlayerRound()));
 		
 		assertRightInputOutput("demanderTour_6", 
-				() -> assertTrue(ChessMain.demanderTourJoueur()));
+				() -> assertTrue(ChessMain.askPlayerRound()));
 	}
 	
 	@Test
 	public void initialisationConsoleTest() {
 		assertRightInputOutput("initConsole_1",
-				ChessMain::initialisationConsole);
+				ChessMain::initConsole);
 		
 		assertRightInputOutput("initConsole_2",
-				ChessMain::initialisationConsole);
+				ChessMain::initConsole);
 		
 		assertRightInputOutput("initConsole_3",
-				ChessMain::initialisationConsole);
+				ChessMain::initConsole);
 		
 		assertRightInputOutput("initConsole_4",
-				ChessMain::initialisationConsole);
+				ChessMain::initConsole);
 		
 		assertRightInputOutput("initConsole_5",
-				ChessMain::initialisationConsole);
+				ChessMain::initConsole);
 	}
 	
 	// UNIQUEMENT DES SCENARIOS CONSOLE (car les scénarios Graphiques sont difficilement testables et n'affichent rien dans la console)
@@ -187,7 +187,7 @@ public class ChessMainTest {
 		
 		// Scenario avec entrées invalides à l'intialisation du mode de jeu, puis
 		// chargement mat berger (et faire le mat) puis rejouer une nouvelle partie puis 
-		// sauvegardes invalides ("sauvegarder ") et sauvegarder vers "nouvellePartie.csv"
+		// sauvegardes invalides ("sauvegarder ") et sauvegarder vers "newGame.csv"
 		// puis sauvegarde valide vers le fichier par defaut puis quitter en pleine partie
 		assertRightInputOutput("main_7",
 				() -> ChessMain.main(null));

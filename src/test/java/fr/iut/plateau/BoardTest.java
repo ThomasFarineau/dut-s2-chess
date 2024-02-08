@@ -9,291 +9,291 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import fr.iut.gestionpartie.GestionnairePartie;
-import fr.iut.pieces.Cavalier;
-import fr.iut.pieces.Fou;
+import fr.iut.gestionpartie.GameManager;
+import fr.iut.pieces.Knight;
+import fr.iut.pieces.Bishop;
 import fr.iut.pieces.Piece;
-import fr.iut.pieces.Pion;
-import fr.iut.pieces.Reine;
-import fr.iut.pieces.Roi;
-import fr.iut.pieces.Tour;
+import fr.iut.pieces.Pawn;
+import fr.iut.pieces.Queen;
+import fr.iut.pieces.King;
+import fr.iut.pieces.Rook;
 
-public class PlateauTest {
-	private Plateau plat;
-	private GestionnairePartie gp;
+public class BoardTest {
+	private Board plat;
+	private GameManager gp;
 
 	@BeforeEach
 	public void initialisation( ) {
-		plat = new Plateau();
-		gp = new GestionnairePartie(plat);
+		plat = new Board();
+		gp = new GameManager(plat);
 	}
 	
 	@Test
 	public void deplacerTest() {
 		
 		try {
-			gp.chargerAnciennePartie("tests/test12.csv");
+			gp.loadSavedGame("tests/test12.csv");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		Piece[][] echiquierInitial = {
-				{new Tour(true), new Cavalier(true), new Reine(false), null, new Roi(true), new Fou(true), new Cavalier(true), new Tour(true)},
-				{new Pion(true), new Pion(true), new Cavalier(false), new Pion(true), null, new Pion(true), null, null},
-				{null, null, null, null, null, null, new Pion(true), null},
-				{null, null, null, null, new Pion(true), null, null, new Pion(true)},
-				{null, new Pion(false), null, null, new Pion(false), null, null, null},
+				{new Rook(true), new Knight(true), new Queen(false), null, new King(true), new Bishop(true), new Knight(true), new Rook(true)},
+				{new Pawn(true), new Pawn(true), new Knight(false), new Pawn(true), null, new Pawn(true), null, null},
+				{null, null, null, null, null, null, new Pawn(true), null},
+				{null, null, null, null, new Pawn(true), null, null, new Pawn(true)},
+				{null, new Pawn(false), null, null, new Pawn(false), null, null, null},
 				{null, null, null, null, null, null, null, null},
-				{new Pion(false), null, null, new Pion(false), null, new Pion(false), new Pion(false), new Pion(false)},
-				{new Tour(false), null, null, null, new Roi(false), new Fou(false), new Cavalier(false), new Tour(false)}
+				{new Pawn(false), null, null, new Pawn(false), null, new Pawn(false), new Pawn(false), new Pawn(false)},
+				{new Rook(false), null, null, null, new King(false), new Bishop(false), new Knight(false), new Rook(false)}
 		};
 		
 		try {
 			int[] coord = {2, 0, 2, 3};
-			plat.setTourJoueur(false);
-			plat.deplacer(coord);
+			plat.setPlayerRound(false);
+			plat.move(coord);
 			fail();
 		}catch(Exception e) {
 			assertEquals("Il n'y a pas de piece sur la première case entrée.", e.getMessage());
-			assertFalse(plat.getTourJoueur());
-			assertArrayEquals(echiquierInitial, plat.getEchiquier());
+			assertFalse(plat.getPlayerRound());
+			assertArrayEquals(echiquierInitial, plat.getChessboard());
 		}
 		
 		try {
 			int[] coord2 = {1, 1, 1, 2};
-			plat.setTourJoueur(false);
-		    plat.deplacer(coord2);
+			plat.setPlayerRound(false);
+		    plat.move(coord2);
 		    fail();
 		}catch(Exception e) {
 		    assertEquals("La pièce selectionnée ne vous appartient pas.", e.getMessage());
-		    assertFalse(plat.getTourJoueur());
-		    assertArrayEquals(echiquierInitial, plat.getEchiquier());
+		    assertFalse(plat.getPlayerRound());
+		    assertArrayEquals(echiquierInitial, plat.getChessboard());
 		}
 		
 		try {
 			int[] coord3 = {1, 0, 5, 0}; 
-			plat.setTourJoueur(true);
-			plat.deplacer(coord3);
+			plat.setPlayerRound(true);
+			plat.move(coord3);
 			fail();
 		}catch(Exception e) {
 			assertEquals("La pièce sélectionnée ne peut pas aller ici.", e.getMessage());
-			assertTrue(plat.getTourJoueur());
-			assertArrayEquals(echiquierInitial, plat.getEchiquier());
+			assertTrue(plat.getPlayerRound());
+			assertArrayEquals(echiquierInitial, plat.getChessboard());
 		}
 		
 		try {
 			int[] coord4 = {3, 7, 5, 7};//Test pion déjà déplacer et veut aller deux cases plus loin
-			plat.setTourJoueur(true);
-			plat.deplacer(coord4);
+			plat.setPlayerRound(true);
+			plat.move(coord4);
 			fail();
 		}catch(Exception e) {
 			assertEquals("La pièce sélectionnée ne peut pas aller ici.", e.getMessage());
-			assertTrue(plat.getTourJoueur());
-			assertArrayEquals(echiquierInitial, plat.getEchiquier());
+			assertTrue(plat.getPlayerRound());
+			assertArrayEquals(echiquierInitial, plat.getChessboard());
 		}
 		
 		try {
 			int[] coord5 = {0, 4, 0, 3};
-			plat.setTourJoueur(true);
-		    plat.deplacer(coord5);
+			plat.setPlayerRound(true);
+		    plat.move(coord5);
 		    fail();
 		}catch(Exception e) {
 		    assertEquals("Mouvement impossible, il vous met en échec : ReB(C8 -> D8)", e.getMessage());
-		    assertTrue(plat.getTourJoueur());
-		    assertArrayEquals(echiquierInitial, plat.getEchiquier());
+		    assertTrue(plat.getPlayerRound());
+		    assertArrayEquals(echiquierInitial, plat.getChessboard());
 		}
 		
-		Piece[][] sauvegardeEchiquier = plat.getEchiquier();
+		Piece[][] sauvegardeEchiquier = plat.getChessboard();
 		
 		Piece[][] nouvelEchiquier = {
-				{new Tour(true),null,new Fou(true),new Reine(true),new Roi(true),new Fou(true),new Cavalier(true),new Tour(true)},
-				{new Pion(true),new Pion(true),new Pion(true),new Pion(true),null,new Pion(true),new Pion(true),new Pion(true)},
+				{new Rook(true),null,new Bishop(true),new Queen(true),new King(true),new Bishop(true),new Knight(true),new Rook(true)},
+				{new Pawn(true),new Pawn(true),new Pawn(true),new Pawn(true),null,new Pawn(true),new Pawn(true),new Pawn(true)},
 				{null,null,null,null,null,null,null,null},
-				{null,null,null,null,new Pion(true),null,null,new Reine(false)},
-				{null,new Cavalier(true),new Fou(false),null,new Pion(false),null,null,null},
-				{new Pion(false),null,null,null,null,null,null,null},
-				{null,new Pion(false),new Pion(false),new Pion(false),null,new Pion(false),new Pion(false),new Pion(false)},
-				{new Tour(false),new Cavalier(false),new Fou(false),null,new Roi(false),null,new Cavalier(false),new Tour(false)}
+				{null,null,null,null,new Pawn(true),null,null,new Queen(false)},
+				{null,new Knight(true),new Bishop(false),null,new Pawn(false),null,null,null},
+				{new Pawn(false),null,null,null,null,null,null,null},
+				{null,new Pawn(false),new Pawn(false),new Pawn(false),null,new Pawn(false),new Pawn(false),new Pawn(false)},
+				{new Rook(false),new Knight(false),new Bishop(false),null,new King(false),null,new Knight(false),new Rook(false)}
 		};
 		
 		Piece[][] memeEchiquier = {
-				{new Tour(true),null,new Fou(true),new Reine(true),new Roi(true),new Fou(true),new Cavalier(true),new Tour(true)},
-				{new Pion(true),new Pion(true),new Pion(true),new Pion(true),null,new Pion(true),new Pion(true),new Pion(true)},
+				{new Rook(true),null,new Bishop(true),new Queen(true),new King(true),new Bishop(true),new Knight(true),new Rook(true)},
+				{new Pawn(true),new Pawn(true),new Pawn(true),new Pawn(true),null,new Pawn(true),new Pawn(true),new Pawn(true)},
 				{null,null,null,null,null,null,null,null},
-				{null,null,null,null,new Pion(true),null,null,new Reine(false)},
-				{null,new Cavalier(true),new Fou(false),null,new Pion(false),null,null,null},
-				{new Pion(false),null,null,null,null,null,null,null},
-				{null,new Pion(false),new Pion(false),new Pion(false),null,new Pion(false),new Pion(false),new Pion(false)},
-				{new Tour(false),new Cavalier(false),new Fou(false),null,new Roi(false),null,new Cavalier(false),new Tour(false)}
+				{null,null,null,null,new Pawn(true),null,null,new Queen(false)},
+				{null,new Knight(true),new Bishop(false),null,new Pawn(false),null,null,null},
+				{new Pawn(false),null,null,null,null,null,null,null},
+				{null,new Pawn(false),new Pawn(false),new Pawn(false),null,new Pawn(false),new Pawn(false),new Pawn(false)},
+				{new Rook(false),new Knight(false),new Bishop(false),null,new King(false),null,new Knight(false),new Rook(false)}
 		};
 		
 		try {
 			int[] coord = {1, 5, 2, 5};
-			plat.setEchiquier(nouvelEchiquier);
-			plat.setTourJoueur(true);
-		    plat.deplacer(coord);
+			plat.setChessboard(nouvelEchiquier);
+			plat.setPlayerRound(true);
+		    plat.move(coord);
 		    fail();
 		}catch(Exception e) {
 		    assertEquals("Mouvement impossible, il vous met en échec : ReB(H5 -> E8)", e.getMessage());
-		    assertTrue(plat.getTourJoueur());
-		    assertArrayEquals(memeEchiquier, plat.getEchiquier());
+		    assertTrue(plat.getPlayerRound());
+		    assertArrayEquals(memeEchiquier, plat.getChessboard());
 		}
 		
-		plat.setEchiquier(sauvegardeEchiquier);
+		plat.setChessboard(sauvegardeEchiquier);
 		
 		try {
 			int[] coord = {0, 4, 1, 4};
-			plat.setTourJoueur(true);
-			plat.deplacer(coord);
-			assertFalse(plat.getTourJoueur());
+			plat.setPlayerRound(true);
+			plat.move(coord);
+			assertFalse(plat.getPlayerRound());
 		}catch(Exception e) {
 			fail();
 		}
 		
 		Piece[][] echiquierAttendu1 = {
-				{new Tour(true), new Cavalier(true), new Reine(false), null, null, new Fou(true), new Cavalier(true), new Tour(true)},
-				{new Pion(true), new Pion(true), new Cavalier(false), new Pion(true), new Roi(true), new Pion(true), null, null},
-				{null, null, null, null, null, null, new Pion(true), null},
-				{null, null, null, null, new Pion(true), null, null, new Pion(true)},
-				{null, new Pion(false), null, null, new Pion(false), null, null, null},
+				{new Rook(true), new Knight(true), new Queen(false), null, null, new Bishop(true), new Knight(true), new Rook(true)},
+				{new Pawn(true), new Pawn(true), new Knight(false), new Pawn(true), new King(true), new Pawn(true), null, null},
+				{null, null, null, null, null, null, new Pawn(true), null},
+				{null, null, null, null, new Pawn(true), null, null, new Pawn(true)},
+				{null, new Pawn(false), null, null, new Pawn(false), null, null, null},
 				{null, null, null, null, null, null, null, null},
-				{new Pion(false), null, null, new Pion(false), null, new Pion(false), new Pion(false), new Pion(false)},
-				{new Tour(false), null, null, null, new Roi(false), new Fou(false), new Cavalier(false), new Tour(false)}
+				{new Pawn(false), null, null, new Pawn(false), null, new Pawn(false), new Pawn(false), new Pawn(false)},
+				{new Rook(false), null, null, null, new King(false), new Bishop(false), new Knight(false), new Rook(false)}
 		};
 		
-		assertArrayEquals(echiquierAttendu1, plat.getEchiquier());
+		assertArrayEquals(echiquierAttendu1, plat.getChessboard());
 		
 		try {
 			int[] coord = {1, 0, 2, 0};
-			plat.setTourJoueur(true);
-			plat.deplacer(coord);
-			assertFalse(plat.getTourJoueur());
+			plat.setPlayerRound(true);
+			plat.move(coord);
+			assertFalse(plat.getPlayerRound());
 		}catch(Exception e) {
 			fail();
 		}
 		
 		Piece[][] echiquierAttendu2 = {
-				{new Tour(true), new Cavalier(true), new Reine(false), null, null, new Fou(true), new Cavalier(true), new Tour(true)},
-				{null, new Pion(true), new Cavalier(false), new Pion(true), new Roi(true), new Pion(true), null, null},
-				{new Pion(true), null, null, null, null, null, new Pion(true), null},
-				{null, null, null, null, new Pion(true), null, null, new Pion(true)},
-				{null, new Pion(false), null, null, new Pion(false), null, null, null},
+				{new Rook(true), new Knight(true), new Queen(false), null, null, new Bishop(true), new Knight(true), new Rook(true)},
+				{null, new Pawn(true), new Knight(false), new Pawn(true), new King(true), new Pawn(true), null, null},
+				{new Pawn(true), null, null, null, null, null, new Pawn(true), null},
+				{null, null, null, null, new Pawn(true), null, null, new Pawn(true)},
+				{null, new Pawn(false), null, null, new Pawn(false), null, null, null},
 				{null, null, null, null, null, null, null, null},
-				{new Pion(false), null, null, new Pion(false), null, new Pion(false), new Pion(false), new Pion(false)},
-				{new Tour(false), null, null, null, new Roi(false), new Fou(false), new Cavalier(false), new Tour(false)}
+				{new Pawn(false), null, null, new Pawn(false), null, new Pawn(false), new Pawn(false), new Pawn(false)},
+				{new Rook(false), null, null, null, new King(false), new Bishop(false), new Knight(false), new Rook(false)}
 		};
 		
-		assertArrayEquals(echiquierAttendu2, plat.getEchiquier());
+		assertArrayEquals(echiquierAttendu2, plat.getChessboard());
 		
 		try {
 			int[] coord = {1, 1, 3, 1};
-			plat.setTourJoueur(true);
-			plat.deplacer(coord);
-			assertFalse(plat.getTourJoueur());
+			plat.setPlayerRound(true);
+			plat.move(coord);
+			assertFalse(plat.getPlayerRound());
 		}catch(Exception e) {
 			fail();
 		}
 		
 		Piece[][] echiquierAttendu3 = {
-				{new Tour(true), new Cavalier(true), new Reine(false), null, null, new Fou(true), new Cavalier(true), new Tour(true)},
-				{null, null, new Cavalier(false), new Pion(true), new Roi(true), new Pion(true), null, null},
-				{new Pion(true), null, null, null, null, null, new Pion(true), null},
-				{null, new Pion(true), null, null, new Pion(true), null, null, new Pion(true)},
-				{null, new Pion(false), null, null, new Pion(false), null, null, null},
+				{new Rook(true), new Knight(true), new Queen(false), null, null, new Bishop(true), new Knight(true), new Rook(true)},
+				{null, null, new Knight(false), new Pawn(true), new King(true), new Pawn(true), null, null},
+				{new Pawn(true), null, null, null, null, null, new Pawn(true), null},
+				{null, new Pawn(true), null, null, new Pawn(true), null, null, new Pawn(true)},
+				{null, new Pawn(false), null, null, new Pawn(false), null, null, null},
 				{null, null, null, null, null, null, null, null},
-				{new Pion(false), null, null, new Pion(false), null, new Pion(false), new Pion(false), new Pion(false)},
-				{new Tour(false), null, null, null, new Roi(false), new Fou(false), new Cavalier(false), new Tour(false)}
+				{new Pawn(false), null, null, new Pawn(false), null, new Pawn(false), new Pawn(false), new Pawn(false)},
+				{new Rook(false), null, null, null, new King(false), new Bishop(false), new Knight(false), new Rook(false)}
 		};
 		
-		assertArrayEquals(echiquierAttendu3, plat.getEchiquier());
+		assertArrayEquals(echiquierAttendu3, plat.getChessboard());
 		
 		try {
 			int[] coord = {7, 6, 5, 5};
-			plat.setTourJoueur(false);
-			plat.deplacer(coord);
-			assertTrue(plat.getTourJoueur());
+			plat.setPlayerRound(false);
+			plat.move(coord);
+			assertTrue(plat.getPlayerRound());
 		}catch(Exception e) {
 			fail();
 		}
 		
 		Piece[][] echiquierAttendu4 = {
-				{new Tour(true), new Cavalier(true), new Reine(false), null, null, new Fou(true), new Cavalier(true), new Tour(true)},
-				{null, null, new Cavalier(false), new Pion(true), new Roi(true), new Pion(true), null, null},
-				{new Pion(true), null, null, null, null, null, new Pion(true), null},
-				{null, new Pion(true), null, null, new Pion(true), null, null, new Pion(true)},
-				{null, new Pion(false), null, null, new Pion(false), null, null, null},
-				{null, null, null, null, null, new Cavalier(false), null, null},
-				{new Pion(false), null, null, new Pion(false), null, new Pion(false), new Pion(false), new Pion(false)},
-				{new Tour(false), null, null, null, new Roi(false), new Fou(false), null, new Tour(false)}
+				{new Rook(true), new Knight(true), new Queen(false), null, null, new Bishop(true), new Knight(true), new Rook(true)},
+				{null, null, new Knight(false), new Pawn(true), new King(true), new Pawn(true), null, null},
+				{new Pawn(true), null, null, null, null, null, new Pawn(true), null},
+				{null, new Pawn(true), null, null, new Pawn(true), null, null, new Pawn(true)},
+				{null, new Pawn(false), null, null, new Pawn(false), null, null, null},
+				{null, null, null, null, null, new Knight(false), null, null},
+				{new Pawn(false), null, null, new Pawn(false), null, new Pawn(false), new Pawn(false), new Pawn(false)},
+				{new Rook(false), null, null, null, new King(false), new Bishop(false), null, new Rook(false)}
 		};
 		
-		assertArrayEquals(echiquierAttendu4, plat.getEchiquier());
+		assertArrayEquals(echiquierAttendu4, plat.getChessboard());
 		
 		try {
 			int[] coord = {0, 5, 1, 6};
-			plat.setTourJoueur(true);
-			plat.deplacer(coord);
-			assertFalse(plat.getTourJoueur());
+			plat.setPlayerRound(true);
+			plat.move(coord);
+			assertFalse(plat.getPlayerRound());
 		}catch(Exception e) {
 			fail();
 		}
 		
 		Piece[][] echiquierAttendu5 = { // Fou
-				{new Tour(true), new Cavalier(true), new Reine(false), null, null, null, new Cavalier(true), new Tour(true)},
-				{null, null, new Cavalier(false), new Pion(true), new Roi(true), new Pion(true), new Fou(true), null},
-				{new Pion(true), null, null, null, null, null, new Pion(true), null},
-				{null, new Pion(true), null, null, new Pion(true), null, null, new Pion(true)},
-				{null, new Pion(false), null, null, new Pion(false), null, null, null},
-				{null, null, null, null, null, new Cavalier(false), null, null},
-				{new Pion(false), null, null, new Pion(false), null, new Pion(false), new Pion(false), new Pion(false)},
-				{new Tour(false), null, null, null, new Roi(false), new Fou(false), null, new Tour(false)}
+				{new Rook(true), new Knight(true), new Queen(false), null, null, null, new Knight(true), new Rook(true)},
+				{null, null, new Knight(false), new Pawn(true), new King(true), new Pawn(true), new Bishop(true), null},
+				{new Pawn(true), null, null, null, null, null, new Pawn(true), null},
+				{null, new Pawn(true), null, null, new Pawn(true), null, null, new Pawn(true)},
+				{null, new Pawn(false), null, null, new Pawn(false), null, null, null},
+				{null, null, null, null, null, new Knight(false), null, null},
+				{new Pawn(false), null, null, new Pawn(false), null, new Pawn(false), new Pawn(false), new Pawn(false)},
+				{new Rook(false), null, null, null, new King(false), new Bishop(false), null, new Rook(false)}
 		};
 		
-		assertArrayEquals(echiquierAttendu5, plat.getEchiquier());
+		assertArrayEquals(echiquierAttendu5, plat.getChessboard());
 		
 		try {
 			int[] coord = {0, 2, 0, 6};
-			plat.setTourJoueur(false);
-			plat.deplacer(coord);
-			assertTrue(plat.getTourJoueur());
+			plat.setPlayerRound(false);
+			plat.move(coord);
+			assertTrue(plat.getPlayerRound());
 		}catch(Exception e) {
 			fail();
 		}
 		
 		Piece[][] echiquierAttendu6 = { // Reine
-				{new Tour(true), new Cavalier(true), null, null, null, null, new Reine(false), new Tour(true)},
-				{null, null, new Cavalier(false), new Pion(true), new Roi(true), new Pion(true), new Fou(true), null},
-				{new Pion(true), null, null, null, null, null, new Pion(true), null},
-				{null, new Pion(true), null, null, new Pion(true), null, null, new Pion(true)},
-				{null, new Pion(false), null, null, new Pion(false), null, null, null},
-				{null, null, null, null, null, new Cavalier(false), null, null},
-				{new Pion(false), null, null, new Pion(false), null, new Pion(false), new Pion(false), new Pion(false)},
-				{new Tour(false), null, null, null, new Roi(false), new Fou(false), null, new Tour(false)}
+				{new Rook(true), new Knight(true), null, null, null, null, new Queen(false), new Rook(true)},
+				{null, null, new Knight(false), new Pawn(true), new King(true), new Pawn(true), new Bishop(true), null},
+				{new Pawn(true), null, null, null, null, null, new Pawn(true), null},
+				{null, new Pawn(true), null, null, new Pawn(true), null, null, new Pawn(true)},
+				{null, new Pawn(false), null, null, new Pawn(false), null, null, null},
+				{null, null, null, null, null, new Knight(false), null, null},
+				{new Pawn(false), null, null, new Pawn(false), null, new Pawn(false), new Pawn(false), new Pawn(false)},
+				{new Rook(false), null, null, null, new King(false), new Bishop(false), null, new Rook(false)}
 		};
 		
-		assertArrayEquals(echiquierAttendu6, plat.getEchiquier());
+		assertArrayEquals(echiquierAttendu6, plat.getChessboard());
 		
 		try {
 			int[] coord = {0, 7, 0, 6};
-			plat.setTourJoueur(true);
-			plat.deplacer(coord);
-			assertFalse(plat.getTourJoueur());
+			plat.setPlayerRound(true);
+			plat.move(coord);
+			assertFalse(plat.getPlayerRound());
 		}catch(Exception e) {
 			fail();
 		}
 		
 		Piece[][] echiquierAttendu7 = { // Tour
-				{new Tour(true), new Cavalier(true), null, null, null, null, new Tour(true), null},
-				{null, null, new Cavalier(false), new Pion(true), new Roi(true), new Pion(true), new Fou(true), null},
-				{new Pion(true), null, null, null, null, null, new Pion(true), null},
-				{null, new Pion(true), null, null, new Pion(true), null, null, new Pion(true)},
-				{null, new Pion(false), null, null, new Pion(false), null, null, null},
-				{null, null, null, null, null, new Cavalier(false), null, null},
-				{new Pion(false), null, null, new Pion(false), null, new Pion(false), new Pion(false), new Pion(false)},
-				{new Tour(false), null, null, null, new Roi(false), new Fou(false), null, new Tour(false)}
+				{new Rook(true), new Knight(true), null, null, null, null, new Rook(true), null},
+				{null, null, new Knight(false), new Pawn(true), new King(true), new Pawn(true), new Bishop(true), null},
+				{new Pawn(true), null, null, null, null, null, new Pawn(true), null},
+				{null, new Pawn(true), null, null, new Pawn(true), null, null, new Pawn(true)},
+				{null, new Pawn(false), null, null, new Pawn(false), null, null, null},
+				{null, null, null, null, null, new Knight(false), null, null},
+				{new Pawn(false), null, null, new Pawn(false), null, new Pawn(false), new Pawn(false), new Pawn(false)},
+				{new Rook(false), null, null, null, new King(false), new Bishop(false), null, new Rook(false)}
 		};
 		
-		assertArrayEquals(echiquierAttendu7, plat.getEchiquier());
+		assertArrayEquals(echiquierAttendu7, plat.getChessboard());
 	}
 	
 	
@@ -301,7 +301,7 @@ public class PlateauTest {
 	public void calculerDeplacementTest2()
 	{
 		try {
-			gp.chargerAnciennePartie("tests/test2.csv");
+			gp.loadSavedGame("tests/test2.csv");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -356,7 +356,7 @@ public class PlateauTest {
 	public void calculerDeplacementTest7()
 	{
 		try {
-			gp.chargerAnciennePartie("tests/test7.csv");
+			gp.loadSavedGame("tests/test7.csv");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -436,7 +436,7 @@ public class PlateauTest {
 	public void calculerDeplacementTest9()
 	{
 		try {
-			gp.chargerAnciennePartie("tests/test9.csv");
+			gp.loadSavedGame("tests/test9.csv");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -505,7 +505,7 @@ public class PlateauTest {
 	@Test
 	public void calculerDeplacementsTest24() {
 		try {
-			gp.chargerAnciennePartie("tests/test24.csv");
+			gp.loadSavedGame("tests/test24.csv");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -571,7 +571,7 @@ public class PlateauTest {
 	public void calculerDeplacementsTest1() {
 
 		try {
-			gp.chargerAnciennePartie("tests/test1.csv");
+			gp.loadSavedGame("tests/test1.csv");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -703,15 +703,15 @@ public class PlateauTest {
 		
 		for(int i=1; i <= 36; i++) {
 			
-			plat.setTourJoueur(tourJoueur[i-1]);
+			plat.setPlayerRound(tourJoueur[i-1]);
 			
 			try {
-				gp.chargerAnciennePartie("tests/test"+i+".csv");
+				gp.loadSavedGame("tests/test"+i+".csv");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			if (echecAttendu[i-1] != null) 
-				assertArrayEquals(echecAttendu[i-1], plat.verifEchec());
+				assertArrayEquals(echecAttendu[i-1], plat.checkCheck());
 
 		}
 	}
@@ -724,13 +724,13 @@ public class PlateauTest {
 		for(int i=1; i<=36; i++) {
 			
 			try {
-				gp.chargerAnciennePartie("tests/test"+i+".csv");
+				gp.loadSavedGame("tests/test"+i+".csv");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
-			plat.setTourJoueur(tourJoueur[i-1]);
-			assertEquals(matAttendu[i-1], plat.verifMat());
+			plat.setPlayerRound(tourJoueur[i-1]);
+			assertEquals(matAttendu[i-1], plat.checkMat());
 		}
 	}
 	
@@ -738,7 +738,7 @@ public class PlateauTest {
 	@Test
 	public void toStringTest1() {
 		try {
-			gp.chargerAnciennePartie("tests/partieTest.csv");
+			gp.loadSavedGame("tests/partieTest.csv");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -759,7 +759,7 @@ public class PlateauTest {
 	@Test
 	public void toStringTest2() {
 		try {
-			gp.chargerAnciennePartie("tests/test2.csv");
+			gp.loadSavedGame("tests/test2.csv");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -779,7 +779,7 @@ public class PlateauTest {
 	@Test
 	public void toStringTest3() {
 		try {
-			gp.chargerAnciennePartie("tests/test3.csv");
+			gp.loadSavedGame("tests/test3.csv");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -799,7 +799,7 @@ public class PlateauTest {
 	@Test
 	public void toStringTest4() {
 		try {
-			gp.chargerAnciennePartie("tests/test4.csv");
+			gp.loadSavedGame("tests/test4.csv");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -819,7 +819,7 @@ public class PlateauTest {
 	@Test
 	public void toStringTest5() {
 		try {
-			gp.chargerAnciennePartie("tests/test5.csv");
+			gp.loadSavedGame("tests/test5.csv");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -839,7 +839,7 @@ public class PlateauTest {
 	@Test
 	public void toStringTest6() {
 		try {
-			gp.chargerAnciennePartie("tests/test6.csv");
+			gp.loadSavedGame("tests/test6.csv");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -859,7 +859,7 @@ public class PlateauTest {
 	@Test
 	public void toStringTest7() {
 		try {
-			gp.chargerAnciennePartie("tests/test7.csv");
+			gp.loadSavedGame("tests/test7.csv");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -879,7 +879,7 @@ public class PlateauTest {
 	@Test
 	public void toStringTest8() {
 		try {
-			gp.chargerAnciennePartie("tests/test8.csv");
+			gp.loadSavedGame("tests/test8.csv");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -899,7 +899,7 @@ public class PlateauTest {
 	@Test
 	public void toStringTest9() {
 		try {
-			gp.chargerAnciennePartie("tests/test9.csv");
+			gp.loadSavedGame("tests/test9.csv");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
